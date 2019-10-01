@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccskgm27.s 			page 1
+GAS LISTING /tmp/ccWzpZPI.s 			page 1
 
 
    1              		.file	"strbase.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccskgm27.s 			page 1
   37 001d C3       		ret
   38              		.cfi_endproc
   39              	.LFE14:
-GAS LISTING /tmp/ccskgm27.s 			page 2
+GAS LISTING /tmp/ccWzpZPI.s 			page 2
 
 
   41              		.globl	_ZN10translator6charAtEPcc
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccskgm27.s 			page 1
   70              		.loc 1 39 16 view .LVU21
   71 0037 B8FFFFFF 		movl	$-1, %eax
   71      FF
-GAS LISTING /tmp/ccskgm27.s 			page 3
+GAS LISTING /tmp/ccWzpZPI.s 			page 3
 
 
   72              	.LVL6:
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccskgm27.s 			page 1
  116              	.LVL12:
  117              	.L13:
   50:Src/strbase.cpp ****                 return i;
-GAS LISTING /tmp/ccskgm27.s 			page 4
+GAS LISTING /tmp/ccWzpZPI.s 			page 4
 
 
   51:Src/strbase.cpp ****         }
@@ -196,13 +196,13 @@ GAS LISTING /tmp/ccskgm27.s 			page 1
  127              		.file 2 "/usr/include/bits/types.h"
  128              		.file 3 "/usr/include/bits/stdint-uintn.h"
  129              		.file 4 "Inc/strbase.hpp"
-GAS LISTING /tmp/ccskgm27.s 			page 5
+GAS LISTING /tmp/ccWzpZPI.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 strbase.cpp
-     /tmp/ccskgm27.s:6      .text:0000000000000000 _ZN10translator8containsEPcc
-     /tmp/ccskgm27.s:43     .text:000000000000001e _ZN10translator6charAtEPcc
-     /tmp/ccskgm27.s:81     .text:000000000000003d _ZN10translator10lastCharAtEPcc
+     /tmp/ccWzpZPI.s:6      .text:0000000000000000 _ZN10translator8containsEPcc
+     /tmp/ccWzpZPI.s:43     .text:000000000000001e _ZN10translator6charAtEPcc
+     /tmp/ccWzpZPI.s:81     .text:000000000000003d _ZN10translator10lastCharAtEPcc
 
 NO UNDEFINED SYMBOLS
