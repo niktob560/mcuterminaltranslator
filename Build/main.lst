@@ -1,0 +1,525 @@
+GAS LISTING /tmp/ccZbqjVl.s 			page 1
+
+
+   1              		.file	"main.cpp"
+   2              		.text
+   3              	.Ltext0:
+   5              	_Z41__static_initialization_and_destruction_0ii:
+   6              	.LVL0:
+   7              	.LFB1826:
+   8              		.file 1 "Src/main.cpp"
+   1:Src/main.cpp  **** #include <iostream>
+   2:Src/main.cpp  **** #include "strbase.hpp"
+   3:Src/main.cpp  **** 
+   4:Src/main.cpp  **** using namespace std;
+   5:Src/main.cpp  **** 
+   6:Src/main.cpp  **** int main()
+   7:Src/main.cpp  **** {
+   8:Src/main.cpp  ****     char *c = (char*)calloc(sizeof(char), 1024);
+   9:Src/main.cpp  ****     cin >> c;
+  10:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
+  11:Src/main.cpp  ****     return 0;
+  12:Src/main.cpp  **** }
+   9              		.loc 1 12 1 view -0
+  10              		.cfi_startproc
+  11              		.loc 1 12 1 is_stmt 0 view .LVU1
+  12 0000 83FF01   		cmpl	$1, %edi
+  13 0003 7401     		je	.L7
+  14              	.L4:
+  15 0005 C3       		ret
+  16              	.L7:
+  17              		.loc 1 12 1 discriminator 1 view .LVU2
+  18 0006 81FEFFFF 		cmpl	$65535, %esi
+  18      0000
+  19 000c 75F7     		jne	.L4
+  20              		.loc 1 12 1 view .LVU3
+  21 000e 4883EC08 		subq	$8, %rsp
+  22              		.cfi_def_cfa_offset 16
+  23              		.file 2 "/usr/include/c++/9.1.0/iostream"
+   1:/usr/include/c++/9.1.0/iostream **** // Standard iostream objects -*- C++ -*-
+   2:/usr/include/c++/9.1.0/iostream **** 
+   3:/usr/include/c++/9.1.0/iostream **** // Copyright (C) 1997-2019 Free Software Foundation, Inc.
+   4:/usr/include/c++/9.1.0/iostream **** //
+   5:/usr/include/c++/9.1.0/iostream **** // This file is part of the GNU ISO C++ Library.  This library is free
+   6:/usr/include/c++/9.1.0/iostream **** // software; you can redistribute it and/or modify it under the
+   7:/usr/include/c++/9.1.0/iostream **** // terms of the GNU General Public License as published by the
+   8:/usr/include/c++/9.1.0/iostream **** // Free Software Foundation; either version 3, or (at your option)
+   9:/usr/include/c++/9.1.0/iostream **** // any later version.
+  10:/usr/include/c++/9.1.0/iostream **** 
+  11:/usr/include/c++/9.1.0/iostream **** // This library is distributed in the hope that it will be useful,
+  12:/usr/include/c++/9.1.0/iostream **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
+  13:/usr/include/c++/9.1.0/iostream **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  14:/usr/include/c++/9.1.0/iostream **** // GNU General Public License for more details.
+  15:/usr/include/c++/9.1.0/iostream **** 
+  16:/usr/include/c++/9.1.0/iostream **** // Under Section 7 of GPL version 3, you are granted additional
+  17:/usr/include/c++/9.1.0/iostream **** // permissions described in the GCC Runtime Library Exception, version
+  18:/usr/include/c++/9.1.0/iostream **** // 3.1, as published by the Free Software Foundation.
+  19:/usr/include/c++/9.1.0/iostream **** 
+  20:/usr/include/c++/9.1.0/iostream **** // You should have received a copy of the GNU General Public License and
+  21:/usr/include/c++/9.1.0/iostream **** // a copy of the GCC Runtime Library Exception along with this program;
+  22:/usr/include/c++/9.1.0/iostream **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+GAS LISTING /tmp/ccZbqjVl.s 			page 2
+
+
+  23:/usr/include/c++/9.1.0/iostream **** // <http://www.gnu.org/licenses/>.
+  24:/usr/include/c++/9.1.0/iostream **** 
+  25:/usr/include/c++/9.1.0/iostream **** /** @file include/iostream
+  26:/usr/include/c++/9.1.0/iostream ****  *  This is a Standard C++ Library header.
+  27:/usr/include/c++/9.1.0/iostream ****  */
+  28:/usr/include/c++/9.1.0/iostream **** 
+  29:/usr/include/c++/9.1.0/iostream **** //
+  30:/usr/include/c++/9.1.0/iostream **** // ISO C++ 14882: 27.3  Standard iostream objects
+  31:/usr/include/c++/9.1.0/iostream **** //
+  32:/usr/include/c++/9.1.0/iostream **** 
+  33:/usr/include/c++/9.1.0/iostream **** #ifndef _GLIBCXX_IOSTREAM
+  34:/usr/include/c++/9.1.0/iostream **** #define _GLIBCXX_IOSTREAM 1
+  35:/usr/include/c++/9.1.0/iostream **** 
+  36:/usr/include/c++/9.1.0/iostream **** #pragma GCC system_header
+  37:/usr/include/c++/9.1.0/iostream **** 
+  38:/usr/include/c++/9.1.0/iostream **** #include <bits/c++config.h>
+  39:/usr/include/c++/9.1.0/iostream **** #include <ostream>
+  40:/usr/include/c++/9.1.0/iostream **** #include <istream>
+  41:/usr/include/c++/9.1.0/iostream **** 
+  42:/usr/include/c++/9.1.0/iostream **** namespace std _GLIBCXX_VISIBILITY(default)
+  43:/usr/include/c++/9.1.0/iostream **** {
+  44:/usr/include/c++/9.1.0/iostream **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
+  45:/usr/include/c++/9.1.0/iostream **** 
+  46:/usr/include/c++/9.1.0/iostream ****   /**
+  47:/usr/include/c++/9.1.0/iostream ****    *  @name Standard Stream Objects
+  48:/usr/include/c++/9.1.0/iostream ****    *
+  49:/usr/include/c++/9.1.0/iostream ****    *  The &lt;iostream&gt; header declares the eight <em>standard stream
+  50:/usr/include/c++/9.1.0/iostream ****    *  objects</em>.  For other declarations, see
+  51:/usr/include/c++/9.1.0/iostream ****    *  http://gcc.gnu.org/onlinedocs/libstdc++/manual/io.html
+  52:/usr/include/c++/9.1.0/iostream ****    *  and the @link iosfwd I/O forward declarations @endlink
+  53:/usr/include/c++/9.1.0/iostream ****    *
+  54:/usr/include/c++/9.1.0/iostream ****    *  They are required by default to cooperate with the global C
+  55:/usr/include/c++/9.1.0/iostream ****    *  library's @c FILE streams, and to be available during program
+  56:/usr/include/c++/9.1.0/iostream ****    *  startup and termination. For more information, see the section of the
+  57:/usr/include/c++/9.1.0/iostream ****    *  manual linked to above.
+  58:/usr/include/c++/9.1.0/iostream ****   */
+  59:/usr/include/c++/9.1.0/iostream ****   //@{
+  60:/usr/include/c++/9.1.0/iostream ****   extern istream cin;		/// Linked to standard input
+  61:/usr/include/c++/9.1.0/iostream ****   extern ostream cout;		/// Linked to standard output
+  62:/usr/include/c++/9.1.0/iostream ****   extern ostream cerr;		/// Linked to standard error (unbuffered)
+  63:/usr/include/c++/9.1.0/iostream ****   extern ostream clog;		/// Linked to standard error (buffered)
+  64:/usr/include/c++/9.1.0/iostream **** 
+  65:/usr/include/c++/9.1.0/iostream **** #ifdef _GLIBCXX_USE_WCHAR_T
+  66:/usr/include/c++/9.1.0/iostream ****   extern wistream wcin;		/// Linked to standard input
+  67:/usr/include/c++/9.1.0/iostream ****   extern wostream wcout;	/// Linked to standard output
+  68:/usr/include/c++/9.1.0/iostream ****   extern wostream wcerr;	/// Linked to standard error (unbuffered)
+  69:/usr/include/c++/9.1.0/iostream ****   extern wostream wclog;	/// Linked to standard error (buffered)
+  70:/usr/include/c++/9.1.0/iostream **** #endif
+  71:/usr/include/c++/9.1.0/iostream ****   //@}
+  72:/usr/include/c++/9.1.0/iostream **** 
+  73:/usr/include/c++/9.1.0/iostream ****   // For construction of filebuffers for cout, cin, cerr, clog et. al.
+  74:/usr/include/c++/9.1.0/iostream ****   static ios_base::Init __ioinit;
+  24              		.loc 2 74 25 view .LVU4
+  25 0012 488D3D00 		leaq	_ZStL8__ioinit(%rip), %rdi
+  25      000000
+  26              	.LVL1:
+  27              		.loc 2 74 25 view .LVU5
+GAS LISTING /tmp/ccZbqjVl.s 			page 3
+
+
+  28 0019 E8000000 		call	_ZNSt8ios_base4InitC1Ev@PLT
+  28      00
+  29              	.LVL2:
+  30              		.loc 2 74 25 view .LVU6
+  31 001e 488D1500 		leaq	__dso_handle(%rip), %rdx
+  31      000000
+  32 0025 488D3500 		leaq	_ZStL8__ioinit(%rip), %rsi
+  32      000000
+  33 002c 488B3D00 		movq	_ZNSt8ios_base4InitD1Ev@GOTPCREL(%rip), %rdi
+  33      000000
+  34 0033 E8000000 		call	__cxa_atexit@PLT
+  34      00
+  35              	.LVL3:
+  36              		.loc 1 12 1 view .LVU7
+  37 0038 4883C408 		addq	$8, %rsp
+  38              		.cfi_def_cfa_offset 8
+  39 003c C3       		ret
+  40              		.cfi_endproc
+  41              	.LFE1826:
+  43              		.globl	main
+  45              	main:
+  46              	.LFB1503:
+   7:Src/main.cpp  ****     char *c = (char*)calloc(sizeof(char), 1024);
+  47              		.loc 1 7 1 is_stmt 1 view -0
+  48              		.cfi_startproc
+  49 003d 53       		pushq	%rbx
+  50              		.cfi_def_cfa_offset 16
+  51              		.cfi_offset 3, -16
+   8:Src/main.cpp  ****     cin >> c;
+  52              		.loc 1 8 5 view .LVU9
+   8:Src/main.cpp  ****     cin >> c;
+  53              		.loc 1 8 28 is_stmt 0 view .LVU10
+  54 003e BE000400 		movl	$1024, %esi
+  54      00
+  55 0043 BF010000 		movl	$1, %edi
+  55      00
+  56 0048 E8000000 		call	calloc@PLT
+  56      00
+  57              	.LVL4:
+  58 004d 4889C3   		movq	%rax, %rbx
+  59              	.LVL5:
+   9:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
+  60              		.loc 1 9 5 is_stmt 1 view .LVU11
+   9:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
+  61              		.loc 1 9 12 is_stmt 0 view .LVU12
+  62 0050 4889C6   		movq	%rax, %rsi
+  63 0053 488D3D00 		leaq	_ZSt3cin(%rip), %rdi
+  63      000000
+  64 005a E8000000 		call	_ZStrsIcSt11char_traitsIcEERSt13basic_istreamIT_T0_ES6_PS3_@PLT
+  64      00
+  65              	.LVL6:
+  10:Src/main.cpp  ****     return 0;
+  66              		.loc 1 10 5 is_stmt 1 view .LVU13
+  10:Src/main.cpp  ****     return 0;
+  67              		.loc 1 10 33 is_stmt 0 view .LVU14
+  68 005f BE610000 		movl	$97, %esi
+  68      00
+GAS LISTING /tmp/ccZbqjVl.s 			page 4
+
+
+  69 0064 4889DF   		movq	%rbx, %rdi
+  70 0067 E8000000 		call	_ZN10translator8containsEPcc@PLT
+  70      00
+  71              	.LVL7:
+  10:Src/main.cpp  ****     return 0;
+  72              		.loc 1 10 40 view .LVU15
+  73 006c 0FB6F0   		movzbl	%al, %esi
+  74              	.LVL8:
+  75              	.LBB14:
+  76              	.LBI14:
+  77              		.file 3 "/usr/include/c++/9.1.0/ostream"
+   1:/usr/include/c++/9.1.0/ostream **** // Output streams -*- C++ -*-
+   2:/usr/include/c++/9.1.0/ostream **** 
+   3:/usr/include/c++/9.1.0/ostream **** // Copyright (C) 1997-2019 Free Software Foundation, Inc.
+   4:/usr/include/c++/9.1.0/ostream **** //
+   5:/usr/include/c++/9.1.0/ostream **** // This file is part of the GNU ISO C++ Library.  This library is free
+   6:/usr/include/c++/9.1.0/ostream **** // software; you can redistribute it and/or modify it under the
+   7:/usr/include/c++/9.1.0/ostream **** // terms of the GNU General Public License as published by the
+   8:/usr/include/c++/9.1.0/ostream **** // Free Software Foundation; either version 3, or (at your option)
+   9:/usr/include/c++/9.1.0/ostream **** // any later version.
+  10:/usr/include/c++/9.1.0/ostream **** 
+  11:/usr/include/c++/9.1.0/ostream **** // This library is distributed in the hope that it will be useful,
+  12:/usr/include/c++/9.1.0/ostream **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
+  13:/usr/include/c++/9.1.0/ostream **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  14:/usr/include/c++/9.1.0/ostream **** // GNU General Public License for more details.
+  15:/usr/include/c++/9.1.0/ostream **** 
+  16:/usr/include/c++/9.1.0/ostream **** // Under Section 7 of GPL version 3, you are granted additional
+  17:/usr/include/c++/9.1.0/ostream **** // permissions described in the GCC Runtime Library Exception, version
+  18:/usr/include/c++/9.1.0/ostream **** // 3.1, as published by the Free Software Foundation.
+  19:/usr/include/c++/9.1.0/ostream **** 
+  20:/usr/include/c++/9.1.0/ostream **** // You should have received a copy of the GNU General Public License and
+  21:/usr/include/c++/9.1.0/ostream **** // a copy of the GCC Runtime Library Exception along with this program;
+  22:/usr/include/c++/9.1.0/ostream **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+  23:/usr/include/c++/9.1.0/ostream **** // <http://www.gnu.org/licenses/>.
+  24:/usr/include/c++/9.1.0/ostream **** 
+  25:/usr/include/c++/9.1.0/ostream **** /** @file include/ostream
+  26:/usr/include/c++/9.1.0/ostream ****  *  This is a Standard C++ Library header.
+  27:/usr/include/c++/9.1.0/ostream ****  */
+  28:/usr/include/c++/9.1.0/ostream **** 
+  29:/usr/include/c++/9.1.0/ostream **** //
+  30:/usr/include/c++/9.1.0/ostream **** // ISO C++ 14882: 27.6.2  Output streams
+  31:/usr/include/c++/9.1.0/ostream **** //
+  32:/usr/include/c++/9.1.0/ostream **** 
+  33:/usr/include/c++/9.1.0/ostream **** #ifndef _GLIBCXX_OSTREAM
+  34:/usr/include/c++/9.1.0/ostream **** #define _GLIBCXX_OSTREAM 1
+  35:/usr/include/c++/9.1.0/ostream **** 
+  36:/usr/include/c++/9.1.0/ostream **** #pragma GCC system_header
+  37:/usr/include/c++/9.1.0/ostream **** 
+  38:/usr/include/c++/9.1.0/ostream **** #include <ios>
+  39:/usr/include/c++/9.1.0/ostream **** #include <bits/ostream_insert.h>
+  40:/usr/include/c++/9.1.0/ostream **** 
+  41:/usr/include/c++/9.1.0/ostream **** namespace std _GLIBCXX_VISIBILITY(default)
+  42:/usr/include/c++/9.1.0/ostream **** {
+  43:/usr/include/c++/9.1.0/ostream **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
+  44:/usr/include/c++/9.1.0/ostream **** 
+  45:/usr/include/c++/9.1.0/ostream ****   /**
+  46:/usr/include/c++/9.1.0/ostream ****    *  @brief  Template class basic_ostream.
+GAS LISTING /tmp/ccZbqjVl.s 			page 5
+
+
+  47:/usr/include/c++/9.1.0/ostream ****    *  @ingroup io
+  48:/usr/include/c++/9.1.0/ostream ****    *
+  49:/usr/include/c++/9.1.0/ostream ****    *  @tparam _CharT  Type of character stream.
+  50:/usr/include/c++/9.1.0/ostream ****    *  @tparam _Traits  Traits for character type, defaults to
+  51:/usr/include/c++/9.1.0/ostream ****    *                   char_traits<_CharT>.
+  52:/usr/include/c++/9.1.0/ostream ****    *
+  53:/usr/include/c++/9.1.0/ostream ****    *  This is the base class for all output streams.  It provides text
+  54:/usr/include/c++/9.1.0/ostream ****    *  formatting of all builtin types, and communicates with any class
+  55:/usr/include/c++/9.1.0/ostream ****    *  derived from basic_streambuf to do the actual output.
+  56:/usr/include/c++/9.1.0/ostream ****   */
+  57:/usr/include/c++/9.1.0/ostream ****   template<typename _CharT, typename _Traits>
+  58:/usr/include/c++/9.1.0/ostream ****     class basic_ostream : virtual public basic_ios<_CharT, _Traits>
+  59:/usr/include/c++/9.1.0/ostream ****     {
+  60:/usr/include/c++/9.1.0/ostream ****     public:
+  61:/usr/include/c++/9.1.0/ostream ****       // Types (inherited from basic_ios):
+  62:/usr/include/c++/9.1.0/ostream ****       typedef _CharT			 		char_type;
+  63:/usr/include/c++/9.1.0/ostream ****       typedef typename _Traits::int_type 		int_type;
+  64:/usr/include/c++/9.1.0/ostream ****       typedef typename _Traits::pos_type 		pos_type;
+  65:/usr/include/c++/9.1.0/ostream ****       typedef typename _Traits::off_type 		off_type;
+  66:/usr/include/c++/9.1.0/ostream ****       typedef _Traits			 		traits_type;
+  67:/usr/include/c++/9.1.0/ostream **** 
+  68:/usr/include/c++/9.1.0/ostream ****       // Non-standard Types:
+  69:/usr/include/c++/9.1.0/ostream ****       typedef basic_streambuf<_CharT, _Traits> 		__streambuf_type;
+  70:/usr/include/c++/9.1.0/ostream ****       typedef basic_ios<_CharT, _Traits>		__ios_type;
+  71:/usr/include/c++/9.1.0/ostream ****       typedef basic_ostream<_CharT, _Traits>		__ostream_type;
+  72:/usr/include/c++/9.1.0/ostream ****       typedef num_put<_CharT, ostreambuf_iterator<_CharT, _Traits> >
+  73:/usr/include/c++/9.1.0/ostream ****       							__num_put_type;
+  74:/usr/include/c++/9.1.0/ostream ****       typedef ctype<_CharT>	      			__ctype_type;
+  75:/usr/include/c++/9.1.0/ostream **** 
+  76:/usr/include/c++/9.1.0/ostream ****       /**
+  77:/usr/include/c++/9.1.0/ostream ****        *  @brief  Base constructor.
+  78:/usr/include/c++/9.1.0/ostream ****        *
+  79:/usr/include/c++/9.1.0/ostream ****        *  This ctor is almost never called by the user directly, rather from
+  80:/usr/include/c++/9.1.0/ostream ****        *  derived classes' initialization lists, which pass a pointer to
+  81:/usr/include/c++/9.1.0/ostream ****        *  their own stream buffer.
+  82:/usr/include/c++/9.1.0/ostream ****       */
+  83:/usr/include/c++/9.1.0/ostream ****       explicit
+  84:/usr/include/c++/9.1.0/ostream ****       basic_ostream(__streambuf_type* __sb)
+  85:/usr/include/c++/9.1.0/ostream ****       { this->init(__sb); }
+  86:/usr/include/c++/9.1.0/ostream **** 
+  87:/usr/include/c++/9.1.0/ostream ****       /**
+  88:/usr/include/c++/9.1.0/ostream ****        *  @brief  Base destructor.
+  89:/usr/include/c++/9.1.0/ostream ****        *
+  90:/usr/include/c++/9.1.0/ostream ****        *  This does very little apart from providing a virtual base dtor.
+  91:/usr/include/c++/9.1.0/ostream ****       */
+  92:/usr/include/c++/9.1.0/ostream ****       virtual
+  93:/usr/include/c++/9.1.0/ostream ****       ~basic_ostream() { }
+  94:/usr/include/c++/9.1.0/ostream **** 
+  95:/usr/include/c++/9.1.0/ostream ****       /// Safe prefix/suffix operations.
+  96:/usr/include/c++/9.1.0/ostream ****       class sentry;
+  97:/usr/include/c++/9.1.0/ostream ****       friend class sentry;
+  98:/usr/include/c++/9.1.0/ostream **** 
+  99:/usr/include/c++/9.1.0/ostream ****       //@{
+ 100:/usr/include/c++/9.1.0/ostream ****       /**
+ 101:/usr/include/c++/9.1.0/ostream ****        *  @brief  Interface for manipulators.
+ 102:/usr/include/c++/9.1.0/ostream ****        *
+ 103:/usr/include/c++/9.1.0/ostream ****        *  Manipulators such as @c std::endl and @c std::hex use these
+GAS LISTING /tmp/ccZbqjVl.s 			page 6
+
+
+ 104:/usr/include/c++/9.1.0/ostream ****        *  functions in constructs like "std::cout << std::endl".  For more
+ 105:/usr/include/c++/9.1.0/ostream ****        *  information, see the iomanip header.
+ 106:/usr/include/c++/9.1.0/ostream ****       */
+ 107:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
+ 108:/usr/include/c++/9.1.0/ostream ****       operator<<(__ostream_type& (*__pf)(__ostream_type&))
+ 109:/usr/include/c++/9.1.0/ostream ****       {
+ 110:/usr/include/c++/9.1.0/ostream **** 	// _GLIBCXX_RESOLVE_LIB_DEFECTS
+ 111:/usr/include/c++/9.1.0/ostream **** 	// DR 60. What is a formatted input function?
+ 112:/usr/include/c++/9.1.0/ostream **** 	// The inserters for manipulators are *not* formatted output functions.
+ 113:/usr/include/c++/9.1.0/ostream **** 	return __pf(*this);
+ 114:/usr/include/c++/9.1.0/ostream ****       }
+ 115:/usr/include/c++/9.1.0/ostream **** 
+ 116:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
+ 117:/usr/include/c++/9.1.0/ostream ****       operator<<(__ios_type& (*__pf)(__ios_type&))
+ 118:/usr/include/c++/9.1.0/ostream ****       {
+ 119:/usr/include/c++/9.1.0/ostream **** 	// _GLIBCXX_RESOLVE_LIB_DEFECTS
+ 120:/usr/include/c++/9.1.0/ostream **** 	// DR 60. What is a formatted input function?
+ 121:/usr/include/c++/9.1.0/ostream **** 	// The inserters for manipulators are *not* formatted output functions.
+ 122:/usr/include/c++/9.1.0/ostream **** 	__pf(*this);
+ 123:/usr/include/c++/9.1.0/ostream **** 	return *this;
+ 124:/usr/include/c++/9.1.0/ostream ****       }
+ 125:/usr/include/c++/9.1.0/ostream **** 
+ 126:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
+ 127:/usr/include/c++/9.1.0/ostream ****       operator<<(ios_base& (*__pf) (ios_base&))
+ 128:/usr/include/c++/9.1.0/ostream ****       {
+ 129:/usr/include/c++/9.1.0/ostream **** 	// _GLIBCXX_RESOLVE_LIB_DEFECTS
+ 130:/usr/include/c++/9.1.0/ostream **** 	// DR 60. What is a formatted input function?
+ 131:/usr/include/c++/9.1.0/ostream **** 	// The inserters for manipulators are *not* formatted output functions.
+ 132:/usr/include/c++/9.1.0/ostream **** 	__pf(*this);
+ 133:/usr/include/c++/9.1.0/ostream **** 	return *this;
+ 134:/usr/include/c++/9.1.0/ostream ****       }
+ 135:/usr/include/c++/9.1.0/ostream ****       //@}
+ 136:/usr/include/c++/9.1.0/ostream **** 
+ 137:/usr/include/c++/9.1.0/ostream ****       //@{
+ 138:/usr/include/c++/9.1.0/ostream ****       /**
+ 139:/usr/include/c++/9.1.0/ostream ****        *  @name Inserters
+ 140:/usr/include/c++/9.1.0/ostream ****        *
+ 141:/usr/include/c++/9.1.0/ostream ****        *  All the @c operator<< functions (aka <em>formatted output
+ 142:/usr/include/c++/9.1.0/ostream ****        *  functions</em>) have some common behavior.  Each starts by
+ 143:/usr/include/c++/9.1.0/ostream ****        *  constructing a temporary object of type std::basic_ostream::sentry.
+ 144:/usr/include/c++/9.1.0/ostream ****        *  This can have several effects, concluding with the setting of a
+ 145:/usr/include/c++/9.1.0/ostream ****        *  status flag; see the sentry documentation for more.
+ 146:/usr/include/c++/9.1.0/ostream ****        *
+ 147:/usr/include/c++/9.1.0/ostream ****        *  If the sentry status is good, the function tries to generate
+ 148:/usr/include/c++/9.1.0/ostream ****        *  whatever data is appropriate for the type of the argument.
+ 149:/usr/include/c++/9.1.0/ostream ****        *
+ 150:/usr/include/c++/9.1.0/ostream ****        *  If an exception is thrown during insertion, ios_base::badbit
+ 151:/usr/include/c++/9.1.0/ostream ****        *  will be turned on in the stream's error state without causing an
+ 152:/usr/include/c++/9.1.0/ostream ****        *  ios_base::failure to be thrown.  The original exception will then
+ 153:/usr/include/c++/9.1.0/ostream ****        *  be rethrown.
+ 154:/usr/include/c++/9.1.0/ostream ****       */
+ 155:/usr/include/c++/9.1.0/ostream **** 
+ 156:/usr/include/c++/9.1.0/ostream ****       //@{
+ 157:/usr/include/c++/9.1.0/ostream ****       /**
+ 158:/usr/include/c++/9.1.0/ostream ****        *  @brief Integer arithmetic inserters
+ 159:/usr/include/c++/9.1.0/ostream ****        *  @param  __n A variable of builtin integral type.
+ 160:/usr/include/c++/9.1.0/ostream ****        *  @return  @c *this if successful
+GAS LISTING /tmp/ccZbqjVl.s 			page 7
+
+
+ 161:/usr/include/c++/9.1.0/ostream ****        *
+ 162:/usr/include/c++/9.1.0/ostream ****        *  These functions use the stream's current locale (specifically, the
+ 163:/usr/include/c++/9.1.0/ostream ****        *  @c num_get facet) to perform numeric formatting.
+ 164:/usr/include/c++/9.1.0/ostream ****       */
+ 165:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
+ 166:/usr/include/c++/9.1.0/ostream ****       operator<<(long __n)
+ 167:/usr/include/c++/9.1.0/ostream ****       { return _M_insert(__n); }
+ 168:/usr/include/c++/9.1.0/ostream **** 
+ 169:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
+ 170:/usr/include/c++/9.1.0/ostream ****       operator<<(unsigned long __n)
+ 171:/usr/include/c++/9.1.0/ostream ****       { return _M_insert(__n); }
+ 172:/usr/include/c++/9.1.0/ostream **** 
+ 173:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
+ 174:/usr/include/c++/9.1.0/ostream ****       operator<<(bool __n)
+  78              		.loc 3 174 7 is_stmt 1 view .LVU16
+  79              	.LBB15:
+ 175:/usr/include/c++/9.1.0/ostream ****       { return _M_insert(__n); }
+  80              		.loc 3 175 29 is_stmt 0 view .LVU17
+  81 006f 488D3D00 		leaq	_ZSt4cout(%rip), %rdi
+  81      000000
+  82 0076 E8000000 		call	_ZNSo9_M_insertIbEERSoT_@PLT
+  82      00
+  83              	.LVL9:
+  84              		.loc 3 175 29 view .LVU18
+  85 007b 4889C7   		movq	%rax, %rdi
+  86              	.LVL10:
+  87              		.loc 3 175 29 view .LVU19
+  88              	.LBE15:
+  89              	.LBE14:
+  90              	.LBB16:
+  91              	.LBI16:
+ 108:/usr/include/c++/9.1.0/ostream ****       {
+  92              		.loc 3 108 7 is_stmt 1 view .LVU20
+  93              	.LBB17:
+ 113:/usr/include/c++/9.1.0/ostream ****       }
+  94              		.loc 3 113 13 is_stmt 0 view .LVU21
+  95 007e E8000000 		call	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@PLT
+  95      00
+  96              	.LVL11:
+ 113:/usr/include/c++/9.1.0/ostream ****       }
+  97              		.loc 3 113 13 view .LVU22
+  98              	.LBE17:
+  99              	.LBE16:
+  11:Src/main.cpp  **** }
+ 100              		.loc 1 11 5 is_stmt 1 view .LVU23
+ 101              		.loc 1 12 1 is_stmt 0 view .LVU24
+ 102 0083 B8000000 		movl	$0, %eax
+ 102      00
+ 103 0088 5B       		popq	%rbx
+ 104              		.cfi_def_cfa_offset 8
+ 105              	.LVL12:
+ 106              		.loc 1 12 1 view .LVU25
+ 107 0089 C3       		ret
+ 108              		.cfi_endproc
+ 109              	.LFE1503:
+ 112              	_GLOBAL__sub_I_main:
+ 113              	.LFB1827:
+GAS LISTING /tmp/ccZbqjVl.s 			page 8
+
+
+ 114              		.loc 1 12 1 is_stmt 1 view -0
+ 115              		.cfi_startproc
+ 116 008a 4883EC08 		subq	$8, %rsp
+ 117              		.cfi_def_cfa_offset 16
+ 118              		.loc 1 12 1 is_stmt 0 view .LVU27
+ 119 008e BEFFFF00 		movl	$65535, %esi
+ 119      00
+ 120 0093 BF010000 		movl	$1, %edi
+ 120      00
+ 121 0098 E863FFFF 		call	_Z41__static_initialization_and_destruction_0ii
+ 121      FF
+ 122              	.LVL13:
+ 123 009d 4883C408 		addq	$8, %rsp
+ 124              		.cfi_def_cfa_offset 8
+ 125 00a1 C3       		ret
+ 126              		.cfi_endproc
+ 127              	.LFE1827:
+ 129              		.section	.init_array,"aw"
+ 130              		.align 8
+ 131 0000 00000000 		.quad	_GLOBAL__sub_I_main
+ 131      00000000 
+ 132              		.local	_ZStL8__ioinit
+ 133              		.comm	_ZStL8__ioinit,1,1
+ 134              		.text
+ 135              	.Letext0:
+ 136              		.file 4 "/usr/include/c++/9.1.0/cwchar"
+ 137              		.file 5 "/usr/include/c++/9.1.0/new"
+ 138              		.file 6 "/usr/include/c++/9.1.0/bits/exception_ptr.h"
+ 139              		.file 7 "/usr/include/c++/9.1.0/type_traits"
+ 140              		.file 8 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/c++config.h"
+ 141              		.file 9 "/usr/include/c++/9.1.0/bits/stl_pair.h"
+ 142              		.file 10 "/usr/include/c++/9.1.0/debug/debug.h"
+ 143              		.file 11 "/usr/include/c++/9.1.0/bits/char_traits.h"
+ 144              		.file 12 "/usr/include/c++/9.1.0/cstdint"
+ 145              		.file 13 "/usr/include/c++/9.1.0/clocale"
+ 146              		.file 14 "/usr/include/c++/9.1.0/cstdlib"
+ 147              		.file 15 "/usr/include/c++/9.1.0/cstdio"
+ 148              		.file 16 "/usr/include/c++/9.1.0/system_error"
+ 149              		.file 17 "/usr/include/c++/9.1.0/bits/ios_base.h"
+ 150              		.file 18 "/usr/include/c++/9.1.0/cwctype"
+ 151              		.file 19 "/usr/include/c++/9.1.0/bits/locale_facets.h"
+ 152              		.file 20 "/usr/include/c++/9.1.0/iosfwd"
+ 153              		.file 21 "/usr/include/c++/9.1.0/bits/basic_ios.h"
+ 154              		.file 22 "/usr/include/c++/9.1.0/bits/ostream.tcc"
+ 155              		.file 23 "/usr/include/c++/9.1.0/istream"
+ 156              		.file 24 "/usr/include/c++/9.1.0/bits/predefined_ops.h"
+ 157              		.file 25 "/usr/include/c++/9.1.0/ext/new_allocator.h"
+ 158              		.file 26 "/usr/include/c++/9.1.0/ext/numeric_traits.h"
+ 159              		.file 27 "/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include/stddef.h"
+ 160              		.file 28 "<built-in>"
+ 161              		.file 29 "/usr/include/bits/types/wint_t.h"
+ 162              		.file 30 "/usr/include/bits/types/__mbstate_t.h"
+ 163              		.file 31 "/usr/include/bits/types/mbstate_t.h"
+ 164              		.file 32 "/usr/include/bits/types/__FILE.h"
+ 165              		.file 33 "/usr/include/bits/types/struct_FILE.h"
+ 166              		.file 34 "/usr/include/bits/types/FILE.h"
+ 167              		.file 35 "/usr/include/wchar.h"
+GAS LISTING /tmp/ccZbqjVl.s 			page 9
+
+
+ 168              		.file 36 "/usr/include/bits/types/struct_tm.h"
+ 169              		.file 37 "/usr/include/bits/types.h"
+ 170              		.file 38 "/usr/include/bits/stdint-intn.h"
+ 171              		.file 39 "/usr/include/bits/stdint-uintn.h"
+ 172              		.file 40 "/usr/include/stdint.h"
+ 173              		.file 41 "/usr/include/locale.h"
+ 174              		.file 42 "/usr/include/time.h"
+ 175              		.file 43 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/atomic_word.h"
+ 176              		.file 44 "/usr/include/stdlib.h"
+ 177              		.file 45 "/usr/include/bits/stdlib-float.h"
+ 178              		.file 46 "/usr/include/bits/stdlib-bsearch.h"
+ 179              		.file 47 "/usr/include/bits/types/__fpos_t.h"
+ 180              		.file 48 "/usr/include/stdio.h"
+ 181              		.file 49 "/usr/include/bits/sys_errlist.h"
+ 182              		.file 50 "/usr/include/bits/stdio.h"
+ 183              		.file 51 "/usr/include/errno.h"
+ 184              		.file 52 "/usr/include/bits/wctype-wchar.h"
+ 185              		.file 53 "/usr/include/wctype.h"
+ 186              		.file 54 "Inc/strbase.hpp"
+GAS LISTING /tmp/ccZbqjVl.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.cpp
+     /tmp/ccZbqjVl.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+                             .bss:0000000000000000 _ZStL8__ioinit
+     /tmp/ccZbqjVl.s:45     .text:000000000000003d main
+     /tmp/ccZbqjVl.s:112    .text:000000000000008a _GLOBAL__sub_I_main
+
+UNDEFINED SYMBOLS
+_GLOBAL_OFFSET_TABLE_
+_ZNSt8ios_base4InitC1Ev
+__dso_handle
+_ZNSt8ios_base4InitD1Ev
+__cxa_atexit
+calloc
+_ZSt3cin
+_ZStrsIcSt11char_traitsIcEERSt13basic_istreamIT_T0_ES6_PS3_
+_ZN10translator8containsEPcc
+_ZSt4cout
+_ZNSo9_M_insertIbEERSoT_
+_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_
