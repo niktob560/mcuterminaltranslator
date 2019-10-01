@@ -1,0 +1,6 @@
+[submodule "test/cxxtest"]
+	path = test/cxxtest
+	url = https://github.com/CxxTest/cxxtest
+[submodule "cxxtest"]
+	path = cxxtest
+	url = https://github.com/CxxTest/cxxtest
