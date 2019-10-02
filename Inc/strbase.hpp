@@ -4,18 +4,11 @@
 namespace translator
 {
     typedef uint32_t STR_LEN_DTYPE;
-    // #ifndef STR_LEN_DTYPE
-    //     #define STR_LEN_DTYPE uint32_t
-    // #endif
 
     const STR_LEN_DTYPE str_NAN = 0xFFFFFFFF;
 
     //checks if string c contains char cc
     bool contains(char *c, const char cc);
-
-    //FIXME: bullshit because of native support
-    // //returns len of string c
-    // STR_LEN_DTYPE strlen(char *c);
 
     //get first char, matching cc from string c
     STR_LEN_DTYPE charAt(char *c, const char cc);
@@ -23,4 +16,15 @@ namespace translator
     //get last char, matching cc from string c
     STR_LEN_DTYPE lastCharAt(char *c, const char cc);
 
+    //check if c1 equals to c2
+    bool equals(char *c1, char *c2);
+
+    //get substr from 'start'
+    void substr(char *from, char *to, STR_LEN_DTYPE start);
+
+    //get substr between 'start' and 'end'
+    void substr(char *from, char *to, STR_LEN_DTYPE start, STR_LEN_DTYPE end);
+
+    //get substring between chars 'sym'
+    void split(char *from, char *to, char sym);
 }

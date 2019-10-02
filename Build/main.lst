@@ -1,4 +1,4 @@
-GAS LISTING /tmp/cc2hizVv.s 			page 1
+GAS LISTING /tmp/ccF4Oe36.s 			page 1
 
 
    1              		.file	"main.cpp"
@@ -13,28 +13,26 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
    3:Src/main.cpp  **** 
    4:Src/main.cpp  **** using namespace std;
    5:Src/main.cpp  **** 
-   6:Src/main.cpp  **** #ifndef TEST
-   7:Src/main.cpp  **** 
-   8:Src/main.cpp  **** int main()
-   9:Src/main.cpp  **** {
-  10:Src/main.cpp  ****     char *c = (char*)calloc(sizeof(char), 1024);
-  11:Src/main.cpp  ****     cin >> c;
-  12:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
-  13:Src/main.cpp  ****     return 0;
-  14:Src/main.cpp  **** }
-   9              		.loc 1 14 1 view -0
+   6:Src/main.cpp  **** int main()
+   7:Src/main.cpp  **** {
+   8:Src/main.cpp  ****     char *c = (char*)calloc(sizeof(char), 1024);
+   9:Src/main.cpp  ****     cin >> c;
+  10:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
+  11:Src/main.cpp  ****     return 0;
+  12:Src/main.cpp  **** }
+   9              		.loc 1 12 1 view -0
   10              		.cfi_startproc
-  11              		.loc 1 14 1 is_stmt 0 view .LVU1
+  11              		.loc 1 12 1 is_stmt 0 view .LVU1
   12 0000 83FF01   		cmpl	$1, %edi
   13 0003 7401     		je	.L7
   14              	.L4:
   15 0005 C3       		ret
   16              	.L7:
-  17              		.loc 1 14 1 discriminator 1 view .LVU2
+  17              		.loc 1 12 1 discriminator 1 view .LVU2
   18 0006 81FEFFFF 		cmpl	$65535, %esi
   18      0000
   19 000c 75F7     		jne	.L4
-  20              		.loc 1 14 1 view .LVU3
+  20              		.loc 1 12 1 view .LVU3
   21 000e 4883EC08 		subq	$8, %rsp
   22              		.cfi_def_cfa_offset 16
   23              		.file 2 "/usr/include/c++/9.1.0/iostream"
@@ -58,11 +56,11 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
   18:/usr/include/c++/9.1.0/iostream **** // 3.1, as published by the Free Software Foundation.
   19:/usr/include/c++/9.1.0/iostream **** 
   20:/usr/include/c++/9.1.0/iostream **** // You should have received a copy of the GNU General Public License and
-GAS LISTING /tmp/cc2hizVv.s 			page 2
-
-
   21:/usr/include/c++/9.1.0/iostream **** // a copy of the GCC Runtime Library Exception along with this program;
   22:/usr/include/c++/9.1.0/iostream **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+GAS LISTING /tmp/ccF4Oe36.s 			page 2
+
+
   23:/usr/include/c++/9.1.0/iostream **** // <http://www.gnu.org/licenses/>.
   24:/usr/include/c++/9.1.0/iostream **** 
   25:/usr/include/c++/9.1.0/iostream **** /** @file include/iostream
@@ -118,11 +116,11 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
   24              		.loc 2 74 25 view .LVU4
   25 0012 488D3D00 		leaq	_ZStL8__ioinit(%rip), %rdi
   25      000000
-GAS LISTING /tmp/cc2hizVv.s 			page 3
-
-
   26              	.LVL1:
   27              		.loc 2 74 25 view .LVU5
+GAS LISTING /tmp/ccF4Oe36.s 			page 3
+
+
   28 0019 E8000000 		call	_ZNSt8ios_base4InitC1Ev@PLT
   28      00
   29              	.LVL2:
@@ -136,7 +134,7 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
   34 0033 E8000000 		call	__cxa_atexit@PLT
   34      00
   35              	.LVL3:
-  36              		.loc 1 14 1 view .LVU7
+  36              		.loc 1 12 1 view .LVU7
   37 0038 4883C408 		addq	$8, %rsp
   38              		.cfi_def_cfa_offset 8
   39 003c C3       		ret
@@ -145,16 +143,16 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
   43              		.globl	main
   45              	main:
   46              	.LFB1503:
-   9:Src/main.cpp  ****     char *c = (char*)calloc(sizeof(char), 1024);
-  47              		.loc 1 9 1 is_stmt 1 view -0
+   7:Src/main.cpp  ****     char *c = (char*)calloc(sizeof(char), 1024);
+  47              		.loc 1 7 1 is_stmt 1 view -0
   48              		.cfi_startproc
   49 003d 53       		pushq	%rbx
   50              		.cfi_def_cfa_offset 16
   51              		.cfi_offset 3, -16
-  10:Src/main.cpp  ****     cin >> c;
-  52              		.loc 1 10 5 view .LVU9
-  10:Src/main.cpp  ****     cin >> c;
-  53              		.loc 1 10 28 is_stmt 0 view .LVU10
+   8:Src/main.cpp  ****     cin >> c;
+  52              		.loc 1 8 5 view .LVU9
+   8:Src/main.cpp  ****     cin >> c;
+  53              		.loc 1 8 28 is_stmt 0 view .LVU10
   54 003e BE000400 		movl	$1024, %esi
   54      00
   55 0043 BF010000 		movl	$1, %edi
@@ -164,31 +162,31 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
   57              	.LVL4:
   58 004d 4889C3   		movq	%rax, %rbx
   59              	.LVL5:
-  11:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
-  60              		.loc 1 11 5 is_stmt 1 view .LVU11
-  11:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
-  61              		.loc 1 11 12 is_stmt 0 view .LVU12
+   9:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
+  60              		.loc 1 9 5 is_stmt 1 view .LVU11
+   9:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
+  61              		.loc 1 9 12 is_stmt 0 view .LVU12
   62 0050 4889C6   		movq	%rax, %rsi
   63 0053 488D3D00 		leaq	_ZSt3cin(%rip), %rdi
   63      000000
   64 005a E8000000 		call	_ZStrsIcSt11char_traitsIcEERSt13basic_istreamIT_T0_ES6_PS3_@PLT
   64      00
   65              	.LVL6:
-  12:Src/main.cpp  ****     return 0;
-  66              		.loc 1 12 5 is_stmt 1 view .LVU13
-  12:Src/main.cpp  ****     return 0;
-  67              		.loc 1 12 33 is_stmt 0 view .LVU14
-GAS LISTING /tmp/cc2hizVv.s 			page 4
-
-
+  10:Src/main.cpp  ****     return 0;
+  66              		.loc 1 10 5 is_stmt 1 view .LVU13
+  10:Src/main.cpp  ****     return 0;
+  67              		.loc 1 10 33 is_stmt 0 view .LVU14
   68 005f BE610000 		movl	$97, %esi
   68      00
+GAS LISTING /tmp/ccF4Oe36.s 			page 4
+
+
   69 0064 4889DF   		movq	%rbx, %rdi
   70 0067 E8000000 		call	_ZN10translator8containsEPcc@PLT
   70      00
   71              	.LVL7:
-  12:Src/main.cpp  ****     return 0;
-  72              		.loc 1 12 40 view .LVU15
+  10:Src/main.cpp  ****     return 0;
+  72              		.loc 1 10 40 view .LVU15
   73 006c 0FB6F0   		movzbl	%al, %esi
   74              	.LVL8:
   75              	.LBB14:
@@ -238,11 +236,11 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
   42:/usr/include/c++/9.1.0/ostream **** {
   43:/usr/include/c++/9.1.0/ostream **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
   44:/usr/include/c++/9.1.0/ostream **** 
-GAS LISTING /tmp/cc2hizVv.s 			page 5
-
-
   45:/usr/include/c++/9.1.0/ostream ****   /**
   46:/usr/include/c++/9.1.0/ostream ****    *  @brief  Template class basic_ostream.
+GAS LISTING /tmp/ccF4Oe36.s 			page 5
+
+
   47:/usr/include/c++/9.1.0/ostream ****    *  @ingroup io
   48:/usr/include/c++/9.1.0/ostream ****    *
   49:/usr/include/c++/9.1.0/ostream ****    *  @tparam _CharT  Type of character stream.
@@ -298,11 +296,11 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
   99:/usr/include/c++/9.1.0/ostream ****       //@{
  100:/usr/include/c++/9.1.0/ostream ****       /**
  101:/usr/include/c++/9.1.0/ostream ****        *  @brief  Interface for manipulators.
-GAS LISTING /tmp/cc2hizVv.s 			page 6
-
-
  102:/usr/include/c++/9.1.0/ostream ****        *
  103:/usr/include/c++/9.1.0/ostream ****        *  Manipulators such as @c std::endl and @c std::hex use these
+GAS LISTING /tmp/ccF4Oe36.s 			page 6
+
+
  104:/usr/include/c++/9.1.0/ostream ****        *  functions in constructs like "std::cout << std::endl".  For more
  105:/usr/include/c++/9.1.0/ostream ****        *  information, see the iomanip header.
  106:/usr/include/c++/9.1.0/ostream ****       */
@@ -358,11 +356,11 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
  156:/usr/include/c++/9.1.0/ostream ****       //@{
  157:/usr/include/c++/9.1.0/ostream ****       /**
  158:/usr/include/c++/9.1.0/ostream ****        *  @brief Integer arithmetic inserters
-GAS LISTING /tmp/cc2hizVv.s 			page 7
-
-
  159:/usr/include/c++/9.1.0/ostream ****        *  @param  __n A variable of builtin integral type.
  160:/usr/include/c++/9.1.0/ostream ****        *  @return  @c *this if successful
+GAS LISTING /tmp/ccF4Oe36.s 			page 7
+
+
  161:/usr/include/c++/9.1.0/ostream ****        *
  162:/usr/include/c++/9.1.0/ostream ****        *  These functions use the stream's current locale (specifically, the
  163:/usr/include/c++/9.1.0/ostream ****        *  @c num_get facet) to perform numeric formatting.
@@ -406,28 +404,28 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
   97              		.loc 3 113 13 view .LVU22
   98              	.LBE17:
   99              	.LBE16:
-  13:Src/main.cpp  **** }
- 100              		.loc 1 13 5 is_stmt 1 view .LVU23
- 101              		.loc 1 14 1 is_stmt 0 view .LVU24
+  11:Src/main.cpp  **** }
+ 100              		.loc 1 11 5 is_stmt 1 view .LVU23
+ 101              		.loc 1 12 1 is_stmt 0 view .LVU24
  102 0083 B8000000 		movl	$0, %eax
  102      00
  103 0088 5B       		popq	%rbx
  104              		.cfi_def_cfa_offset 8
  105              	.LVL12:
- 106              		.loc 1 14 1 view .LVU25
+ 106              		.loc 1 12 1 view .LVU25
  107 0089 C3       		ret
  108              		.cfi_endproc
  109              	.LFE1503:
-GAS LISTING /tmp/cc2hizVv.s 			page 8
-
-
  112              	_GLOBAL__sub_I_main:
  113              	.LFB1827:
- 114              		.loc 1 14 1 is_stmt 1 view -0
+GAS LISTING /tmp/ccF4Oe36.s 			page 8
+
+
+ 114              		.loc 1 12 1 is_stmt 1 view -0
  115              		.cfi_startproc
  116 008a 4883EC08 		subq	$8, %rsp
  117              		.cfi_def_cfa_offset 16
- 118              		.loc 1 14 1 is_stmt 0 view .LVU27
+ 118              		.loc 1 12 1 is_stmt 0 view .LVU27
  119 008e BEFFFF00 		movl	$65535, %esi
  119      00
  120 0093 BF010000 		movl	$1, %edi
@@ -478,11 +476,11 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
  163              		.file 31 "/usr/include/bits/types/mbstate_t.h"
  164              		.file 32 "/usr/include/bits/types/__FILE.h"
  165              		.file 33 "/usr/include/bits/types/struct_FILE.h"
-GAS LISTING /tmp/cc2hizVv.s 			page 9
-
-
  166              		.file 34 "/usr/include/bits/types/FILE.h"
  167              		.file 35 "/usr/include/wchar.h"
+GAS LISTING /tmp/ccF4Oe36.s 			page 9
+
+
  168              		.file 36 "/usr/include/bits/types/struct_tm.h"
  169              		.file 37 "/usr/include/bits/types.h"
  170              		.file 38 "/usr/include/bits/stdint-intn.h"
@@ -502,15 +500,15 @@ GAS LISTING /tmp/cc2hizVv.s 			page 1
  184              		.file 52 "/usr/include/bits/wctype-wchar.h"
  185              		.file 53 "/usr/include/wctype.h"
  186              		.file 54 "Inc/strbase.hpp"
-GAS LISTING /tmp/cc2hizVv.s 			page 10
+GAS LISTING /tmp/ccF4Oe36.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.cpp
-     /tmp/cc2hizVv.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/ccF4Oe36.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
                              .bss:0000000000000000 _ZStL8__ioinit
-     /tmp/cc2hizVv.s:45     .text:000000000000003d main
-     /tmp/cc2hizVv.s:112    .text:000000000000008a _GLOBAL__sub_I_main
+     /tmp/ccF4Oe36.s:45     .text:000000000000003d main
+     /tmp/ccF4Oe36.s:112    .text:000000000000008a _GLOBAL__sub_I_main
 
 UNDEFINED SYMBOLS
 _GLOBAL_OFFSET_TABLE_

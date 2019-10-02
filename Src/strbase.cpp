@@ -14,18 +14,6 @@ namespace translator
         return false;
     }
 
-    //FIXME: bullshit because of native support
-    // //returns len of string c
-    // STR_LEN_DTYPE strlen(char *c)
-    // {
-    //     STR_LEN_DTYPE i = 0;
-    //     while(c[i])
-    //     {
-    //         i++;
-    //     }
-    //     return i;
-    // }
-
     //get first char, matching cc from string c
     STR_LEN_DTYPE charAt(char *c, const char cc)
     {
@@ -50,5 +38,49 @@ namespace translator
                 return i;
         }
         return str_NAN;
+    }
+
+
+    //check if c1 equals to c2
+    bool equals(char *c1, char *c2)
+    {
+        if(c1 == c2)
+            return true;
+        STR_LEN_DTYPE i = 0;
+        while (c1[i] && c2[i] && c1[i] == c2[i])
+        {
+            i++;
+        }
+        return (c1[i] == 0 && c2[i] == 0);
+    }
+
+
+    //get substr from 'start'
+    void substr(char *from, char *to, STR_LEN_DTYPE start)
+    {
+        from += start;
+        while(*from)
+        {
+            *to = *from;
+            from++;
+            to++;
+        }
+        *to = '\0';
+    }
+
+    //get substr between 'start' and 'end'
+    void substr(char *from, char *to, STR_LEN_DTYPE start, STR_LEN_DTYPE end)
+    {
+        from += start;
+        end -= start;
+        end++;
+        while(*from && end)
+        {
+            *to = *from;
+            from++;
+            to++;
+            end--;
+        }
+        *to = '\0';
     }
 }
