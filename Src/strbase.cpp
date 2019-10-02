@@ -30,14 +30,18 @@ namespace translator
     //get last char, matching cc from string c
     STR_LEN_DTYPE lastCharAt(char *c, const char cc)
     {
-        STR_LEN_DTYPE i = strlen(c);
-        while(i && i != str_NAN)
+        bool contains = false;
+        STR_LEN_DTYPE i = 0;
+        while(c[i])
         {
-            i--;
             if(c[i] == cc)
-                return i;
+                contains = true;
+            i++;
         }
-        return str_NAN;
+        if(contains)
+            return i - 1;
+        else
+            return str_NAN;
     }
 
 
