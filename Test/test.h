@@ -55,5 +55,18 @@ public:
 
         translator::substr(c1, c2, 1, 4);
         TS_ASSERT(strlen(c2) == 4);
+
+        free(c2);
+    }
+
+    void testSplit(void)
+    {
+        char * c = (char*)"|aaa|";
+        char * tgt = (char*)calloc(sizeof(char*), 4);
+        translator::split(c, tgt, '|');
+        TS_ASSERT(translator::equals(tgt, (const char*)"aaa"));
+        c = (char*)"||aaa||";
+        translator::split(c, tgt, '|');
+        TS_ASSERT(translator::equals(tgt, (const char*)"|aaa|"));
     }
 };

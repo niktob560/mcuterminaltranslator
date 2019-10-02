@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccsVF6G7.s 			page 1
+GAS LISTING /tmp/ccLeqyup.s 			page 1
 
 
    1              		.file	"strbase.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccsVF6G7.s 			page 1
   37 001d C3       		ret
   38              		.cfi_endproc
   39              	.LFE14:
-GAS LISTING /tmp/ccsVF6G7.s 			page 2
+GAS LISTING /tmp/ccLeqyup.s 			page 2
 
 
   41              		.globl	_ZN10translator6charAtEPcc
@@ -66,65 +66,50 @@ GAS LISTING /tmp/ccsVF6G7.s 			page 1
   44              	.LVL3:
   45              	.LFB15:
   16:Src/strbase.cpp **** 
-  17:Src/strbase.cpp ****     //FIXME: bullshit because of native support
-  18:Src/strbase.cpp ****     // //returns len of string c
-  19:Src/strbase.cpp ****     // STR_LEN_DTYPE strlen(char *c)
-  20:Src/strbase.cpp ****     // {
-  21:Src/strbase.cpp ****     //     STR_LEN_DTYPE i = 0;
-  22:Src/strbase.cpp ****     //     while(c[i])
-  23:Src/strbase.cpp ****     //     {
-  24:Src/strbase.cpp ****     //         i++;
-  25:Src/strbase.cpp ****     //     }
-  26:Src/strbase.cpp ****     //     return i;
-  27:Src/strbase.cpp ****     // }
-  28:Src/strbase.cpp **** 
-  29:Src/strbase.cpp ****     //get first char, matching cc from string c
-  30:Src/strbase.cpp ****     STR_LEN_DTYPE charAt(char *c, const char cc)
-  31:Src/strbase.cpp ****     {
-  46              		.loc 1 31 5 is_stmt 1 view -0
+  17:Src/strbase.cpp ****     //get first char, matching cc from string c
+  18:Src/strbase.cpp ****     STR_LEN_DTYPE charAt(char *c, const char cc)
+  19:Src/strbase.cpp ****     {
+  46              		.loc 1 19 5 is_stmt 1 view -0
   47              		.cfi_startproc
-  32:Src/strbase.cpp ****         STR_LEN_DTYPE i = 0;
-  48              		.loc 1 32 9 view .LVU12
-  49              		.loc 1 32 23 is_stmt 0 view .LVU13
+  20:Src/strbase.cpp ****         STR_LEN_DTYPE i = 0;
+  48              		.loc 1 20 9 view .LVU12
+  49              		.loc 1 20 23 is_stmt 0 view .LVU13
   50 001e B8000000 		movl	$0, %eax
   50      00
   51              	.LVL4:
   52              	.L8:
-  33:Src/strbase.cpp ****         while(c[i])
-  53              		.loc 1 33 9 is_stmt 1 view .LVU14
-  54              		.loc 1 33 17 is_stmt 0 view .LVU15
+  21:Src/strbase.cpp ****         while(c[i])
+  53              		.loc 1 21 9 is_stmt 1 view .LVU14
+  54              		.loc 1 21 17 is_stmt 0 view .LVU15
   55 0023 89C2     		movl	%eax, %edx
-  56              		.loc 1 33 18 view .LVU16
+  56              		.loc 1 21 18 view .LVU16
   57 0025 0FB61417 		movzbl	(%rdi,%rdx), %edx
   58 0029 84D2     		testb	%dl, %dl
   59 002b 740A     		je	.L9
-  34:Src/strbase.cpp ****         {
-  35:Src/strbase.cpp ****             if(c[i] == cc)
-  60              		.loc 1 35 13 is_stmt 1 view .LVU17
+  22:Src/strbase.cpp ****         {
+  23:Src/strbase.cpp ****             if(c[i] == cc)
+  60              		.loc 1 23 13 is_stmt 1 view .LVU17
   61 002d 4038F2   		cmpb	%sil, %dl
   62 0030 740A     		je	.L6
-  36:Src/strbase.cpp ****                 return i;
-  37:Src/strbase.cpp ****             i++;
-  63              		.loc 1 37 13 view .LVU18
-  64              		.loc 1 37 14 is_stmt 0 view .LVU19
+  24:Src/strbase.cpp ****                 return i;
+  25:Src/strbase.cpp ****             i++;
+  63              		.loc 1 25 13 view .LVU18
+  64              		.loc 1 25 14 is_stmt 0 view .LVU19
   65 0032 83C001   		addl	$1, %eax
   66              	.LVL5:
-  33:Src/strbase.cpp ****         {
-  67              		.loc 1 33 9 view .LVU20
+  21:Src/strbase.cpp ****         {
+  67              		.loc 1 21 9 view .LVU20
   68 0035 EBEC     		jmp	.L8
   69              	.L9:
-  38:Src/strbase.cpp ****         }
-  39:Src/strbase.cpp ****         return str_NAN;
-  70              		.loc 1 39 16 view .LVU21
+  26:Src/strbase.cpp ****         }
+  27:Src/strbase.cpp ****         return str_NAN;
+  70              		.loc 1 27 16 view .LVU21
   71 0037 B8FFFFFF 		movl	$-1, %eax
   71      FF
-GAS LISTING /tmp/ccsVF6G7.s 			page 3
-
-
   72              	.LVL6:
   73              	.L6:
-  40:Src/strbase.cpp ****     }
-  74              		.loc 1 40 5 view .LVU22
+  28:Src/strbase.cpp ****     }
+  74              		.loc 1 28 5 view .LVU22
   75 003c C3       		ret
   76              		.cfi_endproc
   77              	.LFE15:
@@ -132,154 +117,157 @@ GAS LISTING /tmp/ccsVF6G7.s 			page 1
   81              	_ZN10translator10lastCharAtEPcc:
   82              	.LVL7:
   83              	.LFB16:
-  41:Src/strbase.cpp **** 
-  42:Src/strbase.cpp ****     //get last char, matching cc from string c
-  43:Src/strbase.cpp ****     STR_LEN_DTYPE lastCharAt(char *c, const char cc)
-  44:Src/strbase.cpp ****     {
-  84              		.loc 1 44 5 is_stmt 1 view -0
+  29:Src/strbase.cpp **** 
+GAS LISTING /tmp/ccLeqyup.s 			page 3
+
+
+  30:Src/strbase.cpp ****     //get last char, matching cc from string c
+  31:Src/strbase.cpp ****     STR_LEN_DTYPE lastCharAt(char *c, const char cc)
+  32:Src/strbase.cpp ****     {
+  84              		.loc 1 32 5 is_stmt 1 view -0
   85              		.cfi_startproc
-  86              		.loc 1 44 5 is_stmt 0 view .LVU24
+  86              		.loc 1 32 5 is_stmt 0 view .LVU24
   87 003d 4989F8   		movq	%rdi, %r8
-  45:Src/strbase.cpp ****         STR_LEN_DTYPE i = strlen(c);
-  88              		.loc 1 45 9 is_stmt 1 view .LVU25
-  89              		.loc 1 45 33 is_stmt 0 view .LVU26
+  33:Src/strbase.cpp ****         STR_LEN_DTYPE i = strlen(c);
+  88              		.loc 1 33 9 is_stmt 1 view .LVU25
+  89              		.loc 1 33 33 is_stmt 0 view .LVU26
   90 0040 48C7C1FF 		movq	$-1, %rcx
   90      FFFFFF
   91 0047 B8000000 		movl	$0, %eax
   91      00
   92 004c F2AE     		repnz scasb
   93              	.LVL8:
-  94              		.loc 1 45 33 view .LVU27
+  94              		.loc 1 33 33 view .LVU27
   95 004e 48F7D1   		notq	%rcx
-  96              		.loc 1 45 23 view .LVU28
+  96              		.loc 1 33 23 view .LVU28
   97 0051 8D41FF   		leal	-1(%rcx), %eax
   98              	.LVL9:
   99              	.L12:
-  46:Src/strbase.cpp ****         while(i && i != str_NAN)
- 100              		.loc 1 46 9 is_stmt 1 view .LVU29
- 101              		.loc 1 46 17 is_stmt 0 view .LVU30
+  34:Src/strbase.cpp ****         while(i && i != str_NAN)
+ 100              		.loc 1 34 9 is_stmt 1 view .LVU29
+ 101              		.loc 1 34 17 is_stmt 0 view .LVU30
  102 0054 83E801   		subl	$1, %eax
  103              	.LVL10:
- 104              		.loc 1 46 17 view .LVU31
+ 104              		.loc 1 34 17 view .LVU31
  105 0057 83F8FD   		cmpl	$-3, %eax
  106 005a 7709     		ja	.L13
-  47:Src/strbase.cpp ****         {
-  48:Src/strbase.cpp ****             i--;
- 107              		.loc 1 48 13 is_stmt 1 view .LVU32
+  35:Src/strbase.cpp ****         {
+  36:Src/strbase.cpp ****             i--;
+ 107              		.loc 1 36 13 is_stmt 1 view .LVU32
  108              	.LVL11:
-  49:Src/strbase.cpp ****             if(c[i] == cc)
- 109              		.loc 1 49 13 view .LVU33
- 110              		.loc 1 49 18 is_stmt 0 view .LVU34
+  37:Src/strbase.cpp ****             if(c[i] == cc)
+ 109              		.loc 1 37 13 view .LVU33
+ 110              		.loc 1 37 18 is_stmt 0 view .LVU34
  111 005c 89C2     		movl	%eax, %edx
- 112              		.loc 1 49 13 view .LVU35
+ 112              		.loc 1 37 13 view .LVU35
  113 005e 41383410 		cmpb	%sil, (%r8,%rdx)
  114 0062 75F0     		jne	.L12
  115 0064 C3       		ret
  116              	.LVL12:
  117              	.L13:
-  50:Src/strbase.cpp ****                 return i;
-GAS LISTING /tmp/ccsVF6G7.s 			page 4
-
-
-  51:Src/strbase.cpp ****         }
-  52:Src/strbase.cpp ****         return str_NAN;
- 118              		.loc 1 52 16 view .LVU36
+  38:Src/strbase.cpp ****                 return i;
+  39:Src/strbase.cpp ****         }
+  40:Src/strbase.cpp ****         return str_NAN;
+ 118              		.loc 1 40 16 view .LVU36
  119 0065 B8FFFFFF 		movl	$-1, %eax
  119      FF
  120              	.LVL13:
-  53:Src/strbase.cpp ****     }
- 121              		.loc 1 53 5 view .LVU37
+  41:Src/strbase.cpp ****     }
+ 121              		.loc 1 41 5 view .LVU37
  122 006a C3       		ret
  123              		.cfi_endproc
  124              	.LFE16:
  126              		.globl	_ZN10translator6equalsEPcS0_
+GAS LISTING /tmp/ccLeqyup.s 			page 4
+
+
  128              	_ZN10translator6equalsEPcS0_:
  129              	.LVL14:
  130              	.LFB17:
-  54:Src/strbase.cpp **** 
-  55:Src/strbase.cpp **** 
-  56:Src/strbase.cpp ****     //check if c1 equals to c2
-  57:Src/strbase.cpp ****     bool equals(char *c1, char *c2)
-  58:Src/strbase.cpp ****     {
- 131              		.loc 1 58 5 is_stmt 1 view -0
+  42:Src/strbase.cpp **** 
+  43:Src/strbase.cpp **** 
+  44:Src/strbase.cpp ****     //check if c1 equals to c2
+  45:Src/strbase.cpp ****     bool equals(char *c1, char *c2)
+  46:Src/strbase.cpp ****     {
+ 131              		.loc 1 46 5 is_stmt 1 view -0
  132              		.cfi_startproc
-  59:Src/strbase.cpp ****         if(c1 == c2)
- 133              		.loc 1 59 9 view .LVU39
+  47:Src/strbase.cpp ****         if(c1 == c2)
+ 133              		.loc 1 47 9 view .LVU39
  134 006b 4839F7   		cmpq	%rsi, %rdi
  135 006e 742E     		je	.L18
-  60:Src/strbase.cpp ****             return true;
-  61:Src/strbase.cpp ****         STR_LEN_DTYPE i = 0;
- 136              		.loc 1 61 23 is_stmt 0 view .LVU40
+  48:Src/strbase.cpp ****             return true;
+  49:Src/strbase.cpp ****         STR_LEN_DTYPE i = 0;
+ 136              		.loc 1 49 23 is_stmt 0 view .LVU40
  137 0070 B9000000 		movl	$0, %ecx
  137      00
  138 0075 EB03     		jmp	.L17
  139              	.LVL15:
  140              	.L21:
-  62:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
-  63:Src/strbase.cpp ****         {
-  64:Src/strbase.cpp ****             i++;
- 141              		.loc 1 64 13 is_stmt 1 view .LVU41
- 142              		.loc 1 64 14 is_stmt 0 view .LVU42
+  50:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
+  51:Src/strbase.cpp ****         {
+  52:Src/strbase.cpp ****             i++;
+ 141              		.loc 1 52 13 is_stmt 1 view .LVU41
+ 142              		.loc 1 52 14 is_stmt 0 view .LVU42
  143 0077 83C101   		addl	$1, %ecx
  144              	.LVL16:
  145              	.L17:
-  62:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
- 146              		.loc 1 62 9 is_stmt 1 view .LVU43
-  62:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
- 147              		.loc 1 62 19 is_stmt 0 view .LVU44
+  50:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
+ 146              		.loc 1 50 9 is_stmt 1 view .LVU43
+  50:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
+ 147              		.loc 1 50 19 is_stmt 0 view .LVU44
  148 007a 89CA     		movl	%ecx, %edx
-  62:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
- 149              		.loc 1 62 20 view .LVU45
+  50:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
+ 149              		.loc 1 50 20 view .LVU45
  150 007c 0FB60417 		movzbl	(%rdi,%rdx), %eax
-  62:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
- 151              		.loc 1 62 31 view .LVU46
+  50:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
+ 151              		.loc 1 50 31 view .LVU46
  152 0080 84C0     		testb	%al, %al
  153 0082 740F     		je	.L16
-  62:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
- 154              		.loc 1 62 29 discriminator 1 view .LVU47
+  50:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
+ 154              		.loc 1 50 29 discriminator 1 view .LVU47
  155 0084 440FB604 		movzbl	(%rsi,%rdx), %r8d
-GAS LISTING /tmp/ccsVF6G7.s 			page 5
-
-
  155      16
-  62:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
- 156              		.loc 1 62 22 discriminator 1 view .LVU48
+  50:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
+ 156              		.loc 1 50 22 discriminator 1 view .LVU48
  157 0089 4584C0   		testb	%r8b, %r8b
  158 008c 7405     		je	.L16
-  62:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
- 159              		.loc 1 62 31 discriminator 2 view .LVU49
+  50:Src/strbase.cpp ****         while (c1[i] && c2[i] && c1[i] == c2[i])
+ 159              		.loc 1 50 31 discriminator 2 view .LVU49
  160 008e 4438C0   		cmpb	%r8b, %al
  161 0091 74E4     		je	.L21
  162              	.L16:
-  65:Src/strbase.cpp ****         }
-  66:Src/strbase.cpp ****         return (c1[i] == 0 && c2[i] == 0);
- 163              		.loc 1 66 9 is_stmt 1 view .LVU50
- 164              		.loc 1 66 28 is_stmt 0 view .LVU51
+  53:Src/strbase.cpp ****         }
+  54:Src/strbase.cpp ****         return (c1[i] == 0 && c2[i] == 0);
+GAS LISTING /tmp/ccLeqyup.s 			page 5
+
+
+ 163              		.loc 1 54 9 is_stmt 1 view .LVU50
+ 164              		.loc 1 54 28 is_stmt 0 view .LVU51
  165 0093 84C0     		testb	%al, %al
  166 0095 750D     		jne	.L19
- 167              		.loc 1 66 28 discriminator 1 view .LVU52
+ 167              		.loc 1 54 28 discriminator 1 view .LVU52
  168 0097 803C1600 		cmpb	$0, (%rsi,%rdx)
  169 009b 740D     		je	.L20
  170 009d C3       		ret
  171              	.LVL17:
  172              	.L18:
-  60:Src/strbase.cpp ****         STR_LEN_DTYPE i = 0;
- 173              		.loc 1 60 20 view .LVU53
+  48:Src/strbase.cpp ****         STR_LEN_DTYPE i = 0;
+ 173              		.loc 1 48 20 view .LVU53
  174 009e B8010000 		movl	$1, %eax
  174      00
  175 00a3 C3       		ret
  176              	.LVL18:
  177              	.L19:
- 178              		.loc 1 66 28 view .LVU54
+ 178              		.loc 1 54 28 view .LVU54
  179 00a4 B8000000 		movl	$0, %eax
  179      00
  180 00a9 C3       		ret
  181              	.L20:
- 182              		.loc 1 66 28 view .LVU55
+ 182              		.loc 1 54 28 view .LVU55
  183 00aa B8010000 		movl	$1, %eax
  183      00
-  67:Src/strbase.cpp ****     }
- 184              		.loc 1 67 5 view .LVU56
+  55:Src/strbase.cpp ****     }
+ 184              		.loc 1 55 5 view .LVU56
  185 00af C3       		ret
  186              		.cfi_endproc
  187              	.LFE17:
@@ -287,57 +275,57 @@ GAS LISTING /tmp/ccsVF6G7.s 			page 1
  191              	_ZN10translator6substrEPcS0_j:
  192              	.LVL19:
  193              	.LFB18:
-  68:Src/strbase.cpp **** 
-  69:Src/strbase.cpp **** 
-  70:Src/strbase.cpp ****     //get substr from 'start'
-  71:Src/strbase.cpp ****     void substr(char *from, char *to, STR_LEN_DTYPE start)
-  72:Src/strbase.cpp ****     {
- 194              		.loc 1 72 5 is_stmt 1 view -0
+  56:Src/strbase.cpp **** 
+  57:Src/strbase.cpp **** 
+  58:Src/strbase.cpp ****     //get substr from 'start'
+  59:Src/strbase.cpp ****     void substr(char *from, char *to, STR_LEN_DTYPE start)
+  60:Src/strbase.cpp ****     {
+ 194              		.loc 1 60 5 is_stmt 1 view -0
  195              		.cfi_startproc
-  73:Src/strbase.cpp ****         from += start;
- 196              		.loc 1 73 9 view .LVU58
- 197              		.loc 1 73 17 is_stmt 0 view .LVU59
+  61:Src/strbase.cpp ****         from += start;
+ 196              		.loc 1 61 9 view .LVU58
+ 197              		.loc 1 61 17 is_stmt 0 view .LVU59
  198 00b0 89D2     		movl	%edx, %edx
-GAS LISTING /tmp/ccsVF6G7.s 			page 6
-
-
- 199              		.loc 1 73 14 view .LVU60
+ 199              		.loc 1 61 14 view .LVU60
  200 00b2 4801D7   		addq	%rdx, %rdi
  201              	.LVL20:
  202              	.L24:
-  74:Src/strbase.cpp ****         while(*from)
- 203              		.loc 1 74 9 is_stmt 1 view .LVU61
- 204              		.loc 1 74 15 is_stmt 0 view .LVU62
+  62:Src/strbase.cpp ****         while(*from)
+ 203              		.loc 1 62 9 is_stmt 1 view .LVU61
+ 204              		.loc 1 62 15 is_stmt 0 view .LVU62
  205 00b5 0FB607   		movzbl	(%rdi), %eax
- 206              		.loc 1 74 16 view .LVU63
+ 206              		.loc 1 62 16 view .LVU63
  207 00b8 84C0     		testb	%al, %al
  208 00ba 740C     		je	.L23
-  75:Src/strbase.cpp ****         {
-  76:Src/strbase.cpp ****             *to = *from;
- 209              		.loc 1 76 13 is_stmt 1 view .LVU64
- 210              		.loc 1 76 17 is_stmt 0 view .LVU65
+  63:Src/strbase.cpp ****         {
+GAS LISTING /tmp/ccLeqyup.s 			page 6
+
+
+  64:Src/strbase.cpp ****             *to = *from;
+ 209              		.loc 1 64 13 is_stmt 1 view .LVU64
+ 210              		.loc 1 64 17 is_stmt 0 view .LVU65
  211 00bc 8806     		movb	%al, (%rsi)
-  77:Src/strbase.cpp ****             from++;
- 212              		.loc 1 77 13 is_stmt 1 view .LVU66
- 213              		.loc 1 77 17 is_stmt 0 view .LVU67
+  65:Src/strbase.cpp ****             from++;
+ 212              		.loc 1 65 13 is_stmt 1 view .LVU66
+ 213              		.loc 1 65 17 is_stmt 0 view .LVU67
  214 00be 4883C701 		addq	$1, %rdi
  215              	.LVL21:
-  78:Src/strbase.cpp ****             to++;
- 216              		.loc 1 78 13 is_stmt 1 view .LVU68
- 217              		.loc 1 78 15 is_stmt 0 view .LVU69
+  66:Src/strbase.cpp ****             to++;
+ 216              		.loc 1 66 13 is_stmt 1 view .LVU68
+ 217              		.loc 1 66 15 is_stmt 0 view .LVU69
  218 00c2 4883C601 		addq	$1, %rsi
  219              	.LVL22:
-  74:Src/strbase.cpp ****         {
- 220              		.loc 1 74 9 view .LVU70
+  62:Src/strbase.cpp ****         {
+ 220              		.loc 1 62 9 view .LVU70
  221 00c6 EBED     		jmp	.L24
  222              	.L23:
-  79:Src/strbase.cpp ****         }
-  80:Src/strbase.cpp ****         *to = '\0';
- 223              		.loc 1 80 9 is_stmt 1 view .LVU71
- 224              		.loc 1 80 13 is_stmt 0 view .LVU72
+  67:Src/strbase.cpp ****         }
+  68:Src/strbase.cpp ****         *to = '\0';
+ 223              		.loc 1 68 9 is_stmt 1 view .LVU71
+ 224              		.loc 1 68 13 is_stmt 0 view .LVU72
  225 00c8 C60600   		movb	$0, (%rsi)
-  81:Src/strbase.cpp ****     }
- 226              		.loc 1 81 5 view .LVU73
+  69:Src/strbase.cpp ****     }
+ 226              		.loc 1 69 5 view .LVU73
  227 00cb C3       		ret
  228              		.cfi_endproc
  229              	.LFE18:
@@ -345,94 +333,187 @@ GAS LISTING /tmp/ccsVF6G7.s 			page 1
  233              	_ZN10translator6substrEPcS0_jj:
  234              	.LVL23:
  235              	.LFB19:
-  82:Src/strbase.cpp **** 
-  83:Src/strbase.cpp ****     //get substr between 'start' and 'end'
-  84:Src/strbase.cpp ****     void substr(char *from, char *to, STR_LEN_DTYPE start, STR_LEN_DTYPE end)
-  85:Src/strbase.cpp ****     {
- 236              		.loc 1 85 5 is_stmt 1 view -0
+  70:Src/strbase.cpp **** 
+  71:Src/strbase.cpp ****     //get substr between 'start' and 'end'
+  72:Src/strbase.cpp ****     void substr(char *from, char *to, STR_LEN_DTYPE start, STR_LEN_DTYPE end)
+  73:Src/strbase.cpp ****     {
+ 236              		.loc 1 73 5 is_stmt 1 view -0
  237              		.cfi_startproc
-  86:Src/strbase.cpp ****         from += start;
- 238              		.loc 1 86 9 view .LVU75
- 239              		.loc 1 86 17 is_stmt 0 view .LVU76
+  74:Src/strbase.cpp ****         from += start;
+ 238              		.loc 1 74 9 view .LVU75
+ 239              		.loc 1 74 17 is_stmt 0 view .LVU76
  240 00cc 89D0     		movl	%edx, %eax
- 241              		.loc 1 86 14 view .LVU77
+ 241              		.loc 1 74 14 view .LVU77
  242 00ce 4801C7   		addq	%rax, %rdi
  243              	.LVL24:
-GAS LISTING /tmp/ccsVF6G7.s 			page 7
-
-
-  87:Src/strbase.cpp ****         end -= start;
- 244              		.loc 1 87 9 is_stmt 1 view .LVU78
- 245              		.loc 1 87 13 is_stmt 0 view .LVU79
+  75:Src/strbase.cpp ****         end -= start;
+ 244              		.loc 1 75 9 is_stmt 1 view .LVU78
+ 245              		.loc 1 75 13 is_stmt 0 view .LVU79
  246 00d1 29D1     		subl	%edx, %ecx
  247              	.LVL25:
-  88:Src/strbase.cpp ****         end++;
- 248              		.loc 1 88 9 is_stmt 1 view .LVU80
- 249              		.loc 1 88 12 is_stmt 0 view .LVU81
+  76:Src/strbase.cpp ****         end++;
+ 248              		.loc 1 76 9 is_stmt 1 view .LVU80
+ 249              		.loc 1 76 12 is_stmt 0 view .LVU81
  250 00d3 83C101   		addl	$1, %ecx
  251              	.LVL26:
  252              	.L27:
-  89:Src/strbase.cpp ****         while(*from && end)
- 253              		.loc 1 89 9 is_stmt 1 view .LVU82
- 254              		.loc 1 89 15 is_stmt 0 view .LVU83
+  77:Src/strbase.cpp ****         while(*from && end)
+GAS LISTING /tmp/ccLeqyup.s 			page 7
+
+
+ 253              		.loc 1 77 9 is_stmt 1 view .LVU82
+ 254              		.loc 1 77 15 is_stmt 0 view .LVU83
  255 00d6 0FB607   		movzbl	(%rdi), %eax
- 256              		.loc 1 89 21 view .LVU84
+ 256              		.loc 1 77 21 view .LVU84
  257 00d9 84C0     		testb	%al, %al
  258 00db 7413     		je	.L26
- 259              		.loc 1 89 21 discriminator 1 view .LVU85
+ 259              		.loc 1 77 21 discriminator 1 view .LVU85
  260 00dd 85C9     		testl	%ecx, %ecx
  261 00df 740F     		je	.L26
-  90:Src/strbase.cpp ****         {
-  91:Src/strbase.cpp ****             *to = *from;
- 262              		.loc 1 91 13 is_stmt 1 view .LVU86
- 263              		.loc 1 91 17 is_stmt 0 view .LVU87
+  78:Src/strbase.cpp ****         {
+  79:Src/strbase.cpp ****             *to = *from;
+ 262              		.loc 1 79 13 is_stmt 1 view .LVU86
+ 263              		.loc 1 79 17 is_stmt 0 view .LVU87
  264 00e1 8806     		movb	%al, (%rsi)
-  92:Src/strbase.cpp ****             from++;
- 265              		.loc 1 92 13 is_stmt 1 view .LVU88
- 266              		.loc 1 92 17 is_stmt 0 view .LVU89
+  80:Src/strbase.cpp ****             from++;
+ 265              		.loc 1 80 13 is_stmt 1 view .LVU88
+ 266              		.loc 1 80 17 is_stmt 0 view .LVU89
  267 00e3 4883C701 		addq	$1, %rdi
  268              	.LVL27:
-  93:Src/strbase.cpp ****             to++;
- 269              		.loc 1 93 13 is_stmt 1 view .LVU90
- 270              		.loc 1 93 15 is_stmt 0 view .LVU91
+  81:Src/strbase.cpp ****             to++;
+ 269              		.loc 1 81 13 is_stmt 1 view .LVU90
+ 270              		.loc 1 81 15 is_stmt 0 view .LVU91
  271 00e7 4883C601 		addq	$1, %rsi
  272              	.LVL28:
-  94:Src/strbase.cpp ****             end--;
- 273              		.loc 1 94 13 is_stmt 1 view .LVU92
- 274              		.loc 1 94 16 is_stmt 0 view .LVU93
+  82:Src/strbase.cpp ****             end--;
+ 273              		.loc 1 82 13 is_stmt 1 view .LVU92
+ 274              		.loc 1 82 16 is_stmt 0 view .LVU93
  275 00eb 83E901   		subl	$1, %ecx
  276              	.LVL29:
-  89:Src/strbase.cpp ****         {
- 277              		.loc 1 89 9 view .LVU94
+  77:Src/strbase.cpp ****         {
+ 277              		.loc 1 77 9 view .LVU94
  278 00ee EBE6     		jmp	.L27
  279              	.L26:
-  95:Src/strbase.cpp ****         }
-  96:Src/strbase.cpp ****         *to = '\0';
- 280              		.loc 1 96 9 is_stmt 1 view .LVU95
- 281              		.loc 1 96 13 is_stmt 0 view .LVU96
+  83:Src/strbase.cpp ****         }
+  84:Src/strbase.cpp ****         *to = '\0';
+ 280              		.loc 1 84 9 is_stmt 1 view .LVU95
+ 281              		.loc 1 84 13 is_stmt 0 view .LVU96
  282 00f0 C60600   		movb	$0, (%rsi)
-  97:Src/strbase.cpp ****     }
- 283              		.loc 1 97 5 view .LVU97
+  85:Src/strbase.cpp ****     }
+ 283              		.loc 1 85 5 view .LVU97
  284 00f3 C3       		ret
  285              		.cfi_endproc
  286              	.LFE19:
- 288              	.Letext0:
- 289              		.file 2 "/usr/include/bits/types.h"
-GAS LISTING /tmp/ccsVF6G7.s 			page 8
+ 288              		.globl	_ZN10translator5splitEPcS0_c
+ 290              	_ZN10translator5splitEPcS0_c:
+ 291              	.LVL30:
+ 292              	.LFB20:
+  86:Src/strbase.cpp **** 
+  87:Src/strbase.cpp ****     //get substring between chars 'sym'
+  88:Src/strbase.cpp ****     void split(char *from, char *to, char sym)
+  89:Src/strbase.cpp ****     {
+ 293              		.loc 1 89 5 is_stmt 1 view -0
+ 294              		.cfi_startproc
+ 295              		.loc 1 89 5 is_stmt 0 view .LVU99
+ 296 00f4 4155     		pushq	%r13
+ 297              		.cfi_def_cfa_offset 16
+ 298              		.cfi_offset 13, -16
+GAS LISTING /tmp/ccLeqyup.s 			page 8
 
 
- 290              		.file 3 "/usr/include/bits/stdint-uintn.h"
- 291              		.file 4 "Inc/strbase.hpp"
-GAS LISTING /tmp/ccsVF6G7.s 			page 9
+ 299 00f6 4154     		pushq	%r12
+ 300              		.cfi_def_cfa_offset 24
+ 301              		.cfi_offset 12, -24
+ 302 00f8 55       		pushq	%rbp
+ 303              		.cfi_def_cfa_offset 32
+ 304              		.cfi_offset 6, -32
+ 305 00f9 53       		pushq	%rbx
+ 306              		.cfi_def_cfa_offset 40
+ 307              		.cfi_offset 3, -40
+ 308 00fa 4889FD   		movq	%rdi, %rbp
+ 309 00fd 4989F4   		movq	%rsi, %r12
+  90:Src/strbase.cpp ****         STR_LEN_DTYPE   start = charAt(from, sym),
+ 310              		.loc 1 90 9 is_stmt 1 view .LVU100
+ 311              		.loc 1 90 39 is_stmt 0 view .LVU101
+ 312 0100 440FBEEA 		movsbl	%dl, %r13d
+ 313 0104 4489EE   		movl	%r13d, %esi
+ 314              	.LVL31:
+ 315              		.loc 1 90 39 view .LVU102
+ 316 0107 E8000000 		call	_ZN10translator6charAtEPcc
+ 316      00
+ 317              	.LVL32:
+ 318              		.loc 1 90 39 view .LVU103
+ 319 010c 89C3     		movl	%eax, %ebx
+ 320              	.LVL33:
+  91:Src/strbase.cpp ****                         end = lastCharAt(from, sym);
+ 321              		.loc 1 91 41 view .LVU104
+ 322 010e 4489EE   		movl	%r13d, %esi
+ 323 0111 4889EF   		movq	%rbp, %rdi
+ 324 0114 E8000000 		call	_ZN10translator10lastCharAtEPcc
+ 324      00
+ 325              	.LVL34:
+  92:Src/strbase.cpp ****         if(start == end)
+ 326              		.loc 1 92 9 is_stmt 1 view .LVU105
+ 327 0119 39C3     		cmpl	%eax, %ebx
+ 328 011b 7411     		je	.L28
+  93:Src/strbase.cpp ****             return;
+  94:Src/strbase.cpp ****         start++;
+ 329              		.loc 1 94 9 view .LVU106
+ 330              		.loc 1 94 14 is_stmt 0 view .LVU107
+ 331 011d 8D5301   		leal	1(%rbx), %edx
+ 332              	.LVL35:
+  95:Src/strbase.cpp ****         end--;
+ 333              		.loc 1 95 9 is_stmt 1 view .LVU108
+ 334              		.loc 1 95 12 is_stmt 0 view .LVU109
+ 335 0120 8D48FF   		leal	-1(%rax), %ecx
+ 336              	.LVL36:
+  96:Src/strbase.cpp **** 
+  97:Src/strbase.cpp ****         substr(from, to, start, end);
+ 337              		.loc 1 97 9 is_stmt 1 view .LVU110
+ 338              		.loc 1 97 15 is_stmt 0 view .LVU111
+ 339 0123 4C89E6   		movq	%r12, %rsi
+ 340 0126 4889EF   		movq	%rbp, %rdi
+ 341 0129 E8000000 		call	_ZN10translator6substrEPcS0_jj
+ 341      00
+ 342              	.LVL37:
+ 343              	.L28:
+  98:Src/strbase.cpp ****     }
+GAS LISTING /tmp/ccLeqyup.s 			page 9
+
+
+ 344              		.loc 1 98 5 view .LVU112
+ 345 012e 5B       		popq	%rbx
+ 346              		.cfi_def_cfa_offset 32
+ 347 012f 5D       		popq	%rbp
+ 348              		.cfi_def_cfa_offset 24
+ 349              	.LVL38:
+ 350              		.loc 1 98 5 view .LVU113
+ 351 0130 415C     		popq	%r12
+ 352              		.cfi_def_cfa_offset 16
+ 353              	.LVL39:
+ 354              		.loc 1 98 5 view .LVU114
+ 355 0132 415D     		popq	%r13
+ 356              		.cfi_def_cfa_offset 8
+ 357              	.LVL40:
+ 358              		.loc 1 98 5 view .LVU115
+ 359 0134 C3       		ret
+ 360              		.cfi_endproc
+ 361              	.LFE20:
+ 363              	.Letext0:
+ 364              		.file 2 "/usr/include/bits/types.h"
+ 365              		.file 3 "/usr/include/bits/stdint-uintn.h"
+ 366              		.file 4 "Inc/strbase.hpp"
+GAS LISTING /tmp/ccLeqyup.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 strbase.cpp
-     /tmp/ccsVF6G7.s:6      .text:0000000000000000 _ZN10translator8containsEPcc
-     /tmp/ccsVF6G7.s:43     .text:000000000000001e _ZN10translator6charAtEPcc
-     /tmp/ccsVF6G7.s:81     .text:000000000000003d _ZN10translator10lastCharAtEPcc
-     /tmp/ccsVF6G7.s:128    .text:000000000000006b _ZN10translator6equalsEPcS0_
-     /tmp/ccsVF6G7.s:191    .text:00000000000000b0 _ZN10translator6substrEPcS0_j
-     /tmp/ccsVF6G7.s:233    .text:00000000000000cc _ZN10translator6substrEPcS0_jj
+     /tmp/ccLeqyup.s:6      .text:0000000000000000 _ZN10translator8containsEPcc
+     /tmp/ccLeqyup.s:43     .text:000000000000001e _ZN10translator6charAtEPcc
+     /tmp/ccLeqyup.s:81     .text:000000000000003d _ZN10translator10lastCharAtEPcc
+     /tmp/ccLeqyup.s:128    .text:000000000000006b _ZN10translator6equalsEPcS0_
+     /tmp/ccLeqyup.s:191    .text:00000000000000b0 _ZN10translator6substrEPcS0_j
+     /tmp/ccLeqyup.s:233    .text:00000000000000cc _ZN10translator6substrEPcS0_jj
+     /tmp/ccLeqyup.s:290    .text:00000000000000f4 _ZN10translator5splitEPcS0_c
 
 NO UNDEFINED SYMBOLS

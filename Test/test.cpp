@@ -57,5 +57,11 @@ public:
  void runTest() { suite_translatorTest.testSubstr(); }
 } testDescription_suite_translatorTest_testSubstr;
 
+static class TestDescription_suite_translatorTest_testSplit : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_translatorTest_testSplit() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 62, "testSplit" ) {}
+ void runTest() { suite_translatorTest.testSplit(); }
+} testDescription_suite_translatorTest_testSplit;
+
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

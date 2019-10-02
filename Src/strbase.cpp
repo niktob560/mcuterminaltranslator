@@ -83,4 +83,17 @@ namespace translator
         }
         *to = '\0';
     }
+
+    //get substring between chars 'sym'
+    void split(char *from, char *to, char sym)
+    {
+        STR_LEN_DTYPE   start = charAt(from, sym),
+                        end = lastCharAt(from, sym);
+        if(start == end)
+            return;
+        start++;
+        end--;
+
+        substr(from, to, start, end);
+    }
 }
