@@ -1,5 +1,20 @@
 #include <cxxtest/TestSuite.h>
 #include "strbase.hpp"
+#include <stdint.h>
+#include <iostream>
+
+bool called0 = false;
+void functest0()
+{
+    called0 = 1;
+}
+
+bool called1 = false;
+void functest1()
+{
+    called1 = 1;
+}
+
 
 class translatorTest : public CxxTest::TestSuite
 {
@@ -68,5 +83,27 @@ public:
         c = (char*)"||aaa||";
         translator::split(c, tgt, '|');
         TS_ASSERT(translator::equals(tgt, (const char*)"|aaa|"));
+    }
+
+
+
+    void testParseCmd(void)
+    {
+        const int len = 3;
+        void (* funcArr [len])();
+        funcArr[0] = (void(*)())(functest0);
+        funcArr[1] = (void(*)())(functest1);
+        char **names = (char**)calloc(sizeof(char*), len);
+        names[0] = (char*)"aaa";
+        names[1] = (char*)"abc";
+        char *cmd0 = (char*)"|aaa|";
+        translator::parseCmd(cmd0, names, funcArr);
+        TS_ASSERT(called0);
+
+        called0 = false;
+        cmd0 = (char*)"|abc|";
+        translator::parseCmd(cmd0, names, funcArr);
+        TS_ASSERT(called1);
+        TS_ASSERT(!called0);
     }
 };

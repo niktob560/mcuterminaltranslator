@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string.h>
 #include <stdint.h>
 
@@ -27,4 +28,13 @@ namespace translator
 
     //get substring between chars 'sym'
     void split(char *from, char *to, char sym);
+
+    //parse var from string |id:var| and write into toArr[id]
+    void parseVar(char *from, void **toArr);
+
+    //parse array from string |id:item0, item1,...,itemn| and write into toArr[id]
+    void parseArr(char *from, void **toArr);
+
+    //parse cmd from string |cmd|, find cmd in names and call it from funcArr
+    void parseCmd(char *from, char** names, void (*funcArr [])());
 }
