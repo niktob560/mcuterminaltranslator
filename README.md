@@ -1,14 +1,18 @@
 # mcuterminaltranslator  
-Library for parsing commands for communication of MCUs
+Library for parsing commands for communication of MCUs  
+Packet structure: 
 ```
-|cmd|
+<type+len, 1byte><checksum, 2bytes><payload>
 ```
-Is simple command  
+max len: 63 bytes  
+types:  
+command: 0b1;  
+var: 0b10;  
+array: 0b11;
+  
+Structure of first byte:  
 ```
-|id:var|
+ttllllll
 ```
-Is variable  
-```
-|id:item0,item1,item2,...,itemn|
-```
-Is array
+where: t - type bits; l - len bits  
+id of array or variable will be at first byte of payload
