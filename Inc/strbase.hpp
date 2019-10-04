@@ -5,8 +5,18 @@
 namespace translator
 {
     typedef uint32_t STR_LEN_DTYPE;
+    typedef uint32_t checksum_t;
 
     const STR_LEN_DTYPE str_NAN = 0xFFFFFFFF;
+    const uint8_t       TYPE_CMD = 0,
+                        TYPE_VAR = 1,
+                        TYPE_ARR = 2,
+                        TYPE_BAD_LEN = 100,
+                        TYPE_BAD_TYPE = 101,
+                        TYPE_BAD_CHECKSUM = 102;
+
+    //generate checksum for char array
+    checksum_t genCheckSum(char* c);
 
     //checks if string c contains char cc
     bool contains(char *c, const char cc);
@@ -37,4 +47,7 @@ namespace translator
 
     //parse cmd from string |cmd|, find cmd in names and call it from funcArr
     void parseCmd(char *from, char** names, void (*funcArr [])());
+
+    //parse input package, get payload, return type of package
+    uint8_t parsePacket(char *from, char *payloadto);
 }

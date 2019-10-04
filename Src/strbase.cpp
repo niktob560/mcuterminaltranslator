@@ -105,17 +105,6 @@ namespace translator
     //parse cmd from string |cmd| and call it from funcArr
     void parseCmd(char *from, char** names, void (*funcArr [])())
     {
-        char *cmd = (char*)alloca(sizeof(char) * strlen(from));
-        split(from, cmd, '|');
-        while(names)
-        {
-            if(equals(*names, cmd))
-            {
-                (*funcArr)();
-                return;
-            }
-            funcArr++;
-            names++;
-        }
+
     }
 }
