@@ -2,6 +2,28 @@
 
 namespace translator
 {
+
+    using namespace std;
+
+    //generate checksum for char array
+    checksum_t genCheckSum(const char* c)
+    {
+        checksum_t ret = 0;
+        uint8_t len = c[0] & LEN_MASK;
+        // cout << "len: " << (int)len << endl;
+        // for(int i = 0; i < len + 3; i++)
+        // {
+        //     cout << (int)c[i];
+        // }
+        // cout << endl;
+        for(uint8_t i = 0; i < len; i++)
+        {
+            ret |= (c[3 + i]) << (8 * ((i % 2) == 1));
+            // cout << "\nAdding: " << (int)c[3 + i] << endl;
+        }
+        return ret;
+    }
+
     //checks if string c contains char cc
     bool contains(char *c, const char cc)
     {

@@ -106,4 +106,37 @@ public:
         // TS_ASSERT(called1);
         // TS_ASSERT(!called0);
     }
+
+    void testCheckSum(void)
+    {
+        char* c = (char*)calloc(sizeof(char), 10);
+        c[0] = 0;
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 0);
+        c[0] = 1;
+        c[1] = 0;
+        c[2] = 0;
+        c[3] = 1;
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 1);
+        c[0] = 2;
+        c[3] = 1;
+        c[4] = 1;
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 257);
+        c[3] = 2;
+        c[4] = 1;
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 258);
+        c[3] = 1;
+        c[4] = 2;
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 513);
+        c[0] = 3;
+        c[3] = 1;
+        c[4] = 2;
+        c[5] = 10;
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 523);
+        c[0] = 4;
+        c[3] = 1;
+        c[4] = 2;
+        c[5] = 10;
+        c[6] = 10;
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 1 | (2 << 8) | 10 | (10 << 8));
+    }
 };

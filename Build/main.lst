@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccipK3uB.s 			page 1
+GAS LISTING /tmp/cc0e6KoS.s 			page 1
 
 
    1              		.file	"main.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
   20:/usr/include/c++/9.1.0/iostream **** // You should have received a copy of the GNU General Public License and
   21:/usr/include/c++/9.1.0/iostream **** // a copy of the GCC Runtime Library Exception along with this program;
   22:/usr/include/c++/9.1.0/iostream **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-GAS LISTING /tmp/ccipK3uB.s 			page 2
+GAS LISTING /tmp/cc0e6KoS.s 			page 2
 
 
   23:/usr/include/c++/9.1.0/iostream **** // <http://www.gnu.org/licenses/>.
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
   25      000000
   26              	.LVL1:
   27              		.loc 2 74 25 view .LVU5
-GAS LISTING /tmp/ccipK3uB.s 			page 3
+GAS LISTING /tmp/cc0e6KoS.s 			page 3
 
 
   28 0019 E8000000 		call	_ZNSt8ios_base4InitC1Ev@PLT
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
   67              		.loc 1 10 33 is_stmt 0 view .LVU14
   68 005f BE610000 		movl	$97, %esi
   68      00
-GAS LISTING /tmp/ccipK3uB.s 			page 4
+GAS LISTING /tmp/cc0e6KoS.s 			page 4
 
 
   69 0064 4889DF   		movq	%rbx, %rdi
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
   44:/usr/include/c++/9.1.0/ostream **** 
   45:/usr/include/c++/9.1.0/ostream ****   /**
   46:/usr/include/c++/9.1.0/ostream ****    *  @brief  Template class basic_ostream.
-GAS LISTING /tmp/ccipK3uB.s 			page 5
+GAS LISTING /tmp/cc0e6KoS.s 			page 5
 
 
   47:/usr/include/c++/9.1.0/ostream ****    *  @ingroup io
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
  101:/usr/include/c++/9.1.0/ostream ****        *  @brief  Interface for manipulators.
  102:/usr/include/c++/9.1.0/ostream ****        *
  103:/usr/include/c++/9.1.0/ostream ****        *  Manipulators such as @c std::endl and @c std::hex use these
-GAS LISTING /tmp/ccipK3uB.s 			page 6
+GAS LISTING /tmp/cc0e6KoS.s 			page 6
 
 
  104:/usr/include/c++/9.1.0/ostream ****        *  functions in constructs like "std::cout << std::endl".  For more
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
  158:/usr/include/c++/9.1.0/ostream ****        *  @brief Integer arithmetic inserters
  159:/usr/include/c++/9.1.0/ostream ****        *  @param  __n A variable of builtin integral type.
  160:/usr/include/c++/9.1.0/ostream ****        *  @return  @c *this if successful
-GAS LISTING /tmp/ccipK3uB.s 			page 7
+GAS LISTING /tmp/cc0e6KoS.s 			page 7
 
 
  161:/usr/include/c++/9.1.0/ostream ****        *
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
  109              	.LFE1503:
  112              	_GLOBAL__sub_I_main:
  113              	.LFB1827:
-GAS LISTING /tmp/ccipK3uB.s 			page 8
+GAS LISTING /tmp/cc0e6KoS.s 			page 8
 
 
  114              		.loc 1 12 1 is_stmt 1 view -0
@@ -478,7 +478,7 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
  165              		.file 33 "/usr/include/bits/types/struct_FILE.h"
  166              		.file 34 "/usr/include/bits/types/FILE.h"
  167              		.file 35 "/usr/include/wchar.h"
-GAS LISTING /tmp/ccipK3uB.s 			page 9
+GAS LISTING /tmp/cc0e6KoS.s 			page 9
 
 
  168              		.file 36 "/usr/include/bits/types/struct_tm.h"
@@ -500,15 +500,15 @@ GAS LISTING /tmp/ccipK3uB.s 			page 1
  184              		.file 52 "/usr/include/bits/wctype-wchar.h"
  185              		.file 53 "/usr/include/wctype.h"
  186              		.file 54 "Inc/strbase.hpp"
-GAS LISTING /tmp/ccipK3uB.s 			page 10
+GAS LISTING /tmp/cc0e6KoS.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.cpp
-     /tmp/ccipK3uB.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/cc0e6KoS.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
                              .bss:0000000000000000 _ZStL8__ioinit
-     /tmp/ccipK3uB.s:45     .text:000000000000003d main
-     /tmp/ccipK3uB.s:112    .text:000000000000008a _GLOBAL__sub_I_main
+     /tmp/cc0e6KoS.s:45     .text:000000000000003d main
+     /tmp/cc0e6KoS.s:112    .text:000000000000008a _GLOBAL__sub_I_main
 
 UNDEFINED SYMBOLS
 _GLOBAL_OFFSET_TABLE_

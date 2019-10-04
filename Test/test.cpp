@@ -69,5 +69,11 @@ public:
  void runTest() { suite_translatorTest.testParseCmd(); }
 } testDescription_suite_translatorTest_testParseCmd;
 
+static class TestDescription_suite_translatorTest_testCheckSum : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_translatorTest_testCheckSum() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 110, "testCheckSum" ) {}
+ void runTest() { suite_translatorTest.testCheckSum(); }
+} testDescription_suite_translatorTest_testCheckSum;
+
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

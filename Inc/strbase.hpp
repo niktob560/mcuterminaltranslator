@@ -5,7 +5,7 @@
 namespace translator
 {
     typedef uint32_t STR_LEN_DTYPE;
-    typedef uint32_t checksum_t;
+    typedef uint16_t checksum_t;
 
     const STR_LEN_DTYPE str_NAN = 0xFFFFFFFF;
     const uint8_t       TYPE_CMD = 0,
@@ -13,10 +13,11 @@ namespace translator
                         TYPE_ARR = 2,
                         TYPE_BAD_LEN = 100,
                         TYPE_BAD_TYPE = 101,
-                        TYPE_BAD_CHECKSUM = 102;
+                        TYPE_BAD_CHECKSUM = 102,
+                        LEN_MASK = 0b00111111;
 
     //generate checksum for char array
-    checksum_t genCheckSum(char* c);
+    checksum_t genCheckSum(const char* c);
 
     //checks if string c contains char cc
     bool contains(char *c, const char cc);
