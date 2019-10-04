@@ -8,9 +8,9 @@ namespace translator
     typedef uint16_t checksum_t;
 
     const STR_LEN_DTYPE str_NAN = 0xFFFFFFFF;
-    const uint8_t       TYPE_CMD = 0,
-                        TYPE_VAR = 1,
-                        TYPE_ARR = 2,
+    const uint8_t       TYPE_CMD = 0b01,
+                        TYPE_VAR = 0b10,
+                        TYPE_ARR = 0b11,
                         TYPE_BAD_LEN = 100,
                         TYPE_BAD_TYPE = 101,
                         TYPE_BAD_CHECKSUM = 102,
