@@ -164,4 +164,36 @@ public:
         pack[2] = translator::genCheckSum(pack) & 0xFF;
         TS_ASSERT_EQUALS(translator::getVarId(pack), 1);
     }
+
+    void testValidate(void)
+    {
+        uint8_t *p = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        p[0] = translator::getZeroByte(translator::TYPE_CMD, 1);
+        p[3] = 0;
+        p[1] = translator::genCheckSum(p) >> 8;
+        p[2] = translator::genCheckSum(p) & 0xFF;
+        TS_ASSERT(translator::validate(p));
+
+        p[0] = translator::getZeroByte(translator::TYPE_CMD, 2);
+        p[1] = translator::genCheckSum(p) >> 8;
+        p[2] = translator::genCheckSum(p) & 0xFF;
+        TS_ASSERT(!translator::validate(p));
+
+        p[0] = translator::getZeroByte(translator::TYPE_VAR, 2);
+        p[3] = 10;
+        p[4] = 100;
+        p[1] = translator::genCheckSum(p) >> 8;
+        p[2] = translator::genCheckSum(p) & 0xFF;
+        TS_ASSERT(translator::validate(p));
+
+        p[0] = translator::getZeroByte(translator::TYPE_VAR, 1);
+        p[1] = translator::genCheckSum(p) >> 8;
+        p[2] = translator::genCheckSum(p) & 0xFF;
+        TS_ASSERT(!translator::validate(p));
+
+        p[0] = translator::getZeroByte(translator::TYPE_ARR, 1);
+        p[1] = translator::genCheckSum(p) >> 8;
+        p[2] = translator::genCheckSum(p) & 0xFF;
+        TS_ASSERT(!translator::validate(p));
+    }
 };

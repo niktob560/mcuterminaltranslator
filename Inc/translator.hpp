@@ -21,6 +21,9 @@ namespace translator
 
     //get len of payload
     uint8_t getLen(const uint8_t* package);
+    
+    //get type of package
+    uint8_t getType(const uint8_t *package);
 
     //parse var from var package and write into toArr[id], return type of package
     uint8_t parseVar(uint8_t *package, void **toArr);
@@ -37,9 +40,6 @@ namespace translator
     //get payload from package to addr
     void getPayload(const uint8_t *package, uint8_t *to);
 
-    //get type of package
-    uint8_t getType(uint8_t *package);
-
     bool equals(const uint8_t* p1, const uint8_t* p2);
 
     uint8_t getZeroByte(const uint8_t type, const uint8_t len);
@@ -51,4 +51,7 @@ namespace translator
 
     //get id of var in payload of package
     uint8_t getVarId(const uint8_t *pack);
+
+    //validate checksum, type, len
+    bool validate(const uint8_t *pack);
 }

@@ -25,7 +25,7 @@ namespace translator
     }
 
     //get type of package
-    uint8_t getType(uint8_t *package)
+    uint8_t getType(const uint8_t *package)
     {
         return ((package[0] & (~LEN_MASK)) >> 6);
     }
@@ -146,5 +146,31 @@ namespace translator
             return 0xFF - 2;
 
         return pack[3];
+    }
+
+
+    //validate checksum, type, len
+    bool validate(const uint8_t *pack)
+    {
+        uint8_t type = getType(pack);
+        switch (type)
+        {
+            case TYPE_CMD:
+            {
+                if(getLen(pack) != 1)
+                    return false;
+                break;
+            }
+            case TYPE_VAR:
+            case TYPE_ARR:
+            {
+                if(getLen(pack) <= 1)
+                    return false;
+                break;
+            }
+            default:
+                return false;
+        }
+        return (getCheckSum(pack) == genCheckSum(pack));
     }
 }
