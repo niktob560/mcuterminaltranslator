@@ -9,7 +9,7 @@ namespace translator
     checksum_t genCheckSum(const uint8_t* c)
     {
         checksum_t ret = 0;
-        uint8_t len = c[0] & LEN_MASK;
+        uint8_t len = getLen(c);
         // cout << "len: " << (int)len << endl;
         // for(int i = 0; i < len + 3; i++)
         // {
@@ -34,11 +34,11 @@ namespace translator
     //parse input package, get payload, return type of package
     uint8_t parsePacket(uint8_t *package, uint8_t *payloadto)
     {
-        uint8_t type = package[0] & (~LEN_MASK);
+        uint8_t type = getType(package);
         if(type != TYPE_ARR && type != TYPE_CMD && type != TYPE_VAR)
             return TYPE_BAD_TYPE;
 
-        uint8_t len = package[0] & LEN_MASK;
+        uint8_t len = getLen(package);
         if(len == 0)
             return TYPE_BAD_LEN;
 
@@ -68,7 +68,7 @@ namespace translator
     //get payload from package to addr
     void getPayload(const uint8_t *package, uint8_t *to)
     {
-        uint8_t len = package[0] & LEN_MASK;
+        uint8_t len = getLen(package);
         for(uint8_t i = 0; i < len; i++)
         {
             to[i] = package[i + 3];
@@ -86,7 +86,7 @@ namespace translator
         if(p1[0] != p2[0])
             return false;
 
-        uint8_t len = p1[0] & LEN_MASK;
+        uint8_t len = getLen(p1);
         for(uint8_t i = 0; i < len; i++)
         {
             if(p1[i] != p2[i])
