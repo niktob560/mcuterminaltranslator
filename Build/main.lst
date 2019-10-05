@@ -1,4 +1,4 @@
-GAS LISTING /tmp/cc0e6KoS.s 			page 1
+GAS LISTING /tmp/ccOYCtpo.s 			page 1
 
 
    1              		.file	"main.cpp"
@@ -6,18 +6,18 @@ GAS LISTING /tmp/cc0e6KoS.s 			page 1
    3              	.Ltext0:
    5              	_Z41__static_initialization_and_destruction_0ii:
    6              	.LVL0:
-   7              	.LFB1826:
+   7              	.LFB1821:
    8              		.file 1 "Src/main.cpp"
    1:Src/main.cpp  **** #include <iostream>
-   2:Src/main.cpp  **** #include "strbase.hpp"
+   2:Src/main.cpp  **** #include "translator.hpp"
    3:Src/main.cpp  **** 
    4:Src/main.cpp  **** using namespace std;
    5:Src/main.cpp  **** 
    6:Src/main.cpp  **** int main()
    7:Src/main.cpp  **** {
-   8:Src/main.cpp  ****     char *c = (char*)calloc(sizeof(char), 1024);
+   8:Src/main.cpp  ****     uint8_t *c = (uint8_t*)calloc(sizeof(uint8_t), 1024);
    9:Src/main.cpp  ****     cin >> c;
-  10:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
+  10:Src/main.cpp  ****     // cout << translator::contains(c, 'a') << endl;
   11:Src/main.cpp  ****     return 0;
   12:Src/main.cpp  **** }
    9              		.loc 1 12 1 view -0
@@ -58,7 +58,7 @@ GAS LISTING /tmp/cc0e6KoS.s 			page 1
   20:/usr/include/c++/9.1.0/iostream **** // You should have received a copy of the GNU General Public License and
   21:/usr/include/c++/9.1.0/iostream **** // a copy of the GCC Runtime Library Exception along with this program;
   22:/usr/include/c++/9.1.0/iostream **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-GAS LISTING /tmp/cc0e6KoS.s 			page 2
+GAS LISTING /tmp/ccOYCtpo.s 			page 2
 
 
   23:/usr/include/c++/9.1.0/iostream **** // <http://www.gnu.org/licenses/>.
@@ -118,7 +118,7 @@ GAS LISTING /tmp/cc0e6KoS.s 			page 1
   25      000000
   26              	.LVL1:
   27              		.loc 2 74 25 view .LVU5
-GAS LISTING /tmp/cc0e6KoS.s 			page 3
+GAS LISTING /tmp/ccOYCtpo.s 			page 3
 
 
   28 0019 E8000000 		call	_ZNSt8ios_base4InitC1Ev@PLT
@@ -139,376 +139,989 @@ GAS LISTING /tmp/cc0e6KoS.s 			page 1
   38              		.cfi_def_cfa_offset 8
   39 003c C3       		ret
   40              		.cfi_endproc
-  41              	.LFE1826:
+  41              	.LFE1821:
   43              		.globl	main
   45              	main:
   46              	.LFB1503:
-   7:Src/main.cpp  ****     char *c = (char*)calloc(sizeof(char), 1024);
+   7:Src/main.cpp  ****     uint8_t *c = (uint8_t*)calloc(sizeof(uint8_t), 1024);
   47              		.loc 1 7 1 is_stmt 1 view -0
   48              		.cfi_startproc
-  49 003d 53       		pushq	%rbx
+  49 003d 4883EC08 		subq	$8, %rsp
   50              		.cfi_def_cfa_offset 16
-  51              		.cfi_offset 3, -16
    8:Src/main.cpp  ****     cin >> c;
-  52              		.loc 1 8 5 view .LVU9
+  51              		.loc 1 8 5 view .LVU9
    8:Src/main.cpp  ****     cin >> c;
-  53              		.loc 1 8 28 is_stmt 0 view .LVU10
-  54 003e BE000400 		movl	$1024, %esi
+  52              		.loc 1 8 34 is_stmt 0 view .LVU10
+  53 0041 BE000400 		movl	$1024, %esi
+  53      00
+  54 0046 BF010000 		movl	$1, %edi
   54      00
-  55 0043 BF010000 		movl	$1, %edi
+  55 004b E8000000 		call	calloc@PLT
   55      00
-  56 0048 E8000000 		call	calloc@PLT
-  56      00
-  57              	.LVL4:
-  58 004d 4889C3   		movq	%rax, %rbx
-  59              	.LVL5:
-   9:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
-  60              		.loc 1 9 5 is_stmt 1 view .LVU11
-   9:Src/main.cpp  ****     cout << translator::contains(c, 'a') << endl;
-  61              		.loc 1 9 12 is_stmt 0 view .LVU12
-  62 0050 4889C6   		movq	%rax, %rsi
-  63 0053 488D3D00 		leaq	_ZSt3cin(%rip), %rdi
-  63      000000
-  64 005a E8000000 		call	_ZStrsIcSt11char_traitsIcEERSt13basic_istreamIT_T0_ES6_PS3_@PLT
-  64      00
-  65              	.LVL6:
-  10:Src/main.cpp  ****     return 0;
-  66              		.loc 1 10 5 is_stmt 1 view .LVU13
-  10:Src/main.cpp  ****     return 0;
-  67              		.loc 1 10 33 is_stmt 0 view .LVU14
-  68 005f BE610000 		movl	$97, %esi
-  68      00
-GAS LISTING /tmp/cc0e6KoS.s 			page 4
+  56              	.LVL4:
+  57 0050 4889C6   		movq	%rax, %rsi
+  58              	.LVL5:
+   9:Src/main.cpp  ****     // cout << translator::contains(c, 'a') << endl;
+  59              		.loc 1 9 5 is_stmt 1 view .LVU11
+  60              	.LBB4:
+  61              	.LBI4:
+  62              		.file 3 "/usr/include/c++/9.1.0/istream"
+   1:/usr/include/c++/9.1.0/istream **** // Input streams -*- C++ -*-
+   2:/usr/include/c++/9.1.0/istream **** 
+   3:/usr/include/c++/9.1.0/istream **** // Copyright (C) 1997-2019 Free Software Foundation, Inc.
+   4:/usr/include/c++/9.1.0/istream **** //
+   5:/usr/include/c++/9.1.0/istream **** // This file is part of the GNU ISO C++ Library.  This library is free
+   6:/usr/include/c++/9.1.0/istream **** // software; you can redistribute it and/or modify it under the
+   7:/usr/include/c++/9.1.0/istream **** // terms of the GNU General Public License as published by the
+   8:/usr/include/c++/9.1.0/istream **** // Free Software Foundation; either version 3, or (at your option)
+   9:/usr/include/c++/9.1.0/istream **** // any later version.
+  10:/usr/include/c++/9.1.0/istream **** 
+  11:/usr/include/c++/9.1.0/istream **** // This library is distributed in the hope that it will be useful,
+  12:/usr/include/c++/9.1.0/istream **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
+GAS LISTING /tmp/ccOYCtpo.s 			page 4
 
 
-  69 0064 4889DF   		movq	%rbx, %rdi
-  70 0067 E8000000 		call	_ZN10translator8containsEPcc@PLT
-  70      00
-  71              	.LVL7:
-  10:Src/main.cpp  ****     return 0;
-  72              		.loc 1 10 40 view .LVU15
-  73 006c 0FB6F0   		movzbl	%al, %esi
-  74              	.LVL8:
-  75              	.LBB14:
-  76              	.LBI14:
-  77              		.file 3 "/usr/include/c++/9.1.0/ostream"
-   1:/usr/include/c++/9.1.0/ostream **** // Output streams -*- C++ -*-
-   2:/usr/include/c++/9.1.0/ostream **** 
-   3:/usr/include/c++/9.1.0/ostream **** // Copyright (C) 1997-2019 Free Software Foundation, Inc.
-   4:/usr/include/c++/9.1.0/ostream **** //
-   5:/usr/include/c++/9.1.0/ostream **** // This file is part of the GNU ISO C++ Library.  This library is free
-   6:/usr/include/c++/9.1.0/ostream **** // software; you can redistribute it and/or modify it under the
-   7:/usr/include/c++/9.1.0/ostream **** // terms of the GNU General Public License as published by the
-   8:/usr/include/c++/9.1.0/ostream **** // Free Software Foundation; either version 3, or (at your option)
-   9:/usr/include/c++/9.1.0/ostream **** // any later version.
-  10:/usr/include/c++/9.1.0/ostream **** 
-  11:/usr/include/c++/9.1.0/ostream **** // This library is distributed in the hope that it will be useful,
-  12:/usr/include/c++/9.1.0/ostream **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
-  13:/usr/include/c++/9.1.0/ostream **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  14:/usr/include/c++/9.1.0/ostream **** // GNU General Public License for more details.
-  15:/usr/include/c++/9.1.0/ostream **** 
-  16:/usr/include/c++/9.1.0/ostream **** // Under Section 7 of GPL version 3, you are granted additional
-  17:/usr/include/c++/9.1.0/ostream **** // permissions described in the GCC Runtime Library Exception, version
-  18:/usr/include/c++/9.1.0/ostream **** // 3.1, as published by the Free Software Foundation.
-  19:/usr/include/c++/9.1.0/ostream **** 
-  20:/usr/include/c++/9.1.0/ostream **** // You should have received a copy of the GNU General Public License and
-  21:/usr/include/c++/9.1.0/ostream **** // a copy of the GCC Runtime Library Exception along with this program;
-  22:/usr/include/c++/9.1.0/ostream **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-  23:/usr/include/c++/9.1.0/ostream **** // <http://www.gnu.org/licenses/>.
-  24:/usr/include/c++/9.1.0/ostream **** 
-  25:/usr/include/c++/9.1.0/ostream **** /** @file include/ostream
-  26:/usr/include/c++/9.1.0/ostream ****  *  This is a Standard C++ Library header.
-  27:/usr/include/c++/9.1.0/ostream ****  */
-  28:/usr/include/c++/9.1.0/ostream **** 
-  29:/usr/include/c++/9.1.0/ostream **** //
-  30:/usr/include/c++/9.1.0/ostream **** // ISO C++ 14882: 27.6.2  Output streams
-  31:/usr/include/c++/9.1.0/ostream **** //
-  32:/usr/include/c++/9.1.0/ostream **** 
-  33:/usr/include/c++/9.1.0/ostream **** #ifndef _GLIBCXX_OSTREAM
-  34:/usr/include/c++/9.1.0/ostream **** #define _GLIBCXX_OSTREAM 1
-  35:/usr/include/c++/9.1.0/ostream **** 
-  36:/usr/include/c++/9.1.0/ostream **** #pragma GCC system_header
-  37:/usr/include/c++/9.1.0/ostream **** 
-  38:/usr/include/c++/9.1.0/ostream **** #include <ios>
-  39:/usr/include/c++/9.1.0/ostream **** #include <bits/ostream_insert.h>
-  40:/usr/include/c++/9.1.0/ostream **** 
-  41:/usr/include/c++/9.1.0/ostream **** namespace std _GLIBCXX_VISIBILITY(default)
-  42:/usr/include/c++/9.1.0/ostream **** {
-  43:/usr/include/c++/9.1.0/ostream **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
-  44:/usr/include/c++/9.1.0/ostream **** 
-  45:/usr/include/c++/9.1.0/ostream ****   /**
-  46:/usr/include/c++/9.1.0/ostream ****    *  @brief  Template class basic_ostream.
-GAS LISTING /tmp/cc0e6KoS.s 			page 5
+  13:/usr/include/c++/9.1.0/istream **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  14:/usr/include/c++/9.1.0/istream **** // GNU General Public License for more details.
+  15:/usr/include/c++/9.1.0/istream **** 
+  16:/usr/include/c++/9.1.0/istream **** // Under Section 7 of GPL version 3, you are granted additional
+  17:/usr/include/c++/9.1.0/istream **** // permissions described in the GCC Runtime Library Exception, version
+  18:/usr/include/c++/9.1.0/istream **** // 3.1, as published by the Free Software Foundation.
+  19:/usr/include/c++/9.1.0/istream **** 
+  20:/usr/include/c++/9.1.0/istream **** // You should have received a copy of the GNU General Public License and
+  21:/usr/include/c++/9.1.0/istream **** // a copy of the GCC Runtime Library Exception along with this program;
+  22:/usr/include/c++/9.1.0/istream **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+  23:/usr/include/c++/9.1.0/istream **** // <http://www.gnu.org/licenses/>.
+  24:/usr/include/c++/9.1.0/istream **** 
+  25:/usr/include/c++/9.1.0/istream **** //
+  26:/usr/include/c++/9.1.0/istream **** // ISO C++ 14882: 27.6.1  Input streams
+  27:/usr/include/c++/9.1.0/istream **** //
+  28:/usr/include/c++/9.1.0/istream **** 
+  29:/usr/include/c++/9.1.0/istream **** /** @file include/istream
+  30:/usr/include/c++/9.1.0/istream ****  *  This is a Standard C++ Library header.
+  31:/usr/include/c++/9.1.0/istream ****  */
+  32:/usr/include/c++/9.1.0/istream **** 
+  33:/usr/include/c++/9.1.0/istream **** #ifndef _GLIBCXX_ISTREAM
+  34:/usr/include/c++/9.1.0/istream **** #define _GLIBCXX_ISTREAM 1
+  35:/usr/include/c++/9.1.0/istream **** 
+  36:/usr/include/c++/9.1.0/istream **** #pragma GCC system_header
+  37:/usr/include/c++/9.1.0/istream **** 
+  38:/usr/include/c++/9.1.0/istream **** #include <ios>
+  39:/usr/include/c++/9.1.0/istream **** #include <ostream>
+  40:/usr/include/c++/9.1.0/istream **** 
+  41:/usr/include/c++/9.1.0/istream **** namespace std _GLIBCXX_VISIBILITY(default)
+  42:/usr/include/c++/9.1.0/istream **** {
+  43:/usr/include/c++/9.1.0/istream **** _GLIBCXX_BEGIN_NAMESPACE_VERSION
+  44:/usr/include/c++/9.1.0/istream **** 
+  45:/usr/include/c++/9.1.0/istream ****   /**
+  46:/usr/include/c++/9.1.0/istream ****    *  @brief  Template class basic_istream.
+  47:/usr/include/c++/9.1.0/istream ****    *  @ingroup io
+  48:/usr/include/c++/9.1.0/istream ****    *
+  49:/usr/include/c++/9.1.0/istream ****    *  @tparam _CharT  Type of character stream.
+  50:/usr/include/c++/9.1.0/istream ****    *  @tparam _Traits  Traits for character type, defaults to
+  51:/usr/include/c++/9.1.0/istream ****    *                   char_traits<_CharT>.
+  52:/usr/include/c++/9.1.0/istream ****    *
+  53:/usr/include/c++/9.1.0/istream ****    *  This is the base class for all input streams.  It provides text
+  54:/usr/include/c++/9.1.0/istream ****    *  formatting of all builtin types, and communicates with any class
+  55:/usr/include/c++/9.1.0/istream ****    *  derived from basic_streambuf to do the actual input.
+  56:/usr/include/c++/9.1.0/istream ****   */
+  57:/usr/include/c++/9.1.0/istream ****   template<typename _CharT, typename _Traits>
+  58:/usr/include/c++/9.1.0/istream ****     class basic_istream : virtual public basic_ios<_CharT, _Traits>
+  59:/usr/include/c++/9.1.0/istream ****     {
+  60:/usr/include/c++/9.1.0/istream ****     public:
+  61:/usr/include/c++/9.1.0/istream ****       // Types (inherited from basic_ios (27.4.4)):
+  62:/usr/include/c++/9.1.0/istream ****       typedef _CharT			 		char_type;
+  63:/usr/include/c++/9.1.0/istream ****       typedef typename _Traits::int_type 		int_type;
+  64:/usr/include/c++/9.1.0/istream ****       typedef typename _Traits::pos_type 		pos_type;
+  65:/usr/include/c++/9.1.0/istream ****       typedef typename _Traits::off_type 		off_type;
+  66:/usr/include/c++/9.1.0/istream ****       typedef _Traits			 		traits_type;
+  67:/usr/include/c++/9.1.0/istream **** 
+  68:/usr/include/c++/9.1.0/istream ****       // Non-standard Types:
+  69:/usr/include/c++/9.1.0/istream ****       typedef basic_streambuf<_CharT, _Traits> 		__streambuf_type;
+GAS LISTING /tmp/ccOYCtpo.s 			page 5
 
 
-  47:/usr/include/c++/9.1.0/ostream ****    *  @ingroup io
-  48:/usr/include/c++/9.1.0/ostream ****    *
-  49:/usr/include/c++/9.1.0/ostream ****    *  @tparam _CharT  Type of character stream.
-  50:/usr/include/c++/9.1.0/ostream ****    *  @tparam _Traits  Traits for character type, defaults to
-  51:/usr/include/c++/9.1.0/ostream ****    *                   char_traits<_CharT>.
-  52:/usr/include/c++/9.1.0/ostream ****    *
-  53:/usr/include/c++/9.1.0/ostream ****    *  This is the base class for all output streams.  It provides text
-  54:/usr/include/c++/9.1.0/ostream ****    *  formatting of all builtin types, and communicates with any class
-  55:/usr/include/c++/9.1.0/ostream ****    *  derived from basic_streambuf to do the actual output.
-  56:/usr/include/c++/9.1.0/ostream ****   */
-  57:/usr/include/c++/9.1.0/ostream ****   template<typename _CharT, typename _Traits>
-  58:/usr/include/c++/9.1.0/ostream ****     class basic_ostream : virtual public basic_ios<_CharT, _Traits>
-  59:/usr/include/c++/9.1.0/ostream ****     {
-  60:/usr/include/c++/9.1.0/ostream ****     public:
-  61:/usr/include/c++/9.1.0/ostream ****       // Types (inherited from basic_ios):
-  62:/usr/include/c++/9.1.0/ostream ****       typedef _CharT			 		char_type;
-  63:/usr/include/c++/9.1.0/ostream ****       typedef typename _Traits::int_type 		int_type;
-  64:/usr/include/c++/9.1.0/ostream ****       typedef typename _Traits::pos_type 		pos_type;
-  65:/usr/include/c++/9.1.0/ostream ****       typedef typename _Traits::off_type 		off_type;
-  66:/usr/include/c++/9.1.0/ostream ****       typedef _Traits			 		traits_type;
-  67:/usr/include/c++/9.1.0/ostream **** 
-  68:/usr/include/c++/9.1.0/ostream ****       // Non-standard Types:
-  69:/usr/include/c++/9.1.0/ostream ****       typedef basic_streambuf<_CharT, _Traits> 		__streambuf_type;
-  70:/usr/include/c++/9.1.0/ostream ****       typedef basic_ios<_CharT, _Traits>		__ios_type;
-  71:/usr/include/c++/9.1.0/ostream ****       typedef basic_ostream<_CharT, _Traits>		__ostream_type;
-  72:/usr/include/c++/9.1.0/ostream ****       typedef num_put<_CharT, ostreambuf_iterator<_CharT, _Traits> >
-  73:/usr/include/c++/9.1.0/ostream ****       							__num_put_type;
-  74:/usr/include/c++/9.1.0/ostream ****       typedef ctype<_CharT>	      			__ctype_type;
-  75:/usr/include/c++/9.1.0/ostream **** 
-  76:/usr/include/c++/9.1.0/ostream ****       /**
-  77:/usr/include/c++/9.1.0/ostream ****        *  @brief  Base constructor.
-  78:/usr/include/c++/9.1.0/ostream ****        *
-  79:/usr/include/c++/9.1.0/ostream ****        *  This ctor is almost never called by the user directly, rather from
-  80:/usr/include/c++/9.1.0/ostream ****        *  derived classes' initialization lists, which pass a pointer to
-  81:/usr/include/c++/9.1.0/ostream ****        *  their own stream buffer.
-  82:/usr/include/c++/9.1.0/ostream ****       */
-  83:/usr/include/c++/9.1.0/ostream ****       explicit
-  84:/usr/include/c++/9.1.0/ostream ****       basic_ostream(__streambuf_type* __sb)
-  85:/usr/include/c++/9.1.0/ostream ****       { this->init(__sb); }
-  86:/usr/include/c++/9.1.0/ostream **** 
-  87:/usr/include/c++/9.1.0/ostream ****       /**
-  88:/usr/include/c++/9.1.0/ostream ****        *  @brief  Base destructor.
-  89:/usr/include/c++/9.1.0/ostream ****        *
-  90:/usr/include/c++/9.1.0/ostream ****        *  This does very little apart from providing a virtual base dtor.
-  91:/usr/include/c++/9.1.0/ostream ****       */
-  92:/usr/include/c++/9.1.0/ostream ****       virtual
-  93:/usr/include/c++/9.1.0/ostream ****       ~basic_ostream() { }
-  94:/usr/include/c++/9.1.0/ostream **** 
-  95:/usr/include/c++/9.1.0/ostream ****       /// Safe prefix/suffix operations.
-  96:/usr/include/c++/9.1.0/ostream ****       class sentry;
-  97:/usr/include/c++/9.1.0/ostream ****       friend class sentry;
-  98:/usr/include/c++/9.1.0/ostream **** 
-  99:/usr/include/c++/9.1.0/ostream ****       //@{
- 100:/usr/include/c++/9.1.0/ostream ****       /**
- 101:/usr/include/c++/9.1.0/ostream ****        *  @brief  Interface for manipulators.
- 102:/usr/include/c++/9.1.0/ostream ****        *
- 103:/usr/include/c++/9.1.0/ostream ****        *  Manipulators such as @c std::endl and @c std::hex use these
-GAS LISTING /tmp/cc0e6KoS.s 			page 6
+  70:/usr/include/c++/9.1.0/istream ****       typedef basic_ios<_CharT, _Traits>		__ios_type;
+  71:/usr/include/c++/9.1.0/istream ****       typedef basic_istream<_CharT, _Traits>		__istream_type;
+  72:/usr/include/c++/9.1.0/istream ****       typedef num_get<_CharT, istreambuf_iterator<_CharT, _Traits> >
+  73:/usr/include/c++/9.1.0/istream ****  							__num_get_type;
+  74:/usr/include/c++/9.1.0/istream ****       typedef ctype<_CharT>	      			__ctype_type;
+  75:/usr/include/c++/9.1.0/istream **** 
+  76:/usr/include/c++/9.1.0/istream ****     protected:
+  77:/usr/include/c++/9.1.0/istream ****       // Data Members:
+  78:/usr/include/c++/9.1.0/istream ****       /**
+  79:/usr/include/c++/9.1.0/istream ****        *  The number of characters extracted in the previous unformatted
+  80:/usr/include/c++/9.1.0/istream ****        *  function; see gcount().
+  81:/usr/include/c++/9.1.0/istream ****       */
+  82:/usr/include/c++/9.1.0/istream ****       streamsize 		_M_gcount;
+  83:/usr/include/c++/9.1.0/istream **** 
+  84:/usr/include/c++/9.1.0/istream ****     public:
+  85:/usr/include/c++/9.1.0/istream ****       /**
+  86:/usr/include/c++/9.1.0/istream ****        *  @brief  Base constructor.
+  87:/usr/include/c++/9.1.0/istream ****        *
+  88:/usr/include/c++/9.1.0/istream ****        *  This ctor is almost never called by the user directly, rather from
+  89:/usr/include/c++/9.1.0/istream ****        *  derived classes' initialization lists, which pass a pointer to
+  90:/usr/include/c++/9.1.0/istream ****        *  their own stream buffer.
+  91:/usr/include/c++/9.1.0/istream ****       */
+  92:/usr/include/c++/9.1.0/istream ****       explicit
+  93:/usr/include/c++/9.1.0/istream ****       basic_istream(__streambuf_type* __sb)
+  94:/usr/include/c++/9.1.0/istream ****       : _M_gcount(streamsize(0))
+  95:/usr/include/c++/9.1.0/istream ****       { this->init(__sb); }
+  96:/usr/include/c++/9.1.0/istream **** 
+  97:/usr/include/c++/9.1.0/istream ****       /**
+  98:/usr/include/c++/9.1.0/istream ****        *  @brief  Base destructor.
+  99:/usr/include/c++/9.1.0/istream ****        *
+ 100:/usr/include/c++/9.1.0/istream ****        *  This does very little apart from providing a virtual base dtor.
+ 101:/usr/include/c++/9.1.0/istream ****       */
+ 102:/usr/include/c++/9.1.0/istream ****       virtual
+ 103:/usr/include/c++/9.1.0/istream ****       ~basic_istream()
+ 104:/usr/include/c++/9.1.0/istream ****       { _M_gcount = streamsize(0); }
+ 105:/usr/include/c++/9.1.0/istream **** 
+ 106:/usr/include/c++/9.1.0/istream ****       /// Safe prefix/suffix operations.
+ 107:/usr/include/c++/9.1.0/istream ****       class sentry;
+ 108:/usr/include/c++/9.1.0/istream ****       friend class sentry;
+ 109:/usr/include/c++/9.1.0/istream **** 
+ 110:/usr/include/c++/9.1.0/istream ****       //@{
+ 111:/usr/include/c++/9.1.0/istream ****       /**
+ 112:/usr/include/c++/9.1.0/istream ****        *  @brief  Interface for manipulators.
+ 113:/usr/include/c++/9.1.0/istream ****        *
+ 114:/usr/include/c++/9.1.0/istream ****        *  Manipulators such as @c std::ws and @c std::dec use these
+ 115:/usr/include/c++/9.1.0/istream ****        *  functions in constructs like
+ 116:/usr/include/c++/9.1.0/istream ****        *  <code>std::cin >> std::ws</code>.
+ 117:/usr/include/c++/9.1.0/istream ****        *  For more information, see the iomanip header.
+ 118:/usr/include/c++/9.1.0/istream ****       */
+ 119:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 120:/usr/include/c++/9.1.0/istream ****       operator>>(__istream_type& (*__pf)(__istream_type&))
+ 121:/usr/include/c++/9.1.0/istream ****       { return __pf(*this); }
+ 122:/usr/include/c++/9.1.0/istream **** 
+ 123:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 124:/usr/include/c++/9.1.0/istream ****       operator>>(__ios_type& (*__pf)(__ios_type&))
+ 125:/usr/include/c++/9.1.0/istream ****       {
+ 126:/usr/include/c++/9.1.0/istream **** 	__pf(*this);
+GAS LISTING /tmp/ccOYCtpo.s 			page 6
 
 
- 104:/usr/include/c++/9.1.0/ostream ****        *  functions in constructs like "std::cout << std::endl".  For more
- 105:/usr/include/c++/9.1.0/ostream ****        *  information, see the iomanip header.
- 106:/usr/include/c++/9.1.0/ostream ****       */
- 107:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
- 108:/usr/include/c++/9.1.0/ostream ****       operator<<(__ostream_type& (*__pf)(__ostream_type&))
- 109:/usr/include/c++/9.1.0/ostream ****       {
- 110:/usr/include/c++/9.1.0/ostream **** 	// _GLIBCXX_RESOLVE_LIB_DEFECTS
- 111:/usr/include/c++/9.1.0/ostream **** 	// DR 60. What is a formatted input function?
- 112:/usr/include/c++/9.1.0/ostream **** 	// The inserters for manipulators are *not* formatted output functions.
- 113:/usr/include/c++/9.1.0/ostream **** 	return __pf(*this);
- 114:/usr/include/c++/9.1.0/ostream ****       }
- 115:/usr/include/c++/9.1.0/ostream **** 
- 116:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
- 117:/usr/include/c++/9.1.0/ostream ****       operator<<(__ios_type& (*__pf)(__ios_type&))
- 118:/usr/include/c++/9.1.0/ostream ****       {
- 119:/usr/include/c++/9.1.0/ostream **** 	// _GLIBCXX_RESOLVE_LIB_DEFECTS
- 120:/usr/include/c++/9.1.0/ostream **** 	// DR 60. What is a formatted input function?
- 121:/usr/include/c++/9.1.0/ostream **** 	// The inserters for manipulators are *not* formatted output functions.
- 122:/usr/include/c++/9.1.0/ostream **** 	__pf(*this);
- 123:/usr/include/c++/9.1.0/ostream **** 	return *this;
- 124:/usr/include/c++/9.1.0/ostream ****       }
- 125:/usr/include/c++/9.1.0/ostream **** 
- 126:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
- 127:/usr/include/c++/9.1.0/ostream ****       operator<<(ios_base& (*__pf) (ios_base&))
- 128:/usr/include/c++/9.1.0/ostream ****       {
- 129:/usr/include/c++/9.1.0/ostream **** 	// _GLIBCXX_RESOLVE_LIB_DEFECTS
- 130:/usr/include/c++/9.1.0/ostream **** 	// DR 60. What is a formatted input function?
- 131:/usr/include/c++/9.1.0/ostream **** 	// The inserters for manipulators are *not* formatted output functions.
- 132:/usr/include/c++/9.1.0/ostream **** 	__pf(*this);
- 133:/usr/include/c++/9.1.0/ostream **** 	return *this;
- 134:/usr/include/c++/9.1.0/ostream ****       }
- 135:/usr/include/c++/9.1.0/ostream ****       //@}
- 136:/usr/include/c++/9.1.0/ostream **** 
- 137:/usr/include/c++/9.1.0/ostream ****       //@{
- 138:/usr/include/c++/9.1.0/ostream ****       /**
- 139:/usr/include/c++/9.1.0/ostream ****        *  @name Inserters
- 140:/usr/include/c++/9.1.0/ostream ****        *
- 141:/usr/include/c++/9.1.0/ostream ****        *  All the @c operator<< functions (aka <em>formatted output
- 142:/usr/include/c++/9.1.0/ostream ****        *  functions</em>) have some common behavior.  Each starts by
- 143:/usr/include/c++/9.1.0/ostream ****        *  constructing a temporary object of type std::basic_ostream::sentry.
- 144:/usr/include/c++/9.1.0/ostream ****        *  This can have several effects, concluding with the setting of a
- 145:/usr/include/c++/9.1.0/ostream ****        *  status flag; see the sentry documentation for more.
- 146:/usr/include/c++/9.1.0/ostream ****        *
- 147:/usr/include/c++/9.1.0/ostream ****        *  If the sentry status is good, the function tries to generate
- 148:/usr/include/c++/9.1.0/ostream ****        *  whatever data is appropriate for the type of the argument.
- 149:/usr/include/c++/9.1.0/ostream ****        *
- 150:/usr/include/c++/9.1.0/ostream ****        *  If an exception is thrown during insertion, ios_base::badbit
- 151:/usr/include/c++/9.1.0/ostream ****        *  will be turned on in the stream's error state without causing an
- 152:/usr/include/c++/9.1.0/ostream ****        *  ios_base::failure to be thrown.  The original exception will then
- 153:/usr/include/c++/9.1.0/ostream ****        *  be rethrown.
- 154:/usr/include/c++/9.1.0/ostream ****       */
- 155:/usr/include/c++/9.1.0/ostream **** 
- 156:/usr/include/c++/9.1.0/ostream ****       //@{
- 157:/usr/include/c++/9.1.0/ostream ****       /**
- 158:/usr/include/c++/9.1.0/ostream ****        *  @brief Integer arithmetic inserters
- 159:/usr/include/c++/9.1.0/ostream ****        *  @param  __n A variable of builtin integral type.
- 160:/usr/include/c++/9.1.0/ostream ****        *  @return  @c *this if successful
-GAS LISTING /tmp/cc0e6KoS.s 			page 7
+ 127:/usr/include/c++/9.1.0/istream **** 	return *this;
+ 128:/usr/include/c++/9.1.0/istream ****       }
+ 129:/usr/include/c++/9.1.0/istream **** 
+ 130:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 131:/usr/include/c++/9.1.0/istream ****       operator>>(ios_base& (*__pf)(ios_base&))
+ 132:/usr/include/c++/9.1.0/istream ****       {
+ 133:/usr/include/c++/9.1.0/istream **** 	__pf(*this);
+ 134:/usr/include/c++/9.1.0/istream **** 	return *this;
+ 135:/usr/include/c++/9.1.0/istream ****       }
+ 136:/usr/include/c++/9.1.0/istream ****       //@}
+ 137:/usr/include/c++/9.1.0/istream **** 
+ 138:/usr/include/c++/9.1.0/istream ****       //@{
+ 139:/usr/include/c++/9.1.0/istream ****       /**
+ 140:/usr/include/c++/9.1.0/istream ****        *  @name Extractors
+ 141:/usr/include/c++/9.1.0/istream ****        *
+ 142:/usr/include/c++/9.1.0/istream ****        *  All the @c operator>> functions (aka <em>formatted input
+ 143:/usr/include/c++/9.1.0/istream ****        *  functions</em>) have some common behavior.  Each starts by
+ 144:/usr/include/c++/9.1.0/istream ****        *  constructing a temporary object of type std::basic_istream::sentry
+ 145:/usr/include/c++/9.1.0/istream ****        *  with the second argument (noskipws) set to false.  This has several
+ 146:/usr/include/c++/9.1.0/istream ****        *  effects, concluding with the setting of a status flag; see the
+ 147:/usr/include/c++/9.1.0/istream ****        *  sentry documentation for more.
+ 148:/usr/include/c++/9.1.0/istream ****        *
+ 149:/usr/include/c++/9.1.0/istream ****        *  If the sentry status is good, the function tries to extract
+ 150:/usr/include/c++/9.1.0/istream ****        *  whatever data is appropriate for the type of the argument.
+ 151:/usr/include/c++/9.1.0/istream ****        *
+ 152:/usr/include/c++/9.1.0/istream ****        *  If an exception is thrown during extraction, ios_base::badbit
+ 153:/usr/include/c++/9.1.0/istream ****        *  will be turned on in the stream's error state (without causing an
+ 154:/usr/include/c++/9.1.0/istream ****        *  ios_base::failure to be thrown) and the original exception will
+ 155:/usr/include/c++/9.1.0/istream ****        *  be rethrown if badbit is set in the exceptions mask.
+ 156:/usr/include/c++/9.1.0/istream ****       */
+ 157:/usr/include/c++/9.1.0/istream **** 
+ 158:/usr/include/c++/9.1.0/istream ****       //@{
+ 159:/usr/include/c++/9.1.0/istream ****       /**
+ 160:/usr/include/c++/9.1.0/istream ****        *  @brief  Integer arithmetic extractors
+ 161:/usr/include/c++/9.1.0/istream ****        *  @param  __n A variable of builtin integral type.
+ 162:/usr/include/c++/9.1.0/istream ****        *  @return  @c *this if successful
+ 163:/usr/include/c++/9.1.0/istream ****        *
+ 164:/usr/include/c++/9.1.0/istream ****        *  These functions use the stream's current locale (specifically, the
+ 165:/usr/include/c++/9.1.0/istream ****        *  @c num_get facet) to parse the input data.
+ 166:/usr/include/c++/9.1.0/istream ****       */
+ 167:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 168:/usr/include/c++/9.1.0/istream ****       operator>>(bool& __n)
+ 169:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__n); }
+ 170:/usr/include/c++/9.1.0/istream **** 
+ 171:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 172:/usr/include/c++/9.1.0/istream ****       operator>>(short& __n);
+ 173:/usr/include/c++/9.1.0/istream **** 
+ 174:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 175:/usr/include/c++/9.1.0/istream ****       operator>>(unsigned short& __n)
+ 176:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__n); }
+ 177:/usr/include/c++/9.1.0/istream **** 
+ 178:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 179:/usr/include/c++/9.1.0/istream ****       operator>>(int& __n);
+ 180:/usr/include/c++/9.1.0/istream **** 
+ 181:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 182:/usr/include/c++/9.1.0/istream ****       operator>>(unsigned int& __n)
+ 183:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__n); }
+GAS LISTING /tmp/ccOYCtpo.s 			page 7
 
 
- 161:/usr/include/c++/9.1.0/ostream ****        *
- 162:/usr/include/c++/9.1.0/ostream ****        *  These functions use the stream's current locale (specifically, the
- 163:/usr/include/c++/9.1.0/ostream ****        *  @c num_get facet) to perform numeric formatting.
- 164:/usr/include/c++/9.1.0/ostream ****       */
- 165:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
- 166:/usr/include/c++/9.1.0/ostream ****       operator<<(long __n)
- 167:/usr/include/c++/9.1.0/ostream ****       { return _M_insert(__n); }
- 168:/usr/include/c++/9.1.0/ostream **** 
- 169:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
- 170:/usr/include/c++/9.1.0/ostream ****       operator<<(unsigned long __n)
- 171:/usr/include/c++/9.1.0/ostream ****       { return _M_insert(__n); }
- 172:/usr/include/c++/9.1.0/ostream **** 
- 173:/usr/include/c++/9.1.0/ostream ****       __ostream_type&
- 174:/usr/include/c++/9.1.0/ostream ****       operator<<(bool __n)
-  78              		.loc 3 174 7 is_stmt 1 view .LVU16
-  79              	.LBB15:
- 175:/usr/include/c++/9.1.0/ostream ****       { return _M_insert(__n); }
-  80              		.loc 3 175 29 is_stmt 0 view .LVU17
-  81 006f 488D3D00 		leaq	_ZSt4cout(%rip), %rdi
-  81      000000
-  82 0076 E8000000 		call	_ZNSo9_M_insertIbEERSoT_@PLT
-  82      00
-  83              	.LVL9:
-  84              		.loc 3 175 29 view .LVU18
-  85 007b 4889C7   		movq	%rax, %rdi
-  86              	.LVL10:
-  87              		.loc 3 175 29 view .LVU19
-  88              	.LBE15:
-  89              	.LBE14:
-  90              	.LBB16:
-  91              	.LBI16:
- 108:/usr/include/c++/9.1.0/ostream ****       {
-  92              		.loc 3 108 7 is_stmt 1 view .LVU20
-  93              	.LBB17:
- 113:/usr/include/c++/9.1.0/ostream ****       }
-  94              		.loc 3 113 13 is_stmt 0 view .LVU21
-  95 007e E8000000 		call	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@PLT
-  95      00
-  96              	.LVL11:
- 113:/usr/include/c++/9.1.0/ostream ****       }
-  97              		.loc 3 113 13 view .LVU22
-  98              	.LBE17:
-  99              	.LBE16:
+ 184:/usr/include/c++/9.1.0/istream **** 
+ 185:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 186:/usr/include/c++/9.1.0/istream ****       operator>>(long& __n)
+ 187:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__n); }
+ 188:/usr/include/c++/9.1.0/istream **** 
+ 189:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 190:/usr/include/c++/9.1.0/istream ****       operator>>(unsigned long& __n)
+ 191:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__n); }
+ 192:/usr/include/c++/9.1.0/istream **** 
+ 193:/usr/include/c++/9.1.0/istream **** #ifdef _GLIBCXX_USE_LONG_LONG
+ 194:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 195:/usr/include/c++/9.1.0/istream ****       operator>>(long long& __n)
+ 196:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__n); }
+ 197:/usr/include/c++/9.1.0/istream **** 
+ 198:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 199:/usr/include/c++/9.1.0/istream ****       operator>>(unsigned long long& __n)
+ 200:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__n); }
+ 201:/usr/include/c++/9.1.0/istream **** #endif
+ 202:/usr/include/c++/9.1.0/istream ****       //@}
+ 203:/usr/include/c++/9.1.0/istream **** 
+ 204:/usr/include/c++/9.1.0/istream ****       //@{
+ 205:/usr/include/c++/9.1.0/istream ****       /**
+ 206:/usr/include/c++/9.1.0/istream ****        *  @brief  Floating point arithmetic extractors
+ 207:/usr/include/c++/9.1.0/istream ****        *  @param  __f A variable of builtin floating point type.
+ 208:/usr/include/c++/9.1.0/istream ****        *  @return  @c *this if successful
+ 209:/usr/include/c++/9.1.0/istream ****        *
+ 210:/usr/include/c++/9.1.0/istream ****        *  These functions use the stream's current locale (specifically, the
+ 211:/usr/include/c++/9.1.0/istream ****        *  @c num_get facet) to parse the input data.
+ 212:/usr/include/c++/9.1.0/istream ****       */
+ 213:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 214:/usr/include/c++/9.1.0/istream ****       operator>>(float& __f)
+ 215:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__f); }
+ 216:/usr/include/c++/9.1.0/istream **** 
+ 217:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 218:/usr/include/c++/9.1.0/istream ****       operator>>(double& __f)
+ 219:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__f); }
+ 220:/usr/include/c++/9.1.0/istream **** 
+ 221:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 222:/usr/include/c++/9.1.0/istream ****       operator>>(long double& __f)
+ 223:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__f); }
+ 224:/usr/include/c++/9.1.0/istream ****       //@}
+ 225:/usr/include/c++/9.1.0/istream **** 
+ 226:/usr/include/c++/9.1.0/istream ****       /**
+ 227:/usr/include/c++/9.1.0/istream ****        *  @brief  Basic arithmetic extractors
+ 228:/usr/include/c++/9.1.0/istream ****        *  @param  __p A variable of pointer type.
+ 229:/usr/include/c++/9.1.0/istream ****        *  @return  @c *this if successful
+ 230:/usr/include/c++/9.1.0/istream ****        *
+ 231:/usr/include/c++/9.1.0/istream ****        *  These functions use the stream's current locale (specifically, the
+ 232:/usr/include/c++/9.1.0/istream ****        *  @c num_get facet) to parse the input data.
+ 233:/usr/include/c++/9.1.0/istream ****       */
+ 234:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 235:/usr/include/c++/9.1.0/istream ****       operator>>(void*& __p)
+ 236:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__p); }
+ 237:/usr/include/c++/9.1.0/istream **** 
+ 238:/usr/include/c++/9.1.0/istream ****       /**
+ 239:/usr/include/c++/9.1.0/istream ****        *  @brief  Extracting into another streambuf.
+ 240:/usr/include/c++/9.1.0/istream ****        *  @param  __sb  A pointer to a streambuf
+GAS LISTING /tmp/ccOYCtpo.s 			page 8
+
+
+ 241:/usr/include/c++/9.1.0/istream ****        *
+ 242:/usr/include/c++/9.1.0/istream ****        *  This function behaves like one of the basic arithmetic extractors,
+ 243:/usr/include/c++/9.1.0/istream ****        *  in that it also constructs a sentry object and has the same error
+ 244:/usr/include/c++/9.1.0/istream ****        *  handling behavior.
+ 245:/usr/include/c++/9.1.0/istream ****        *
+ 246:/usr/include/c++/9.1.0/istream ****        *  If @p __sb is NULL, the stream will set failbit in its error state.
+ 247:/usr/include/c++/9.1.0/istream ****        *
+ 248:/usr/include/c++/9.1.0/istream ****        *  Characters are extracted from this stream and inserted into the
+ 249:/usr/include/c++/9.1.0/istream ****        *  @p __sb streambuf until one of the following occurs:
+ 250:/usr/include/c++/9.1.0/istream ****        *
+ 251:/usr/include/c++/9.1.0/istream ****        *  - the input stream reaches end-of-file,
+ 252:/usr/include/c++/9.1.0/istream ****        *  - insertion into the output buffer fails (in this case, the
+ 253:/usr/include/c++/9.1.0/istream ****        *    character that would have been inserted is not extracted), or
+ 254:/usr/include/c++/9.1.0/istream ****        *  - an exception occurs (and in this case is caught)
+ 255:/usr/include/c++/9.1.0/istream ****        *
+ 256:/usr/include/c++/9.1.0/istream ****        *  If the function inserts no characters, failbit is set.
+ 257:/usr/include/c++/9.1.0/istream ****       */
+ 258:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 259:/usr/include/c++/9.1.0/istream ****       operator>>(__streambuf_type* __sb);
+ 260:/usr/include/c++/9.1.0/istream ****       //@}
+ 261:/usr/include/c++/9.1.0/istream **** 
+ 262:/usr/include/c++/9.1.0/istream ****       // [27.6.1.3] unformatted input
+ 263:/usr/include/c++/9.1.0/istream ****       /**
+ 264:/usr/include/c++/9.1.0/istream ****        *  @brief  Character counting
+ 265:/usr/include/c++/9.1.0/istream ****        *  @return  The number of characters extracted by the previous
+ 266:/usr/include/c++/9.1.0/istream ****        *           unformatted input function dispatched for this stream.
+ 267:/usr/include/c++/9.1.0/istream ****       */
+ 268:/usr/include/c++/9.1.0/istream ****       streamsize
+ 269:/usr/include/c++/9.1.0/istream ****       gcount() const
+ 270:/usr/include/c++/9.1.0/istream ****       { return _M_gcount; }
+ 271:/usr/include/c++/9.1.0/istream **** 
+ 272:/usr/include/c++/9.1.0/istream ****       //@{
+ 273:/usr/include/c++/9.1.0/istream ****       /**
+ 274:/usr/include/c++/9.1.0/istream ****        *  @name Unformatted Input Functions
+ 275:/usr/include/c++/9.1.0/istream ****        *
+ 276:/usr/include/c++/9.1.0/istream ****        *  All the unformatted input functions have some common behavior.
+ 277:/usr/include/c++/9.1.0/istream ****        *  Each starts by constructing a temporary object of type
+ 278:/usr/include/c++/9.1.0/istream ****        *  std::basic_istream::sentry with the second argument (noskipws)
+ 279:/usr/include/c++/9.1.0/istream ****        *  set to true.  This has several effects, concluding with the
+ 280:/usr/include/c++/9.1.0/istream ****        *  setting of a status flag; see the sentry documentation for more.
+ 281:/usr/include/c++/9.1.0/istream ****        *
+ 282:/usr/include/c++/9.1.0/istream ****        *  If the sentry status is good, the function tries to extract
+ 283:/usr/include/c++/9.1.0/istream ****        *  whatever data is appropriate for the type of the argument.
+ 284:/usr/include/c++/9.1.0/istream ****        *
+ 285:/usr/include/c++/9.1.0/istream ****        *  The number of characters extracted is stored for later retrieval
+ 286:/usr/include/c++/9.1.0/istream ****        *  by gcount().
+ 287:/usr/include/c++/9.1.0/istream ****        *
+ 288:/usr/include/c++/9.1.0/istream ****        *  If an exception is thrown during extraction, ios_base::badbit
+ 289:/usr/include/c++/9.1.0/istream ****        *  will be turned on in the stream's error state (without causing an
+ 290:/usr/include/c++/9.1.0/istream ****        *  ios_base::failure to be thrown) and the original exception will
+ 291:/usr/include/c++/9.1.0/istream ****        *  be rethrown if badbit is set in the exceptions mask.
+ 292:/usr/include/c++/9.1.0/istream ****       */
+ 293:/usr/include/c++/9.1.0/istream **** 
+ 294:/usr/include/c++/9.1.0/istream ****       /**
+ 295:/usr/include/c++/9.1.0/istream ****        *  @brief  Simple extraction.
+ 296:/usr/include/c++/9.1.0/istream ****        *  @return  A character, or eof().
+ 297:/usr/include/c++/9.1.0/istream ****        *
+GAS LISTING /tmp/ccOYCtpo.s 			page 9
+
+
+ 298:/usr/include/c++/9.1.0/istream ****        *  Tries to extract a character.  If none are available, sets failbit
+ 299:/usr/include/c++/9.1.0/istream ****        *  and returns traits::eof().
+ 300:/usr/include/c++/9.1.0/istream ****       */
+ 301:/usr/include/c++/9.1.0/istream ****       int_type
+ 302:/usr/include/c++/9.1.0/istream ****       get();
+ 303:/usr/include/c++/9.1.0/istream **** 
+ 304:/usr/include/c++/9.1.0/istream ****       /**
+ 305:/usr/include/c++/9.1.0/istream ****        *  @brief  Simple extraction.
+ 306:/usr/include/c++/9.1.0/istream ****        *  @param  __c  The character in which to store data.
+ 307:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 308:/usr/include/c++/9.1.0/istream ****        *
+ 309:/usr/include/c++/9.1.0/istream ****        *  Tries to extract a character and store it in @a __c.  If none are
+ 310:/usr/include/c++/9.1.0/istream ****        *  available, sets failbit and returns traits::eof().
+ 311:/usr/include/c++/9.1.0/istream ****        *
+ 312:/usr/include/c++/9.1.0/istream ****        *  @note  This function is not overloaded on signed char and
+ 313:/usr/include/c++/9.1.0/istream ****        *         unsigned char.
+ 314:/usr/include/c++/9.1.0/istream ****       */
+ 315:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 316:/usr/include/c++/9.1.0/istream ****       get(char_type& __c);
+ 317:/usr/include/c++/9.1.0/istream **** 
+ 318:/usr/include/c++/9.1.0/istream ****       /**
+ 319:/usr/include/c++/9.1.0/istream ****        *  @brief  Simple multiple-character extraction.
+ 320:/usr/include/c++/9.1.0/istream ****        *  @param  __s  Pointer to an array.
+ 321:/usr/include/c++/9.1.0/istream ****        *  @param  __n  Maximum number of characters to store in @a __s.
+ 322:/usr/include/c++/9.1.0/istream ****        *  @param  __delim  A "stop" character.
+ 323:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 324:/usr/include/c++/9.1.0/istream ****        *
+ 325:/usr/include/c++/9.1.0/istream ****        *  Characters are extracted and stored into @a __s until one of the
+ 326:/usr/include/c++/9.1.0/istream ****        *  following happens:
+ 327:/usr/include/c++/9.1.0/istream ****        *
+ 328:/usr/include/c++/9.1.0/istream ****        *  - @c __n-1 characters are stored
+ 329:/usr/include/c++/9.1.0/istream ****        *  - the input sequence reaches EOF
+ 330:/usr/include/c++/9.1.0/istream ****        *  - the next character equals @a __delim, in which case the character
+ 331:/usr/include/c++/9.1.0/istream ****        *    is not extracted
+ 332:/usr/include/c++/9.1.0/istream ****        *
+ 333:/usr/include/c++/9.1.0/istream ****        * If no characters are stored, failbit is set in the stream's error
+ 334:/usr/include/c++/9.1.0/istream ****        * state.
+ 335:/usr/include/c++/9.1.0/istream ****        *
+ 336:/usr/include/c++/9.1.0/istream ****        * In any case, a null character is stored into the next location in
+ 337:/usr/include/c++/9.1.0/istream ****        * the array.
+ 338:/usr/include/c++/9.1.0/istream ****        *
+ 339:/usr/include/c++/9.1.0/istream ****        *  @note  This function is not overloaded on signed char and
+ 340:/usr/include/c++/9.1.0/istream ****        *         unsigned char.
+ 341:/usr/include/c++/9.1.0/istream ****       */
+ 342:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 343:/usr/include/c++/9.1.0/istream ****       get(char_type* __s, streamsize __n, char_type __delim);
+ 344:/usr/include/c++/9.1.0/istream **** 
+ 345:/usr/include/c++/9.1.0/istream ****       /**
+ 346:/usr/include/c++/9.1.0/istream ****        *  @brief  Simple multiple-character extraction.
+ 347:/usr/include/c++/9.1.0/istream ****        *  @param  __s  Pointer to an array.
+ 348:/usr/include/c++/9.1.0/istream ****        *  @param  __n  Maximum number of characters to store in @a s.
+ 349:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 350:/usr/include/c++/9.1.0/istream ****        *
+ 351:/usr/include/c++/9.1.0/istream ****        *  Returns @c get(__s,__n,widen(&apos;\\n&apos;)).
+ 352:/usr/include/c++/9.1.0/istream ****       */
+ 353:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 354:/usr/include/c++/9.1.0/istream ****       get(char_type* __s, streamsize __n)
+GAS LISTING /tmp/ccOYCtpo.s 			page 10
+
+
+ 355:/usr/include/c++/9.1.0/istream ****       { return this->get(__s, __n, this->widen('\n')); }
+ 356:/usr/include/c++/9.1.0/istream **** 
+ 357:/usr/include/c++/9.1.0/istream ****       /**
+ 358:/usr/include/c++/9.1.0/istream ****        *  @brief  Extraction into another streambuf.
+ 359:/usr/include/c++/9.1.0/istream ****        *  @param  __sb  A streambuf in which to store data.
+ 360:/usr/include/c++/9.1.0/istream ****        *  @param  __delim  A "stop" character.
+ 361:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 362:/usr/include/c++/9.1.0/istream ****        *
+ 363:/usr/include/c++/9.1.0/istream ****        *  Characters are extracted and inserted into @a __sb until one of the
+ 364:/usr/include/c++/9.1.0/istream ****        *  following happens:
+ 365:/usr/include/c++/9.1.0/istream ****        *
+ 366:/usr/include/c++/9.1.0/istream ****        *  - the input sequence reaches EOF
+ 367:/usr/include/c++/9.1.0/istream ****        *  - insertion into the output buffer fails (in this case, the
+ 368:/usr/include/c++/9.1.0/istream ****        *    character that would have been inserted is not extracted)
+ 369:/usr/include/c++/9.1.0/istream ****        *  - the next character equals @a __delim (in this case, the character
+ 370:/usr/include/c++/9.1.0/istream ****        *    is not extracted)
+ 371:/usr/include/c++/9.1.0/istream ****        *  - an exception occurs (and in this case is caught)
+ 372:/usr/include/c++/9.1.0/istream ****        *
+ 373:/usr/include/c++/9.1.0/istream ****        * If no characters are stored, failbit is set in the stream's error
+ 374:/usr/include/c++/9.1.0/istream ****        * state.
+ 375:/usr/include/c++/9.1.0/istream ****       */
+ 376:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 377:/usr/include/c++/9.1.0/istream ****       get(__streambuf_type& __sb, char_type __delim);
+ 378:/usr/include/c++/9.1.0/istream **** 
+ 379:/usr/include/c++/9.1.0/istream ****       /**
+ 380:/usr/include/c++/9.1.0/istream ****        *  @brief  Extraction into another streambuf.
+ 381:/usr/include/c++/9.1.0/istream ****        *  @param  __sb  A streambuf in which to store data.
+ 382:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 383:/usr/include/c++/9.1.0/istream ****        *
+ 384:/usr/include/c++/9.1.0/istream ****        *  Returns @c get(__sb,widen(&apos;\\n&apos;)).
+ 385:/usr/include/c++/9.1.0/istream ****       */
+ 386:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 387:/usr/include/c++/9.1.0/istream ****       get(__streambuf_type& __sb)
+ 388:/usr/include/c++/9.1.0/istream ****       { return this->get(__sb, this->widen('\n')); }
+ 389:/usr/include/c++/9.1.0/istream **** 
+ 390:/usr/include/c++/9.1.0/istream ****       /**
+ 391:/usr/include/c++/9.1.0/istream ****        *  @brief  String extraction.
+ 392:/usr/include/c++/9.1.0/istream ****        *  @param  __s  A character array in which to store the data.
+ 393:/usr/include/c++/9.1.0/istream ****        *  @param  __n  Maximum number of characters to extract.
+ 394:/usr/include/c++/9.1.0/istream ****        *  @param  __delim  A "stop" character.
+ 395:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 396:/usr/include/c++/9.1.0/istream ****        *
+ 397:/usr/include/c++/9.1.0/istream ****        *  Extracts and stores characters into @a __s until one of the
+ 398:/usr/include/c++/9.1.0/istream ****        *  following happens.  Note that these criteria are required to be
+ 399:/usr/include/c++/9.1.0/istream ****        *  tested in the order listed here, to allow an input line to exactly
+ 400:/usr/include/c++/9.1.0/istream ****        *  fill the @a __s array without setting failbit.
+ 401:/usr/include/c++/9.1.0/istream ****        *
+ 402:/usr/include/c++/9.1.0/istream ****        *  -# the input sequence reaches end-of-file, in which case eofbit
+ 403:/usr/include/c++/9.1.0/istream ****        *     is set in the stream error state
+ 404:/usr/include/c++/9.1.0/istream ****        *  -# the next character equals @c __delim, in which case the character
+ 405:/usr/include/c++/9.1.0/istream ****        *     is extracted (and therefore counted in @c gcount()) but not stored
+ 406:/usr/include/c++/9.1.0/istream ****        *  -# @c __n-1 characters are stored, in which case failbit is set
+ 407:/usr/include/c++/9.1.0/istream ****        *     in the stream error state
+ 408:/usr/include/c++/9.1.0/istream ****        *
+ 409:/usr/include/c++/9.1.0/istream ****        *  If no characters are extracted, failbit is set.  (An empty line of
+ 410:/usr/include/c++/9.1.0/istream ****        *  input should therefore not cause failbit to be set.)
+ 411:/usr/include/c++/9.1.0/istream ****        *
+GAS LISTING /tmp/ccOYCtpo.s 			page 11
+
+
+ 412:/usr/include/c++/9.1.0/istream ****        *  In any case, a null character is stored in the next location in
+ 413:/usr/include/c++/9.1.0/istream ****        *  the array.
+ 414:/usr/include/c++/9.1.0/istream ****       */
+ 415:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 416:/usr/include/c++/9.1.0/istream ****       getline(char_type* __s, streamsize __n, char_type __delim);
+ 417:/usr/include/c++/9.1.0/istream **** 
+ 418:/usr/include/c++/9.1.0/istream ****       /**
+ 419:/usr/include/c++/9.1.0/istream ****        *  @brief  String extraction.
+ 420:/usr/include/c++/9.1.0/istream ****        *  @param  __s  A character array in which to store the data.
+ 421:/usr/include/c++/9.1.0/istream ****        *  @param  __n  Maximum number of characters to extract.
+ 422:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 423:/usr/include/c++/9.1.0/istream ****        *
+ 424:/usr/include/c++/9.1.0/istream ****        *  Returns @c getline(__s,__n,widen(&apos;\\n&apos;)).
+ 425:/usr/include/c++/9.1.0/istream ****       */
+ 426:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 427:/usr/include/c++/9.1.0/istream ****       getline(char_type* __s, streamsize __n)
+ 428:/usr/include/c++/9.1.0/istream ****       { return this->getline(__s, __n, this->widen('\n')); }
+ 429:/usr/include/c++/9.1.0/istream **** 
+ 430:/usr/include/c++/9.1.0/istream ****       /**
+ 431:/usr/include/c++/9.1.0/istream ****        *  @brief  Discarding characters
+ 432:/usr/include/c++/9.1.0/istream ****        *  @param  __n  Number of characters to discard.
+ 433:/usr/include/c++/9.1.0/istream ****        *  @param  __delim  A "stop" character.
+ 434:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 435:/usr/include/c++/9.1.0/istream ****        *
+ 436:/usr/include/c++/9.1.0/istream ****        *  Extracts characters and throws them away until one of the
+ 437:/usr/include/c++/9.1.0/istream ****        *  following happens:
+ 438:/usr/include/c++/9.1.0/istream ****        *  - if @a __n @c != @c std::numeric_limits<int>::max(), @a __n
+ 439:/usr/include/c++/9.1.0/istream ****        *    characters are extracted
+ 440:/usr/include/c++/9.1.0/istream ****        *  - the input sequence reaches end-of-file
+ 441:/usr/include/c++/9.1.0/istream ****        *  - the next character equals @a __delim (in this case, the character
+ 442:/usr/include/c++/9.1.0/istream ****        *    is extracted); note that this condition will never occur if
+ 443:/usr/include/c++/9.1.0/istream ****        *    @a __delim equals @c traits::eof().
+ 444:/usr/include/c++/9.1.0/istream ****        *
+ 445:/usr/include/c++/9.1.0/istream ****        *  NB: Provide three overloads, instead of the single function
+ 446:/usr/include/c++/9.1.0/istream ****        *  (with defaults) mandated by the Standard: this leads to a
+ 447:/usr/include/c++/9.1.0/istream ****        *  better performing implementation, while still conforming to
+ 448:/usr/include/c++/9.1.0/istream ****        *  the Standard.
+ 449:/usr/include/c++/9.1.0/istream ****       */
+ 450:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 451:/usr/include/c++/9.1.0/istream ****       ignore(streamsize __n, int_type __delim);
+ 452:/usr/include/c++/9.1.0/istream **** 
+ 453:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 454:/usr/include/c++/9.1.0/istream ****       ignore(streamsize __n);
+ 455:/usr/include/c++/9.1.0/istream **** 
+ 456:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 457:/usr/include/c++/9.1.0/istream ****       ignore();
+ 458:/usr/include/c++/9.1.0/istream **** 
+ 459:/usr/include/c++/9.1.0/istream ****       /**
+ 460:/usr/include/c++/9.1.0/istream ****        *  @brief  Looking ahead in the stream
+ 461:/usr/include/c++/9.1.0/istream ****        *  @return  The next character, or eof().
+ 462:/usr/include/c++/9.1.0/istream ****        *
+ 463:/usr/include/c++/9.1.0/istream ****        *  If, after constructing the sentry object, @c good() is false,
+ 464:/usr/include/c++/9.1.0/istream ****        *  returns @c traits::eof().  Otherwise reads but does not extract
+ 465:/usr/include/c++/9.1.0/istream ****        *  the next input character.
+ 466:/usr/include/c++/9.1.0/istream ****       */
+ 467:/usr/include/c++/9.1.0/istream ****       int_type
+ 468:/usr/include/c++/9.1.0/istream ****       peek();
+GAS LISTING /tmp/ccOYCtpo.s 			page 12
+
+
+ 469:/usr/include/c++/9.1.0/istream **** 
+ 470:/usr/include/c++/9.1.0/istream ****       /**
+ 471:/usr/include/c++/9.1.0/istream ****        *  @brief  Extraction without delimiters.
+ 472:/usr/include/c++/9.1.0/istream ****        *  @param  __s  A character array.
+ 473:/usr/include/c++/9.1.0/istream ****        *  @param  __n  Maximum number of characters to store.
+ 474:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 475:/usr/include/c++/9.1.0/istream ****        *
+ 476:/usr/include/c++/9.1.0/istream ****        *  If the stream state is @c good(), extracts characters and stores
+ 477:/usr/include/c++/9.1.0/istream ****        *  them into @a __s until one of the following happens:
+ 478:/usr/include/c++/9.1.0/istream ****        *  - @a __n characters are stored
+ 479:/usr/include/c++/9.1.0/istream ****        *  - the input sequence reaches end-of-file, in which case the error
+ 480:/usr/include/c++/9.1.0/istream ****        *    state is set to @c failbit|eofbit.
+ 481:/usr/include/c++/9.1.0/istream ****        *
+ 482:/usr/include/c++/9.1.0/istream ****        *  @note  This function is not overloaded on signed char and
+ 483:/usr/include/c++/9.1.0/istream ****        *         unsigned char.
+ 484:/usr/include/c++/9.1.0/istream ****       */
+ 485:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 486:/usr/include/c++/9.1.0/istream ****       read(char_type* __s, streamsize __n);
+ 487:/usr/include/c++/9.1.0/istream **** 
+ 488:/usr/include/c++/9.1.0/istream ****       /**
+ 489:/usr/include/c++/9.1.0/istream ****        *  @brief  Extraction until the buffer is exhausted, but no more.
+ 490:/usr/include/c++/9.1.0/istream ****        *  @param  __s  A character array.
+ 491:/usr/include/c++/9.1.0/istream ****        *  @param  __n  Maximum number of characters to store.
+ 492:/usr/include/c++/9.1.0/istream ****        *  @return  The number of characters extracted.
+ 493:/usr/include/c++/9.1.0/istream ****        *
+ 494:/usr/include/c++/9.1.0/istream ****        *  Extracts characters and stores them into @a __s depending on the
+ 495:/usr/include/c++/9.1.0/istream ****        *  number of characters remaining in the streambuf's buffer,
+ 496:/usr/include/c++/9.1.0/istream ****        *  @c rdbuf()->in_avail(), called @c A here:
+ 497:/usr/include/c++/9.1.0/istream ****        *  - if @c A @c == @c -1, sets eofbit and extracts no characters
+ 498:/usr/include/c++/9.1.0/istream ****        *  - if @c A @c == @c 0, extracts no characters
+ 499:/usr/include/c++/9.1.0/istream ****        *  - if @c A @c > @c 0, extracts @c min(A,n)
+ 500:/usr/include/c++/9.1.0/istream ****        *
+ 501:/usr/include/c++/9.1.0/istream ****        *  The goal is to empty the current buffer, and to not request any
+ 502:/usr/include/c++/9.1.0/istream ****        *  more from the external input sequence controlled by the streambuf.
+ 503:/usr/include/c++/9.1.0/istream ****       */
+ 504:/usr/include/c++/9.1.0/istream ****       streamsize
+ 505:/usr/include/c++/9.1.0/istream ****       readsome(char_type* __s, streamsize __n);
+ 506:/usr/include/c++/9.1.0/istream **** 
+ 507:/usr/include/c++/9.1.0/istream ****       /**
+ 508:/usr/include/c++/9.1.0/istream ****        *  @brief  Unextracting a single character.
+ 509:/usr/include/c++/9.1.0/istream ****        *  @param  __c  The character to push back into the input stream.
+ 510:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 511:/usr/include/c++/9.1.0/istream ****        *
+ 512:/usr/include/c++/9.1.0/istream ****        *  If @c rdbuf() is not null, calls @c rdbuf()->sputbackc(c).
+ 513:/usr/include/c++/9.1.0/istream ****        *
+ 514:/usr/include/c++/9.1.0/istream ****        *  If @c rdbuf() is null or if @c sputbackc() fails, sets badbit in
+ 515:/usr/include/c++/9.1.0/istream ****        *  the error state.
+ 516:/usr/include/c++/9.1.0/istream ****        *
+ 517:/usr/include/c++/9.1.0/istream ****        *  @note  This function first clears eofbit.  Since no characters
+ 518:/usr/include/c++/9.1.0/istream ****        *         are extracted, the next call to @c gcount() will return 0,
+ 519:/usr/include/c++/9.1.0/istream ****        *         as required by DR 60.
+ 520:/usr/include/c++/9.1.0/istream ****       */
+ 521:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 522:/usr/include/c++/9.1.0/istream ****       putback(char_type __c);
+ 523:/usr/include/c++/9.1.0/istream **** 
+ 524:/usr/include/c++/9.1.0/istream ****       /**
+ 525:/usr/include/c++/9.1.0/istream ****        *  @brief  Unextracting the previous character.
+GAS LISTING /tmp/ccOYCtpo.s 			page 13
+
+
+ 526:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 527:/usr/include/c++/9.1.0/istream ****        *
+ 528:/usr/include/c++/9.1.0/istream ****        *  If @c rdbuf() is not null, calls @c rdbuf()->sungetc(c).
+ 529:/usr/include/c++/9.1.0/istream ****        *
+ 530:/usr/include/c++/9.1.0/istream ****        *  If @c rdbuf() is null or if @c sungetc() fails, sets badbit in
+ 531:/usr/include/c++/9.1.0/istream ****        *  the error state.
+ 532:/usr/include/c++/9.1.0/istream ****        *
+ 533:/usr/include/c++/9.1.0/istream ****        *  @note  This function first clears eofbit.  Since no characters
+ 534:/usr/include/c++/9.1.0/istream ****        *         are extracted, the next call to @c gcount() will return 0,
+ 535:/usr/include/c++/9.1.0/istream ****        *         as required by DR 60.
+ 536:/usr/include/c++/9.1.0/istream ****       */
+ 537:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 538:/usr/include/c++/9.1.0/istream ****       unget();
+ 539:/usr/include/c++/9.1.0/istream **** 
+ 540:/usr/include/c++/9.1.0/istream ****       /**
+ 541:/usr/include/c++/9.1.0/istream ****        *  @brief  Synchronizing the stream buffer.
+ 542:/usr/include/c++/9.1.0/istream ****        *  @return  0 on success, -1 on failure
+ 543:/usr/include/c++/9.1.0/istream ****        *
+ 544:/usr/include/c++/9.1.0/istream ****        *  If @c rdbuf() is a null pointer, returns -1.
+ 545:/usr/include/c++/9.1.0/istream ****        *
+ 546:/usr/include/c++/9.1.0/istream ****        *  Otherwise, calls @c rdbuf()->pubsync(), and if that returns -1,
+ 547:/usr/include/c++/9.1.0/istream ****        *  sets badbit and returns -1.
+ 548:/usr/include/c++/9.1.0/istream ****        *
+ 549:/usr/include/c++/9.1.0/istream ****        *  Otherwise, returns 0.
+ 550:/usr/include/c++/9.1.0/istream ****        *
+ 551:/usr/include/c++/9.1.0/istream ****        *  @note  This function does not count the number of characters
+ 552:/usr/include/c++/9.1.0/istream ****        *         extracted, if any, and therefore does not affect the next
+ 553:/usr/include/c++/9.1.0/istream ****        *         call to @c gcount().
+ 554:/usr/include/c++/9.1.0/istream ****       */
+ 555:/usr/include/c++/9.1.0/istream ****       int
+ 556:/usr/include/c++/9.1.0/istream ****       sync();
+ 557:/usr/include/c++/9.1.0/istream **** 
+ 558:/usr/include/c++/9.1.0/istream ****       /**
+ 559:/usr/include/c++/9.1.0/istream ****        *  @brief  Getting the current read position.
+ 560:/usr/include/c++/9.1.0/istream ****        *  @return  A file position object.
+ 561:/usr/include/c++/9.1.0/istream ****        *
+ 562:/usr/include/c++/9.1.0/istream ****        *  If @c fail() is not false, returns @c pos_type(-1) to indicate
+ 563:/usr/include/c++/9.1.0/istream ****        *  failure.  Otherwise returns @c rdbuf()->pubseekoff(0,cur,in).
+ 564:/usr/include/c++/9.1.0/istream ****        *
+ 565:/usr/include/c++/9.1.0/istream ****        *  @note  This function does not count the number of characters
+ 566:/usr/include/c++/9.1.0/istream ****        *         extracted, if any, and therefore does not affect the next
+ 567:/usr/include/c++/9.1.0/istream ****        *         call to @c gcount().  At variance with putback, unget and
+ 568:/usr/include/c++/9.1.0/istream ****        *         seekg, eofbit is not cleared first.
+ 569:/usr/include/c++/9.1.0/istream ****       */
+ 570:/usr/include/c++/9.1.0/istream ****       pos_type
+ 571:/usr/include/c++/9.1.0/istream ****       tellg();
+ 572:/usr/include/c++/9.1.0/istream **** 
+ 573:/usr/include/c++/9.1.0/istream ****       /**
+ 574:/usr/include/c++/9.1.0/istream ****        *  @brief  Changing the current read position.
+ 575:/usr/include/c++/9.1.0/istream ****        *  @param  __pos  A file position object.
+ 576:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 577:/usr/include/c++/9.1.0/istream ****        *
+ 578:/usr/include/c++/9.1.0/istream ****        *  If @c fail() is not true, calls @c rdbuf()->pubseekpos(__pos).  If
+ 579:/usr/include/c++/9.1.0/istream ****        *  that function fails, sets failbit.
+ 580:/usr/include/c++/9.1.0/istream ****        *
+ 581:/usr/include/c++/9.1.0/istream ****        *  @note  This function first clears eofbit.  It does not count the
+ 582:/usr/include/c++/9.1.0/istream ****        *         number of characters extracted, if any, and therefore does
+GAS LISTING /tmp/ccOYCtpo.s 			page 14
+
+
+ 583:/usr/include/c++/9.1.0/istream ****        *         not affect the next call to @c gcount().
+ 584:/usr/include/c++/9.1.0/istream ****       */
+ 585:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 586:/usr/include/c++/9.1.0/istream ****       seekg(pos_type);
+ 587:/usr/include/c++/9.1.0/istream **** 
+ 588:/usr/include/c++/9.1.0/istream ****       /**
+ 589:/usr/include/c++/9.1.0/istream ****        *  @brief  Changing the current read position.
+ 590:/usr/include/c++/9.1.0/istream ****        *  @param  __off  A file offset object.
+ 591:/usr/include/c++/9.1.0/istream ****        *  @param  __dir  The direction in which to seek.
+ 592:/usr/include/c++/9.1.0/istream ****        *  @return  *this
+ 593:/usr/include/c++/9.1.0/istream ****        *
+ 594:/usr/include/c++/9.1.0/istream ****        *  If @c fail() is not true, calls @c rdbuf()->pubseekoff(__off,__dir).
+ 595:/usr/include/c++/9.1.0/istream ****        *  If that function fails, sets failbit.
+ 596:/usr/include/c++/9.1.0/istream ****        *
+ 597:/usr/include/c++/9.1.0/istream ****        *  @note  This function first clears eofbit.  It does not count the
+ 598:/usr/include/c++/9.1.0/istream ****        *         number of characters extracted, if any, and therefore does
+ 599:/usr/include/c++/9.1.0/istream ****        *         not affect the next call to @c gcount().
+ 600:/usr/include/c++/9.1.0/istream ****       */
+ 601:/usr/include/c++/9.1.0/istream ****       __istream_type&
+ 602:/usr/include/c++/9.1.0/istream ****       seekg(off_type, ios_base::seekdir);
+ 603:/usr/include/c++/9.1.0/istream ****       //@}
+ 604:/usr/include/c++/9.1.0/istream **** 
+ 605:/usr/include/c++/9.1.0/istream ****     protected:
+ 606:/usr/include/c++/9.1.0/istream ****       basic_istream()
+ 607:/usr/include/c++/9.1.0/istream ****       : _M_gcount(streamsize(0))
+ 608:/usr/include/c++/9.1.0/istream ****       { this->init(0); }
+ 609:/usr/include/c++/9.1.0/istream **** 
+ 610:/usr/include/c++/9.1.0/istream **** #if __cplusplus >= 201103L
+ 611:/usr/include/c++/9.1.0/istream ****       basic_istream(const basic_istream&) = delete;
+ 612:/usr/include/c++/9.1.0/istream **** 
+ 613:/usr/include/c++/9.1.0/istream ****       basic_istream(basic_istream&& __rhs)
+ 614:/usr/include/c++/9.1.0/istream ****       : __ios_type(), _M_gcount(__rhs._M_gcount)
+ 615:/usr/include/c++/9.1.0/istream ****       {
+ 616:/usr/include/c++/9.1.0/istream **** 	__ios_type::move(__rhs);
+ 617:/usr/include/c++/9.1.0/istream **** 	__rhs._M_gcount = 0;
+ 618:/usr/include/c++/9.1.0/istream ****       }
+ 619:/usr/include/c++/9.1.0/istream **** 
+ 620:/usr/include/c++/9.1.0/istream ****       // 27.7.3.3 Assign/swap
+ 621:/usr/include/c++/9.1.0/istream **** 
+ 622:/usr/include/c++/9.1.0/istream ****       basic_istream& operator=(const basic_istream&) = delete;
+ 623:/usr/include/c++/9.1.0/istream **** 
+ 624:/usr/include/c++/9.1.0/istream ****       basic_istream&
+ 625:/usr/include/c++/9.1.0/istream ****       operator=(basic_istream&& __rhs)
+ 626:/usr/include/c++/9.1.0/istream ****       {
+ 627:/usr/include/c++/9.1.0/istream **** 	swap(__rhs);
+ 628:/usr/include/c++/9.1.0/istream **** 	return *this;
+ 629:/usr/include/c++/9.1.0/istream ****       }
+ 630:/usr/include/c++/9.1.0/istream **** 
+ 631:/usr/include/c++/9.1.0/istream ****       void
+ 632:/usr/include/c++/9.1.0/istream ****       swap(basic_istream& __rhs)
+ 633:/usr/include/c++/9.1.0/istream ****       {
+ 634:/usr/include/c++/9.1.0/istream **** 	__ios_type::swap(__rhs);
+ 635:/usr/include/c++/9.1.0/istream **** 	std::swap(_M_gcount, __rhs._M_gcount);
+ 636:/usr/include/c++/9.1.0/istream ****       }
+ 637:/usr/include/c++/9.1.0/istream **** #endif
+ 638:/usr/include/c++/9.1.0/istream **** 
+ 639:/usr/include/c++/9.1.0/istream ****       template<typename _ValueT>
+GAS LISTING /tmp/ccOYCtpo.s 			page 15
+
+
+ 640:/usr/include/c++/9.1.0/istream **** 	__istream_type&
+ 641:/usr/include/c++/9.1.0/istream **** 	_M_extract(_ValueT& __v);
+ 642:/usr/include/c++/9.1.0/istream ****     };
+ 643:/usr/include/c++/9.1.0/istream **** 
+ 644:/usr/include/c++/9.1.0/istream ****   /// Explicit specialization declarations, defined in src/istream.cc.
+ 645:/usr/include/c++/9.1.0/istream ****   template<>
+ 646:/usr/include/c++/9.1.0/istream ****     basic_istream<char>&
+ 647:/usr/include/c++/9.1.0/istream ****     basic_istream<char>::
+ 648:/usr/include/c++/9.1.0/istream ****     getline(char_type* __s, streamsize __n, char_type __delim);
+ 649:/usr/include/c++/9.1.0/istream **** 
+ 650:/usr/include/c++/9.1.0/istream ****   template<>
+ 651:/usr/include/c++/9.1.0/istream ****     basic_istream<char>&
+ 652:/usr/include/c++/9.1.0/istream ****     basic_istream<char>::
+ 653:/usr/include/c++/9.1.0/istream ****     ignore(streamsize __n);
+ 654:/usr/include/c++/9.1.0/istream **** 
+ 655:/usr/include/c++/9.1.0/istream ****   template<>
+ 656:/usr/include/c++/9.1.0/istream ****     basic_istream<char>&
+ 657:/usr/include/c++/9.1.0/istream ****     basic_istream<char>::
+ 658:/usr/include/c++/9.1.0/istream ****     ignore(streamsize __n, int_type __delim);
+ 659:/usr/include/c++/9.1.0/istream **** 
+ 660:/usr/include/c++/9.1.0/istream **** #ifdef _GLIBCXX_USE_WCHAR_T
+ 661:/usr/include/c++/9.1.0/istream ****   template<>
+ 662:/usr/include/c++/9.1.0/istream ****     basic_istream<wchar_t>&
+ 663:/usr/include/c++/9.1.0/istream ****     basic_istream<wchar_t>::
+ 664:/usr/include/c++/9.1.0/istream ****     getline(char_type* __s, streamsize __n, char_type __delim);
+ 665:/usr/include/c++/9.1.0/istream **** 
+ 666:/usr/include/c++/9.1.0/istream ****   template<>
+ 667:/usr/include/c++/9.1.0/istream ****     basic_istream<wchar_t>&
+ 668:/usr/include/c++/9.1.0/istream ****     basic_istream<wchar_t>::
+ 669:/usr/include/c++/9.1.0/istream ****     ignore(streamsize __n);
+ 670:/usr/include/c++/9.1.0/istream **** 
+ 671:/usr/include/c++/9.1.0/istream ****   template<>
+ 672:/usr/include/c++/9.1.0/istream ****     basic_istream<wchar_t>&
+ 673:/usr/include/c++/9.1.0/istream ****     basic_istream<wchar_t>::
+ 674:/usr/include/c++/9.1.0/istream ****     ignore(streamsize __n, int_type __delim);
+ 675:/usr/include/c++/9.1.0/istream **** #endif
+ 676:/usr/include/c++/9.1.0/istream **** 
+ 677:/usr/include/c++/9.1.0/istream ****   /**
+ 678:/usr/include/c++/9.1.0/istream ****    *  @brief  Performs setup work for input streams.
+ 679:/usr/include/c++/9.1.0/istream ****    *
+ 680:/usr/include/c++/9.1.0/istream ****    *  Objects of this class are created before all of the standard
+ 681:/usr/include/c++/9.1.0/istream ****    *  extractors are run.  It is responsible for <em>exception-safe
+ 682:/usr/include/c++/9.1.0/istream ****    *  prefix and suffix operations,</em> although only prefix actions
+ 683:/usr/include/c++/9.1.0/istream ****    *  are currently required by the standard.
+ 684:/usr/include/c++/9.1.0/istream ****   */
+ 685:/usr/include/c++/9.1.0/istream ****   template<typename _CharT, typename _Traits>
+ 686:/usr/include/c++/9.1.0/istream ****     class basic_istream<_CharT, _Traits>::sentry
+ 687:/usr/include/c++/9.1.0/istream ****     {
+ 688:/usr/include/c++/9.1.0/istream ****       // Data Members.
+ 689:/usr/include/c++/9.1.0/istream ****       bool _M_ok;
+ 690:/usr/include/c++/9.1.0/istream **** 
+ 691:/usr/include/c++/9.1.0/istream ****     public:
+ 692:/usr/include/c++/9.1.0/istream ****       /// Easy access to dependent types.
+ 693:/usr/include/c++/9.1.0/istream ****       typedef _Traits 					traits_type;
+ 694:/usr/include/c++/9.1.0/istream ****       typedef basic_streambuf<_CharT, _Traits> 		__streambuf_type;
+ 695:/usr/include/c++/9.1.0/istream ****       typedef basic_istream<_CharT, _Traits> 		__istream_type;
+ 696:/usr/include/c++/9.1.0/istream ****       typedef typename __istream_type::__ctype_type 	__ctype_type;
+GAS LISTING /tmp/ccOYCtpo.s 			page 16
+
+
+ 697:/usr/include/c++/9.1.0/istream ****       typedef typename _Traits::int_type		__int_type;
+ 698:/usr/include/c++/9.1.0/istream **** 
+ 699:/usr/include/c++/9.1.0/istream ****       /**
+ 700:/usr/include/c++/9.1.0/istream ****        *  @brief  The constructor performs all the work.
+ 701:/usr/include/c++/9.1.0/istream ****        *  @param  __is  The input stream to guard.
+ 702:/usr/include/c++/9.1.0/istream ****        *  @param  __noskipws  Whether to consume whitespace or not.
+ 703:/usr/include/c++/9.1.0/istream ****        *
+ 704:/usr/include/c++/9.1.0/istream ****        *  If the stream state is good (@a __is.good() is true), then the
+ 705:/usr/include/c++/9.1.0/istream ****        *  following actions are performed, otherwise the sentry state
+ 706:/usr/include/c++/9.1.0/istream ****        *  is false (<em>not okay</em>) and failbit is set in the
+ 707:/usr/include/c++/9.1.0/istream ****        *  stream state.
+ 708:/usr/include/c++/9.1.0/istream ****        *
+ 709:/usr/include/c++/9.1.0/istream ****        *  The sentry's preparatory actions are:
+ 710:/usr/include/c++/9.1.0/istream ****        *
+ 711:/usr/include/c++/9.1.0/istream ****        *  -# if the stream is tied to an output stream, @c is.tie()->flush()
+ 712:/usr/include/c++/9.1.0/istream ****        *     is called to synchronize the output sequence
+ 713:/usr/include/c++/9.1.0/istream ****        *  -# if @a __noskipws is false, and @c ios_base::skipws is set in
+ 714:/usr/include/c++/9.1.0/istream ****        *     @c is.flags(), the sentry extracts and discards whitespace
+ 715:/usr/include/c++/9.1.0/istream ****        *     characters from the stream.  The currently imbued locale is
+ 716:/usr/include/c++/9.1.0/istream ****        *     used to determine whether each character is whitespace.
+ 717:/usr/include/c++/9.1.0/istream ****        *
+ 718:/usr/include/c++/9.1.0/istream ****        *  If the stream state is still good, then the sentry state becomes
+ 719:/usr/include/c++/9.1.0/istream ****        *  true (@a okay).
+ 720:/usr/include/c++/9.1.0/istream ****       */
+ 721:/usr/include/c++/9.1.0/istream ****       explicit
+ 722:/usr/include/c++/9.1.0/istream ****       sentry(basic_istream<_CharT, _Traits>& __is, bool __noskipws = false);
+ 723:/usr/include/c++/9.1.0/istream **** 
+ 724:/usr/include/c++/9.1.0/istream ****       /**
+ 725:/usr/include/c++/9.1.0/istream ****        *  @brief  Quick status checking.
+ 726:/usr/include/c++/9.1.0/istream ****        *  @return  The sentry state.
+ 727:/usr/include/c++/9.1.0/istream ****        *
+ 728:/usr/include/c++/9.1.0/istream ****        *  For ease of use, sentries may be converted to booleans.  The
+ 729:/usr/include/c++/9.1.0/istream ****        *  return value is that of the sentry state (true == okay).
+ 730:/usr/include/c++/9.1.0/istream ****       */
+ 731:/usr/include/c++/9.1.0/istream **** #if __cplusplus >= 201103L
+ 732:/usr/include/c++/9.1.0/istream ****       explicit
+ 733:/usr/include/c++/9.1.0/istream **** #endif
+ 734:/usr/include/c++/9.1.0/istream ****       operator bool() const
+ 735:/usr/include/c++/9.1.0/istream ****       { return _M_ok; }
+ 736:/usr/include/c++/9.1.0/istream ****     };
+ 737:/usr/include/c++/9.1.0/istream **** 
+ 738:/usr/include/c++/9.1.0/istream ****   //@{
+ 739:/usr/include/c++/9.1.0/istream ****   /**
+ 740:/usr/include/c++/9.1.0/istream ****    *  @brief  Character extractors
+ 741:/usr/include/c++/9.1.0/istream ****    *  @param  __in  An input stream.
+ 742:/usr/include/c++/9.1.0/istream ****    *  @param  __c  A character reference.
+ 743:/usr/include/c++/9.1.0/istream ****    *  @return  in
+ 744:/usr/include/c++/9.1.0/istream ****    *
+ 745:/usr/include/c++/9.1.0/istream ****    *  Behaves like one of the formatted arithmetic extractors described in
+ 746:/usr/include/c++/9.1.0/istream ****    *  std::basic_istream.  After constructing a sentry object with good
+ 747:/usr/include/c++/9.1.0/istream ****    *  status, this function extracts a character (if one is available) and
+ 748:/usr/include/c++/9.1.0/istream ****    *  stores it in @a __c.  Otherwise, sets failbit in the input stream.
+ 749:/usr/include/c++/9.1.0/istream ****   */
+ 750:/usr/include/c++/9.1.0/istream ****   template<typename _CharT, typename _Traits>
+ 751:/usr/include/c++/9.1.0/istream ****     basic_istream<_CharT, _Traits>&
+ 752:/usr/include/c++/9.1.0/istream ****     operator>>(basic_istream<_CharT, _Traits>& __in, _CharT& __c);
+ 753:/usr/include/c++/9.1.0/istream **** 
+GAS LISTING /tmp/ccOYCtpo.s 			page 17
+
+
+ 754:/usr/include/c++/9.1.0/istream ****   template<class _Traits>
+ 755:/usr/include/c++/9.1.0/istream ****     inline basic_istream<char, _Traits>&
+ 756:/usr/include/c++/9.1.0/istream ****     operator>>(basic_istream<char, _Traits>& __in, unsigned char& __c)
+ 757:/usr/include/c++/9.1.0/istream ****     { return (__in >> reinterpret_cast<char&>(__c)); }
+ 758:/usr/include/c++/9.1.0/istream **** 
+ 759:/usr/include/c++/9.1.0/istream ****   template<class _Traits>
+ 760:/usr/include/c++/9.1.0/istream ****     inline basic_istream<char, _Traits>&
+ 761:/usr/include/c++/9.1.0/istream ****     operator>>(basic_istream<char, _Traits>& __in, signed char& __c)
+ 762:/usr/include/c++/9.1.0/istream ****     { return (__in >> reinterpret_cast<char&>(__c)); }
+ 763:/usr/include/c++/9.1.0/istream ****   //@}
+ 764:/usr/include/c++/9.1.0/istream **** 
+ 765:/usr/include/c++/9.1.0/istream ****   //@{
+ 766:/usr/include/c++/9.1.0/istream ****   /**
+ 767:/usr/include/c++/9.1.0/istream ****    *  @brief  Character string extractors
+ 768:/usr/include/c++/9.1.0/istream ****    *  @param  __in  An input stream.
+ 769:/usr/include/c++/9.1.0/istream ****    *  @param  __s  A pointer to a character array.
+ 770:/usr/include/c++/9.1.0/istream ****    *  @return  __in
+ 771:/usr/include/c++/9.1.0/istream ****    *
+ 772:/usr/include/c++/9.1.0/istream ****    *  Behaves like one of the formatted arithmetic extractors described in
+ 773:/usr/include/c++/9.1.0/istream ****    *  std::basic_istream.  After constructing a sentry object with good
+ 774:/usr/include/c++/9.1.0/istream ****    *  status, this function extracts up to @c n characters and stores them
+ 775:/usr/include/c++/9.1.0/istream ****    *  into the array starting at @a __s.  @c n is defined as:
+ 776:/usr/include/c++/9.1.0/istream ****    *
+ 777:/usr/include/c++/9.1.0/istream ****    *  - if @c width() is greater than zero, @c n is width() otherwise
+ 778:/usr/include/c++/9.1.0/istream ****    *  - @c n is <em>the number of elements of the largest array of *
+ 779:/usr/include/c++/9.1.0/istream ****    *  - @c char_type that can store a terminating @c eos.</em>
+ 780:/usr/include/c++/9.1.0/istream ****    *  - [27.6.1.2.3]/6
+ 781:/usr/include/c++/9.1.0/istream ****    *
+ 782:/usr/include/c++/9.1.0/istream ****    *  Characters are extracted and stored until one of the following happens:
+ 783:/usr/include/c++/9.1.0/istream ****    *  - @c n-1 characters are stored
+ 784:/usr/include/c++/9.1.0/istream ****    *  - EOF is reached
+ 785:/usr/include/c++/9.1.0/istream ****    *  - the next character is whitespace according to the current locale
+ 786:/usr/include/c++/9.1.0/istream ****    *  - the next character is a null byte (i.e., @c charT() )
+ 787:/usr/include/c++/9.1.0/istream ****    *
+ 788:/usr/include/c++/9.1.0/istream ****    *  @c width(0) is then called for the input stream.
+ 789:/usr/include/c++/9.1.0/istream ****    *
+ 790:/usr/include/c++/9.1.0/istream ****    *  If no characters are extracted, sets failbit.
+ 791:/usr/include/c++/9.1.0/istream ****   */
+ 792:/usr/include/c++/9.1.0/istream ****   template<typename _CharT, typename _Traits>
+ 793:/usr/include/c++/9.1.0/istream ****     basic_istream<_CharT, _Traits>&
+ 794:/usr/include/c++/9.1.0/istream ****     operator>>(basic_istream<_CharT, _Traits>& __in, _CharT* __s);
+ 795:/usr/include/c++/9.1.0/istream **** 
+ 796:/usr/include/c++/9.1.0/istream ****   // Explicit specialization declaration, defined in src/istream.cc.
+ 797:/usr/include/c++/9.1.0/istream ****   template<>
+ 798:/usr/include/c++/9.1.0/istream ****     basic_istream<char>&
+ 799:/usr/include/c++/9.1.0/istream ****     operator>>(basic_istream<char>& __in, char* __s);
+ 800:/usr/include/c++/9.1.0/istream **** 
+ 801:/usr/include/c++/9.1.0/istream ****   template<class _Traits>
+ 802:/usr/include/c++/9.1.0/istream ****     inline basic_istream<char, _Traits>&
+ 803:/usr/include/c++/9.1.0/istream ****     operator>>(basic_istream<char, _Traits>& __in, unsigned char* __s)
+  63              		.loc 3 803 5 view .LVU12
+  64              	.LBB5:
+ 804:/usr/include/c++/9.1.0/istream ****     { return (__in >> reinterpret_cast<char*>(__s)); }
+  65              		.loc 3 804 20 is_stmt 0 view .LVU13
+  66 0053 488D3D00 		leaq	_ZSt3cin(%rip), %rdi
+  66      000000
+  67 005a E8000000 		call	_ZStrsIcSt11char_traitsIcEERSt13basic_istreamIT_T0_ES6_PS3_@PLT
+GAS LISTING /tmp/ccOYCtpo.s 			page 18
+
+
+  67      00
+  68              	.LVL6:
+  69              		.loc 3 804 20 view .LVU14
+  70              	.LBE5:
+  71              	.LBE4:
   11:Src/main.cpp  **** }
- 100              		.loc 1 11 5 is_stmt 1 view .LVU23
- 101              		.loc 1 12 1 is_stmt 0 view .LVU24
- 102 0083 B8000000 		movl	$0, %eax
- 102      00
- 103 0088 5B       		popq	%rbx
- 104              		.cfi_def_cfa_offset 8
- 105              	.LVL12:
- 106              		.loc 1 12 1 view .LVU25
- 107 0089 C3       		ret
- 108              		.cfi_endproc
- 109              	.LFE1503:
- 112              	_GLOBAL__sub_I_main:
- 113              	.LFB1827:
-GAS LISTING /tmp/cc0e6KoS.s 			page 8
+  72              		.loc 1 11 5 is_stmt 1 view .LVU15
+  73              		.loc 1 12 1 is_stmt 0 view .LVU16
+  74 005f B8000000 		movl	$0, %eax
+  74      00
+  75 0064 4883C408 		addq	$8, %rsp
+  76              		.cfi_def_cfa_offset 8
+  77 0068 C3       		ret
+  78              		.cfi_endproc
+  79              	.LFE1503:
+  82              	_GLOBAL__sub_I_main:
+  83              	.LFB1822:
+  84              		.loc 1 12 1 is_stmt 1 view -0
+  85              		.cfi_startproc
+  86 0069 4883EC08 		subq	$8, %rsp
+  87              		.cfi_def_cfa_offset 16
+  88              		.loc 1 12 1 is_stmt 0 view .LVU18
+  89 006d BEFFFF00 		movl	$65535, %esi
+  89      00
+  90 0072 BF010000 		movl	$1, %edi
+  90      00
+  91 0077 E884FFFF 		call	_Z41__static_initialization_and_destruction_0ii
+  91      FF
+  92              	.LVL7:
+  93 007c 4883C408 		addq	$8, %rsp
+  94              		.cfi_def_cfa_offset 8
+  95 0080 C3       		ret
+  96              		.cfi_endproc
+  97              	.LFE1822:
+  99              		.section	.init_array,"aw"
+ 100              		.align 8
+ 101 0000 00000000 		.quad	_GLOBAL__sub_I_main
+ 101      00000000 
+ 102              		.local	_ZStL8__ioinit
+ 103              		.comm	_ZStL8__ioinit,1,1
+ 104              		.text
+ 105              	.Letext0:
+ 106              		.file 4 "/usr/include/c++/9.1.0/cwchar"
+ 107              		.file 5 "/usr/include/c++/9.1.0/new"
+ 108              		.file 6 "/usr/include/c++/9.1.0/bits/exception_ptr.h"
+ 109              		.file 7 "/usr/include/c++/9.1.0/type_traits"
+ 110              		.file 8 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/c++config.h"
+ 111              		.file 9 "/usr/include/c++/9.1.0/bits/stl_pair.h"
+ 112              		.file 10 "/usr/include/c++/9.1.0/debug/debug.h"
+ 113              		.file 11 "/usr/include/c++/9.1.0/bits/char_traits.h"
+ 114              		.file 12 "/usr/include/c++/9.1.0/cstdint"
+ 115              		.file 13 "/usr/include/c++/9.1.0/clocale"
+ 116              		.file 14 "/usr/include/c++/9.1.0/cstdlib"
+ 117              		.file 15 "/usr/include/c++/9.1.0/cstdio"
+ 118              		.file 16 "/usr/include/c++/9.1.0/system_error"
+ 119              		.file 17 "/usr/include/c++/9.1.0/bits/ios_base.h"
+ 120              		.file 18 "/usr/include/c++/9.1.0/cwctype"
+GAS LISTING /tmp/ccOYCtpo.s 			page 19
 
 
- 114              		.loc 1 12 1 is_stmt 1 view -0
- 115              		.cfi_startproc
- 116 008a 4883EC08 		subq	$8, %rsp
- 117              		.cfi_def_cfa_offset 16
- 118              		.loc 1 12 1 is_stmt 0 view .LVU27
- 119 008e BEFFFF00 		movl	$65535, %esi
- 119      00
- 120 0093 BF010000 		movl	$1, %edi
- 120      00
- 121 0098 E863FFFF 		call	_Z41__static_initialization_and_destruction_0ii
- 121      FF
- 122              	.LVL13:
- 123 009d 4883C408 		addq	$8, %rsp
- 124              		.cfi_def_cfa_offset 8
- 125 00a1 C3       		ret
- 126              		.cfi_endproc
- 127              	.LFE1827:
- 129              		.section	.init_array,"aw"
- 130              		.align 8
- 131 0000 00000000 		.quad	_GLOBAL__sub_I_main
- 131      00000000 
- 132              		.local	_ZStL8__ioinit
- 133              		.comm	_ZStL8__ioinit,1,1
- 134              		.text
- 135              	.Letext0:
- 136              		.file 4 "/usr/include/c++/9.1.0/cwchar"
- 137              		.file 5 "/usr/include/c++/9.1.0/new"
- 138              		.file 6 "/usr/include/c++/9.1.0/bits/exception_ptr.h"
- 139              		.file 7 "/usr/include/c++/9.1.0/type_traits"
- 140              		.file 8 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/c++config.h"
- 141              		.file 9 "/usr/include/c++/9.1.0/bits/stl_pair.h"
- 142              		.file 10 "/usr/include/c++/9.1.0/debug/debug.h"
- 143              		.file 11 "/usr/include/c++/9.1.0/bits/char_traits.h"
- 144              		.file 12 "/usr/include/c++/9.1.0/cstdint"
- 145              		.file 13 "/usr/include/c++/9.1.0/clocale"
- 146              		.file 14 "/usr/include/c++/9.1.0/cstdlib"
- 147              		.file 15 "/usr/include/c++/9.1.0/cstdio"
- 148              		.file 16 "/usr/include/c++/9.1.0/system_error"
- 149              		.file 17 "/usr/include/c++/9.1.0/bits/ios_base.h"
- 150              		.file 18 "/usr/include/c++/9.1.0/cwctype"
- 151              		.file 19 "/usr/include/c++/9.1.0/bits/locale_facets.h"
- 152              		.file 20 "/usr/include/c++/9.1.0/iosfwd"
- 153              		.file 21 "/usr/include/c++/9.1.0/bits/basic_ios.h"
- 154              		.file 22 "/usr/include/c++/9.1.0/bits/ostream.tcc"
- 155              		.file 23 "/usr/include/c++/9.1.0/istream"
- 156              		.file 24 "/usr/include/c++/9.1.0/bits/predefined_ops.h"
- 157              		.file 25 "/usr/include/c++/9.1.0/ext/new_allocator.h"
- 158              		.file 26 "/usr/include/c++/9.1.0/ext/numeric_traits.h"
- 159              		.file 27 "/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include/stddef.h"
- 160              		.file 28 "<built-in>"
- 161              		.file 29 "/usr/include/bits/types/wint_t.h"
- 162              		.file 30 "/usr/include/bits/types/__mbstate_t.h"
- 163              		.file 31 "/usr/include/bits/types/mbstate_t.h"
- 164              		.file 32 "/usr/include/bits/types/__FILE.h"
- 165              		.file 33 "/usr/include/bits/types/struct_FILE.h"
- 166              		.file 34 "/usr/include/bits/types/FILE.h"
- 167              		.file 35 "/usr/include/wchar.h"
-GAS LISTING /tmp/cc0e6KoS.s 			page 9
-
-
- 168              		.file 36 "/usr/include/bits/types/struct_tm.h"
- 169              		.file 37 "/usr/include/bits/types.h"
- 170              		.file 38 "/usr/include/bits/stdint-intn.h"
- 171              		.file 39 "/usr/include/bits/stdint-uintn.h"
- 172              		.file 40 "/usr/include/stdint.h"
- 173              		.file 41 "/usr/include/locale.h"
- 174              		.file 42 "/usr/include/time.h"
- 175              		.file 43 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/atomic_word.h"
- 176              		.file 44 "/usr/include/stdlib.h"
- 177              		.file 45 "/usr/include/bits/stdlib-float.h"
- 178              		.file 46 "/usr/include/bits/stdlib-bsearch.h"
- 179              		.file 47 "/usr/include/bits/types/__fpos_t.h"
- 180              		.file 48 "/usr/include/stdio.h"
- 181              		.file 49 "/usr/include/bits/sys_errlist.h"
- 182              		.file 50 "/usr/include/bits/stdio.h"
- 183              		.file 51 "/usr/include/errno.h"
- 184              		.file 52 "/usr/include/bits/wctype-wchar.h"
- 185              		.file 53 "/usr/include/wctype.h"
- 186              		.file 54 "Inc/strbase.hpp"
-GAS LISTING /tmp/cc0e6KoS.s 			page 10
+ 121              		.file 19 "/usr/include/c++/9.1.0/iosfwd"
+ 122              		.file 20 "/usr/include/c++/9.1.0/bits/predefined_ops.h"
+ 123              		.file 21 "/usr/include/c++/9.1.0/ext/new_allocator.h"
+ 124              		.file 22 "/usr/include/c++/9.1.0/ext/numeric_traits.h"
+ 125              		.file 23 "/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include/stddef.h"
+ 126              		.file 24 "<built-in>"
+ 127              		.file 25 "/usr/include/bits/types/wint_t.h"
+ 128              		.file 26 "/usr/include/bits/types/__mbstate_t.h"
+ 129              		.file 27 "/usr/include/bits/types/mbstate_t.h"
+ 130              		.file 28 "/usr/include/bits/types/__FILE.h"
+ 131              		.file 29 "/usr/include/bits/types/struct_FILE.h"
+ 132              		.file 30 "/usr/include/bits/types/FILE.h"
+ 133              		.file 31 "/usr/include/wchar.h"
+ 134              		.file 32 "/usr/include/bits/types/struct_tm.h"
+ 135              		.file 33 "/usr/include/bits/types.h"
+ 136              		.file 34 "/usr/include/bits/stdint-intn.h"
+ 137              		.file 35 "/usr/include/bits/stdint-uintn.h"
+ 138              		.file 36 "/usr/include/stdint.h"
+ 139              		.file 37 "/usr/include/locale.h"
+ 140              		.file 38 "/usr/include/time.h"
+ 141              		.file 39 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/atomic_word.h"
+ 142              		.file 40 "/usr/include/stdlib.h"
+ 143              		.file 41 "/usr/include/bits/stdlib-float.h"
+ 144              		.file 42 "/usr/include/bits/stdlib-bsearch.h"
+ 145              		.file 43 "/usr/include/bits/types/__fpos_t.h"
+ 146              		.file 44 "/usr/include/stdio.h"
+ 147              		.file 45 "/usr/include/bits/sys_errlist.h"
+ 148              		.file 46 "/usr/include/bits/stdio.h"
+ 149              		.file 47 "/usr/include/errno.h"
+ 150              		.file 48 "/usr/include/bits/wctype-wchar.h"
+ 151              		.file 49 "/usr/include/wctype.h"
+ 152              		.file 50 "Inc/translator.hpp"
+GAS LISTING /tmp/ccOYCtpo.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.cpp
-     /tmp/cc0e6KoS.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/ccOYCtpo.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
                              .bss:0000000000000000 _ZStL8__ioinit
-     /tmp/cc0e6KoS.s:45     .text:000000000000003d main
-     /tmp/cc0e6KoS.s:112    .text:000000000000008a _GLOBAL__sub_I_main
+     /tmp/ccOYCtpo.s:45     .text:000000000000003d main
+     /tmp/ccOYCtpo.s:82     .text:0000000000000069 _GLOBAL__sub_I_main
 
 UNDEFINED SYMBOLS
 _GLOBAL_OFFSET_TABLE_
@@ -519,7 +1132,3 @@ __cxa_atexit
 calloc
 _ZSt3cin
 _ZStrsIcSt11char_traitsIcEERSt13basic_istreamIT_T0_ES6_PS3_
-_ZN10translator8containsEPcc
-_ZSt4cout
-_ZNSo9_M_insertIbEERSoT_
-_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_
