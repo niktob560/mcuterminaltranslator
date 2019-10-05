@@ -69,5 +69,11 @@ public:
  void runTest() { suite_translatorTest.testGetZeroByte(); }
 } testDescription_suite_translatorTest_testGetZeroByte;
 
+static class TestDescription_suite_translatorTest_testGenerateCmd : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_translatorTest_testGenerateCmd() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 145, "testGenerateCmd" ) {}
+ void runTest() { suite_translatorTest.testGenerateCmd(); }
+} testDescription_suite_translatorTest_testGenerateCmd;
+
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

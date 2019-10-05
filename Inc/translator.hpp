@@ -45,4 +45,7 @@ namespace translator
     uint8_t getZeroByte(const uint8_t type, const uint8_t len);
 
     checksum_t getCheckSum(const uint8_t* package);
+
+    //gets cmd num at 'cmd', returns final package into target pointer
+    void generateCmd(const uint8_t cmd, uint8_t* tgt);
 }

@@ -119,4 +119,15 @@ namespace translator
     {
         return (package[1] << 8) | package[2];
     }
+
+
+    //gets cmd num at 'cmd', returns final package into target pointer
+    void generateCmd(const uint8_t cmd, uint8_t* tgt)
+    {
+        tgt[0] = getZeroByte(TYPE_CMD, 1);
+        tgt[3] = cmd;
+        checksum_t check = getCheckSum(tgt);
+        tgt[1] = check >> 8;
+        tgt[2] = check & 0xFF;
+    }
 }

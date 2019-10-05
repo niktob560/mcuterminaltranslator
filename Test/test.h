@@ -141,4 +141,16 @@ public:
         TS_ASSERT_EQUALS(translator::getZeroByte(1, 1), (1 << 6) | 1);
         TS_ASSERT_EQUALS(translator::getZeroByte(255, 2), (3 << 6) | 2);
     }
+
+    void testGenerateCmd(void)
+    {
+        uint8_t *pack = (uint8_t*) alloca(sizeof(uint8_t) * 4),
+                *ref  = (uint8_t*) alloca(sizeof(uint8_t) * 4);
+        translator::generateCmd(1, pack);
+        ref[0] = translator::getZeroByte(translator::TYPE_CMD, 1);
+        ref[3] = 1;
+        ref[1] = translator::genCheckSum(ref) >> 8;
+        ref[2] = translator::genCheckSum(ref) & 0xFF;
+        TS_ASSERT(translator::equals(pack, ref));
+    }
 };
