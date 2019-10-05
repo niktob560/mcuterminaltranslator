@@ -153,4 +153,15 @@ public:
         ref[2] = translator::genCheckSum(ref) & 0xFF;
         TS_ASSERT(translator::equals(pack, ref));
     }
+
+    void testGetVarId(void)
+    {
+        uint8_t *pack = (uint8_t*)alloca(sizeof(uint8_t) * 4);
+        pack[0] = translator::getZeroByte(translator::TYPE_VAR, 2);
+        pack[3] = 1;
+        pack[4] = 1;
+        pack[1] = translator::genCheckSum(pack) >> 8;
+        pack[2] = translator::genCheckSum(pack) & 0xFF;
+        TS_ASSERT_EQUALS(translator::getVarId(pack), 1);
+    }
 };

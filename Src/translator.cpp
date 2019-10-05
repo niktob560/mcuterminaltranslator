@@ -130,4 +130,21 @@ namespace translator
         tgt[1] = check >> 8;
         tgt[2] = check & 0xFF;
     }
+
+
+    //get id of var in payload of package
+    uint8_t getVarId(const uint8_t *pack)
+    {
+        if((pack[0] >> 6) != TYPE_VAR)
+            return 0xFF;
+
+        if((pack[0] & LEN_MASK) <= 1)
+            return 0xFF - 1;
+
+        checksum_t check = genCheckSum(pack);
+        if(check != getCheckSum(pack))
+            return 0xFF - 2;
+
+        return pack[3];
+    }
 }

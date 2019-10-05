@@ -48,4 +48,7 @@ namespace translator
 
     //gets cmd num at 'cmd', returns final package into target pointer
     void generateCmd(const uint8_t cmd, uint8_t* tgt);
+
+    //get id of var in payload of package
+    uint8_t getVarId(const uint8_t *pack);
 }
