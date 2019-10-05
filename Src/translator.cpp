@@ -10,16 +10,9 @@ namespace translator
     {
         checksum_t ret = 0;
         uint8_t len = getLen(c);
-        // cout << "len: " << (int)len << endl;
-        // for(int i = 0; i < len + 3; i++)
-        // {
-        //     cout << (int)c[i];
-        // }
-        // cout << endl;
         for(uint8_t i = 0; i < len; i++)
         {
             ret |= (c[3 + i]) << (8 * ((i % 2) == 1));
-            // cout << "\nAdding: " << (int)c[3 + i] << endl;
         }
         return ret;
     }
@@ -42,18 +35,14 @@ namespace translator
         if(len == 0)
             return TYPE_BAD_LEN;
 
-        checksum_t checksum = getCheckSum(package);
-        if(genCheckSum(package) != checksum)
+        if(genCheckSum(package) != getCheckSum(package))
             return TYPE_BAD_CHECKSUM;
 
-        package += 3;
-        while(len > 0)
+
+        for(uint8_t i = 0; i < len; i++)
         {
-            *payloadto = *package;
-            payloadto++;
-            package++;
+            payloadto[i] = package[i + 3];
         }
-        *payloadto = *package;
         return type;
     }
 
@@ -135,15 +124,8 @@ namespace translator
     //get id of var in payload of package
     uint8_t getVarId(const uint8_t *pack)
     {
-        if((pack[0] >> 6) != TYPE_VAR)
+        if(!validate(pack))
             return 0xFF;
-
-        if((pack[0] & LEN_MASK) <= 1)
-            return 0xFF - 1;
-
-        checksum_t check = genCheckSum(pack);
-        if(check != getCheckSum(pack))
-            return 0xFF - 2;
 
         return pack[3];
     }
