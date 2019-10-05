@@ -89,16 +89,21 @@ public:
         TS_ASSERT(!translator::equals(c0, c1));
     }
 
-    // void testGetPayload(void)
-    // {
-    //     uint8_t *c = (uint8_t*)calloc(sizeof(uint8_t), 10);
-    //     c[0] = 3;
-    //     c[1] = 0;
-    //     c[2] = 0;
-    //     c[3] = 10;
-    //     c[4] = 11;
-    //     c[5] = 12;
-    //     uint8_t *payload = (uint8_t*)calloc(sizeof(uint8_t), 10);
-    //     translator::getPayload(c, payload);
-    // }
+    void testGetPayload(void)
+    {
+        uint8_t *c = (uint8_t*)calloc(sizeof(uint8_t), 10),
+                *payload_const = (uint8_t*)calloc(sizeof(uint8_t), 7);
+        c[0] = 3;
+        c[1] = 0;
+        c[2] = 0;
+        c[3] = 10;
+        c[4] = 11;
+        c[5] = 12;
+        payload_const[0] = c[3];
+        payload_const[1] = c[4];
+        payload_const[2] = c[5];
+        uint8_t *payload = (uint8_t*)calloc(sizeof(uint8_t), 10);
+        translator::getPayload(c, payload);
+        TS_ASSERT(translator::equals(payload, payload_const));
+    }
 };

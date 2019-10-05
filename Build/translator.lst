@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccHe8zMG.s 			page 1
+GAS LISTING /tmp/cc3aQhnA.s 			page 1
 
 
    1              		.file	"translator.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
   48:Src/translator.cpp **** 
   49:Src/translator.cpp ****         package += 3;
   50:Src/translator.cpp ****         while(len > 0)
-GAS LISTING /tmp/ccHe8zMG.s 			page 2
+GAS LISTING /tmp/cc3aQhnA.s 			page 2
 
 
   51:Src/translator.cpp ****         {
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
   20              		.loc 1 92 1 view .LVU3
   21 000e 4883EC08 		subq	$8, %rsp
   22              		.cfi_def_cfa_offset 16
-GAS LISTING /tmp/ccHe8zMG.s 			page 3
+GAS LISTING /tmp/cc3aQhnA.s 			page 3
 
 
   23              		.file 2 "/usr/include/c++/9.1.0/iostream"
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
   54:/usr/include/c++/9.1.0/iostream ****    *  They are required by default to cooperate with the global C
   55:/usr/include/c++/9.1.0/iostream ****    *  library's @c FILE streams, and to be available during program
   56:/usr/include/c++/9.1.0/iostream ****    *  startup and termination. For more information, see the section of the
-GAS LISTING /tmp/ccHe8zMG.s 			page 4
+GAS LISTING /tmp/cc3aQhnA.s 			page 4
 
 
   57:/usr/include/c++/9.1.0/iostream ****    *  manual linked to above.
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
   52              		.loc 1 12 17 is_stmt 0 view .LVU11
   53 003d 440FB607 		movzbl	(%rdi), %r8d
   54 0041 4183E03F 		andl	$63, %r8d
-GAS LISTING /tmp/ccHe8zMG.s 			page 5
+GAS LISTING /tmp/cc3aQhnA.s 			page 5
 
 
   55              	.LVL5:
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
   93              	.LBE3:
   25:Src/translator.cpp **** 
   94              		.loc 1 25 5 view .LVU26
-GAS LISTING /tmp/ccHe8zMG.s 			page 6
+GAS LISTING /tmp/cc3aQhnA.s 			page 6
 
 
   95 0070 89F0     		movl	%esi, %eax
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
  142 0087 89D0     		movl	%edx, %eax
  143 0089 83E0C0   		andl	$-64, %eax
  144              	.LVL13:
-GAS LISTING /tmp/ccHe8zMG.s 			page 7
+GAS LISTING /tmp/cc3aQhnA.s 			page 7
 
 
   38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
  183      00
  184              	.LVL20:
   46:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
-GAS LISTING /tmp/ccHe8zMG.s 			page 8
+GAS LISTING /tmp/cc3aQhnA.s 			page 8
 
 
  185              		.loc 1 46 9 view .LVU53
@@ -478,7 +478,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
  222              		.loc 1 58 5 view .LVU68
  223 00e3 5B       		popq	%rbx
  224              		.cfi_remember_state
-GAS LISTING /tmp/ccHe8zMG.s 			page 9
+GAS LISTING /tmp/cc3aQhnA.s 			page 9
 
 
  225              		.cfi_def_cfa_offset 24
@@ -538,7 +538,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
  271      00
  272              	.LVL34:
  273              	.L23:
-GAS LISTING /tmp/ccHe8zMG.s 			page 10
+GAS LISTING /tmp/cc3aQhnA.s 			page 10
 
 
   72:Src/translator.cpp ****         {
@@ -598,7 +598,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
   85:Src/translator.cpp ****         {
  314              		.loc 1 85 9 is_stmt 1 view .LVU94
  315              	.LBB5:
-GAS LISTING /tmp/ccHe8zMG.s 			page 11
+GAS LISTING /tmp/cc3aQhnA.s 			page 11
 
 
   85:Src/translator.cpp ****         {
@@ -658,7 +658,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
  353      00
  354              	.LVL44:
   88:Src/translator.cpp ****         }
-GAS LISTING /tmp/ccHe8zMG.s 			page 12
+GAS LISTING /tmp/cc3aQhnA.s 			page 12
 
 
  355              		.loc 1 88 24 view .LVU107
@@ -718,7 +718,7 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
  407              		.file 23 "<built-in>"
  408              		.file 24 "/usr/include/bits/types/wint_t.h"
  409              		.file 25 "/usr/include/bits/types/__mbstate_t.h"
-GAS LISTING /tmp/ccHe8zMG.s 			page 13
+GAS LISTING /tmp/cc3aQhnA.s 			page 13
 
 
  410              		.file 26 "/usr/include/bits/types/mbstate_t.h"
@@ -745,20 +745,20 @@ GAS LISTING /tmp/ccHe8zMG.s 			page 1
  431              		.file 47 "/usr/include/bits/wctype-wchar.h"
  432              		.file 48 "/usr/include/wctype.h"
  433              		.file 49 "Inc/translator.hpp"
-GAS LISTING /tmp/ccHe8zMG.s 			page 14
+GAS LISTING /tmp/cc3aQhnA.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 translator.cpp
-     /tmp/ccHe8zMG.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/cc3aQhnA.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
                              .bss:0000000000000000 _ZStL8__ioinit
-     /tmp/ccHe8zMG.s:45     .text:000000000000003d _ZN10translator11genCheckSumEPKh
-     /tmp/ccHe8zMG.s:104    .text:0000000000000073 _ZN10translator7getTypeEPh
-     /tmp/ccHe8zMG.s:121    .text:000000000000007a _ZN10translator11parsePacketEPhS0_
-     /tmp/ccHe8zMG.s:246    .text:00000000000000ef _ZN10translator8parseCmdEPhPPcPPFvvE
-     /tmp/ccHe8zMG.s:258    .text:00000000000000f0 _ZN10translator10getPayloadEPKhPh
-     /tmp/ccHe8zMG.s:299    .text:0000000000000113 _ZN10translator6equalsEPKhS1_
-     /tmp/ccHe8zMG.s:363    .text:000000000000014b _GLOBAL__sub_I__ZN10translator11genCheckSumEPKh
+     /tmp/cc3aQhnA.s:45     .text:000000000000003d _ZN10translator11genCheckSumEPKh
+     /tmp/cc3aQhnA.s:104    .text:0000000000000073 _ZN10translator7getTypeEPh
+     /tmp/cc3aQhnA.s:121    .text:000000000000007a _ZN10translator11parsePacketEPhS0_
+     /tmp/cc3aQhnA.s:246    .text:00000000000000ef _ZN10translator8parseCmdEPhPPcPPFvvE
+     /tmp/cc3aQhnA.s:258    .text:00000000000000f0 _ZN10translator10getPayloadEPKhPh
+     /tmp/cc3aQhnA.s:299    .text:0000000000000113 _ZN10translator6equalsEPKhS1_
+     /tmp/cc3aQhnA.s:363    .text:000000000000014b _GLOBAL__sub_I__ZN10translator11genCheckSumEPKh
 
 UNDEFINED SYMBOLS
 _GLOBAL_OFFSET_TABLE_

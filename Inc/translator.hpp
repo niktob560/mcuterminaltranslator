@@ -32,7 +32,7 @@ namespace translator
     uint8_t parsePacket(uint8_t *package, uint8_t *payloadto);
 
     //get payload from package to addr
-    void getPayload(const uint8_t *package, const uint8_t *to);
+    void getPayload(const uint8_t *package, uint8_t *to);
 
     //get type of package
     uint8_t getType(uint8_t *package);
