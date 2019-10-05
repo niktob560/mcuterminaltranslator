@@ -60,6 +60,45 @@ public:
         uint8_t *c = (uint8_t*)calloc(sizeof(uint8_t), 10);
         c[0] = translator::TYPE_ARR << 6;
         TS_ASSERT_EQUALS(translator::getType(c), translator::TYPE_ARR);
+
         free(c);
     }
+
+    void testEquals(void)
+    {
+        uint8_t *c0 =(uint8_t*)calloc(sizeof(uint8_t), 10),
+                *c1 =(uint8_t*)calloc(sizeof(uint8_t), 10);
+        for(int i = 0; i < 10; i++)
+        {
+            c0[i] = i;
+            c1[i] = i;
+        }
+        c0[0] &= ~translator::LEN_MASK;
+        c0[0] |= 7;
+        c1[0] = c0[0];
+        TS_ASSERT(translator::equals(c0, c1));
+
+        for(int i = 0; i < 10; i++)
+        {
+            c1[i] = 10 - i;
+        }
+        TS_ASSERT(!translator::equals(c0, c1));
+        c1[0] = c0[0];
+        c1[1] = c0[1];
+        c1[2] = c0[2];
+        TS_ASSERT(!translator::equals(c0, c1));
+    }
+
+    // void testGetPayload(void)
+    // {
+    //     uint8_t *c = (uint8_t*)calloc(sizeof(uint8_t), 10);
+    //     c[0] = 3;
+    //     c[1] = 0;
+    //     c[2] = 0;
+    //     c[3] = 10;
+    //     c[4] = 11;
+    //     c[5] = 12;
+    //     uint8_t *payload = (uint8_t*)calloc(sizeof(uint8_t), 10);
+    //     translator::getPayload(c, payload);
+    // }
 };

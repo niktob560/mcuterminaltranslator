@@ -63,4 +63,30 @@ namespace translator
     {
 
     }
+
+
+    //get payload from package to addr
+    void getPayload(const uint8_t *package, uint8_t *to)
+    {
+        uint8_t len = package[0] & LEN_MASK;
+        for(uint8_t i = 0; i < len; i++)
+        {
+            to[i] = package[i + 3];
+        }
+    }
+
+
+    bool equals(const uint8_t* p1, const uint8_t* p2)
+    {
+        if(p1[0] != p2[0])
+            return false;
+
+        uint8_t len = p1[0] & LEN_MASK;
+        for(uint8_t i = 0; i < len; i++)
+        {
+            if(p1[i] != p2[i])
+                return false;
+        }
+        return true;
+    }
 }
