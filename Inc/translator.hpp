@@ -41,4 +41,8 @@ namespace translator
     uint8_t getType(uint8_t *package);
 
     bool equals(const uint8_t* p1, const uint8_t* p2);
+
+    uint8_t getZeroByte(const uint8_t type, const uint8_t len);
+
+    checksum_t getCheckSum(const uint8_t* package);
 }

@@ -116,21 +116,29 @@ public:
     void testParseCmd(void)
     {
         uint8_t *c = (uint8_t*)alloca(sizeof(uint8_t) * 10);
-        c[0] = (translator::TYPE_CMD << 6) | 2;
+        c[0] = translator::getZeroByte(translator::TYPE_CMD, 2);
         TS_ASSERT_EQUALS(translator::parseCmd(c, 0), translator::TYPE_BAD_LEN);
 
-        c[0] = (translator::TYPE_VAR << 6) | 1;
+        c[0] = translator::getZeroByte(translator::TYPE_VAR, 1);
         TS_ASSERT_EQUALS(translator::parseCmd(c, 0), translator::TYPE_BAD_TYPE);
 
-        c[0] = (translator::TYPE_CMD << 6) | 1;
+        c[0] = translator::getZeroByte(translator::TYPE_CMD, 1);
         TS_ASSERT_EQUALS(translator::parseCmd(c, 0), translator::TYPE_BAD_CHECKSUM);
         void (*funcArr[10])();
         funcArr[0] = functest0;
         called0 = false;
         c[3] = 0;
-        c[1] = ((translator::genCheckSum(c) & 0xFF00) >> 8);
-        c[2] = (translator::genCheckSum(c));
+        c[1] = ((translator::genCheckSum(c) >> 8) & 0xFF);
+        c[2] = (translator::genCheckSum(c) & 0xFF);
         TS_ASSERT_EQUALS(translator::parseCmd(c, funcArr), translator::TYPE_CMD);
         TS_ASSERT(called0);
+    }
+
+    void testGetZeroByte(void)
+    {
+        TS_ASSERT_EQUALS(translator::getZeroByte(1, 1), (1 << 6) | 1);
+        TS_ASSERT_EQUALS(translator::getZeroByte(1, 2), (1 << 6) | 2);
+        TS_ASSERT_EQUALS(translator::getZeroByte(1, 1), (1 << 6) | 1);
+        TS_ASSERT_EQUALS(translator::getZeroByte(255, 2), (3 << 6) | 2);
     }
 };

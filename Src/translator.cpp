@@ -42,7 +42,7 @@ namespace translator
         if(len == 0)
             return TYPE_BAD_LEN;
 
-        checksum_t checksum = (package[1] << 8) | package[2];
+        checksum_t checksum = getCheckSum(package);
         if(genCheckSum(package) != checksum)
             return TYPE_BAD_CHECKSUM;
 
@@ -70,7 +70,7 @@ namespace translator
             return TYPE_BAD_LEN;
 
         checksum_t check = genCheckSum(package);
-        if(check != ((package[1] << 8) | (package[2])))
+        if(check != getCheckSum(package))
             return TYPE_BAD_CHECKSUM;
 
         if(funcArr[package[3]] != NULL)
@@ -107,5 +107,16 @@ namespace translator
                 return false;
         }
         return true;
+    }
+
+    uint8_t getZeroByte(const uint8_t type, const uint8_t len)
+    {
+        return (uint8_t)(((type & 0b11) << 6) | (len & LEN_MASK));
+    }
+
+
+    checksum_t getCheckSum(const uint8_t* package)
+    {
+        return (package[1] << 8) | package[2];
     }
 }
