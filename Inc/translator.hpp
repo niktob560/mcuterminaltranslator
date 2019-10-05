@@ -19,6 +19,9 @@ namespace translator
     //generate checksum for char array
     checksum_t genCheckSum(const uint8_t* c);
 
+    //get len of payload
+    uint8_t getLen(const uint8_t* package);
+
     //parse var from var package and write into toArr[id]
     void parseVar(uint8_t *package, void **toArr);
 

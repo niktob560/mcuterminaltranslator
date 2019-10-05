@@ -58,8 +58,8 @@ namespace translator
     }
 
 
-    //parse cmd from string |cmd| and call it from funcArr
-    void parseCmd(uint8_t *from, char** names, void (*funcArr [])())
+    //parse cmd from package, call funcArr[cmd]
+    void parseCmd(uint8_t *package, void (*funcArr [])())
     {
 
     }
@@ -75,6 +75,11 @@ namespace translator
         }
     }
 
+    //get len of payload
+    uint8_t getLen(const uint8_t* package)
+    {
+        return package[0] & LEN_MASK;
+    }
 
     bool equals(const uint8_t* p1, const uint8_t* p2)
     {

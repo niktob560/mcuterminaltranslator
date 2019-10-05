@@ -106,4 +106,12 @@ public:
         translator::getPayload(c, payload);
         TS_ASSERT(translator::equals(payload, payload_const));
     }
+
+    void testGetLen(void)
+    {
+        uint8_t c = 10;
+        TS_ASSERT_EQUALS(translator::getLen(&c), 10);
+        c = 10 | (translator::TYPE_ARR << 6);
+        TS_ASSERT_EQUALS(translator::getLen(&c), 10);
+    }
 };
