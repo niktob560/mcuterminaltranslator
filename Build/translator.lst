@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccwWEt2v.s 			page 1
+GAS LISTING /tmp/ccV5SczU.s 			page 1
 
 
    1              		.file	"translator.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccwWEt2v.s 			page 1
   48:Src/translator.cpp **** 
   49:Src/translator.cpp ****         package += 3;
   50:Src/translator.cpp ****         while(len > 0)
-GAS LISTING /tmp/ccwWEt2v.s 			page 2
+GAS LISTING /tmp/ccV5SczU.s 			page 2
 
 
   51:Src/translator.cpp ****         {
@@ -71,59 +71,73 @@ GAS LISTING /tmp/ccwWEt2v.s 			page 1
   58:Src/translator.cpp ****     }
   59:Src/translator.cpp **** 
   60:Src/translator.cpp **** 
-  61:Src/translator.cpp ****     //parse cmd from package, call funcArr[cmd]
-  62:Src/translator.cpp ****     void parseCmd(uint8_t *package, void (*funcArr [])())
+  61:Src/translator.cpp ****     //parse cmd from package, call funcArr[cmd], return type of package, max num of funcs - 255
+  62:Src/translator.cpp ****     uint8_t parseCmd(uint8_t *package, void (*funcArr [])())
   63:Src/translator.cpp ****     {
-  64:Src/translator.cpp **** 
-  65:Src/translator.cpp ****     }
-  66:Src/translator.cpp **** 
+  64:Src/translator.cpp ****         uint8_t var = getType(package);
+  65:Src/translator.cpp ****         if(var != TYPE_CMD)
+  66:Src/translator.cpp ****             return TYPE_BAD_TYPE;
   67:Src/translator.cpp **** 
-  68:Src/translator.cpp ****     //get payload from package to addr
-  69:Src/translator.cpp ****     void getPayload(const uint8_t *package, uint8_t *to)
-  70:Src/translator.cpp ****     {
-  71:Src/translator.cpp ****         uint8_t len = getLen(package);
-  72:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
-  73:Src/translator.cpp ****         {
-  74:Src/translator.cpp ****             to[i] = package[i + 3];
-  75:Src/translator.cpp ****         }
-  76:Src/translator.cpp ****     }
-  77:Src/translator.cpp **** 
-  78:Src/translator.cpp ****     //get len of payload
-  79:Src/translator.cpp ****     uint8_t getLen(const uint8_t* package)
-  80:Src/translator.cpp ****     {
-  81:Src/translator.cpp ****         return package[0] & LEN_MASK;
-  82:Src/translator.cpp ****     }
-  83:Src/translator.cpp **** 
-  84:Src/translator.cpp ****     bool equals(const uint8_t* p1, const uint8_t* p2)
-  85:Src/translator.cpp ****     {
-  86:Src/translator.cpp ****         if(p1[0] != p2[0])
-  87:Src/translator.cpp ****             return false;
-  88:Src/translator.cpp **** 
-  89:Src/translator.cpp ****         uint8_t len = getLen(p1);
-  90:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
-  91:Src/translator.cpp ****         {
-  92:Src/translator.cpp ****             if(p1[i] != p2[i])
-  93:Src/translator.cpp ****                 return false;
-  94:Src/translator.cpp ****         }
-  95:Src/translator.cpp ****         return true;
+  68:Src/translator.cpp ****         var = getLen(package);
+  69:Src/translator.cpp ****         if(var != 1)
+  70:Src/translator.cpp ****             return TYPE_BAD_LEN;
+  71:Src/translator.cpp **** 
+  72:Src/translator.cpp ****         checksum_t check = genCheckSum(package);
+  73:Src/translator.cpp ****         if(check != ((package[1] << 8) | (package[2])))
+  74:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+  75:Src/translator.cpp **** 
+  76:Src/translator.cpp ****         if(funcArr[package[3]] != NULL)
+  77:Src/translator.cpp ****             funcArr[package[3]]();
+  78:Src/translator.cpp ****         return TYPE_CMD;
+  79:Src/translator.cpp ****     }
+  80:Src/translator.cpp **** 
+  81:Src/translator.cpp **** 
+  82:Src/translator.cpp ****     //get payload from package to addr
+  83:Src/translator.cpp ****     void getPayload(const uint8_t *package, uint8_t *to)
+  84:Src/translator.cpp ****     {
+  85:Src/translator.cpp ****         uint8_t len = getLen(package);
+  86:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
+  87:Src/translator.cpp ****         {
+  88:Src/translator.cpp ****             to[i] = package[i + 3];
+  89:Src/translator.cpp ****         }
+  90:Src/translator.cpp ****     }
+  91:Src/translator.cpp **** 
+  92:Src/translator.cpp ****     //get len of payload
+  93:Src/translator.cpp ****     uint8_t getLen(const uint8_t* package)
+  94:Src/translator.cpp ****     {
+  95:Src/translator.cpp ****         return package[0] & LEN_MASK;
   96:Src/translator.cpp ****     }
-  97:Src/translator.cpp **** }
-   9              		.loc 1 97 1 view -0
+  97:Src/translator.cpp **** 
+  98:Src/translator.cpp ****     bool equals(const uint8_t* p1, const uint8_t* p2)
+  99:Src/translator.cpp ****     {
+ 100:Src/translator.cpp ****         if(p1[0] != p2[0])
+ 101:Src/translator.cpp ****             return false;
+ 102:Src/translator.cpp **** 
+ 103:Src/translator.cpp ****         uint8_t len = getLen(p1);
+ 104:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
+ 105:Src/translator.cpp ****         {
+ 106:Src/translator.cpp ****             if(p1[i] != p2[i])
+ 107:Src/translator.cpp ****                 return false;
+GAS LISTING /tmp/ccV5SczU.s 			page 3
+
+
+ 108:Src/translator.cpp ****         }
+ 109:Src/translator.cpp ****         return true;
+ 110:Src/translator.cpp ****     }
+ 111:Src/translator.cpp **** }
+   9              		.loc 1 111 1 view -0
   10              		.cfi_startproc
-  11              		.loc 1 97 1 is_stmt 0 view .LVU1
+  11              		.loc 1 111 1 is_stmt 0 view .LVU1
   12 0000 83FF01   		cmpl	$1, %edi
   13 0003 7401     		je	.L7
   14              	.L4:
   15 0005 C3       		ret
   16              	.L7:
-  17              		.loc 1 97 1 discriminator 1 view .LVU2
+  17              		.loc 1 111 1 discriminator 1 view .LVU2
   18 0006 81FEFFFF 		cmpl	$65535, %esi
-GAS LISTING /tmp/ccwWEt2v.s 			page 3
-
-
   18      0000
   19 000c 75F7     		jne	.L4
-  20              		.loc 1 97 1 view .LVU3
+  20              		.loc 1 111 1 view .LVU3
   21 000e 4883EC08 		subq	$8, %rsp
   22              		.cfi_def_cfa_offset 16
   23              		.file 2 "/usr/include/c++/9.1.0/iostream"
@@ -164,6 +178,9 @@ GAS LISTING /tmp/ccwWEt2v.s 			page 1
   35:/usr/include/c++/9.1.0/iostream **** 
   36:/usr/include/c++/9.1.0/iostream **** #pragma GCC system_header
   37:/usr/include/c++/9.1.0/iostream **** 
+GAS LISTING /tmp/ccV5SczU.s 			page 4
+
+
   38:/usr/include/c++/9.1.0/iostream **** #include <bits/c++config.h>
   39:/usr/include/c++/9.1.0/iostream **** #include <ostream>
   40:/usr/include/c++/9.1.0/iostream **** #include <istream>
@@ -178,9 +195,6 @@ GAS LISTING /tmp/ccwWEt2v.s 			page 1
   49:/usr/include/c++/9.1.0/iostream ****    *  The &lt;iostream&gt; header declares the eight <em>standard stream
   50:/usr/include/c++/9.1.0/iostream ****    *  objects</em>.  For other declarations, see
   51:/usr/include/c++/9.1.0/iostream ****    *  http://gcc.gnu.org/onlinedocs/libstdc++/manual/io.html
-GAS LISTING /tmp/ccwWEt2v.s 			page 4
-
-
   52:/usr/include/c++/9.1.0/iostream ****    *  and the @link iosfwd I/O forward declarations @endlink
   53:/usr/include/c++/9.1.0/iostream ****    *
   54:/usr/include/c++/9.1.0/iostream ****    *  They are required by default to cooperate with the global C
@@ -222,8 +236,11 @@ GAS LISTING /tmp/ccwWEt2v.s 			page 1
   34 0033 E8000000 		call	__cxa_atexit@PLT
   34      00
   35              	.LVL3:
-  36              		.loc 1 97 1 view .LVU7
+  36              		.loc 1 111 1 view .LVU7
   37 0038 4883C408 		addq	$8, %rsp
+GAS LISTING /tmp/ccV5SczU.s 			page 5
+
+
   38              		.cfi_def_cfa_offset 8
   39 003c C3       		ret
   40              		.cfi_endproc
@@ -238,9 +255,6 @@ GAS LISTING /tmp/ccwWEt2v.s 			page 1
   30:Src/translator.cpp ****     }
   50              		.loc 1 30 9 view .LVU9
   30:Src/translator.cpp ****     }
-GAS LISTING /tmp/ccwWEt2v.s 			page 5
-
-
   51              		.loc 1 30 27 is_stmt 0 view .LVU10
   52 003d 0FB607   		movzbl	(%rdi), %eax
   30:Src/translator.cpp ****     }
@@ -251,599 +265,737 @@ GAS LISTING /tmp/ccwWEt2v.s 			page 1
   56 0043 C3       		ret
   57              		.cfi_endproc
   58              	.LFE1504:
-  60              		.globl	_ZN10translator8parseCmdEPhPPFvvE
-  62              	_ZN10translator8parseCmdEPhPPFvvE:
+  60              		.globl	_ZN10translator6getLenEPKh
+  62              	_ZN10translator6getLenEPKh:
   63              	.LVL5:
-  64              	.LFB1506:
-  63:Src/translator.cpp **** 
-  65              		.loc 1 63 5 is_stmt 1 view -0
+  64              	.LFB1508:
+  94:Src/translator.cpp ****         return package[0] & LEN_MASK;
+  65              		.loc 1 94 5 is_stmt 1 view -0
   66              		.cfi_startproc
-  65:Src/translator.cpp **** 
-  67              		.loc 1 65 5 is_stmt 0 view .LVU14
-  68 0044 C3       		ret
-  69              		.cfi_endproc
-  70              	.LFE1506:
-  72              		.globl	_ZN10translator6getLenEPKh
-  74              	_ZN10translator6getLenEPKh:
-  75              	.LVL6:
-  76              	.LFB1508:
-  80:Src/translator.cpp ****         return package[0] & LEN_MASK;
-  77              		.loc 1 80 5 is_stmt 1 view -0
-  78              		.cfi_startproc
-  81:Src/translator.cpp ****     }
-  79              		.loc 1 81 9 view .LVU16
-  81:Src/translator.cpp ****     }
-  80              		.loc 1 81 27 is_stmt 0 view .LVU17
-  81 0045 0FB607   		movzbl	(%rdi), %eax
-  81:Src/translator.cpp ****     }
-  82              		.loc 1 81 29 view .LVU18
-  83 0048 83E03F   		andl	$63, %eax
-  82:Src/translator.cpp **** 
-  84              		.loc 1 82 5 view .LVU19
-  85 004b C3       		ret
-  86              		.cfi_endproc
-  87              	.LFE1508:
-  89              		.globl	_ZN10translator11genCheckSumEPKh
-  91              	_ZN10translator11genCheckSumEPKh:
-  92              	.LVL7:
-  93              	.LFB1503:
-  10:Src/translator.cpp ****         checksum_t ret = 0;
-  94              		.loc 1 10 5 is_stmt 1 view -0
-  95              		.cfi_startproc
-  10:Src/translator.cpp ****         checksum_t ret = 0;
-  96              		.loc 1 10 5 is_stmt 0 view .LVU21
-  97 004c 53       		pushq	%rbx
-  98              		.cfi_def_cfa_offset 16
-  99              		.cfi_offset 3, -16
- 100 004d 4889FB   		movq	%rdi, %rbx
-  11:Src/translator.cpp ****         uint8_t len = getLen(c);
- 101              		.loc 1 11 9 is_stmt 1 view .LVU22
-GAS LISTING /tmp/ccwWEt2v.s 			page 6
-
-
- 102              	.LVL8:
-  12:Src/translator.cpp ****         // cout << "len: " << (int)len << endl;
- 103              		.loc 1 12 9 view .LVU23
-  12:Src/translator.cpp ****         // cout << "len: " << (int)len << endl;
- 104              		.loc 1 12 29 is_stmt 0 view .LVU24
- 105 0050 E8000000 		call	_ZN10translator6getLenEPKh
- 105      00
- 106              	.LVL9:
-  12:Src/translator.cpp ****         // cout << "len: " << (int)len << endl;
- 107              		.loc 1 12 29 view .LVU25
- 108 0055 89C7     		movl	%eax, %edi
- 109              	.LVL10:
-  19:Src/translator.cpp ****         {
- 110              		.loc 1 19 9 is_stmt 1 view .LVU26
- 111              	.LBB2:
-  19:Src/translator.cpp ****         {
- 112              		.loc 1 19 21 is_stmt 0 view .LVU27
- 113 0057 BA000000 		movl	$0, %edx
- 113      00
- 114              	.LBE2:
-  11:Src/translator.cpp ****         uint8_t len = getLen(c);
- 115              		.loc 1 11 20 view .LVU28
- 116 005c B8000000 		movl	$0, %eax
- 116      00
- 117              	.LVL11:
- 118              	.L13:
- 119              	.LBB3:
-  19:Src/translator.cpp ****         {
- 120              		.loc 1 19 30 discriminator 3 view .LVU29
- 121 0061 4038FA   		cmpb	%dil, %dl
- 122 0064 731C     		jnb	.L11
-  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
- 123              		.loc 1 21 13 is_stmt 1 discriminator 2 view .LVU30
-  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
- 124              		.loc 1 21 27 is_stmt 0 discriminator 2 view .LVU31
- 125 0066 0FB6CA   		movzbl	%dl, %ecx
-  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
- 126              		.loc 1 21 25 discriminator 2 view .LVU32
- 127 0069 8D7103   		leal	3(%rcx), %esi
- 128 006c 4863F6   		movslq	%esi, %rsi
-  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
- 129              		.loc 1 21 28 discriminator 2 view .LVU33
- 130 006f 0FB63433 		movzbl	(%rbx,%rsi), %esi
-  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
- 131              		.loc 1 21 37 discriminator 2 view .LVU34
- 132 0073 C1E103   		sall	$3, %ecx
- 133 0076 83E108   		andl	$8, %ecx
-  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
- 134              		.loc 1 21 31 discriminator 2 view .LVU35
- 135 0079 D3E6     		sall	%cl, %esi
-  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
- 136              		.loc 1 21 17 discriminator 2 view .LVU36
- 137 007b 09F0     		orl	%esi, %eax
- 138              	.LVL12:
-  19:Src/translator.cpp ****         {
- 139              		.loc 1 19 9 discriminator 2 view .LVU37
- 140 007d 83C201   		addl	$1, %edx
-GAS LISTING /tmp/ccwWEt2v.s 			page 7
-
-
- 141              	.LVL13:
-  19:Src/translator.cpp ****         {
- 142              		.loc 1 19 9 discriminator 2 view .LVU38
- 143 0080 EBDF     		jmp	.L13
- 144              	.LVL14:
- 145              	.L11:
-  19:Src/translator.cpp ****         {
- 146              		.loc 1 19 9 discriminator 2 view .LVU39
- 147              	.LBE3:
-  25:Src/translator.cpp **** 
- 148              		.loc 1 25 5 view .LVU40
- 149 0082 5B       		popq	%rbx
- 150              		.cfi_def_cfa_offset 8
- 151              	.LVL15:
-  25:Src/translator.cpp **** 
- 152              		.loc 1 25 5 view .LVU41
- 153 0083 C3       		ret
- 154              		.cfi_endproc
- 155              	.LFE1503:
- 157              		.globl	_ZN10translator11parsePacketEPhS0_
- 159              	_ZN10translator11parsePacketEPhS0_:
- 160              	.LVL16:
- 161              	.LFB1505:
-  36:Src/translator.cpp ****         uint8_t type = getType(package);
- 162              		.loc 1 36 5 is_stmt 1 view -0
- 163              		.cfi_startproc
-  36:Src/translator.cpp ****         uint8_t type = getType(package);
- 164              		.loc 1 36 5 is_stmt 0 view .LVU43
- 165 0084 4154     		pushq	%r12
- 166              		.cfi_def_cfa_offset 16
- 167              		.cfi_offset 12, -16
- 168 0086 55       		pushq	%rbp
- 169              		.cfi_def_cfa_offset 24
- 170              		.cfi_offset 6, -24
- 171 0087 53       		pushq	%rbx
- 172              		.cfi_def_cfa_offset 32
- 173              		.cfi_offset 3, -32
- 174 0088 4889FB   		movq	%rdi, %rbx
- 175 008b 4889F5   		movq	%rsi, %rbp
-  37:Src/translator.cpp ****         if(type != TYPE_ARR && type != TYPE_CMD && type != TYPE_VAR)
- 176              		.loc 1 37 9 is_stmt 1 view .LVU44
-  37:Src/translator.cpp ****         if(type != TYPE_ARR && type != TYPE_CMD && type != TYPE_VAR)
- 177              		.loc 1 37 31 is_stmt 0 view .LVU45
- 178 008e E8000000 		call	_ZN10translator7getTypeEPh
- 178      00
- 179              	.LVL17:
-  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
- 180              		.loc 1 38 9 is_stmt 1 view .LVU46
-  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
- 181              		.loc 1 38 17 is_stmt 0 view .LVU47
- 182 0093 3C03     		cmpb	$3, %al
- 183 0095 0F95C1   		setne	%cl
-  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
- 184              		.loc 1 38 37 view .LVU48
- 185 0098 3C01     		cmpb	$1, %al
- 186 009a 0F95C2   		setne	%dl
-  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
-GAS LISTING /tmp/ccwWEt2v.s 			page 8
-
-
- 187              		.loc 1 38 9 view .LVU49
- 188 009d 84D1     		testb	%dl, %cl
- 189 009f 7404     		je	.L16
-  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
- 190              		.loc 1 38 49 discriminator 1 view .LVU50
- 191 00a1 3C02     		cmpb	$2, %al
- 192 00a3 753E     		jne	.L19
- 193              	.L16:
-  41:Src/translator.cpp ****         if(len == 0)
- 194              		.loc 1 41 9 is_stmt 1 view .LVU51
-  41:Src/translator.cpp ****         if(len == 0)
- 195              		.loc 1 41 29 is_stmt 0 view .LVU52
- 196 00a5 4889DF   		movq	%rbx, %rdi
- 197 00a8 E8000000 		call	_ZN10translator6getLenEPKh
- 197      00
- 198              	.LVL18:
-  42:Src/translator.cpp ****             return TYPE_BAD_LEN;
- 199              		.loc 1 42 9 is_stmt 1 view .LVU53
- 200 00ad 84C0     		testb	%al, %al
- 201 00af 7439     		je	.L20
-  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
- 202              		.loc 1 45 9 view .LVU54
-  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
- 203              		.loc 1 45 41 is_stmt 0 view .LVU55
- 204 00b1 0FB65301 		movzbl	1(%rbx), %edx
-  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
- 205              		.loc 1 45 43 view .LVU56
- 206 00b5 C1E208   		sall	$8, %edx
-  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
- 207              		.loc 1 45 60 view .LVU57
- 208 00b8 0FB64302 		movzbl	2(%rbx), %eax
- 209              	.LVL19:
-  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
- 210              		.loc 1 45 49 view .LVU58
- 211 00bc 09D0     		orl	%edx, %eax
- 212 00be 4189C4   		movl	%eax, %r12d
- 213              	.LVL20:
-  46:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
- 214              		.loc 1 46 9 is_stmt 1 view .LVU59
-  46:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
- 215              		.loc 1 46 23 is_stmt 0 view .LVU60
- 216 00c1 4889DF   		movq	%rbx, %rdi
- 217 00c4 E8000000 		call	_ZN10translator11genCheckSumEPKh
- 217      00
- 218              	.LVL21:
-  46:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
- 219              		.loc 1 46 9 view .LVU61
- 220 00c9 664139C4 		cmpw	%ax, %r12w
- 221 00cd 7525     		jne	.L21
-  49:Src/translator.cpp ****         while(len > 0)
- 222              		.loc 1 49 9 is_stmt 1 view .LVU62
-  49:Src/translator.cpp ****         while(len > 0)
- 223              		.loc 1 49 17 is_stmt 0 view .LVU63
- 224 00cf 488D4303 		leaq	3(%rbx), %rax
- 225              	.LVL22:
- 226              	.L18:
-  50:Src/translator.cpp ****         {
-GAS LISTING /tmp/ccwWEt2v.s 			page 9
-
-
- 227              		.loc 1 50 9 is_stmt 1 view .LVU64
-  52:Src/translator.cpp ****             payloadto++;
- 228              		.loc 1 52 13 view .LVU65
-  52:Src/translator.cpp ****             payloadto++;
- 229              		.loc 1 52 26 is_stmt 0 view .LVU66
- 230 00d3 0FB610   		movzbl	(%rax), %edx
-  52:Src/translator.cpp ****             payloadto++;
- 231              		.loc 1 52 24 view .LVU67
- 232 00d6 885500   		movb	%dl, 0(%rbp)
-  53:Src/translator.cpp ****             package++;
- 233              		.loc 1 53 13 is_stmt 1 view .LVU68
-  53:Src/translator.cpp ****             package++;
- 234              		.loc 1 53 22 is_stmt 0 view .LVU69
- 235 00d9 4883C501 		addq	$1, %rbp
- 236              	.LVL23:
-  54:Src/translator.cpp ****         }
- 237              		.loc 1 54 13 is_stmt 1 view .LVU70
-  54:Src/translator.cpp ****         }
- 238              		.loc 1 54 20 is_stmt 0 view .LVU71
- 239 00dd 4883C001 		addq	$1, %rax
- 240              	.LVL24:
-  54:Src/translator.cpp ****         }
- 241              		.loc 1 54 20 view .LVU72
- 242 00e1 EBF0     		jmp	.L18
- 243              	.LVL25:
- 244              	.L19:
-  39:Src/translator.cpp **** 
- 245              		.loc 1 39 20 view .LVU73
- 246 00e3 B8650000 		movl	$101, %eax
- 246      00
- 247              	.LVL26:
-  39:Src/translator.cpp **** 
- 248              		.loc 1 39 20 view .LVU74
- 249 00e8 EB05     		jmp	.L15
- 250              	.LVL27:
- 251              	.L20:
-  43:Src/translator.cpp **** 
- 252              		.loc 1 43 20 view .LVU75
- 253 00ea B8640000 		movl	$100, %eax
- 253      00
- 254              	.LVL28:
- 255              	.L15:
-  58:Src/translator.cpp **** 
- 256              		.loc 1 58 5 view .LVU76
- 257 00ef 5B       		popq	%rbx
- 258              		.cfi_remember_state
- 259              		.cfi_def_cfa_offset 24
- 260              	.LVL29:
-  58:Src/translator.cpp **** 
- 261              		.loc 1 58 5 view .LVU77
- 262 00f0 5D       		popq	%rbp
- 263              		.cfi_def_cfa_offset 16
- 264              	.LVL30:
-  58:Src/translator.cpp **** 
- 265              		.loc 1 58 5 view .LVU78
- 266 00f1 415C     		popq	%r12
- 267              		.cfi_def_cfa_offset 8
-GAS LISTING /tmp/ccwWEt2v.s 			page 10
-
-
- 268 00f3 C3       		ret
- 269              	.LVL31:
- 270              	.L21:
- 271              		.cfi_restore_state
-  47:Src/translator.cpp **** 
- 272              		.loc 1 47 20 view .LVU79
- 273 00f4 B8660000 		movl	$102, %eax
- 273      00
- 274 00f9 EBF4     		jmp	.L15
- 275              		.cfi_endproc
- 276              	.LFE1505:
- 278              		.globl	_ZN10translator10getPayloadEPKhPh
- 280              	_ZN10translator10getPayloadEPKhPh:
- 281              	.LVL32:
- 282              	.LFB1507:
-  70:Src/translator.cpp ****         uint8_t len = getLen(package);
- 283              		.loc 1 70 5 is_stmt 1 view -0
- 284              		.cfi_startproc
-  70:Src/translator.cpp ****         uint8_t len = getLen(package);
- 285              		.loc 1 70 5 is_stmt 0 view .LVU81
- 286 00fb 55       		pushq	%rbp
- 287              		.cfi_def_cfa_offset 16
- 288              		.cfi_offset 6, -16
- 289 00fc 53       		pushq	%rbx
- 290              		.cfi_def_cfa_offset 24
- 291              		.cfi_offset 3, -24
- 292 00fd 4889FB   		movq	%rdi, %rbx
- 293 0100 4889F5   		movq	%rsi, %rbp
-  71:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
- 294              		.loc 1 71 9 is_stmt 1 view .LVU82
-  71:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
- 295              		.loc 1 71 29 is_stmt 0 view .LVU83
- 296 0103 E8000000 		call	_ZN10translator6getLenEPKh
- 296      00
- 297              	.LVL33:
-  72:Src/translator.cpp ****         {
- 298              		.loc 1 72 9 is_stmt 1 view .LVU84
- 299              	.LBB4:
-  72:Src/translator.cpp ****         {
- 300              		.loc 1 72 21 is_stmt 0 view .LVU85
- 301 0108 BA000000 		movl	$0, %edx
- 301      00
- 302              	.LVL34:
- 303              	.L25:
-  72:Src/translator.cpp ****         {
- 304              		.loc 1 72 30 discriminator 3 view .LVU86
- 305 010d 38C2     		cmpb	%al, %dl
- 306 010f 7312     		jnb	.L23
-  74:Src/translator.cpp ****         }
- 307              		.loc 1 74 13 is_stmt 1 discriminator 2 view .LVU87
-  74:Src/translator.cpp ****         }
- 308              		.loc 1 74 29 is_stmt 0 discriminator 2 view .LVU88
- 309 0111 0FB6CA   		movzbl	%dl, %ecx
-  74:Src/translator.cpp ****         }
- 310              		.loc 1 74 34 discriminator 2 view .LVU89
- 311 0114 0FB6740B 		movzbl	3(%rbx,%rcx), %esi
- 311      03
-GAS LISTING /tmp/ccwWEt2v.s 			page 11
-
-
-  74:Src/translator.cpp ****         }
- 312              		.loc 1 74 19 discriminator 2 view .LVU90
- 313 0119 4088740D 		movb	%sil, 0(%rbp,%rcx)
- 313      00
-  72:Src/translator.cpp ****         {
- 314              		.loc 1 72 9 discriminator 2 view .LVU91
- 315 011e 83C201   		addl	$1, %edx
- 316              	.LVL35:
-  72:Src/translator.cpp ****         {
- 317              		.loc 1 72 9 discriminator 2 view .LVU92
- 318 0121 EBEA     		jmp	.L25
- 319              	.L23:
-  72:Src/translator.cpp ****         {
- 320              		.loc 1 72 9 discriminator 2 view .LVU93
- 321              	.LBE4:
-  76:Src/translator.cpp **** 
- 322              		.loc 1 76 5 view .LVU94
- 323 0123 5B       		popq	%rbx
- 324              		.cfi_def_cfa_offset 16
- 325              	.LVL36:
-  76:Src/translator.cpp **** 
- 326              		.loc 1 76 5 view .LVU95
- 327 0124 5D       		popq	%rbp
- 328              		.cfi_def_cfa_offset 8
- 329              	.LVL37:
-  76:Src/translator.cpp **** 
- 330              		.loc 1 76 5 view .LVU96
- 331 0125 C3       		ret
- 332              		.cfi_endproc
- 333              	.LFE1507:
- 335              		.globl	_ZN10translator6equalsEPKhS1_
- 337              	_ZN10translator6equalsEPKhS1_:
- 338              	.LVL38:
- 339              	.LFB1509:
-  85:Src/translator.cpp ****         if(p1[0] != p2[0])
- 340              		.loc 1 85 5 is_stmt 1 view -0
- 341              		.cfi_startproc
-  86:Src/translator.cpp ****             return false;
- 342              		.loc 1 86 9 view .LVU98
- 343 0126 0FB606   		movzbl	(%rsi), %eax
- 344 0129 3807     		cmpb	%al, (%rdi)
- 345 012b 7529     		jne	.L30
-  85:Src/translator.cpp ****         if(p1[0] != p2[0])
- 346              		.loc 1 85 5 is_stmt 0 view .LVU99
- 347 012d 55       		pushq	%rbp
- 348              		.cfi_def_cfa_offset 16
- 349              		.cfi_offset 6, -16
- 350 012e 53       		pushq	%rbx
- 351              		.cfi_def_cfa_offset 24
- 352              		.cfi_offset 3, -24
- 353 012f 4889FB   		movq	%rdi, %rbx
- 354 0132 4889F5   		movq	%rsi, %rbp
-  89:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
- 355              		.loc 1 89 9 is_stmt 1 view .LVU100
-  89:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
- 356              		.loc 1 89 29 is_stmt 0 view .LVU101
- 357 0135 E8000000 		call	_ZN10translator6getLenEPKh
-GAS LISTING /tmp/ccwWEt2v.s 			page 12
-
-
- 357      00
- 358              	.LVL39:
-  90:Src/translator.cpp ****         {
- 359              		.loc 1 90 9 is_stmt 1 view .LVU102
- 360              	.LBB5:
-  90:Src/translator.cpp ****         {
- 361              		.loc 1 90 21 is_stmt 0 view .LVU103
- 362 013a BA000000 		movl	$0, %edx
- 362      00
- 363              	.LVL40:
- 364              	.L29:
-  90:Src/translator.cpp ****         {
- 365              		.loc 1 90 30 discriminator 1 view .LVU104
- 366 013f 38C2     		cmpb	%al, %dl
- 367 0141 7319     		jnb	.L31
-  92:Src/translator.cpp ****                 return false;
- 368              		.loc 1 92 13 is_stmt 1 view .LVU105
-  92:Src/translator.cpp ****                 return false;
- 369              		.loc 1 92 19 is_stmt 0 view .LVU106
- 370 0143 0FB6CA   		movzbl	%dl, %ecx
-  92:Src/translator.cpp ****                 return false;
- 371              		.loc 1 92 13 view .LVU107
- 372 0146 0FB6740D 		movzbl	0(%rbp,%rcx), %esi
- 372      00
- 373 014b 4038340B 		cmpb	%sil, (%rbx,%rcx)
- 374 014f 7513     		jne	.L32
-  90:Src/translator.cpp ****         {
- 375              		.loc 1 90 9 discriminator 2 view .LVU108
- 376 0151 83C201   		addl	$1, %edx
- 377              	.LVL41:
-  90:Src/translator.cpp ****         {
- 378              		.loc 1 90 9 discriminator 2 view .LVU109
- 379 0154 EBE9     		jmp	.L29
- 380              	.LVL42:
- 381              	.L30:
- 382              		.cfi_def_cfa_offset 8
- 383              		.cfi_restore 3
- 384              		.cfi_restore 6
-  90:Src/translator.cpp ****         {
- 385              		.loc 1 90 9 discriminator 2 view .LVU110
- 386              	.LBE5:
-  87:Src/translator.cpp **** 
- 387              		.loc 1 87 20 view .LVU111
- 388 0156 B8000000 		movl	$0, %eax
- 388      00
-  96:Src/translator.cpp **** }
- 389              		.loc 1 96 5 view .LVU112
- 390 015b C3       		ret
- 391              	.LVL43:
- 392              	.L31:
- 393              		.cfi_def_cfa_offset 24
- 394              		.cfi_offset 3, -24
- 395              		.cfi_offset 6, -16
   95:Src/translator.cpp ****     }
- 396              		.loc 1 95 16 view .LVU113
- 397 015c B8010000 		movl	$1, %eax
- 397      00
-GAS LISTING /tmp/ccwWEt2v.s 			page 13
+  67              		.loc 1 95 9 view .LVU14
+  95:Src/translator.cpp ****     }
+  68              		.loc 1 95 27 is_stmt 0 view .LVU15
+  69 0044 0FB607   		movzbl	(%rdi), %eax
+  95:Src/translator.cpp ****     }
+  70              		.loc 1 95 29 view .LVU16
+  71 0047 83E03F   		andl	$63, %eax
+  96:Src/translator.cpp **** 
+  72              		.loc 1 96 5 view .LVU17
+  73 004a C3       		ret
+  74              		.cfi_endproc
+  75              	.LFE1508:
+  77              		.globl	_ZN10translator11genCheckSumEPKh
+  79              	_ZN10translator11genCheckSumEPKh:
+  80              	.LVL6:
+  81              	.LFB1503:
+  10:Src/translator.cpp ****         checksum_t ret = 0;
+  82              		.loc 1 10 5 is_stmt 1 view -0
+  83              		.cfi_startproc
+  10:Src/translator.cpp ****         checksum_t ret = 0;
+  84              		.loc 1 10 5 is_stmt 0 view .LVU19
+  85 004b 53       		pushq	%rbx
+  86              		.cfi_def_cfa_offset 16
+  87              		.cfi_offset 3, -16
+  88 004c 4889FB   		movq	%rdi, %rbx
+GAS LISTING /tmp/ccV5SczU.s 			page 6
 
 
- 398              	.LVL44:
- 399              	.L27:
-  96:Src/translator.cpp **** }
- 400              		.loc 1 96 5 view .LVU114
- 401 0161 5B       		popq	%rbx
- 402              		.cfi_remember_state
- 403              		.cfi_def_cfa_offset 16
- 404              	.LVL45:
-  96:Src/translator.cpp **** }
- 405              		.loc 1 96 5 view .LVU115
- 406 0162 5D       		popq	%rbp
- 407              		.cfi_def_cfa_offset 8
- 408              	.LVL46:
-  96:Src/translator.cpp **** }
- 409              		.loc 1 96 5 view .LVU116
- 410 0163 C3       		ret
- 411              	.LVL47:
- 412              	.L32:
- 413              		.cfi_restore_state
- 414              	.LBB6:
-  93:Src/translator.cpp ****         }
- 415              		.loc 1 93 24 view .LVU117
- 416 0164 B8000000 		movl	$0, %eax
- 416      00
- 417              	.LVL48:
-  93:Src/translator.cpp ****         }
- 418              		.loc 1 93 24 view .LVU118
- 419 0169 EBF6     		jmp	.L27
- 420              	.LBE6:
- 421              		.cfi_endproc
- 422              	.LFE1509:
- 425              	_GLOBAL__sub_I__ZN10translator11genCheckSumEPKh:
- 426              	.LFB1827:
- 427              		.loc 1 97 1 is_stmt 1 view -0
- 428              		.cfi_startproc
- 429 016b 4883EC08 		subq	$8, %rsp
- 430              		.cfi_def_cfa_offset 16
- 431              		.loc 1 97 1 is_stmt 0 view .LVU120
- 432 016f BEFFFF00 		movl	$65535, %esi
- 432      00
- 433 0174 BF010000 		movl	$1, %edi
- 433      00
- 434 0179 E882FEFF 		call	_Z41__static_initialization_and_destruction_0ii
- 434      FF
- 435              	.LVL49:
- 436 017e 4883C408 		addq	$8, %rsp
- 437              		.cfi_def_cfa_offset 8
- 438 0182 C3       		ret
- 439              		.cfi_endproc
- 440              	.LFE1827:
- 442              		.section	.init_array,"aw"
- 443              		.align 8
- 444 0000 00000000 		.quad	_GLOBAL__sub_I__ZN10translator11genCheckSumEPKh
- 444      00000000 
- 445              		.local	_ZStL8__ioinit
- 446              		.comm	_ZStL8__ioinit,1,1
- 447              		.text
-GAS LISTING /tmp/ccwWEt2v.s 			page 14
+  11:Src/translator.cpp ****         uint8_t len = getLen(c);
+  89              		.loc 1 11 9 is_stmt 1 view .LVU20
+  90              	.LVL7:
+  12:Src/translator.cpp ****         // cout << "len: " << (int)len << endl;
+  91              		.loc 1 12 9 view .LVU21
+  12:Src/translator.cpp ****         // cout << "len: " << (int)len << endl;
+  92              		.loc 1 12 29 is_stmt 0 view .LVU22
+  93 004f E8000000 		call	_ZN10translator6getLenEPKh
+  93      00
+  94              	.LVL8:
+  12:Src/translator.cpp ****         // cout << "len: " << (int)len << endl;
+  95              		.loc 1 12 29 view .LVU23
+  96 0054 89C7     		movl	%eax, %edi
+  97              	.LVL9:
+  19:Src/translator.cpp ****         {
+  98              		.loc 1 19 9 is_stmt 1 view .LVU24
+  99              	.LBB2:
+  19:Src/translator.cpp ****         {
+ 100              		.loc 1 19 21 is_stmt 0 view .LVU25
+ 101 0056 BA000000 		movl	$0, %edx
+ 101      00
+ 102              	.LBE2:
+  11:Src/translator.cpp ****         uint8_t len = getLen(c);
+ 103              		.loc 1 11 20 view .LVU26
+ 104 005b B8000000 		movl	$0, %eax
+ 104      00
+ 105              	.LVL10:
+ 106              	.L12:
+ 107              	.LBB3:
+  19:Src/translator.cpp ****         {
+ 108              		.loc 1 19 30 discriminator 3 view .LVU27
+ 109 0060 4038FA   		cmpb	%dil, %dl
+ 110 0063 731C     		jnb	.L10
+  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
+ 111              		.loc 1 21 13 is_stmt 1 discriminator 2 view .LVU28
+  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
+ 112              		.loc 1 21 27 is_stmt 0 discriminator 2 view .LVU29
+ 113 0065 0FB6CA   		movzbl	%dl, %ecx
+  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
+ 114              		.loc 1 21 25 discriminator 2 view .LVU30
+ 115 0068 8D7103   		leal	3(%rcx), %esi
+ 116 006b 4863F6   		movslq	%esi, %rsi
+  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
+ 117              		.loc 1 21 28 discriminator 2 view .LVU31
+ 118 006e 0FB63433 		movzbl	(%rbx,%rsi), %esi
+  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
+ 119              		.loc 1 21 37 discriminator 2 view .LVU32
+ 120 0072 C1E103   		sall	$3, %ecx
+ 121 0075 83E108   		andl	$8, %ecx
+  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
+ 122              		.loc 1 21 31 discriminator 2 view .LVU33
+ 123 0078 D3E6     		sall	%cl, %esi
+  21:Src/translator.cpp ****             // cout << "\nAdding: " << (int)c[3 + i] << endl;
+ 124              		.loc 1 21 17 discriminator 2 view .LVU34
+ 125 007a 09F0     		orl	%esi, %eax
+ 126              	.LVL11:
+  19:Src/translator.cpp ****         {
+GAS LISTING /tmp/ccV5SczU.s 			page 7
 
 
- 448              	.Letext0:
- 449              		.file 3 "/usr/include/c++/9.1.0/cwchar"
- 450              		.file 4 "/usr/include/c++/9.1.0/new"
- 451              		.file 5 "/usr/include/c++/9.1.0/bits/exception_ptr.h"
- 452              		.file 6 "/usr/include/c++/9.1.0/type_traits"
- 453              		.file 7 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/c++config.h"
- 454              		.file 8 "/usr/include/c++/9.1.0/bits/stl_pair.h"
- 455              		.file 9 "/usr/include/c++/9.1.0/debug/debug.h"
- 456              		.file 10 "/usr/include/c++/9.1.0/bits/char_traits.h"
- 457              		.file 11 "/usr/include/c++/9.1.0/cstdint"
- 458              		.file 12 "/usr/include/c++/9.1.0/clocale"
- 459              		.file 13 "/usr/include/c++/9.1.0/cstdlib"
- 460              		.file 14 "/usr/include/c++/9.1.0/cstdio"
- 461              		.file 15 "/usr/include/c++/9.1.0/system_error"
- 462              		.file 16 "/usr/include/c++/9.1.0/bits/ios_base.h"
- 463              		.file 17 "/usr/include/c++/9.1.0/cwctype"
- 464              		.file 18 "/usr/include/c++/9.1.0/iosfwd"
- 465              		.file 19 "/usr/include/c++/9.1.0/bits/predefined_ops.h"
- 466              		.file 20 "/usr/include/c++/9.1.0/ext/new_allocator.h"
- 467              		.file 21 "/usr/include/c++/9.1.0/ext/numeric_traits.h"
- 468              		.file 22 "/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include/stddef.h"
- 469              		.file 23 "<built-in>"
- 470              		.file 24 "/usr/include/bits/types/wint_t.h"
- 471              		.file 25 "/usr/include/bits/types/__mbstate_t.h"
- 472              		.file 26 "/usr/include/bits/types/mbstate_t.h"
- 473              		.file 27 "/usr/include/bits/types/__FILE.h"
- 474              		.file 28 "/usr/include/bits/types/struct_FILE.h"
- 475              		.file 29 "/usr/include/bits/types/FILE.h"
- 476              		.file 30 "/usr/include/wchar.h"
- 477              		.file 31 "/usr/include/bits/types/struct_tm.h"
- 478              		.file 32 "/usr/include/bits/types.h"
- 479              		.file 33 "/usr/include/bits/stdint-intn.h"
- 480              		.file 34 "/usr/include/bits/stdint-uintn.h"
- 481              		.file 35 "/usr/include/stdint.h"
- 482              		.file 36 "/usr/include/locale.h"
- 483              		.file 37 "/usr/include/time.h"
- 484              		.file 38 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/atomic_word.h"
- 485              		.file 39 "/usr/include/stdlib.h"
- 486              		.file 40 "/usr/include/bits/stdlib-float.h"
- 487              		.file 41 "/usr/include/bits/stdlib-bsearch.h"
- 488              		.file 42 "/usr/include/bits/types/__fpos_t.h"
- 489              		.file 43 "/usr/include/stdio.h"
- 490              		.file 44 "/usr/include/bits/sys_errlist.h"
- 491              		.file 45 "/usr/include/bits/stdio.h"
- 492              		.file 46 "/usr/include/errno.h"
- 493              		.file 47 "/usr/include/bits/wctype-wchar.h"
- 494              		.file 48 "/usr/include/wctype.h"
- 495              		.file 49 "Inc/translator.hpp"
-GAS LISTING /tmp/ccwWEt2v.s 			page 15
+ 127              		.loc 1 19 9 discriminator 2 view .LVU35
+ 128 007c 83C201   		addl	$1, %edx
+ 129              	.LVL12:
+  19:Src/translator.cpp ****         {
+ 130              		.loc 1 19 9 discriminator 2 view .LVU36
+ 131 007f EBDF     		jmp	.L12
+ 132              	.LVL13:
+ 133              	.L10:
+  19:Src/translator.cpp ****         {
+ 134              		.loc 1 19 9 discriminator 2 view .LVU37
+ 135              	.LBE3:
+  25:Src/translator.cpp **** 
+ 136              		.loc 1 25 5 view .LVU38
+ 137 0081 5B       		popq	%rbx
+ 138              		.cfi_def_cfa_offset 8
+ 139              	.LVL14:
+  25:Src/translator.cpp **** 
+ 140              		.loc 1 25 5 view .LVU39
+ 141 0082 C3       		ret
+ 142              		.cfi_endproc
+ 143              	.LFE1503:
+ 145              		.globl	_ZN10translator11parsePacketEPhS0_
+ 147              	_ZN10translator11parsePacketEPhS0_:
+ 148              	.LVL15:
+ 149              	.LFB1505:
+  36:Src/translator.cpp ****         uint8_t type = getType(package);
+ 150              		.loc 1 36 5 is_stmt 1 view -0
+ 151              		.cfi_startproc
+  36:Src/translator.cpp ****         uint8_t type = getType(package);
+ 152              		.loc 1 36 5 is_stmt 0 view .LVU41
+ 153 0083 4154     		pushq	%r12
+ 154              		.cfi_def_cfa_offset 16
+ 155              		.cfi_offset 12, -16
+ 156 0085 55       		pushq	%rbp
+ 157              		.cfi_def_cfa_offset 24
+ 158              		.cfi_offset 6, -24
+ 159 0086 53       		pushq	%rbx
+ 160              		.cfi_def_cfa_offset 32
+ 161              		.cfi_offset 3, -32
+ 162 0087 4889FB   		movq	%rdi, %rbx
+ 163 008a 4889F5   		movq	%rsi, %rbp
+  37:Src/translator.cpp ****         if(type != TYPE_ARR && type != TYPE_CMD && type != TYPE_VAR)
+ 164              		.loc 1 37 9 is_stmt 1 view .LVU42
+  37:Src/translator.cpp ****         if(type != TYPE_ARR && type != TYPE_CMD && type != TYPE_VAR)
+ 165              		.loc 1 37 31 is_stmt 0 view .LVU43
+ 166 008d E8000000 		call	_ZN10translator7getTypeEPh
+ 166      00
+ 167              	.LVL16:
+  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
+ 168              		.loc 1 38 9 is_stmt 1 view .LVU44
+  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
+ 169              		.loc 1 38 17 is_stmt 0 view .LVU45
+ 170 0092 3C03     		cmpb	$3, %al
+ 171 0094 0F95C1   		setne	%cl
+  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
+ 172              		.loc 1 38 37 view .LVU46
+ 173 0097 3C01     		cmpb	$1, %al
+GAS LISTING /tmp/ccV5SczU.s 			page 8
+
+
+ 174 0099 0F95C2   		setne	%dl
+  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
+ 175              		.loc 1 38 9 view .LVU47
+ 176 009c 84D1     		testb	%dl, %cl
+ 177 009e 7404     		je	.L15
+  38:Src/translator.cpp ****             return TYPE_BAD_TYPE;
+ 178              		.loc 1 38 49 discriminator 1 view .LVU48
+ 179 00a0 3C02     		cmpb	$2, %al
+ 180 00a2 753E     		jne	.L18
+ 181              	.L15:
+  41:Src/translator.cpp ****         if(len == 0)
+ 182              		.loc 1 41 9 is_stmt 1 view .LVU49
+  41:Src/translator.cpp ****         if(len == 0)
+ 183              		.loc 1 41 29 is_stmt 0 view .LVU50
+ 184 00a4 4889DF   		movq	%rbx, %rdi
+ 185 00a7 E8000000 		call	_ZN10translator6getLenEPKh
+ 185      00
+ 186              	.LVL17:
+  42:Src/translator.cpp ****             return TYPE_BAD_LEN;
+ 187              		.loc 1 42 9 is_stmt 1 view .LVU51
+ 188 00ac 84C0     		testb	%al, %al
+ 189 00ae 7439     		je	.L19
+  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
+ 190              		.loc 1 45 9 view .LVU52
+  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
+ 191              		.loc 1 45 41 is_stmt 0 view .LVU53
+ 192 00b0 0FB65301 		movzbl	1(%rbx), %edx
+  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
+ 193              		.loc 1 45 43 view .LVU54
+ 194 00b4 C1E208   		sall	$8, %edx
+  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
+ 195              		.loc 1 45 60 view .LVU55
+ 196 00b7 0FB64302 		movzbl	2(%rbx), %eax
+ 197              	.LVL18:
+  45:Src/translator.cpp ****         if(genCheckSum(package) != checksum)
+ 198              		.loc 1 45 49 view .LVU56
+ 199 00bb 09D0     		orl	%edx, %eax
+ 200 00bd 4189C4   		movl	%eax, %r12d
+ 201              	.LVL19:
+  46:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 202              		.loc 1 46 9 is_stmt 1 view .LVU57
+  46:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 203              		.loc 1 46 23 is_stmt 0 view .LVU58
+ 204 00c0 4889DF   		movq	%rbx, %rdi
+ 205 00c3 E8000000 		call	_ZN10translator11genCheckSumEPKh
+ 205      00
+ 206              	.LVL20:
+  46:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 207              		.loc 1 46 9 view .LVU59
+ 208 00c8 664139C4 		cmpw	%ax, %r12w
+ 209 00cc 7525     		jne	.L20
+  49:Src/translator.cpp ****         while(len > 0)
+ 210              		.loc 1 49 9 is_stmt 1 view .LVU60
+  49:Src/translator.cpp ****         while(len > 0)
+ 211              		.loc 1 49 17 is_stmt 0 view .LVU61
+ 212 00ce 488D4303 		leaq	3(%rbx), %rax
+ 213              	.LVL21:
+GAS LISTING /tmp/ccV5SczU.s 			page 9
+
+
+ 214              	.L17:
+  50:Src/translator.cpp ****         {
+ 215              		.loc 1 50 9 is_stmt 1 view .LVU62
+  52:Src/translator.cpp ****             payloadto++;
+ 216              		.loc 1 52 13 view .LVU63
+  52:Src/translator.cpp ****             payloadto++;
+ 217              		.loc 1 52 26 is_stmt 0 view .LVU64
+ 218 00d2 0FB610   		movzbl	(%rax), %edx
+  52:Src/translator.cpp ****             payloadto++;
+ 219              		.loc 1 52 24 view .LVU65
+ 220 00d5 885500   		movb	%dl, 0(%rbp)
+  53:Src/translator.cpp ****             package++;
+ 221              		.loc 1 53 13 is_stmt 1 view .LVU66
+  53:Src/translator.cpp ****             package++;
+ 222              		.loc 1 53 22 is_stmt 0 view .LVU67
+ 223 00d8 4883C501 		addq	$1, %rbp
+ 224              	.LVL22:
+  54:Src/translator.cpp ****         }
+ 225              		.loc 1 54 13 is_stmt 1 view .LVU68
+  54:Src/translator.cpp ****         }
+ 226              		.loc 1 54 20 is_stmt 0 view .LVU69
+ 227 00dc 4883C001 		addq	$1, %rax
+ 228              	.LVL23:
+  54:Src/translator.cpp ****         }
+ 229              		.loc 1 54 20 view .LVU70
+ 230 00e0 EBF0     		jmp	.L17
+ 231              	.LVL24:
+ 232              	.L18:
+  39:Src/translator.cpp **** 
+ 233              		.loc 1 39 20 view .LVU71
+ 234 00e2 B8650000 		movl	$101, %eax
+ 234      00
+ 235              	.LVL25:
+  39:Src/translator.cpp **** 
+ 236              		.loc 1 39 20 view .LVU72
+ 237 00e7 EB05     		jmp	.L14
+ 238              	.LVL26:
+ 239              	.L19:
+  43:Src/translator.cpp **** 
+ 240              		.loc 1 43 20 view .LVU73
+ 241 00e9 B8640000 		movl	$100, %eax
+ 241      00
+ 242              	.LVL27:
+ 243              	.L14:
+  58:Src/translator.cpp **** 
+ 244              		.loc 1 58 5 view .LVU74
+ 245 00ee 5B       		popq	%rbx
+ 246              		.cfi_remember_state
+ 247              		.cfi_def_cfa_offset 24
+ 248              	.LVL28:
+  58:Src/translator.cpp **** 
+ 249              		.loc 1 58 5 view .LVU75
+ 250 00ef 5D       		popq	%rbp
+ 251              		.cfi_def_cfa_offset 16
+ 252              	.LVL29:
+  58:Src/translator.cpp **** 
+ 253              		.loc 1 58 5 view .LVU76
+GAS LISTING /tmp/ccV5SczU.s 			page 10
+
+
+ 254 00f0 415C     		popq	%r12
+ 255              		.cfi_def_cfa_offset 8
+ 256 00f2 C3       		ret
+ 257              	.LVL30:
+ 258              	.L20:
+ 259              		.cfi_restore_state
+  47:Src/translator.cpp **** 
+ 260              		.loc 1 47 20 view .LVU77
+ 261 00f3 B8660000 		movl	$102, %eax
+ 261      00
+ 262 00f8 EBF4     		jmp	.L14
+ 263              		.cfi_endproc
+ 264              	.LFE1505:
+ 266              		.globl	_ZN10translator8parseCmdEPhPPFvvE
+ 268              	_ZN10translator8parseCmdEPhPPFvvE:
+ 269              	.LVL31:
+ 270              	.LFB1506:
+  63:Src/translator.cpp ****         uint8_t var = getType(package);
+ 271              		.loc 1 63 5 is_stmt 1 view -0
+ 272              		.cfi_startproc
+  63:Src/translator.cpp ****         uint8_t var = getType(package);
+ 273              		.loc 1 63 5 is_stmt 0 view .LVU79
+ 274 00fa 4154     		pushq	%r12
+ 275              		.cfi_def_cfa_offset 16
+ 276              		.cfi_offset 12, -16
+ 277 00fc 55       		pushq	%rbp
+ 278              		.cfi_def_cfa_offset 24
+ 279              		.cfi_offset 6, -24
+ 280 00fd 53       		pushq	%rbx
+ 281              		.cfi_def_cfa_offset 32
+ 282              		.cfi_offset 3, -32
+ 283 00fe 4889FB   		movq	%rdi, %rbx
+ 284 0101 4989F4   		movq	%rsi, %r12
+  64:Src/translator.cpp ****         if(var != TYPE_CMD)
+ 285              		.loc 1 64 9 is_stmt 1 view .LVU80
+  64:Src/translator.cpp ****         if(var != TYPE_CMD)
+ 286              		.loc 1 64 30 is_stmt 0 view .LVU81
+ 287 0104 E8000000 		call	_ZN10translator7getTypeEPh
+ 287      00
+ 288              	.LVL32:
+  65:Src/translator.cpp ****             return TYPE_BAD_TYPE;
+ 289              		.loc 1 65 9 is_stmt 1 view .LVU82
+ 290 0109 3C01     		cmpb	$1, %al
+ 291 010b 753B     		jne	.L24
+  68:Src/translator.cpp ****         if(var != 1)
+ 292              		.loc 1 68 9 view .LVU83
+  68:Src/translator.cpp ****         if(var != 1)
+ 293              		.loc 1 68 21 is_stmt 0 view .LVU84
+ 294 010d 4889DF   		movq	%rbx, %rdi
+ 295 0110 E8000000 		call	_ZN10translator6getLenEPKh
+ 295      00
+ 296              	.LVL33:
+  68:Src/translator.cpp ****         if(var != 1)
+ 297              		.loc 1 68 21 view .LVU85
+ 298 0115 89C5     		movl	%eax, %ebp
+ 299              	.LVL34:
+  69:Src/translator.cpp ****             return TYPE_BAD_LEN;
+GAS LISTING /tmp/ccV5SczU.s 			page 11
+
+
+ 300              		.loc 1 69 9 is_stmt 1 view .LVU86
+ 301 0117 3C01     		cmpb	$1, %al
+ 302 0119 7539     		jne	.L25
+  72:Src/translator.cpp ****         if(check != ((package[1] << 8) | (package[2])))
+ 303              		.loc 1 72 9 view .LVU87
+  72:Src/translator.cpp ****         if(check != ((package[1] << 8) | (package[2])))
+ 304              		.loc 1 72 39 is_stmt 0 view .LVU88
+ 305 011b 4889DF   		movq	%rbx, %rdi
+ 306 011e E8000000 		call	_ZN10translator11genCheckSumEPKh
+ 306      00
+ 307              	.LVL35:
+  73:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 308              		.loc 1 73 9 is_stmt 1 view .LVU89
+  73:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 309              		.loc 1 73 12 is_stmt 0 view .LVU90
+ 310 0123 0FB7C0   		movzwl	%ax, %eax
+  73:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 311              		.loc 1 73 32 view .LVU91
+ 312 0126 0FB65301 		movzbl	1(%rbx), %edx
+  73:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 313              		.loc 1 73 34 view .LVU92
+ 314 012a C1E208   		sall	$8, %edx
+  73:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 315              		.loc 1 73 52 view .LVU93
+ 316 012d 0FB64B02 		movzbl	2(%rbx), %ecx
+  73:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 317              		.loc 1 73 40 view .LVU94
+ 318 0131 09CA     		orl	%ecx, %edx
+  73:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+ 319              		.loc 1 73 9 view .LVU95
+ 320 0133 39D0     		cmpl	%edx, %eax
+ 321 0135 7524     		jne	.L26
+  76:Src/translator.cpp ****             funcArr[package[3]]();
+ 322              		.loc 1 76 9 is_stmt 1 view .LVU96
+  76:Src/translator.cpp ****             funcArr[package[3]]();
+ 323              		.loc 1 76 29 is_stmt 0 view .LVU97
+ 324 0137 0FB64303 		movzbl	3(%rbx), %eax
+ 325              	.LVL36:
+  76:Src/translator.cpp ****             funcArr[package[3]]();
+ 326              		.loc 1 76 30 view .LVU98
+ 327 013b 498B04C4 		movq	(%r12,%rax,8), %rax
+  76:Src/translator.cpp ****             funcArr[package[3]]();
+ 328              		.loc 1 76 9 view .LVU99
+ 329 013f 4885C0   		testq	%rax, %rax
+ 330 0142 7409     		je	.L22
+  77:Src/translator.cpp ****         return TYPE_CMD;
+ 331              		.loc 1 77 13 is_stmt 1 view .LVU100
+  77:Src/translator.cpp ****         return TYPE_CMD;
+ 332              		.loc 1 77 32 is_stmt 0 view .LVU101
+ 333 0144 FFD0     		call	*%rax
+ 334              	.LVL37:
+ 335 0146 EB05     		jmp	.L22
+ 336              	.LVL38:
+ 337              	.L24:
+  66:Src/translator.cpp **** 
+ 338              		.loc 1 66 20 view .LVU102
+ 339 0148 BD650000 		movl	$101, %ebp
+GAS LISTING /tmp/ccV5SczU.s 			page 12
+
+
+ 339      00
+ 340              	.LVL39:
+ 341              	.L22:
+  79:Src/translator.cpp **** 
+ 342              		.loc 1 79 5 view .LVU103
+ 343 014d 89E8     		movl	%ebp, %eax
+ 344 014f 5B       		popq	%rbx
+ 345              		.cfi_remember_state
+ 346              		.cfi_def_cfa_offset 24
+ 347              	.LVL40:
+  79:Src/translator.cpp **** 
+ 348              		.loc 1 79 5 view .LVU104
+ 349 0150 5D       		popq	%rbp
+ 350              		.cfi_def_cfa_offset 16
+ 351 0151 415C     		popq	%r12
+ 352              		.cfi_def_cfa_offset 8
+ 353              	.LVL41:
+  79:Src/translator.cpp **** 
+ 354              		.loc 1 79 5 view .LVU105
+ 355 0153 C3       		ret
+ 356              	.LVL42:
+ 357              	.L25:
+ 358              		.cfi_restore_state
+  70:Src/translator.cpp **** 
+ 359              		.loc 1 70 20 view .LVU106
+ 360 0154 BD640000 		movl	$100, %ebp
+ 360      00
+ 361 0159 EBF2     		jmp	.L22
+ 362              	.LVL43:
+ 363              	.L26:
+  74:Src/translator.cpp **** 
+ 364              		.loc 1 74 20 view .LVU107
+ 365 015b BD660000 		movl	$102, %ebp
+ 365      00
+ 366              	.LVL44:
+  74:Src/translator.cpp **** 
+ 367              		.loc 1 74 20 view .LVU108
+ 368 0160 EBEB     		jmp	.L22
+ 369              		.cfi_endproc
+ 370              	.LFE1506:
+ 372              		.globl	_ZN10translator10getPayloadEPKhPh
+ 374              	_ZN10translator10getPayloadEPKhPh:
+ 375              	.LVL45:
+ 376              	.LFB1507:
+  84:Src/translator.cpp ****         uint8_t len = getLen(package);
+ 377              		.loc 1 84 5 is_stmt 1 view -0
+ 378              		.cfi_startproc
+  84:Src/translator.cpp ****         uint8_t len = getLen(package);
+ 379              		.loc 1 84 5 is_stmt 0 view .LVU110
+ 380 0162 55       		pushq	%rbp
+ 381              		.cfi_def_cfa_offset 16
+ 382              		.cfi_offset 6, -16
+ 383 0163 53       		pushq	%rbx
+ 384              		.cfi_def_cfa_offset 24
+ 385              		.cfi_offset 3, -24
+ 386 0164 4889FB   		movq	%rdi, %rbx
+ 387 0167 4889F5   		movq	%rsi, %rbp
+GAS LISTING /tmp/ccV5SczU.s 			page 13
+
+
+  85:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
+ 388              		.loc 1 85 9 is_stmt 1 view .LVU111
+  85:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
+ 389              		.loc 1 85 29 is_stmt 0 view .LVU112
+ 390 016a E8000000 		call	_ZN10translator6getLenEPKh
+ 390      00
+ 391              	.LVL46:
+  86:Src/translator.cpp ****         {
+ 392              		.loc 1 86 9 is_stmt 1 view .LVU113
+ 393              	.LBB4:
+  86:Src/translator.cpp ****         {
+ 394              		.loc 1 86 21 is_stmt 0 view .LVU114
+ 395 016f BA000000 		movl	$0, %edx
+ 395      00
+ 396              	.LVL47:
+ 397              	.L30:
+  86:Src/translator.cpp ****         {
+ 398              		.loc 1 86 30 discriminator 3 view .LVU115
+ 399 0174 38C2     		cmpb	%al, %dl
+ 400 0176 7312     		jnb	.L28
+  88:Src/translator.cpp ****         }
+ 401              		.loc 1 88 13 is_stmt 1 discriminator 2 view .LVU116
+  88:Src/translator.cpp ****         }
+ 402              		.loc 1 88 29 is_stmt 0 discriminator 2 view .LVU117
+ 403 0178 0FB6CA   		movzbl	%dl, %ecx
+  88:Src/translator.cpp ****         }
+ 404              		.loc 1 88 34 discriminator 2 view .LVU118
+ 405 017b 0FB6740B 		movzbl	3(%rbx,%rcx), %esi
+ 405      03
+  88:Src/translator.cpp ****         }
+ 406              		.loc 1 88 19 discriminator 2 view .LVU119
+ 407 0180 4088740D 		movb	%sil, 0(%rbp,%rcx)
+ 407      00
+  86:Src/translator.cpp ****         {
+ 408              		.loc 1 86 9 discriminator 2 view .LVU120
+ 409 0185 83C201   		addl	$1, %edx
+ 410              	.LVL48:
+  86:Src/translator.cpp ****         {
+ 411              		.loc 1 86 9 discriminator 2 view .LVU121
+ 412 0188 EBEA     		jmp	.L30
+ 413              	.L28:
+  86:Src/translator.cpp ****         {
+ 414              		.loc 1 86 9 discriminator 2 view .LVU122
+ 415              	.LBE4:
+  90:Src/translator.cpp **** 
+ 416              		.loc 1 90 5 view .LVU123
+ 417 018a 5B       		popq	%rbx
+ 418              		.cfi_def_cfa_offset 16
+ 419              	.LVL49:
+  90:Src/translator.cpp **** 
+ 420              		.loc 1 90 5 view .LVU124
+ 421 018b 5D       		popq	%rbp
+ 422              		.cfi_def_cfa_offset 8
+ 423              	.LVL50:
+  90:Src/translator.cpp **** 
+ 424              		.loc 1 90 5 view .LVU125
+ 425 018c C3       		ret
+GAS LISTING /tmp/ccV5SczU.s 			page 14
+
+
+ 426              		.cfi_endproc
+ 427              	.LFE1507:
+ 429              		.globl	_ZN10translator6equalsEPKhS1_
+ 431              	_ZN10translator6equalsEPKhS1_:
+ 432              	.LVL51:
+ 433              	.LFB1509:
+  99:Src/translator.cpp ****         if(p1[0] != p2[0])
+ 434              		.loc 1 99 5 is_stmt 1 view -0
+ 435              		.cfi_startproc
+ 100:Src/translator.cpp ****             return false;
+ 436              		.loc 1 100 9 view .LVU127
+ 437 018d 0FB606   		movzbl	(%rsi), %eax
+ 438 0190 3807     		cmpb	%al, (%rdi)
+ 439 0192 7529     		jne	.L35
+  99:Src/translator.cpp ****         if(p1[0] != p2[0])
+ 440              		.loc 1 99 5 is_stmt 0 view .LVU128
+ 441 0194 55       		pushq	%rbp
+ 442              		.cfi_def_cfa_offset 16
+ 443              		.cfi_offset 6, -16
+ 444 0195 53       		pushq	%rbx
+ 445              		.cfi_def_cfa_offset 24
+ 446              		.cfi_offset 3, -24
+ 447 0196 4889FB   		movq	%rdi, %rbx
+ 448 0199 4889F5   		movq	%rsi, %rbp
+ 103:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
+ 449              		.loc 1 103 9 is_stmt 1 view .LVU129
+ 103:Src/translator.cpp ****         for(uint8_t i = 0; i < len; i++)
+ 450              		.loc 1 103 29 is_stmt 0 view .LVU130
+ 451 019c E8000000 		call	_ZN10translator6getLenEPKh
+ 451      00
+ 452              	.LVL52:
+ 104:Src/translator.cpp ****         {
+ 453              		.loc 1 104 9 is_stmt 1 view .LVU131
+ 454              	.LBB5:
+ 104:Src/translator.cpp ****         {
+ 455              		.loc 1 104 21 is_stmt 0 view .LVU132
+ 456 01a1 BA000000 		movl	$0, %edx
+ 456      00
+ 457              	.LVL53:
+ 458              	.L34:
+ 104:Src/translator.cpp ****         {
+ 459              		.loc 1 104 30 discriminator 1 view .LVU133
+ 460 01a6 38C2     		cmpb	%al, %dl
+ 461 01a8 7319     		jnb	.L36
+ 106:Src/translator.cpp ****                 return false;
+ 462              		.loc 1 106 13 is_stmt 1 view .LVU134
+ 106:Src/translator.cpp ****                 return false;
+ 463              		.loc 1 106 19 is_stmt 0 view .LVU135
+ 464 01aa 0FB6CA   		movzbl	%dl, %ecx
+ 106:Src/translator.cpp ****                 return false;
+ 465              		.loc 1 106 13 view .LVU136
+ 466 01ad 0FB6740D 		movzbl	0(%rbp,%rcx), %esi
+ 466      00
+ 467 01b2 4038340B 		cmpb	%sil, (%rbx,%rcx)
+ 468 01b6 7513     		jne	.L37
+ 104:Src/translator.cpp ****         {
+ 469              		.loc 1 104 9 discriminator 2 view .LVU137
+GAS LISTING /tmp/ccV5SczU.s 			page 15
+
+
+ 470 01b8 83C201   		addl	$1, %edx
+ 471              	.LVL54:
+ 104:Src/translator.cpp ****         {
+ 472              		.loc 1 104 9 discriminator 2 view .LVU138
+ 473 01bb EBE9     		jmp	.L34
+ 474              	.LVL55:
+ 475              	.L35:
+ 476              		.cfi_def_cfa_offset 8
+ 477              		.cfi_restore 3
+ 478              		.cfi_restore 6
+ 104:Src/translator.cpp ****         {
+ 479              		.loc 1 104 9 discriminator 2 view .LVU139
+ 480              	.LBE5:
+ 101:Src/translator.cpp **** 
+ 481              		.loc 1 101 20 view .LVU140
+ 482 01bd B8000000 		movl	$0, %eax
+ 482      00
+ 110:Src/translator.cpp **** }
+ 483              		.loc 1 110 5 view .LVU141
+ 484 01c2 C3       		ret
+ 485              	.LVL56:
+ 486              	.L36:
+ 487              		.cfi_def_cfa_offset 24
+ 488              		.cfi_offset 3, -24
+ 489              		.cfi_offset 6, -16
+ 109:Src/translator.cpp ****     }
+ 490              		.loc 1 109 16 view .LVU142
+ 491 01c3 B8010000 		movl	$1, %eax
+ 491      00
+ 492              	.LVL57:
+ 493              	.L32:
+ 110:Src/translator.cpp **** }
+ 494              		.loc 1 110 5 view .LVU143
+ 495 01c8 5B       		popq	%rbx
+ 496              		.cfi_remember_state
+ 497              		.cfi_def_cfa_offset 16
+ 498              	.LVL58:
+ 110:Src/translator.cpp **** }
+ 499              		.loc 1 110 5 view .LVU144
+ 500 01c9 5D       		popq	%rbp
+ 501              		.cfi_def_cfa_offset 8
+ 502              	.LVL59:
+ 110:Src/translator.cpp **** }
+ 503              		.loc 1 110 5 view .LVU145
+ 504 01ca C3       		ret
+ 505              	.LVL60:
+ 506              	.L37:
+ 507              		.cfi_restore_state
+ 508              	.LBB6:
+ 107:Src/translator.cpp ****         }
+ 509              		.loc 1 107 24 view .LVU146
+ 510 01cb B8000000 		movl	$0, %eax
+ 510      00
+ 511              	.LVL61:
+ 107:Src/translator.cpp ****         }
+ 512              		.loc 1 107 24 view .LVU147
+ 513 01d0 EBF6     		jmp	.L32
+GAS LISTING /tmp/ccV5SczU.s 			page 16
+
+
+ 514              	.LBE6:
+ 515              		.cfi_endproc
+ 516              	.LFE1509:
+ 519              	_GLOBAL__sub_I__ZN10translator11genCheckSumEPKh:
+ 520              	.LFB1827:
+ 521              		.loc 1 111 1 is_stmt 1 view -0
+ 522              		.cfi_startproc
+ 523 01d2 4883EC08 		subq	$8, %rsp
+ 524              		.cfi_def_cfa_offset 16
+ 525              		.loc 1 111 1 is_stmt 0 view .LVU149
+ 526 01d6 BEFFFF00 		movl	$65535, %esi
+ 526      00
+ 527 01db BF010000 		movl	$1, %edi
+ 527      00
+ 528 01e0 E81BFEFF 		call	_Z41__static_initialization_and_destruction_0ii
+ 528      FF
+ 529              	.LVL62:
+ 530 01e5 4883C408 		addq	$8, %rsp
+ 531              		.cfi_def_cfa_offset 8
+ 532 01e9 C3       		ret
+ 533              		.cfi_endproc
+ 534              	.LFE1827:
+ 536              		.section	.init_array,"aw"
+ 537              		.align 8
+ 538 0000 00000000 		.quad	_GLOBAL__sub_I__ZN10translator11genCheckSumEPKh
+ 538      00000000 
+ 539              		.local	_ZStL8__ioinit
+ 540              		.comm	_ZStL8__ioinit,1,1
+ 541              		.text
+ 542              	.Letext0:
+ 543              		.file 3 "/usr/include/c++/9.1.0/cwchar"
+ 544              		.file 4 "/usr/include/c++/9.1.0/new"
+ 545              		.file 5 "/usr/include/c++/9.1.0/bits/exception_ptr.h"
+ 546              		.file 6 "/usr/include/c++/9.1.0/type_traits"
+ 547              		.file 7 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/c++config.h"
+ 548              		.file 8 "/usr/include/c++/9.1.0/bits/stl_pair.h"
+ 549              		.file 9 "/usr/include/c++/9.1.0/debug/debug.h"
+ 550              		.file 10 "/usr/include/c++/9.1.0/bits/char_traits.h"
+ 551              		.file 11 "/usr/include/c++/9.1.0/cstdint"
+ 552              		.file 12 "/usr/include/c++/9.1.0/clocale"
+ 553              		.file 13 "/usr/include/c++/9.1.0/cstdlib"
+ 554              		.file 14 "/usr/include/c++/9.1.0/cstdio"
+ 555              		.file 15 "/usr/include/c++/9.1.0/system_error"
+ 556              		.file 16 "/usr/include/c++/9.1.0/bits/ios_base.h"
+ 557              		.file 17 "/usr/include/c++/9.1.0/cwctype"
+ 558              		.file 18 "/usr/include/c++/9.1.0/iosfwd"
+ 559              		.file 19 "/usr/include/c++/9.1.0/bits/predefined_ops.h"
+ 560              		.file 20 "/usr/include/c++/9.1.0/ext/new_allocator.h"
+ 561              		.file 21 "/usr/include/c++/9.1.0/ext/numeric_traits.h"
+ 562              		.file 22 "/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include/stddef.h"
+ 563              		.file 23 "<built-in>"
+ 564              		.file 24 "/usr/include/bits/types/wint_t.h"
+ 565              		.file 25 "/usr/include/bits/types/__mbstate_t.h"
+ 566              		.file 26 "/usr/include/bits/types/mbstate_t.h"
+ 567              		.file 27 "/usr/include/bits/types/__FILE.h"
+ 568              		.file 28 "/usr/include/bits/types/struct_FILE.h"
+ 569              		.file 29 "/usr/include/bits/types/FILE.h"
+GAS LISTING /tmp/ccV5SczU.s 			page 17
+
+
+ 570              		.file 30 "/usr/include/wchar.h"
+ 571              		.file 31 "/usr/include/bits/types/struct_tm.h"
+ 572              		.file 32 "/usr/include/bits/types.h"
+ 573              		.file 33 "/usr/include/bits/stdint-intn.h"
+ 574              		.file 34 "/usr/include/bits/stdint-uintn.h"
+ 575              		.file 35 "/usr/include/stdint.h"
+ 576              		.file 36 "/usr/include/locale.h"
+ 577              		.file 37 "/usr/include/time.h"
+ 578              		.file 38 "/usr/include/c++/9.1.0/x86_64-pc-linux-gnu/bits/atomic_word.h"
+ 579              		.file 39 "/usr/include/stdlib.h"
+ 580              		.file 40 "/usr/include/bits/stdlib-float.h"
+ 581              		.file 41 "/usr/include/bits/stdlib-bsearch.h"
+ 582              		.file 42 "/usr/include/bits/types/__fpos_t.h"
+ 583              		.file 43 "/usr/include/stdio.h"
+ 584              		.file 44 "/usr/include/bits/sys_errlist.h"
+ 585              		.file 45 "/usr/include/bits/stdio.h"
+ 586              		.file 46 "/usr/include/errno.h"
+ 587              		.file 47 "/usr/include/bits/wctype-wchar.h"
+ 588              		.file 48 "/usr/include/wctype.h"
+ 589              		.file 49 "Inc/translator.hpp"
+GAS LISTING /tmp/ccV5SczU.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 translator.cpp
-     /tmp/ccwWEt2v.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/ccV5SczU.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
                              .bss:0000000000000000 _ZStL8__ioinit
-     /tmp/ccwWEt2v.s:45     .text:000000000000003d _ZN10translator7getTypeEPh
-     /tmp/ccwWEt2v.s:62     .text:0000000000000044 _ZN10translator8parseCmdEPhPPFvvE
-     /tmp/ccwWEt2v.s:74     .text:0000000000000045 _ZN10translator6getLenEPKh
-     /tmp/ccwWEt2v.s:91     .text:000000000000004c _ZN10translator11genCheckSumEPKh
-     /tmp/ccwWEt2v.s:159    .text:0000000000000084 _ZN10translator11parsePacketEPhS0_
-     /tmp/ccwWEt2v.s:280    .text:00000000000000fb _ZN10translator10getPayloadEPKhPh
-     /tmp/ccwWEt2v.s:337    .text:0000000000000126 _ZN10translator6equalsEPKhS1_
-     /tmp/ccwWEt2v.s:425    .text:000000000000016b _GLOBAL__sub_I__ZN10translator11genCheckSumEPKh
+     /tmp/ccV5SczU.s:45     .text:000000000000003d _ZN10translator7getTypeEPh
+     /tmp/ccV5SczU.s:62     .text:0000000000000044 _ZN10translator6getLenEPKh
+     /tmp/ccV5SczU.s:79     .text:000000000000004b _ZN10translator11genCheckSumEPKh
+     /tmp/ccV5SczU.s:147    .text:0000000000000083 _ZN10translator11parsePacketEPhS0_
+     /tmp/ccV5SczU.s:268    .text:00000000000000fa _ZN10translator8parseCmdEPhPPFvvE
+     /tmp/ccV5SczU.s:374    .text:0000000000000162 _ZN10translator10getPayloadEPKhPh
+     /tmp/ccV5SczU.s:431    .text:000000000000018d _ZN10translator6equalsEPKhS1_
+     /tmp/ccV5SczU.s:519    .text:00000000000001d2 _GLOBAL__sub_I__ZN10translator11genCheckSumEPKh
 
 UNDEFINED SYMBOLS
 _GLOBAL_OFFSET_TABLE_

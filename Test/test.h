@@ -57,11 +57,9 @@ public:
 
     void testGetType(void)
     {
-        uint8_t *c = (uint8_t*)calloc(sizeof(uint8_t), 10);
+        uint8_t *c = (uint8_t*)alloca(sizeof(uint8_t)* 10);
         c[0] = translator::TYPE_ARR << 6;
         TS_ASSERT_EQUALS(translator::getType(c), translator::TYPE_ARR);
-
-        free(c);
     }
 
     void testEquals(void)
@@ -113,5 +111,26 @@ public:
         TS_ASSERT_EQUALS(translator::getLen(&c), 10);
         c = 10 | (translator::TYPE_ARR << 6);
         TS_ASSERT_EQUALS(translator::getLen(&c), 10);
+    }
+
+    void testParseCmd(void)
+    {
+        uint8_t *c = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        c[0] = (translator::TYPE_CMD << 6) | 2;
+        TS_ASSERT_EQUALS(translator::parseCmd(c, 0), translator::TYPE_BAD_LEN);
+
+        c[0] = (translator::TYPE_VAR << 6) | 1;
+        TS_ASSERT_EQUALS(translator::parseCmd(c, 0), translator::TYPE_BAD_TYPE);
+
+        c[0] = (translator::TYPE_CMD << 6) | 1;
+        TS_ASSERT_EQUALS(translator::parseCmd(c, 0), translator::TYPE_BAD_CHECKSUM);
+        void (*funcArr[10])();
+        funcArr[0] = functest0;
+        called0 = false;
+        c[3] = 0;
+        c[1] = ((translator::genCheckSum(c) & 0xFF00) >> 8);
+        c[2] = (translator::genCheckSum(c));
+        TS_ASSERT_EQUALS(translator::parseCmd(c, funcArr), translator::TYPE_CMD);
+        TS_ASSERT(called0);
     }
 };

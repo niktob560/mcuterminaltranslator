@@ -22,14 +22,14 @@ namespace translator
     //get len of payload
     uint8_t getLen(const uint8_t* package);
 
-    //parse var from var package and write into toArr[id]
-    void parseVar(uint8_t *package, void **toArr);
+    //parse var from var package and write into toArr[id], return type of package
+    uint8_t parseVar(uint8_t *package, void **toArr);
 
-    //parse array from array package and write into toArr[id]
-    void parseArr(uint8_t *package, void **toArr);
+    //parse array from array package and write into toArr[id], return type of package
+    uint8_t parseArr(uint8_t *package, void **toArr);
 
-    //parse cmd from package, call funcArr[cmd]
-    void parseCmd(uint8_t *package, void (*funcArr [])());
+    //parse cmd from package, call funcArr[cmd], return type of package, max num of funcs - 255, max len - 1
+    uint8_t parseCmd(uint8_t *package, void (*funcArr [])());
 
     //parse input package, get payload, return type of package
     uint8_t parsePacket(uint8_t *package, uint8_t *payloadto);

@@ -58,10 +58,24 @@ namespace translator
     }
 
 
-    //parse cmd from package, call funcArr[cmd]
-    void parseCmd(uint8_t *package, void (*funcArr [])())
+    //parse cmd from package, call funcArr[cmd], return type of package, max num of funcs - 255
+    uint8_t parseCmd(uint8_t *package, void (*funcArr [])())
     {
+        uint8_t var = getType(package);
+        if(var != TYPE_CMD)
+            return TYPE_BAD_TYPE;
 
+        var = getLen(package);
+        if(var != 1)
+            return TYPE_BAD_LEN;
+
+        checksum_t check = genCheckSum(package);
+        if(check != ((package[1] << 8) | (package[2])))
+            return TYPE_BAD_CHECKSUM;
+
+        if(funcArr[package[3]] != NULL)
+            funcArr[package[3]]();
+        return TYPE_CMD;
     }
 
 

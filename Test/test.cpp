@@ -41,21 +41,27 @@ public:
 
 static class TestDescription_suite_translatorTest_testEquals : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testEquals() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 67, "testEquals" ) {}
+ TestDescription_suite_translatorTest_testEquals() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 65, "testEquals" ) {}
  void runTest() { suite_translatorTest.testEquals(); }
 } testDescription_suite_translatorTest_testEquals;
 
 static class TestDescription_suite_translatorTest_testGetPayload : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testGetPayload() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 92, "testGetPayload" ) {}
+ TestDescription_suite_translatorTest_testGetPayload() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 90, "testGetPayload" ) {}
  void runTest() { suite_translatorTest.testGetPayload(); }
 } testDescription_suite_translatorTest_testGetPayload;
 
 static class TestDescription_suite_translatorTest_testGetLen : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testGetLen() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 110, "testGetLen" ) {}
+ TestDescription_suite_translatorTest_testGetLen() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 108, "testGetLen" ) {}
  void runTest() { suite_translatorTest.testGetLen(); }
 } testDescription_suite_translatorTest_testGetLen;
+
+static class TestDescription_suite_translatorTest_testParseCmd : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_translatorTest_testParseCmd() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 116, "testParseCmd" ) {}
+ void runTest() { suite_translatorTest.testParseCmd(); }
+} testDescription_suite_translatorTest_testParseCmd;
 
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";
