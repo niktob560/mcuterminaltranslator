@@ -196,4 +196,20 @@ public:
         p[2] = translator::genCheckSum(p) & 0xFF;
         TS_ASSERT(!translator::validate(p));
     }
+
+    void testGenVar(void)
+    {
+        uint8_t *p = (uint8_t*)alloca(sizeof(uint8_t) * 10),
+                *ref = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        ref[0] = translator::getZeroByte(translator::TYPE_VAR, 2);
+        ref[3] = 1;
+        ref[4] = 1;
+        ref[1] = translator::genCheckSum(ref) >> 8;
+        ref[2] = translator::genCheckSum(ref) & 0xFF;
+        uint8_t *i = (uint8_t*)alloca(sizeof(uint8_t));
+        *i = 1;
+        translator::generateVar(1, 1, i, p);
+
+        TS_ASSERT(translator::equals(p, ref));
+    }
 };

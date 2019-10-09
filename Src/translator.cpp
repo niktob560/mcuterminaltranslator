@@ -155,4 +155,16 @@ namespace translator
         }
         return (getCheckSum(pack) == genCheckSum(pack));
     }
+
+    //create var package
+    void generateVar(const uint8_t len, const uint8_t id, const uint8_t* var, uint8_t *tgt)
+    {
+        tgt[0] = getZeroByte(TYPE_VAR, len + 1);
+        tgt[3] = id;
+        for(uint8_t i = 0; i < len; i++)
+            tgt[4 + i] = var[i];
+        checksum_t check = genCheckSum(tgt);
+        tgt[1] = check >> 8;
+        tgt[2] = check & 0xFF;
+    }
 }

@@ -21,7 +21,7 @@ namespace translator
 
     //get len of payload
     uint8_t getLen(const uint8_t* package);
-    
+
     //get type of package
     uint8_t getType(const uint8_t *package);
 
@@ -54,4 +54,7 @@ namespace translator
 
     //validate checksum, type, len
     bool validate(const uint8_t *pack);
+
+    //create var package
+    void generateVar(const uint8_t len, const uint8_t id, const uint8_t* var, uint8_t *tgt);
 }
