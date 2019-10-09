@@ -26,7 +26,7 @@ namespace translator
     uint8_t getType(const uint8_t* package);
 
     //parse var from var package and write into toArr[id], return type of package
-    uint8_t parseVar(uint8_t* package, void** toArr);
+    uint8_t parseVar(uint8_t* package, uint8_t* toArr, uint8_t elsize);
 
     //parse array from array package and write into toArr[id], return type of package
     uint8_t parseArr(uint8_t* package, void** toArr);

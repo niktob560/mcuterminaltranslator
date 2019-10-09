@@ -212,4 +212,18 @@ public:
 
         TS_ASSERT(translator::equals(p, ref));
     }
+
+    void testParseVar(void)
+    {
+        uint8_t* array  = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        uint8_t* p      = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+
+        array[0] = 0;
+        array[1] = 0;
+        array[2] = 22;
+
+        translator::generateVar(1, 1, &array[2], p);
+        TS_ASSERT_EQUALS(translator::parseVar(p, array, 1), translator::TYPE_VAR);
+        TS_ASSERT_EQUALS(array[1], array[2]);
+    }
 };

@@ -167,4 +167,28 @@ namespace translator
         tgt[1] = check >> 8;
         tgt[2] = check & 0xFF;
     }
+
+
+    //parse var from var package and write into toArr[id], return type of package
+    uint8_t parseVar(uint8_t* package, uint8_t* toArr, uint8_t elsize)
+    {
+        uint8_t type = getType(package);
+        if(type != TYPE_VAR)
+            return TYPE_BAD_TYPE;
+        uint8_t len = getLen(package);
+        if(len < 2)
+            return TYPE_BAD_LEN;
+        checksum_t  check = genCheckSum(package),
+                    thischeck = getCheckSum(package);
+        if(check != thischeck)
+            return TYPE_BAD_CHECKSUM;
+
+        uint8_t id = package[3];
+        for(uint8_t i = 0; i < len - 1; i++)
+        {
+            toArr[(id + i) * elsize] = package[i + 4];
+            std::cout << "from " << (int)((id + i) * elsize) << " to " << (int)(i + 4) << std::endl;
+        }
+        return TYPE_VAR;
+    }
 }
