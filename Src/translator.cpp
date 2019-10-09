@@ -18,14 +18,14 @@ namespace translator
     }
 
     //get type of package
-    uint8_t getType(const uint8_t *package)
+    uint8_t getType(const uint8_t* package)
     {
         return ((package[0] & (~LEN_MASK)) >> 6);
     }
 
 
     //parse input package, get payload, return type of package
-    uint8_t parsePacket(uint8_t *package, uint8_t *payloadto)
+    uint8_t parsePacket(uint8_t* package, uint8_t* payloadto)
     {
         uint8_t type = getType(package);
         if(type != TYPE_ARR && type != TYPE_CMD && type != TYPE_VAR)
@@ -48,7 +48,7 @@ namespace translator
 
 
     //parse cmd from package, call funcArr[cmd], return type of package, max num of funcs - 255
-    uint8_t parseCmd(uint8_t *package, void (*funcArr [])())
+    uint8_t parseCmd(uint8_t* package, void (*funcArr [])())
     {
         uint8_t var = getType(package);
         if(var != TYPE_CMD)
@@ -69,7 +69,7 @@ namespace translator
 
 
     //get payload from package to addr
-    void getPayload(const uint8_t *package, uint8_t *to)
+    void getPayload(const uint8_t* package, uint8_t* to)
     {
         uint8_t len = getLen(package);
         for(uint8_t i = 0; i < len; i++)
@@ -122,7 +122,7 @@ namespace translator
 
 
     //get id of var in payload of package
-    uint8_t getVarId(const uint8_t *pack)
+    uint8_t getVarId(const uint8_t* pack)
     {
         if(!validate(pack))
             return 0xFF;
@@ -132,7 +132,7 @@ namespace translator
 
 
     //validate checksum, type, len
-    bool validate(const uint8_t *pack)
+    bool validate(const uint8_t* pack)
     {
         uint8_t type = getType(pack);
         switch (type)
@@ -157,7 +157,7 @@ namespace translator
     }
 
     //create var package
-    void generateVar(const uint8_t len, const uint8_t id, const uint8_t* var, uint8_t *tgt)
+    void generateVar(const uint8_t len, const uint8_t id, const uint8_t* var, uint8_t* tgt)
     {
         tgt[0] = getZeroByte(TYPE_VAR, len + 1);
         tgt[3] = id;
