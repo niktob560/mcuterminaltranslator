@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccArRuJ8.s 			page 1
+GAS LISTING /tmp/ccqVV4wR.s 			page 1
 
 
    1              		.file	"main.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
   20:/usr/include/c++/9.1.0/iostream **** // You should have received a copy of the GNU General Public License and
   21:/usr/include/c++/9.1.0/iostream **** // a copy of the GCC Runtime Library Exception along with this program;
   22:/usr/include/c++/9.1.0/iostream **** // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-GAS LISTING /tmp/ccArRuJ8.s 			page 2
+GAS LISTING /tmp/ccqVV4wR.s 			page 2
 
 
   23:/usr/include/c++/9.1.0/iostream **** // <http://www.gnu.org/licenses/>.
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
   25      000000
   26              	.LVL1:
   27              		.loc 2 74 25 view .LVU5
-GAS LISTING /tmp/ccArRuJ8.s 			page 3
+GAS LISTING /tmp/ccqVV4wR.s 			page 3
 
 
   28 0019 E8000000 		call	_ZNSt8ios_base4InitC1Ev@PLT
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
   10:/usr/include/c++/9.1.0/istream **** 
   11:/usr/include/c++/9.1.0/istream **** // This library is distributed in the hope that it will be useful,
   12:/usr/include/c++/9.1.0/istream **** // but WITHOUT ANY WARRANTY; without even the implied warranty of
-GAS LISTING /tmp/ccArRuJ8.s 			page 4
+GAS LISTING /tmp/ccqVV4wR.s 			page 4
 
 
   13:/usr/include/c++/9.1.0/istream **** // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
   67:/usr/include/c++/9.1.0/istream **** 
   68:/usr/include/c++/9.1.0/istream ****       // Non-standard Types:
   69:/usr/include/c++/9.1.0/istream ****       typedef basic_streambuf<_CharT, _Traits> 		__streambuf_type;
-GAS LISTING /tmp/ccArRuJ8.s 			page 5
+GAS LISTING /tmp/ccqVV4wR.s 			page 5
 
 
   70:/usr/include/c++/9.1.0/istream ****       typedef basic_ios<_CharT, _Traits>		__ios_type;
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  124:/usr/include/c++/9.1.0/istream ****       operator>>(__ios_type& (*__pf)(__ios_type&))
  125:/usr/include/c++/9.1.0/istream ****       {
  126:/usr/include/c++/9.1.0/istream **** 	__pf(*this);
-GAS LISTING /tmp/ccArRuJ8.s 			page 6
+GAS LISTING /tmp/ccqVV4wR.s 			page 6
 
 
  127:/usr/include/c++/9.1.0/istream **** 	return *this;
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  181:/usr/include/c++/9.1.0/istream ****       __istream_type&
  182:/usr/include/c++/9.1.0/istream ****       operator>>(unsigned int& __n)
  183:/usr/include/c++/9.1.0/istream ****       { return _M_extract(__n); }
-GAS LISTING /tmp/ccArRuJ8.s 			page 7
+GAS LISTING /tmp/ccqVV4wR.s 			page 7
 
 
  184:/usr/include/c++/9.1.0/istream **** 
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  238:/usr/include/c++/9.1.0/istream ****       /**
  239:/usr/include/c++/9.1.0/istream ****        *  @brief  Extracting into another streambuf.
  240:/usr/include/c++/9.1.0/istream ****        *  @param  __sb  A pointer to a streambuf
-GAS LISTING /tmp/ccArRuJ8.s 			page 8
+GAS LISTING /tmp/ccqVV4wR.s 			page 8
 
 
  241:/usr/include/c++/9.1.0/istream ****        *
@@ -478,7 +478,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  295:/usr/include/c++/9.1.0/istream ****        *  @brief  Simple extraction.
  296:/usr/include/c++/9.1.0/istream ****        *  @return  A character, or eof().
  297:/usr/include/c++/9.1.0/istream ****        *
-GAS LISTING /tmp/ccArRuJ8.s 			page 9
+GAS LISTING /tmp/ccqVV4wR.s 			page 9
 
 
  298:/usr/include/c++/9.1.0/istream ****        *  Tries to extract a character.  If none are available, sets failbit
@@ -538,7 +538,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  352:/usr/include/c++/9.1.0/istream ****       */
  353:/usr/include/c++/9.1.0/istream ****       __istream_type&
  354:/usr/include/c++/9.1.0/istream ****       get(char_type* __s, streamsize __n)
-GAS LISTING /tmp/ccArRuJ8.s 			page 10
+GAS LISTING /tmp/ccqVV4wR.s 			page 10
 
 
  355:/usr/include/c++/9.1.0/istream ****       { return this->get(__s, __n, this->widen('\n')); }
@@ -598,7 +598,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  409:/usr/include/c++/9.1.0/istream ****        *  If no characters are extracted, failbit is set.  (An empty line of
  410:/usr/include/c++/9.1.0/istream ****        *  input should therefore not cause failbit to be set.)
  411:/usr/include/c++/9.1.0/istream ****        *
-GAS LISTING /tmp/ccArRuJ8.s 			page 11
+GAS LISTING /tmp/ccqVV4wR.s 			page 11
 
 
  412:/usr/include/c++/9.1.0/istream ****        *  In any case, a null character is stored in the next location in
@@ -658,7 +658,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  466:/usr/include/c++/9.1.0/istream ****       */
  467:/usr/include/c++/9.1.0/istream ****       int_type
  468:/usr/include/c++/9.1.0/istream ****       peek();
-GAS LISTING /tmp/ccArRuJ8.s 			page 12
+GAS LISTING /tmp/ccqVV4wR.s 			page 12
 
 
  469:/usr/include/c++/9.1.0/istream **** 
@@ -718,7 +718,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  523:/usr/include/c++/9.1.0/istream **** 
  524:/usr/include/c++/9.1.0/istream ****       /**
  525:/usr/include/c++/9.1.0/istream ****        *  @brief  Unextracting the previous character.
-GAS LISTING /tmp/ccArRuJ8.s 			page 13
+GAS LISTING /tmp/ccqVV4wR.s 			page 13
 
 
  526:/usr/include/c++/9.1.0/istream ****        *  @return  *this
@@ -778,7 +778,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  580:/usr/include/c++/9.1.0/istream ****        *
  581:/usr/include/c++/9.1.0/istream ****        *  @note  This function first clears eofbit.  It does not count the
  582:/usr/include/c++/9.1.0/istream ****        *         number of characters extracted, if any, and therefore does
-GAS LISTING /tmp/ccArRuJ8.s 			page 14
+GAS LISTING /tmp/ccqVV4wR.s 			page 14
 
 
  583:/usr/include/c++/9.1.0/istream ****        *         not affect the next call to @c gcount().
@@ -838,7 +838,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  637:/usr/include/c++/9.1.0/istream **** #endif
  638:/usr/include/c++/9.1.0/istream **** 
  639:/usr/include/c++/9.1.0/istream ****       template<typename _ValueT>
-GAS LISTING /tmp/ccArRuJ8.s 			page 15
+GAS LISTING /tmp/ccqVV4wR.s 			page 15
 
 
  640:/usr/include/c++/9.1.0/istream **** 	__istream_type&
@@ -898,7 +898,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  694:/usr/include/c++/9.1.0/istream ****       typedef basic_streambuf<_CharT, _Traits> 		__streambuf_type;
  695:/usr/include/c++/9.1.0/istream ****       typedef basic_istream<_CharT, _Traits> 		__istream_type;
  696:/usr/include/c++/9.1.0/istream ****       typedef typename __istream_type::__ctype_type 	__ctype_type;
-GAS LISTING /tmp/ccArRuJ8.s 			page 16
+GAS LISTING /tmp/ccqVV4wR.s 			page 16
 
 
  697:/usr/include/c++/9.1.0/istream ****       typedef typename _Traits::int_type		__int_type;
@@ -958,7 +958,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  751:/usr/include/c++/9.1.0/istream ****     basic_istream<_CharT, _Traits>&
  752:/usr/include/c++/9.1.0/istream ****     operator>>(basic_istream<_CharT, _Traits>& __in, _CharT& __c);
  753:/usr/include/c++/9.1.0/istream **** 
-GAS LISTING /tmp/ccArRuJ8.s 			page 17
+GAS LISTING /tmp/ccqVV4wR.s 			page 17
 
 
  754:/usr/include/c++/9.1.0/istream ****   template<class _Traits>
@@ -1018,7 +1018,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
   66 0053 488D3D00 		leaq	_ZSt3cin(%rip), %rdi
   66      000000
   67 005a E8000000 		call	_ZStrsIcSt11char_traitsIcEERSt13basic_istreamIT_T0_ES6_PS3_@PLT
-GAS LISTING /tmp/ccArRuJ8.s 			page 18
+GAS LISTING /tmp/ccqVV4wR.s 			page 18
 
 
   67      00
@@ -1078,7 +1078,7 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  118              		.file 16 "/usr/include/c++/9.1.0/system_error"
  119              		.file 17 "/usr/include/c++/9.1.0/bits/ios_base.h"
  120              		.file 18 "/usr/include/c++/9.1.0/cwctype"
-GAS LISTING /tmp/ccArRuJ8.s 			page 19
+GAS LISTING /tmp/ccqVV4wR.s 			page 19
 
 
  121              		.file 19 "/usr/include/c++/9.1.0/iosfwd"
@@ -1113,15 +1113,15 @@ GAS LISTING /tmp/ccArRuJ8.s 			page 1
  150              		.file 48 "/usr/include/bits/wctype-wchar.h"
  151              		.file 49 "/usr/include/wctype.h"
  152              		.file 50 "Inc/translator.hpp"
-GAS LISTING /tmp/ccArRuJ8.s 			page 20
+GAS LISTING /tmp/ccqVV4wR.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.cpp
-     /tmp/ccArRuJ8.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/ccqVV4wR.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
                              .bss:0000000000000000 _ZStL8__ioinit
-     /tmp/ccArRuJ8.s:45     .text:000000000000003d main
-     /tmp/ccArRuJ8.s:82     .text:0000000000000069 _GLOBAL__sub_I_main
+     /tmp/ccqVV4wR.s:45     .text:000000000000003d main
+     /tmp/ccqVV4wR.s:82     .text:0000000000000069 _GLOBAL__sub_I_main
 
 UNDEFINED SYMBOLS
 _GLOBAL_OFFSET_TABLE_

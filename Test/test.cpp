@@ -95,7 +95,7 @@ public:
 
 static class TestDescription_suite_translatorTest_testParseVar : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testParseVar() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 216, "testParseVar" ) {}
+ TestDescription_suite_translatorTest_testParseVar() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 227, "testParseVar" ) {}
  void runTest() { suite_translatorTest.testParseVar(); }
 } testDescription_suite_translatorTest_testParseVar;
 

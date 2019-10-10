@@ -30,7 +30,6 @@ namespace translator
         uint8_t type = getType(package);
         if(type != TYPE_ARR && type != TYPE_CMD && type != TYPE_VAR)
             return TYPE_BAD_TYPE;
-
         uint8_t len = getLen(package);
         if(len == 0)
             return TYPE_BAD_LEN;
@@ -157,12 +156,15 @@ namespace translator
     }
 
     //create var package
-    void generateVar(const uint8_t len, const uint8_t id, const uint8_t* var, uint8_t* tgt)
+    void generateVar(const uint8_t id, const uint8_t len, const uint8_t* var, uint8_t* tgt)
     {
         tgt[0] = getZeroByte(TYPE_VAR, len + 1);
         tgt[3] = id;
         for(uint8_t i = 0; i < len; i++)
-            tgt[4 + i] = var[i];
+        {
+            tgt[4 + i] = var[len - i - 1];
+            std::cout << "from " << (int)(i) << " to " << (int)(i + 4) << " set 0x" << std::hex << (int)var[i] << std::endl;
+        }
         checksum_t check = genCheckSum(tgt);
         tgt[1] = check >> 8;
         tgt[2] = check & 0xFF;
@@ -187,8 +189,16 @@ namespace translator
         for(uint8_t i = 0; i < len - 1; i++)
         {
             toArr[(id + i) * elsize] = package[i + 4];
-            std::cout << "from " << (int)((id + i) * elsize) << " to " << (int)(i + 4) << std::endl;
+            // std::cout << "from " << (int)((id + i) * elsize) << " to " << (int)(i + 4) << std::endl;
         }
         return TYPE_VAR;
     }
+    
+    
+    //create array package
+    void generateArr(const uint8_t id, uint8_t arrlen, const uint8_t elsize, const uint8_t* arr, uint8_t* tgt)
+    {
+      tgt[0] = getZeroByte(TYPE_ARR, (arrlen * elsize) + 1);
+    }
+    void generateArr(const uint8_t id, const uint8_t arrlen, const uint8_t elsize, const uint8_t* arr, uint8_t* tgt);
 }

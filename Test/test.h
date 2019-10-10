@@ -211,6 +211,17 @@ public:
         translator::generateVar(1, 1, i, p);
 
         TS_ASSERT(translator::equals(p, ref));
+        
+        uint16_t* ii = (uint16_t*)alloca(sizeof(uint16_t));
+        *ii = 0xFAFB;
+        ref[0] = translator::getZeroByte(translator::TYPE_VAR, 3);
+        ref[3] = 2;
+        ref[4] = 0xFA;
+        ref[5] = 0xFB;
+        ref[1] = translator::genCheckSum(ref) >> 8;
+        ref[2] = translator::genCheckSum(ref) & 0xFF;
+        translator::generateVar(2, 2, (uint8_t*)ii, p);
+        TS_ASSERT(translator::equals(p, ref));
     }
 
     void testParseVar(void)
@@ -225,5 +236,16 @@ public:
         translator::generateVar(1, 1, &array[2], p);
         TS_ASSERT_EQUALS(translator::parseVar(p, array, 1), translator::TYPE_VAR);
         TS_ASSERT_EQUALS(array[1], array[2]);
+        
+        uint16_t* ii = (uint16_t*)alloca(sizeof(uint16_t));
+        *ii = 0xFAFB;
+        
+        translator::generateVar(0, 2, (uint8_t*)ii, p);
+        
+        TS_ASSERT_EQUALS(translator::parseVar(p, array, 1), translator::TYPE_VAR);
+        TS_ASSERT_EQUALS(array[0], 0xFA);
+        TS_ASSERT_EQUALS(array[1], 0xFB);
+        
+        
     }
 };
