@@ -292,4 +292,18 @@ public:
         TS_ASSERT_EQUALS(p[4], ref[4]);
         TS_ASSERT_EQUALS(p[5], ref[5]);
     }
+    
+    void testParseArr(void)
+    {
+        uint8_t* p = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        uint8_t* arr = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        memset(arr, 0, 10);
+        for(int i = 0; i < 10; i++)
+            arr[i] = i + 1;
+        translator::generateArr(0, 2, 1, arr, p);
+        uint8_t* tgt = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        translator::parseArr(p, &tgt);
+        TS_ASSERT_EQUALS(arr[0], tgt[0]);
+        TS_ASSERT_EQUALS(arr[1], tgt[1]);
+    }
 };

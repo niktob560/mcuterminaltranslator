@@ -206,10 +206,32 @@ namespace translator
             {
                 tgt[4 + (i * elsize) + j] = arr[(i * elsize) + (elsize - j - 1)];
             }
-            // tgt[4 + i] = arr[i];
         }
         checksum_t check = genCheckSum(tgt);
         tgt[1] = check >> 8;
         tgt[2] = check & 0xFF;
+    }
+    
+    
+    //parse array from array package and write into toArr[id], return type of package
+    uint8_t parseArr(uint8_t* package, uint8_t** toArr)
+    {
+        uint8_t type = getType(package);
+        if(type != TYPE_ARR)
+            return TYPE_BAD_TYPE;
+        uint8_t len = getLen(package);
+        if(len < 2)
+            return TYPE_BAD_LEN;
+        checksum_t  check = genCheckSum(package),
+                    thischeck = getCheckSum(package);
+        if(check != thischeck)
+            return TYPE_BAD_CHECKSUM;
+
+        uint8_t id = package[3];
+        for(uint8_t i = 0; i < len - 1; i++)
+        {
+            toArr[id][i] = package[4 + i];
+        }
+        return TYPE_ARR;
     }
 }
