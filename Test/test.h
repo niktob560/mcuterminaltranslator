@@ -245,7 +245,51 @@ public:
         TS_ASSERT_EQUALS(translator::parseVar(p, array, 1), translator::TYPE_VAR);
         TS_ASSERT_EQUALS(array[0], 0xFA);
         TS_ASSERT_EQUALS(array[1], 0xFB);
+    }
+    
+    void testGenArr(void)
+    {
+        uint8_t* p = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        uint8_t* ref = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        uint8_t* arr0 = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        arr0[0] = 10;
+        arr0[1] = 20;
+        ref[0] = translator::getZeroByte(translator::TYPE_ARR, 3);
+        ref[3] = 1;
+        ref[4] = arr0[0];
+        ref[5] = arr0[1];
+        ref[1] = translator::genCheckSum(ref) >> 8;
+        ref[2] = translator::genCheckSum(ref) & 0xFF;
         
         
+        translator::generateArr(1, 2, 1, arr0, p);
+        // TS_ASSERT(translator::equals(p, ref));
+        TS_ASSERT_EQUALS(p[0], ref[0]);
+        TS_ASSERT_EQUALS(p[1], ref[1]);
+        TS_ASSERT_EQUALS(p[2], ref[2]);
+        TS_ASSERT_EQUALS(p[3], ref[3]);
+        TS_ASSERT_EQUALS(p[4], ref[4]);
+        TS_ASSERT_EQUALS(p[5], ref[5]);
+        
+        uint16_t* arr1 = (uint16_t*)alloca(sizeof(uint16_t) * 10);
+        arr1[0] = 10;
+        arr1[1] = 20;
+        ref[0] = translator::getZeroByte(translator::TYPE_ARR, 5);
+        ref[3] = 1;
+        ref[4] = arr1[0] >> 8;
+        ref[5] = arr1[0] & 0xFF;
+        ref[6] = arr1[1] >> 8;
+        ref[7] = arr1[1] & 0xFF;
+        ref[1] = translator::genCheckSum(ref) >> 8;
+        ref[2] = translator::genCheckSum(ref) & 0xFF;
+        
+        translator::generateArr(1, 2, 2, (uint8_t*)arr1, p);
+        
+        TS_ASSERT_EQUALS(p[0], ref[0]);
+        TS_ASSERT_EQUALS(p[1], ref[1]);
+        TS_ASSERT_EQUALS(p[2], ref[2]);
+        TS_ASSERT_EQUALS(p[3], ref[3]);
+        TS_ASSERT_EQUALS(p[4], ref[4]);
+        TS_ASSERT_EQUALS(p[5], ref[5]);
     }
 };

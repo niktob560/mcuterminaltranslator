@@ -99,5 +99,11 @@ public:
  void runTest() { suite_translatorTest.testParseVar(); }
 } testDescription_suite_translatorTest_testParseVar;
 
+static class TestDescription_suite_translatorTest_testGenArr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_translatorTest_testGenArr() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 250, "testGenArr" ) {}
+ void runTest() { suite_translatorTest.testGenArr(); }
+} testDescription_suite_translatorTest_testGenArr;
+
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

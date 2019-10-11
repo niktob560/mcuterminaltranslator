@@ -56,8 +56,8 @@ namespace translator
     bool validate(const uint8_t* pack);
 
     //create var package
-    void generateVar(const uint8_t id, const uint8_t len, const uint8_t* var, uint8_t *tgt);
+    void generateVar(const uint8_t id, const uint8_t varlen, const uint8_t* var, uint8_t *tgt);
     
     //create array package
-    void generateArr(const uint8_t id, uint8_t arrlen, const uint8_t elsize, const uint8_t* arr, uint8_t* tgt);
+    void generateArr(const uint8_t id, const uint8_t arrlen, const uint8_t elsize, const uint8_t* arr, uint8_t* tgt);
 }
