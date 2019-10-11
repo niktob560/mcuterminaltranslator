@@ -34,12 +34,6 @@ namespace translator
     //parse cmd from package, call funcArr[cmd], return type of package, max num of funcs - 255, max len - 1
     uint8_t parseCmd(uint8_t* package, void (*funcArr [])());
 
-    //parse input package, get payload, return type of package
-    uint8_t parsePacket(uint8_t* package, uint8_t* payloadto);
-
-    //get payload from package to addr
-    void getPayload(const uint8_t* package, uint8_t* to);
-
     bool equals(const uint8_t* p1, const uint8_t* p2);
 
     uint8_t getZeroByte(const uint8_t type, const uint8_t len);
@@ -49,15 +43,15 @@ namespace translator
     //gets cmd num at 'cmd', returns final package into target pointer
     void generateCmd(const uint8_t cmd, uint8_t* tgt);
 
-    //get id of var in payload of package
-    uint8_t getVarId(const uint8_t* pack);
-
     //validate checksum, type, len
-    bool validate(const uint8_t* pack);
+    bool validate(const uint8_t* package);
 
     //create var package
     void generateVar(const uint8_t id, const uint8_t varlen, const uint8_t* var, uint8_t *tgt);
     
     //create array package
     void generateArr(const uint8_t id, const uint8_t arrlen, const uint8_t elsize, const uint8_t* arr, uint8_t* tgt);
+    
+    //check for package is full
+    bool isFull(uint8_t* package, const uint8_t len);
 }

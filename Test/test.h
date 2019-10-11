@@ -87,24 +87,6 @@ public:
         TS_ASSERT(!translator::equals(c0, c1));
     }
 
-    void testGetPayload(void)
-    {
-        uint8_t *c = (uint8_t*)calloc(sizeof(uint8_t), 10),
-                *payload_const = (uint8_t*)calloc(sizeof(uint8_t), 7);
-        c[0] = 3;
-        c[1] = 0;
-        c[2] = 0;
-        c[3] = 10;
-        c[4] = 11;
-        c[5] = 12;
-        payload_const[0] = c[3];
-        payload_const[1] = c[4];
-        payload_const[2] = c[5];
-        uint8_t *payload = (uint8_t*)calloc(sizeof(uint8_t), 10);
-        translator::getPayload(c, payload);
-        TS_ASSERT(translator::equals(payload, payload_const));
-    }
-
     void testGetLen(void)
     {
         uint8_t c = 10;
@@ -144,25 +126,14 @@ public:
 
     void testGenerateCmd(void)
     {
-        uint8_t *pack = (uint8_t*) alloca(sizeof(uint8_t) * 4),
+        uint8_t *package = (uint8_t*) alloca(sizeof(uint8_t) * 4),
                 *ref  = (uint8_t*) alloca(sizeof(uint8_t) * 4);
-        translator::generateCmd(1, pack);
+        translator::generateCmd(1, package);
         ref[0] = translator::getZeroByte(translator::TYPE_CMD, 1);
         ref[3] = 1;
         ref[1] = translator::genCheckSum(ref) >> 8;
         ref[2] = translator::genCheckSum(ref) & 0xFF;
-        TS_ASSERT(translator::equals(pack, ref));
-    }
-
-    void testGetVarId(void)
-    {
-        uint8_t *pack = (uint8_t*)alloca(sizeof(uint8_t) * 4);
-        pack[0] = translator::getZeroByte(translator::TYPE_VAR, 2);
-        pack[3] = 1;
-        pack[4] = 1;
-        pack[1] = translator::genCheckSum(pack) >> 8;
-        pack[2] = translator::genCheckSum(pack) & 0xFF;
-        TS_ASSERT_EQUALS(translator::getVarId(pack), 1);
+        TS_ASSERT(translator::equals(package, ref));
     }
 
     void testValidate(void)
@@ -305,5 +276,15 @@ public:
         translator::parseArr(p, &tgt);
         TS_ASSERT_EQUALS(arr[0], tgt[0]);
         TS_ASSERT_EQUALS(arr[1], tgt[1]);
+    }
+    
+    void testIsFull(void)
+    {
+        uint8_t* p = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        memset(p, 0, 10);
+        translator::generateCmd(10, p);
+        TS_ASSERT(!translator::isFull(p, 1));
+        TS_ASSERT(!translator::isFull(p, 3));
+        TS_ASSERT(translator::isFull(p, 4));
     }
 };

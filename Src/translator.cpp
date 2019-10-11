@@ -67,16 +67,6 @@ namespace translator
     }
 
 
-    //get payload from package to addr
-    void getPayload(const uint8_t* package, uint8_t* to)
-    {
-        uint8_t len = getLen(package);
-        for(uint8_t i = 0; i < len; i++)
-        {
-            to[i] = package[i + 3];
-        }
-    }
-
     //get len of payload
     uint8_t getLen(const uint8_t* package)
     {
@@ -120,39 +110,29 @@ namespace translator
     }
 
 
-    //get id of var in payload of package
-    uint8_t getVarId(const uint8_t* pack)
-    {
-        if(!validate(pack))
-            return 0xFF;
-
-        return pack[3];
-    }
-
-
     //validate checksum, type, len
-    bool validate(const uint8_t* pack)
+    bool validate(const uint8_t* package)
     {
-        uint8_t type = getType(pack);
+        uint8_t type = getType(package);
         switch (type)
         {
             case TYPE_CMD:
             {
-                if(getLen(pack) != 1)
+                if(getLen(package) != 1)
                     return false;
                 break;
             }
             case TYPE_VAR:
             case TYPE_ARR:
             {
-                if(getLen(pack) <= 1)
+                if(getLen(package) <= 1)
                     return false;
                 break;
             }
             default:
                 return false;
         }
-        return (getCheckSum(pack) == genCheckSum(pack));
+        return (getCheckSum(package) == genCheckSum(package));
     }
 
     //create var package
@@ -233,5 +213,34 @@ namespace translator
             toArr[id][i] = package[4 + i];
         }
         return TYPE_ARR;
+    }
+    
+    
+    //check for package is full
+    bool isFull(uint8_t* package, const uint8_t len)
+    {
+        if(len < 3)
+            return false;
+        if((getLen(package) + 3) != len)
+            return false;
+        switch (getType(package))
+        {
+            case TYPE_CMD:
+            {
+                if(getLen(package) != 1)
+                    return false;
+                break;
+            }
+            case TYPE_VAR:
+            case TYPE_ARR:
+            {
+                if(getLen(package) <= 1)
+                    return false;
+                break;
+            }
+            default:
+                return false;
+        }
+        return true;
     }
 }

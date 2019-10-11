@@ -45,71 +45,65 @@ public:
  void runTest() { suite_translatorTest.testEquals(); }
 } testDescription_suite_translatorTest_testEquals;
 
-static class TestDescription_suite_translatorTest_testGetPayload : public CxxTest::RealTestDescription {
-public:
- TestDescription_suite_translatorTest_testGetPayload() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 90, "testGetPayload" ) {}
- void runTest() { suite_translatorTest.testGetPayload(); }
-} testDescription_suite_translatorTest_testGetPayload;
-
 static class TestDescription_suite_translatorTest_testGetLen : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testGetLen() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 108, "testGetLen" ) {}
+ TestDescription_suite_translatorTest_testGetLen() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 90, "testGetLen" ) {}
  void runTest() { suite_translatorTest.testGetLen(); }
 } testDescription_suite_translatorTest_testGetLen;
 
 static class TestDescription_suite_translatorTest_testParseCmd : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testParseCmd() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 116, "testParseCmd" ) {}
+ TestDescription_suite_translatorTest_testParseCmd() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 98, "testParseCmd" ) {}
  void runTest() { suite_translatorTest.testParseCmd(); }
 } testDescription_suite_translatorTest_testParseCmd;
 
 static class TestDescription_suite_translatorTest_testGetZeroByte : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testGetZeroByte() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 137, "testGetZeroByte" ) {}
+ TestDescription_suite_translatorTest_testGetZeroByte() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 119, "testGetZeroByte" ) {}
  void runTest() { suite_translatorTest.testGetZeroByte(); }
 } testDescription_suite_translatorTest_testGetZeroByte;
 
 static class TestDescription_suite_translatorTest_testGenerateCmd : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testGenerateCmd() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 145, "testGenerateCmd" ) {}
+ TestDescription_suite_translatorTest_testGenerateCmd() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 127, "testGenerateCmd" ) {}
  void runTest() { suite_translatorTest.testGenerateCmd(); }
 } testDescription_suite_translatorTest_testGenerateCmd;
 
-static class TestDescription_suite_translatorTest_testGetVarId : public CxxTest::RealTestDescription {
-public:
- TestDescription_suite_translatorTest_testGetVarId() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 157, "testGetVarId" ) {}
- void runTest() { suite_translatorTest.testGetVarId(); }
-} testDescription_suite_translatorTest_testGetVarId;
-
 static class TestDescription_suite_translatorTest_testValidate : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testValidate() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 168, "testValidate" ) {}
+ TestDescription_suite_translatorTest_testValidate() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 139, "testValidate" ) {}
  void runTest() { suite_translatorTest.testValidate(); }
 } testDescription_suite_translatorTest_testValidate;
 
 static class TestDescription_suite_translatorTest_testGenVar : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testGenVar() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 200, "testGenVar" ) {}
+ TestDescription_suite_translatorTest_testGenVar() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 171, "testGenVar" ) {}
  void runTest() { suite_translatorTest.testGenVar(); }
 } testDescription_suite_translatorTest_testGenVar;
 
 static class TestDescription_suite_translatorTest_testParseVar : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testParseVar() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 227, "testParseVar" ) {}
+ TestDescription_suite_translatorTest_testParseVar() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 198, "testParseVar" ) {}
  void runTest() { suite_translatorTest.testParseVar(); }
 } testDescription_suite_translatorTest_testParseVar;
 
 static class TestDescription_suite_translatorTest_testGenArr : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testGenArr() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 250, "testGenArr" ) {}
+ TestDescription_suite_translatorTest_testGenArr() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 221, "testGenArr" ) {}
  void runTest() { suite_translatorTest.testGenArr(); }
 } testDescription_suite_translatorTest_testGenArr;
 
 static class TestDescription_suite_translatorTest_testParseArr : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testParseArr() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 296, "testParseArr" ) {}
+ TestDescription_suite_translatorTest_testParseArr() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 267, "testParseArr" ) {}
  void runTest() { suite_translatorTest.testParseArr(); }
 } testDescription_suite_translatorTest_testParseArr;
+
+static class TestDescription_suite_translatorTest_testIsFull : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_translatorTest_testIsFull() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 281, "testIsFull" ) {}
+ void runTest() { suite_translatorTest.testIsFull(); }
+} testDescription_suite_translatorTest_testIsFull;
 
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";
