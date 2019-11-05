@@ -2,6 +2,7 @@
 #include "translator.hpp"
 #include <stdint.h>
 #include <iostream>
+#include <bitset>
 
 bool called0 = false;
 void functest0()
@@ -24,33 +25,50 @@ public:
     {
         uint8_t* c = (uint8_t*)calloc(sizeof(uint8_t), 10);
         c[0] = 0;
-        TS_ASSERT_EQUALS(translator::genCheckSum(c), 0);
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 1);
         c[0] = 1;
         c[1] = 0;
         c[2] = 0;
         c[3] = 1;
-        TS_ASSERT_EQUALS(translator::genCheckSum(c), 1);
+        #ifdef USE_MULTIDEVICE
+            c[4] = 0;
+        #endif
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 258);
         c[0] = 2;
         c[3] = 1;
         c[4] = 1;
-        TS_ASSERT_EQUALS(translator::genCheckSum(c), 257);
+        #ifdef USE_MULTIDEVICE
+            c[5] = 0;
+        #endif
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 260);
+        c[0] = 2;
         c[3] = 2;
         c[4] = 1;
-        TS_ASSERT_EQUALS(translator::genCheckSum(c), 258);
+        #ifdef USE_MULTIDEVICE
+            c[5] = 0;
+        #endif
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 516);
+        c[0] = 2;
         c[3] = 1;
         c[4] = 2;
-        TS_ASSERT_EQUALS(translator::genCheckSum(c), 513);
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 261);
         c[0] = 3;
         c[3] = 1;
         c[4] = 2;
         c[5] = 10;
-        TS_ASSERT_EQUALS(translator::genCheckSum(c), 523);
+        #ifdef USE_MULTIDEVICE
+            c[6] = 0;
+        #endif
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 2822);
         c[0] = 4;
         c[3] = 1;
         c[4] = 2;
         c[5] = 10;
         c[6] = 10;
-        TS_ASSERT_EQUALS(translator::genCheckSum(c), 1 | (2 << 8) | 10 | (10 << 8));
+        #ifdef USE_MULTIDEVICE
+            c[7] = 0;
+        #endif
+        TS_ASSERT_EQUALS(translator::genCheckSum(c), 2833);
 
         free(c);
     }
@@ -71,8 +89,9 @@ public:
             c0[i] = i;
             c1[i] = i;
         }
-        c0[0] &= ~translator::LEN_MASK;
-        c0[0] |= 7;
+        // c0[0] &= ~translator::LEN_MASK;
+        c0[0] = translator::getZeroByte(translator::TYPE_VAR, 1);
+        // c0[0] |= 7;
         c1[0] = c0[0];
         TS_ASSERT(translator::equals(c0, c1));
 
@@ -110,6 +129,7 @@ public:
         funcArr[0] = functest0;
         called0 = false;
         c[3] = 0;
+        c[4] = 0;
         c[1] = ((translator::genCheckSum(c) >> 8) & 0xFF);
         c[2] = (translator::genCheckSum(c) & 0xFF);
         TS_ASSERT_EQUALS(translator::parseCmd(c, funcArr), translator::TYPE_CMD);
@@ -128,9 +148,14 @@ public:
     {
         uint8_t *package = (uint8_t*) alloca(sizeof(uint8_t) * 4),
                 *ref  = (uint8_t*) alloca(sizeof(uint8_t) * 4);
-        translator::generateCmd(1, package);
+        translator::generateCmd(2, package);
         ref[0] = translator::getZeroByte(translator::TYPE_CMD, 1);
-        ref[3] = 1;
+        #ifdef USE_MULTIDEVICE
+            ref[3] = translator::myId;
+            ref[4] = 2;
+        #else
+            ref[3] = 2;
+        #endif
         ref[1] = translator::genCheckSum(ref) >> 8;
         ref[2] = translator::genCheckSum(ref) & 0xFF;
         TS_ASSERT(translator::equals(package, ref));
@@ -170,25 +195,45 @@ public:
 
     void testGenVar(void)
     {
-        uint8_t *p = (uint8_t*)alloca(sizeof(uint8_t) * 10),
-                *ref = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        uint8_t *p      = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        uint8_t *ref    = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        p[1] = 0;
+        p[2] = 0;
+        ref[1] = 0;
         ref[0] = translator::getZeroByte(translator::TYPE_VAR, 2);
-        ref[3] = 1;
-        ref[4] = 1;
-        ref[1] = translator::genCheckSum(ref) >> 8;
-        ref[2] = translator::genCheckSum(ref) & 0xFF;
+        #ifdef USE_MULTIDEVICE
+            ref[3] = translator::myId;
+            ref[4] = 1;
+            ref[5] = 1;
+        #else
+            ref[3] = 1;
+            ref[4] = 1;
+            ref[5] = 0;
+        #endif
+        translator::checksum_t check = translator::genCheckSum(ref);
+        ref[1] = check >> 8;
+        ref[2] = check & 0xFF;
         uint8_t *i = (uint8_t*)alloca(sizeof(uint8_t));
         *i = 1;
-        translator::generateVar(1, 1, i, p);
+        // uint8_t i = 1;
+        translator::generateVar(1, 1, i, p);//{10000010}{c}{c}{dev id}{1}{1}
 
         TS_ASSERT(translator::equals(p, ref));
+
         
         uint16_t* ii = (uint16_t*)alloca(sizeof(uint16_t));
         *ii = 0xFAFB;
         ref[0] = translator::getZeroByte(translator::TYPE_VAR, 3);
-        ref[3] = 2;
-        ref[4] = 0xFA;
-        ref[5] = 0xFB;
+        #ifdef USE_MULTIDEVICE
+            ref[3] = translator::myId;
+            ref[4] = 2;
+            ref[5] = 0xFA;
+            ref[6] = 0xFB;
+        #else
+            ref[3] = 2;
+            ref[4] = 0xFA;
+            ref[5] = 0xFB;
+        #endif
         ref[1] = translator::genCheckSum(ref) >> 8;
         ref[2] = translator::genCheckSum(ref) & 0xFF;
         translator::generateVar(2, 2, (uint8_t*)ii, p);
@@ -226,9 +271,16 @@ public:
         arr0[0] = 10;
         arr0[1] = 20;
         ref[0] = translator::getZeroByte(translator::TYPE_ARR, 3);
-        ref[3] = 1;
-        ref[4] = arr0[0];
-        ref[5] = arr0[1];
+        #ifdef USE_MULTIDEVICE
+            ref[3] = translator::myId;
+            ref[4] = 1;
+            ref[5] = arr0[0];
+            ref[6] = arr0[1];
+        #else
+            ref[3] = 1;
+            ref[4] = arr0[0];
+            ref[5] = arr0[1];
+        #endif
         ref[1] = translator::genCheckSum(ref) >> 8;
         ref[2] = translator::genCheckSum(ref) & 0xFF;
         
@@ -246,11 +298,20 @@ public:
         arr1[0] = 10;
         arr1[1] = 20;
         ref[0] = translator::getZeroByte(translator::TYPE_ARR, 5);
+        #ifdef USE_MULTIDEVICE
+            ref[3] = translator::myId;
+            ref[4] = 1;
+            ref[5] = arr1[0] >> 8;
+            ref[6] = arr1[0] & 0xFF;
+            ref[7] = arr1[1] >> 8;
+            ref[8] = arr1[1] & 0xFF;
+        #else
         ref[3] = 1;
         ref[4] = arr1[0] >> 8;
         ref[5] = arr1[0] & 0xFF;
         ref[6] = arr1[1] >> 8;
         ref[7] = arr1[1] & 0xFF;
+        #endif
         ref[1] = translator::genCheckSum(ref) >> 8;
         ref[2] = translator::genCheckSum(ref) & 0xFF;
         

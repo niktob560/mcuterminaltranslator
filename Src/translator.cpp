@@ -3,22 +3,52 @@
 namespace translator
 {
     #ifdef USE_MULTIDEVICE
+        #pragma message "Using multidevice version"
         const uint8_t SYS_LEN = 4;
+        
+        uint8_t getSenderId(uint8_t* p)
+        {
+            return p[SYS_LEN];
+        }
+
+        #ifdef USE_DYNAMIC_ID
+            uint8_t myId = 0;
+
+            void setMyId(uint8_t id)
+            {
+                myId = id;
+            }
+
+            uint8_t getMyId(void)
+            {
+                return myId;
+            }
+        #else
+            #ifndef DEVICE_ID
+                #error "Device id is not set"
+            #else
+                #pragma message "Using static device id"
+                const uint8_t myId = DEVICE_ID;
+            #endif
+        #endif
     #else
+        #pragma message Using 1-1 device version
         const uint8_t SYS_LEN = 3;
     #endif
-    // using namespace std;
+
+
 
     //generate checksum for char array
     checksum_t genCheckSum(const uint8_t* c)
     {
-        checksum_t ret = 1;
+        checksum_t ret = 0;
         uint8_t len = getLen(c);
         for(uint8_t i = 0; i < len + SYS_LEN; i++)
         {
             if(i != 1 && i != 2)
-                ret |= (c[i]) << (8 * ((i % 2) == 1));
+                ret += (c[i]) << (8 * ((i % 2) == 1));
         }
+        ret++;
         return ret;
     }
 
@@ -66,8 +96,10 @@ namespace translator
         if(check != getCheckSum(package))   
             return TYPE_BAD_CHECKSUM;
 
-        if(funcArr[package[3]] != NULL)
-            funcArr[package[3]]();
+        if(funcArr[package[SYS_LEN]] != NULL)
+            funcArr[package[SYS_LEN]]();
+        else
+            std::cerr << "tgt func is null\n";
         return TYPE_CMD;
     }
 
@@ -84,7 +116,7 @@ namespace translator
         checksum_t check = genCheckSum(package);
         if(check != getCheckSum(package))
             return ~0;
-        return package[3];
+        return package[SYS_LEN];
     }
 
 
@@ -100,7 +132,7 @@ namespace translator
             return false;
 
         uint8_t len = getLen(p1);
-        for(uint8_t i = 0; i < len; i++)
+        for(uint8_t i = 0; i < len + SYS_LEN; i++)
         {
             if(p1[i] != p2[i])
                 return false;
@@ -124,7 +156,10 @@ namespace translator
     void generateCmd(const uint8_t cmd, uint8_t* tgt)
     {
         tgt[0] = getZeroByte(TYPE_CMD, 1);
-        tgt[3] = cmd;
+        #ifdef USE_MULTIDEVICE
+            tgt[SYS_LEN - 1] = myId;
+        #endif 
+        tgt[SYS_LEN] = cmd;
         checksum_t check = genCheckSum(tgt);
         tgt[1] = check >> 8;
         tgt[2] = check & 0xFF;
@@ -160,15 +195,21 @@ namespace translator
     void generateVar(const uint8_t id, const uint8_t varlen, const uint8_t* var, uint8_t* tgt)
     {
         tgt[0] = getZeroByte(TYPE_VAR, varlen + 1);
-        tgt[3] = id;
+        tgt[SYS_LEN] = id;
         for(uint8_t i = 0; i < varlen; i++)
         {
-            tgt[4 + i] = var[varlen - i - 1];
+            tgt[SYS_LEN + 1 + i] = var[varlen - i - 1];
             // std::cout << "from " << (int)(i) << " to " << (int)(i + 4) << " set 0x" << std::hex << (int)var[i] << std::endl;
         }
+
+        #ifdef USE_MULTIDEVICE
+            tgt[SYS_LEN - 1] = myId;
+        #endif 
+
         checksum_t check = genCheckSum(tgt);
         tgt[1] = check >> 8;
         tgt[2] = check & 0xFF;
+
     }
 
 
@@ -186,11 +227,10 @@ namespace translator
         if(check != thischeck)
             return TYPE_BAD_CHECKSUM;
 
-        uint8_t id = package[3];
+        uint8_t id = package[SYS_LEN];
         for(uint8_t i = 0; i < len - 1; i++)
         {
-            toArr[(id + i) * elsize] = package[i + 4];
-            // std::cout << "from " << (int)((id + i) * elsize) << " to " << (int)(i + 4) << std::endl;
+            toArr[(id + i) * elsize] = package[i + SYS_LEN + 1];
         }
         return TYPE_VAR;
     }
@@ -200,14 +240,19 @@ namespace translator
     void generateArr(const uint8_t id, const uint8_t arrlen, const uint8_t elsize, const uint8_t* arr, uint8_t* tgt)
     {
         tgt[0] = getZeroByte(TYPE_ARR, (arrlen * elsize) + 1);
-        tgt[3] = id;
+        tgt[SYS_LEN] = id;
         for(uint8_t i = 0; i < arrlen; i++)
         {
             for(uint8_t j = 0; j < elsize; j++)
             {
-                tgt[4 + (i * elsize) + j] = arr[(i * elsize) + (elsize - j - 1)];
+                tgt[SYS_LEN + 1 + (i * elsize) + j] = arr[(i * elsize) + (elsize - j - 1)];
             }
         }
+
+        #ifdef USE_MULTIDEVICE
+            tgt[SYS_LEN - 1] = myId;
+        #endif 
+
         checksum_t check = genCheckSum(tgt);
         tgt[1] = check >> 8;
         tgt[2] = check & 0xFF;
@@ -228,10 +273,10 @@ namespace translator
         if(check != thischeck)
             return TYPE_BAD_CHECKSUM;
 
-        uint8_t id = package[3];
+        uint8_t id = package[SYS_LEN];
         for(uint8_t i = 0; i < len - 1; i++)
         {
-            toArr[id][i] = package[4 + i];
+            toArr[id][i] = package[SYS_LEN + 1 + i];
         }
         return TYPE_ARR;
     }
@@ -240,9 +285,10 @@ namespace translator
     //check for package is full
     bool isFull(uint8_t* package, const uint8_t len)
     {
-        if(len < 3)
+
+        if(len < SYS_LEN)
             return false;
-        if((getLen(package) + 3) != len)
+        if((getLen(package) + SYS_LEN) != len)
             return false;
         switch (getType(package))
         {

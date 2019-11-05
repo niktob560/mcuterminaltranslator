@@ -4,6 +4,20 @@
 
 namespace translator
 {
+    extern const uint8_t SYS_LEN;
+    #ifdef USE_MULTIDEVICE
+        uint8_t getSenderId(uint8_t* p);
+        #ifdef USE_DYNAMIC_ID
+            extern uint8_t myId;
+
+            void setMyId(uint8_t id);
+            uint8_t getMyId(void);
+
+        #else
+            extern const uint8_t myId;
+        #endif
+    #endif
+
     typedef uint32_t STR_LEN_DTYPE;
     typedef uint16_t checksum_t;
 
@@ -33,7 +47,7 @@ namespace translator
 
     //parse cmd from package, call funcArr[cmd], return type of package, max num of funcs - 255, max len - 1
     uint8_t parseCmd(uint8_t* package, void (*funcArr [])());
-    
+
     size_t parseCmd(uint8_t* package);
 
 

@@ -21,6 +21,8 @@ Src/translator.cpp
 # /tmp/a.cpp \
 # Src/translator.cpp
 
+CPP_DEFS = -DDEVICE_ID=1 -DUSE_MULTIDEVICE
+
 
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
 vpath %.cpp $(sort $(dir $(CPP_SOURCES)))
@@ -45,7 +47,7 @@ $(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
 test: directories all
 	echo $(TOBJECTS)
 	cxxtest/bin/cxxtestgen --error-printer -o $(TEST_DIR)/test.cpp $(TEST_DIR)/test.h
-	g++ -o $(TEST_DIR)/test $(TOBJECTS) $(TEST_DIR)/test.cpp -I cxxtest -I $(INCLUDE_DIR)
+	g++ $(CPP_DEFS) -o $(TEST_DIR)/test $(TOBJECTS) $(TEST_DIR)/test.cpp -I cxxtest -I $(INCLUDE_DIR)
 	$(TEST_DIR)/test
 
 
