@@ -8,7 +8,7 @@ namespace translator
     //generate checksum for char array
     checksum_t genCheckSum(const uint8_t* c)
     {
-        checksum_t ret = 0;
+        checksum_t ret = 1;
         uint8_t len = getLen(c);
         for(uint8_t i = 0; i < len; i++)
         {

@@ -17,6 +17,9 @@ CPP_INCLUDES = \
 CPP_SOURCES = \
 Src/main.cpp \
 Src/translator.cpp
+# CPP_SOURCES = \
+# /tmp/a.cpp \
+# Src/translator.cpp
 
 
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
