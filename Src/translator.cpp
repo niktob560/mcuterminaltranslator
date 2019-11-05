@@ -2,17 +2,22 @@
 
 namespace translator
 {
-
-    using namespace std;
+    #ifdef USE_MULTIDEVICE
+        const uint8_t SYS_LEN = 4;
+    #else
+        const uint8_t SYS_LEN = 3;
+    #endif
+    // using namespace std;
 
     //generate checksum for char array
     checksum_t genCheckSum(const uint8_t* c)
     {
         checksum_t ret = 1;
         uint8_t len = getLen(c);
-        for(uint8_t i = 0; i < len; i++)
+        for(uint8_t i = 0; i < len + SYS_LEN; i++)
         {
-            ret |= (c[3 + i]) << (8 * ((i % 2) == 1));
+            if(i != 1 && i != 2)
+                ret |= (c[i]) << (8 * ((i % 2) == 1));
         }
         return ret;
     }
@@ -40,7 +45,7 @@ namespace translator
 
         for(uint8_t i = 0; i < len; i++)
         {
-            payloadto[i] = package[i + 3];
+            payloadto[i] = package[i + SYS_LEN];
         }
         return type;
     }
@@ -58,7 +63,7 @@ namespace translator
             return TYPE_BAD_LEN;
 
         checksum_t check = genCheckSum(package);
-        if(check != getCheckSum(package))
+        if(check != getCheckSum(package))   
             return TYPE_BAD_CHECKSUM;
 
         if(funcArr[package[3]] != NULL)

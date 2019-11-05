@@ -1,10 +1,26 @@
 # mcuterminaltranslator  
 Library for parsing commands for communication of MCUs  
 ## Package structure: 
+### For multidevice systems:
 ```
-<type+len, 1byte><checksum, 2bytes><payload>
+<type+len, 1 byte><checksum, 2 bytes><payload, len + 1 bytes>
 ```
-max len: 63 bytes  
+### For 1-1 systems:
+```
+<type+len, 1 byte><checksum, 2 bytes><payload, len bytes>
+```
+  
+## Payload structure:
+### For multidevice systems:
+```
+<device id, 1 byte><data, len bytes>
+```
+### For 1-1 systems:
+```
+<data, len bytes>
+```
+### max len: 63 bytes  
+  
 ## Types:  
 command: ``0b1``;  
 var: ``0b10``;  
