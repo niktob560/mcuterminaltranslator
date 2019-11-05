@@ -1,4 +1,4 @@
-TARGET=main
+TARGET=translator
 LIBS=
 OPTIMIZE=-Og
 LFLAGS=-Wall -Wextra -lm $(LIBS)
@@ -69,6 +69,7 @@ clean:
 	rm -rf $(BUILD_DIR)/*
 	rm -rf $(TEST_DIR)/*.cpp
 	rm -rf $(TEST_DIR)/main
+	rm -rf $(BIN_DIR)/*
 
 
 run: main

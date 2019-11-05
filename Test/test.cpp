@@ -99,11 +99,11 @@ public:
  void runTest() { suite_translatorTest.testParseArr(); }
 } testDescription_suite_translatorTest_testParseArr;
 
-static class TestDescription_suite_translatorTest_testIsFull : public CxxTest::RealTestDescription {
+static class TestDescription_suite_translatorTest_testCmd : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_translatorTest_testIsFull() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 281, "testIsFull" ) {}
- void runTest() { suite_translatorTest.testIsFull(); }
-} testDescription_suite_translatorTest_testIsFull;
+ TestDescription_suite_translatorTest_testCmd() : CxxTest::RealTestDescription( Tests_translatorTest, suiteDescription_translatorTest, 282, "testCmd" ) {}
+ void runTest() { suite_translatorTest.testCmd(); }
+} testDescription_suite_translatorTest_testCmd;
 
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

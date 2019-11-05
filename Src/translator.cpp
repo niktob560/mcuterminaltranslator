@@ -66,6 +66,22 @@ namespace translator
         return TYPE_CMD;
     }
 
+    size_t parseCmd(uint8_t* package)
+    {
+        uint8_t var = getType(package);
+        if(var != TYPE_CMD)
+            return ~0;
+
+        var = getLen(package);
+        if(var != 1)
+            return ~0;
+
+        checksum_t check = genCheckSum(package);
+        if(check != getCheckSum(package))
+            return ~0;
+        return package[3];
+    }
+
 
     //get len of payload
     uint8_t getLen(const uint8_t* package)
@@ -104,7 +120,7 @@ namespace translator
     {
         tgt[0] = getZeroByte(TYPE_CMD, 1);
         tgt[3] = cmd;
-        checksum_t check = getCheckSum(tgt);
+        checksum_t check = genCheckSum(tgt);
         tgt[1] = check >> 8;
         tgt[2] = check & 0xFF;
     }

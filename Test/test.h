@@ -277,14 +277,13 @@ public:
         TS_ASSERT_EQUALS(arr[0], tgt[0]);
         TS_ASSERT_EQUALS(arr[1], tgt[1]);
     }
-    
-    void testIsFull(void)
+
+
+    void testCmd(void)
     {
-        uint8_t* p = (uint8_t*)alloca(sizeof(uint8_t) * 10);
-        memset(p, 0, 10);
-        translator::generateCmd(10, p);
-        TS_ASSERT(!translator::isFull(p, 1));
-        TS_ASSERT(!translator::isFull(p, 3));
-        TS_ASSERT(translator::isFull(p, 4));
+        uint8_t* tgt = (uint8_t*)alloca(sizeof(uint8_t) * 10);
+        translator::generateCmd(1, tgt);
+        TS_ASSERT(translator::validate(tgt));
+        TS_ASSERT_EQUALS(translator::parseCmd(tgt), 1);
     }
 };

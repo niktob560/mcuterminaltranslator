@@ -33,6 +33,9 @@ namespace translator
 
     //parse cmd from package, call funcArr[cmd], return type of package, max num of funcs - 255, max len - 1
     uint8_t parseCmd(uint8_t* package, void (*funcArr [])());
+    
+    size_t parseCmd(uint8_t* package);
+
 
     bool equals(const uint8_t* p1, const uint8_t* p2);
 
