@@ -21,7 +21,7 @@ Src/translator.cpp
 # /tmp/a.cpp \
 # Src/translator.cpp
 
-CPP_DEFS = -DDEVICE_ID=1 -DUSE_MULTIDEVICE
+CPP_DEFS =# -DDEVICE_ID=1 -DUSE_MULTIDEVICE
 
 
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
