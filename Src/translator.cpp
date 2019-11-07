@@ -310,4 +310,28 @@ namespace translator
         }
         return true;
     }
+
+
+    bool isHeaderValid(uint8_t head)
+    {
+        switch (getType(&head))
+        {
+            case TYPE_CMD:
+            {
+                if(getLen(&head) != 1)
+                    return false;
+                break;
+            }
+            case TYPE_VAR:
+            case TYPE_ARR:
+            {
+                if(getLen(&head) <= 1)
+                    return false;
+                break;
+            }
+            default:
+                return false;
+        }
+        return true;
+    }
 }

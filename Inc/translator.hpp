@@ -71,4 +71,6 @@ namespace translator
     
     //check for package is full
     bool isFull(uint8_t* package, const uint8_t len);
+
+    bool isHeaderValid(uint8_t head);
 }

@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccBuC8w2.s 			page 1
+GAS LISTING /tmp/ccHWptXe.s 			page 1
 
 
    1              		.file	"translator.cpp"
@@ -6,7 +6,7 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
    3              	.Ltext0:
    5              	_Z41__static_initialization_and_destruction_0ii:
    6              	.LVL0:
-   7              	.LFB1838:
+   7              	.LFB1839:
    8              		.file 1 "Src/translator.cpp"
    1:Src/translator.cpp **** #include "translator.hpp"
    2:Src/translator.cpp **** 
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   48:Src/translator.cpp ****             if(i != 1 && i != 2)
   49:Src/translator.cpp ****                 ret += (c[i]) << (8 * ((i % 2) == 1));
   50:Src/translator.cpp ****         }
-GAS LISTING /tmp/ccBuC8w2.s 			page 2
+GAS LISTING /tmp/ccHWptXe.s 			page 2
 
 
   51:Src/translator.cpp ****         ret++;
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  105:Src/translator.cpp **** 
  106:Src/translator.cpp ****     size_t parseCmd(uint8_t* package)
  107:Src/translator.cpp ****     {
-GAS LISTING /tmp/ccBuC8w2.s 			page 3
+GAS LISTING /tmp/ccHWptXe.s 			page 3
 
 
  108:Src/translator.cpp ****         uint8_t var = getType(package);
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  162:Src/translator.cpp ****         tgt[SYS_LEN] = cmd;
  163:Src/translator.cpp ****         checksum_t check = genCheckSum(tgt);
  164:Src/translator.cpp ****         tgt[1] = check >> 8;
-GAS LISTING /tmp/ccBuC8w2.s 			page 4
+GAS LISTING /tmp/ccHWptXe.s 			page 4
 
 
  165:Src/translator.cpp ****         tgt[2] = check & 0xFF;
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  219:Src/translator.cpp ****         uint8_t type = getType(package);
  220:Src/translator.cpp ****         if(type != TYPE_VAR)
  221:Src/translator.cpp ****             return TYPE_BAD_TYPE;
-GAS LISTING /tmp/ccBuC8w2.s 			page 5
+GAS LISTING /tmp/ccHWptXe.s 			page 5
 
 
  222:Src/translator.cpp ****         uint8_t len = getLen(package);
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  276:Src/translator.cpp ****         uint8_t id = package[SYS_LEN];
  277:Src/translator.cpp ****         for(uint8_t i = 0; i < len - 1; i++)
  278:Src/translator.cpp ****         {
-GAS LISTING /tmp/ccBuC8w2.s 			page 6
+GAS LISTING /tmp/ccHWptXe.s 			page 6
 
 
  279:Src/translator.cpp ****             toArr[id][i] = package[SYS_LEN + 1 + i];
@@ -335,20 +335,47 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  310:Src/translator.cpp ****         }
  311:Src/translator.cpp ****         return true;
  312:Src/translator.cpp ****     }
- 313:Src/translator.cpp **** }
-   9              		.loc 1 313 1 view -0
+ 313:Src/translator.cpp **** 
+ 314:Src/translator.cpp **** 
+ 315:Src/translator.cpp ****     bool isHeaderValid(uint8_t head)
+ 316:Src/translator.cpp ****     {
+ 317:Src/translator.cpp ****         switch (getType(&head))
+ 318:Src/translator.cpp ****         {
+ 319:Src/translator.cpp ****             case TYPE_CMD:
+ 320:Src/translator.cpp ****             {
+ 321:Src/translator.cpp ****                 if(getLen(&head) != 1)
+ 322:Src/translator.cpp ****                     return false;
+ 323:Src/translator.cpp ****                 break;
+ 324:Src/translator.cpp ****             }
+ 325:Src/translator.cpp ****             case TYPE_VAR:
+ 326:Src/translator.cpp ****             case TYPE_ARR:
+ 327:Src/translator.cpp ****             {
+ 328:Src/translator.cpp ****                 if(getLen(&head) <= 1)
+ 329:Src/translator.cpp ****                     return false;
+ 330:Src/translator.cpp ****                 break;
+ 331:Src/translator.cpp ****             }
+ 332:Src/translator.cpp ****             default:
+ 333:Src/translator.cpp ****                 return false;
+ 334:Src/translator.cpp ****         }
+ 335:Src/translator.cpp ****         return true;
+GAS LISTING /tmp/ccHWptXe.s 			page 7
+
+
+ 336:Src/translator.cpp ****     }
+ 337:Src/translator.cpp **** }
+   9              		.loc 1 337 1 view -0
   10              		.cfi_startproc
-  11              		.loc 1 313 1 is_stmt 0 view .LVU1
+  11              		.loc 1 337 1 is_stmt 0 view .LVU1
   12 0000 83FF01   		cmpl	$1, %edi
   13 0003 7401     		je	.L7
   14              	.L4:
   15 0005 C3       		ret
   16              	.L7:
-  17              		.loc 1 313 1 discriminator 1 view .LVU2
+  17              		.loc 1 337 1 discriminator 1 view .LVU2
   18 0006 81FEFFFF 		cmpl	$65535, %esi
   18      0000
   19 000c 75F7     		jne	.L4
-  20              		.loc 1 313 1 view .LVU3
+  20              		.loc 1 337 1 view .LVU3
   21 000e 4883EC08 		subq	$8, %rsp
   22              		.cfi_def_cfa_offset 16
   23              		.file 2 "/usr/include/c++/9.2.0/iostream"
@@ -358,9 +385,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
    4:/usr/include/c++/9.2.0/iostream **** //
    5:/usr/include/c++/9.2.0/iostream **** // This file is part of the GNU ISO C++ Library.  This library is free
    6:/usr/include/c++/9.2.0/iostream **** // software; you can redistribute it and/or modify it under the
-GAS LISTING /tmp/ccBuC8w2.s 			page 7
-
-
    7:/usr/include/c++/9.2.0/iostream **** // terms of the GNU General Public License as published by the
    8:/usr/include/c++/9.2.0/iostream **** // Free Software Foundation; either version 3, or (at your option)
    9:/usr/include/c++/9.2.0/iostream **** // any later version.
@@ -394,6 +418,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   37:/usr/include/c++/9.2.0/iostream **** 
   38:/usr/include/c++/9.2.0/iostream **** #include <bits/c++config.h>
   39:/usr/include/c++/9.2.0/iostream **** #include <ostream>
+GAS LISTING /tmp/ccHWptXe.s 			page 8
+
+
   40:/usr/include/c++/9.2.0/iostream **** #include <istream>
   41:/usr/include/c++/9.2.0/iostream **** 
   42:/usr/include/c++/9.2.0/iostream **** namespace std _GLIBCXX_VISIBILITY(default)
@@ -418,9 +445,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   61:/usr/include/c++/9.2.0/iostream ****   extern ostream cout;		/// Linked to standard output
   62:/usr/include/c++/9.2.0/iostream ****   extern ostream cerr;		/// Linked to standard error (unbuffered)
   63:/usr/include/c++/9.2.0/iostream ****   extern ostream clog;		/// Linked to standard error (buffered)
-GAS LISTING /tmp/ccBuC8w2.s 			page 8
-
-
   64:/usr/include/c++/9.2.0/iostream **** 
   65:/usr/include/c++/9.2.0/iostream **** #ifdef _GLIBCXX_USE_WCHAR_T
   66:/usr/include/c++/9.2.0/iostream ****   extern wistream wcin;		/// Linked to standard input
@@ -450,12 +474,15 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   34 0033 E8000000 		call	__cxa_atexit@PLT
   34      00
   35              	.LVL3:
-  36              		.loc 1 313 1 view .LVU7
+  36              		.loc 1 337 1 view .LVU7
   37 0038 4883C408 		addq	$8, %rsp
   38              		.cfi_def_cfa_offset 8
   39 003c C3       		ret
+GAS LISTING /tmp/ccHWptXe.s 			page 9
+
+
   40              		.cfi_endproc
-  41              	.LFE1838:
+  41              	.LFE1839:
   43              		.globl	_ZN10translator7getTypeEPKh
   45              	_ZN10translator7getTypeEPKh:
   46              	.LVL4:
@@ -478,9 +505,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   58              	.LFE1504:
   60              		.globl	_ZN10translator6getLenEPKh
   62              	_ZN10translator6getLenEPKh:
-GAS LISTING /tmp/ccBuC8w2.s 			page 9
-
-
   63              	.LVL5:
   64              	.LFB1508:
  125:Src/translator.cpp ****         return package[0] & LEN_MASK;
@@ -514,6 +538,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   88 004c 4889FB   		movq	%rdi, %rbx
   44:Src/translator.cpp ****         uint8_t len = getLen(c);
   89              		.loc 1 44 9 is_stmt 1 view .LVU20
+GAS LISTING /tmp/ccHWptXe.s 			page 10
+
+
   90              	.LVL7:
   45:Src/translator.cpp ****         for(uint8_t i = 0; i < len + SYS_LEN; i++)
   91              		.loc 1 45 9 view .LVU21
@@ -538,9 +565,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  103              	.LVL9:
  104              	.L12:
  105              	.LBB15:
-GAS LISTING /tmp/ccBuC8w2.s 			page 10
-
-
   46:Src/translator.cpp ****         {
  106              		.loc 1 46 9 is_stmt 1 discriminator 2 view .LVU26
  107 0060 83C601   		addl	$1, %esi
@@ -574,6 +598,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  126              		.loc 1 49 27 is_stmt 0 view .LVU35
  127 0079 400FB6D6 		movzbl	%sil, %edx
   49:Src/translator.cpp ****         }
+GAS LISTING /tmp/ccHWptXe.s 			page 11
+
+
  128              		.loc 1 49 28 view .LVU36
  129 007d 0FB61413 		movzbl	(%rbx,%rdx), %edx
   49:Src/translator.cpp ****         }
@@ -598,9 +625,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  143              		.loc 1 51 9 is_stmt 1 view .LVU42
   51:Src/translator.cpp ****         return ret;
  144              		.loc 1 51 12 is_stmt 0 view .LVU43
-GAS LISTING /tmp/ccBuC8w2.s 			page 11
-
-
  145 008d 8D4701   		leal	1(%rdi), %eax
  146              	.LVL12:
   52:Src/translator.cpp ****     }
@@ -634,6 +658,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  171              		.cfi_offset 6, -16
  172 009a 53       		pushq	%rbx
  173              		.cfi_def_cfa_offset 24
+GAS LISTING /tmp/ccHWptXe.s 			page 12
+
+
  174              		.cfi_offset 3, -24
  175 009b 4889FB   		movq	%rdi, %rbx
  176 009e 4889F5   		movq	%rsi, %rbp
@@ -658,9 +685,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  135:Src/translator.cpp ****         {
  188              		.loc 1 135 32 is_stmt 0 discriminator 1 view .LVU55
  189 00ab 0FB6D0   		movzbl	%al, %edx
-GAS LISTING /tmp/ccBuC8w2.s 			page 12
-
-
  135:Src/translator.cpp ****         {
  190              		.loc 1 135 28 discriminator 1 view .LVU56
  191 00ae 400FB6CE 		movzbl	%sil, %ecx
@@ -694,6 +718,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  212              		.cfi_restore 6
  135:Src/translator.cpp ****         {
  213              		.loc 1 135 9 discriminator 2 view .LVU63
+GAS LISTING /tmp/ccHWptXe.s 			page 13
+
+
  214              	.LBE16:
  132:Src/translator.cpp **** 
  215              		.loc 1 132 20 view .LVU64
@@ -718,9 +745,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  229 00d8 5B       		popq	%rbx
  230              		.cfi_remember_state
  231              		.cfi_def_cfa_offset 16
-GAS LISTING /tmp/ccBuC8w2.s 			page 13
-
-
  232              	.LVL21:
  141:Src/translator.cpp **** 
  233              		.loc 1 141 5 view .LVU68
@@ -754,6 +778,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  258              		.cfi_startproc
  145:Src/translator.cpp ****     }
  259              		.loc 1 145 9 view .LVU73
+GAS LISTING /tmp/ccHWptXe.s 			page 14
+
+
  145:Src/translator.cpp ****     }
  260              		.loc 1 145 33 is_stmt 0 view .LVU74
  261 00e2 400FB6C7 		movzbl	%dil, %eax
@@ -778,9 +805,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  278              	.LFB1511:
  150:Src/translator.cpp ****         return (package[1] << 8) | package[2];
  279              		.loc 1 150 5 is_stmt 1 view -0
-GAS LISTING /tmp/ccBuC8w2.s 			page 14
-
-
  280              		.cfi_startproc
  151:Src/translator.cpp ****     }
  281              		.loc 1 151 9 view .LVU80
@@ -814,6 +838,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  304 00ff 4156     		pushq	%r14
  305              		.cfi_def_cfa_offset 16
  306              		.cfi_offset 14, -16
+GAS LISTING /tmp/ccHWptXe.s 			page 15
+
+
  307 0101 4155     		pushq	%r13
  308              		.cfi_def_cfa_offset 24
  309              		.cfi_offset 13, -24
@@ -838,9 +865,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   65:Src/translator.cpp ****         if(type != TYPE_ARR && type != TYPE_CMD && type != TYPE_VAR)
  325              		.loc 1 65 31 view .LVU90
  326 0112 89C5     		movl	%eax, %ebp
-GAS LISTING /tmp/ccBuC8w2.s 			page 15
-
-
  327              	.LVL30:
   66:Src/translator.cpp ****             return TYPE_BAD_TYPE;
  328              		.loc 1 66 9 is_stmt 1 view .LVU91
@@ -874,6 +898,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  349              	.LVL33:
   69:Src/translator.cpp ****             return TYPE_BAD_LEN;
  350              		.loc 1 69 9 is_stmt 1 view .LVU98
+GAS LISTING /tmp/ccHWptXe.s 			page 16
+
+
  351 0133 84C0     		testb	%al, %al
  352 0135 743C     		je	.L32
   72:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
@@ -898,9 +925,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  365 014a 664439F0 		cmpw	%r14w, %ax
  366 014e 7533     		jne	.L33
  367              	.LBB18:
-GAS LISTING /tmp/ccBuC8w2.s 			page 16
-
-
   76:Src/translator.cpp ****         {
  368              		.loc 1 76 21 view .LVU104
  369 0150 B8000000 		movl	$0, %eax
@@ -934,6 +958,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  387              	.LVL38:
  388              	.L31:
   76:Src/translator.cpp ****         {
+GAS LISTING /tmp/ccHWptXe.s 			page 17
+
+
  389              		.loc 1 76 9 discriminator 2 view .LVU112
  390              	.LBE18:
   67:Src/translator.cpp ****         uint8_t len = getLen(package);
@@ -958,9 +985,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  404 017a 5B       		popq	%rbx
  405              		.cfi_remember_state
  406              		.cfi_def_cfa_offset 40
-GAS LISTING /tmp/ccBuC8w2.s 			page 17
-
-
  407              	.LVL42:
   81:Src/translator.cpp **** 
  408              		.loc 1 81 5 view .LVU117
@@ -994,6 +1018,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  433 0000 74677420 		.string	"tgt func is null\n"
  433      66756E63 
  433      20697320 
+GAS LISTING /tmp/ccHWptXe.s 			page 18
+
+
  433      6E756C6C 
  433      0A00
  434              		.text
@@ -1018,9 +1045,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  452 018f 53       		pushq	%rbx
  453              		.cfi_def_cfa_offset 40
  454              		.cfi_offset 3, -40
-GAS LISTING /tmp/ccBuC8w2.s 			page 18
-
-
  455 0190 4883EC08 		subq	$8, %rsp
  456              		.cfi_def_cfa_offset 48
  457 0194 4889FB   		movq	%rdi, %rbx
@@ -1054,6 +1078,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  476 01af 7407     		je	.L42
   93:Src/translator.cpp **** 
  477              		.loc 1 93 20 is_stmt 0 view .LVU130
+GAS LISTING /tmp/ccHWptXe.s 			page 19
+
+
  478 01b1 BD640000 		movl	$100, %ebp
  478      00
  479 01b6 EB49     		jmp	.L35
@@ -1078,9 +1105,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  492 01c6 E8000000 		call	_ZN10translator11getCheckSumEPKh
  492      00
  493              	.LVL52:
-GAS LISTING /tmp/ccBuC8w2.s 			page 19
-
-
   96:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
  494              		.loc 1 96 9 view .LVU136
  495 01cb 664439E8 		cmpw	%r13w, %ax
@@ -1114,6 +1138,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
    1:/usr/include/c++/9.2.0/ostream **** // Output streams -*- C++ -*-
    2:/usr/include/c++/9.2.0/ostream **** 
    3:/usr/include/c++/9.2.0/ostream **** // Copyright (C) 1997-2019 Free Software Foundation, Inc.
+GAS LISTING /tmp/ccHWptXe.s 			page 20
+
+
    4:/usr/include/c++/9.2.0/ostream **** //
    5:/usr/include/c++/9.2.0/ostream **** // This file is part of the GNU ISO C++ Library.  This library is free
    6:/usr/include/c++/9.2.0/ostream **** // software; you can redistribute it and/or modify it under the
@@ -1138,9 +1165,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   25:/usr/include/c++/9.2.0/ostream **** /** @file include/ostream
   26:/usr/include/c++/9.2.0/ostream ****  *  This is a Standard C++ Library header.
   27:/usr/include/c++/9.2.0/ostream ****  */
-GAS LISTING /tmp/ccBuC8w2.s 			page 20
-
-
   28:/usr/include/c++/9.2.0/ostream **** 
   29:/usr/include/c++/9.2.0/ostream **** //
   30:/usr/include/c++/9.2.0/ostream **** // ISO C++ 14882: 27.6.2  Output streams
@@ -1174,6 +1198,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   58:/usr/include/c++/9.2.0/ostream ****     class basic_ostream : virtual public basic_ios<_CharT, _Traits>
   59:/usr/include/c++/9.2.0/ostream ****     {
   60:/usr/include/c++/9.2.0/ostream ****     public:
+GAS LISTING /tmp/ccHWptXe.s 			page 21
+
+
   61:/usr/include/c++/9.2.0/ostream ****       // Types (inherited from basic_ios):
   62:/usr/include/c++/9.2.0/ostream ****       typedef _CharT			 		char_type;
   63:/usr/include/c++/9.2.0/ostream ****       typedef typename _Traits::int_type 		int_type;
@@ -1198,9 +1225,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   82:/usr/include/c++/9.2.0/ostream ****       */
   83:/usr/include/c++/9.2.0/ostream ****       explicit
   84:/usr/include/c++/9.2.0/ostream ****       basic_ostream(__streambuf_type* __sb)
-GAS LISTING /tmp/ccBuC8w2.s 			page 21
-
-
   85:/usr/include/c++/9.2.0/ostream ****       { this->init(__sb); }
   86:/usr/include/c++/9.2.0/ostream **** 
   87:/usr/include/c++/9.2.0/ostream ****       /**
@@ -1234,6 +1258,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  115:/usr/include/c++/9.2.0/ostream **** 
  116:/usr/include/c++/9.2.0/ostream ****       __ostream_type&
  117:/usr/include/c++/9.2.0/ostream ****       operator<<(__ios_type& (*__pf)(__ios_type&))
+GAS LISTING /tmp/ccHWptXe.s 			page 22
+
+
  118:/usr/include/c++/9.2.0/ostream ****       {
  119:/usr/include/c++/9.2.0/ostream **** 	// _GLIBCXX_RESOLVE_LIB_DEFECTS
  120:/usr/include/c++/9.2.0/ostream **** 	// DR 60. What is a formatted input function?
@@ -1258,9 +1285,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  139:/usr/include/c++/9.2.0/ostream ****        *  @name Inserters
  140:/usr/include/c++/9.2.0/ostream ****        *
  141:/usr/include/c++/9.2.0/ostream ****        *  All the @c operator<< functions (aka <em>formatted output
-GAS LISTING /tmp/ccBuC8w2.s 			page 22
-
-
  142:/usr/include/c++/9.2.0/ostream ****        *  functions</em>) have some common behavior.  Each starts by
  143:/usr/include/c++/9.2.0/ostream ****        *  constructing a temporary object of type std::basic_ostream::sentry.
  144:/usr/include/c++/9.2.0/ostream ****        *  This can have several effects, concluding with the setting of a
@@ -1294,6 +1318,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  172:/usr/include/c++/9.2.0/ostream **** 
  173:/usr/include/c++/9.2.0/ostream ****       __ostream_type&
  174:/usr/include/c++/9.2.0/ostream ****       operator<<(bool __n)
+GAS LISTING /tmp/ccHWptXe.s 			page 23
+
+
  175:/usr/include/c++/9.2.0/ostream ****       { return _M_insert(__n); }
  176:/usr/include/c++/9.2.0/ostream **** 
  177:/usr/include/c++/9.2.0/ostream ****       __ostream_type&
@@ -1318,9 +1345,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  196:/usr/include/c++/9.2.0/ostream **** 	return _M_insert(static_cast<unsigned long>(__n));
  197:/usr/include/c++/9.2.0/ostream ****       }
  198:/usr/include/c++/9.2.0/ostream **** 
-GAS LISTING /tmp/ccBuC8w2.s 			page 23
-
-
  199:/usr/include/c++/9.2.0/ostream **** #ifdef _GLIBCXX_USE_LONG_LONG
  200:/usr/include/c++/9.2.0/ostream ****       __ostream_type&
  201:/usr/include/c++/9.2.0/ostream ****       operator<<(long long __n)
@@ -1354,6 +1378,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  229:/usr/include/c++/9.2.0/ostream ****       }
  230:/usr/include/c++/9.2.0/ostream **** 
  231:/usr/include/c++/9.2.0/ostream ****       __ostream_type&
+GAS LISTING /tmp/ccHWptXe.s 			page 24
+
+
  232:/usr/include/c++/9.2.0/ostream ****       operator<<(long double __f)
  233:/usr/include/c++/9.2.0/ostream ****       { return _M_insert(__f); }
  234:/usr/include/c++/9.2.0/ostream ****       //@}
@@ -1378,9 +1405,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  253:/usr/include/c++/9.2.0/ostream **** 
  254:/usr/include/c++/9.2.0/ostream ****       /**
  255:/usr/include/c++/9.2.0/ostream ****        *  @brief  Extracting from another streambuf.
-GAS LISTING /tmp/ccBuC8w2.s 			page 24
-
-
  256:/usr/include/c++/9.2.0/ostream ****        *  @param  __sb  A pointer to a streambuf
  257:/usr/include/c++/9.2.0/ostream ****        *
  258:/usr/include/c++/9.2.0/ostream ****        *  This function behaves like one of the basic arithmetic extractors,
@@ -1414,6 +1438,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  286:/usr/include/c++/9.2.0/ostream ****        *  with the setting of a status flag; see the sentry documentation
  287:/usr/include/c++/9.2.0/ostream ****        *  for more.
  288:/usr/include/c++/9.2.0/ostream ****        *
+GAS LISTING /tmp/ccHWptXe.s 			page 25
+
+
  289:/usr/include/c++/9.2.0/ostream ****        *  If the sentry status is good, the function tries to generate
  290:/usr/include/c++/9.2.0/ostream ****        *  whatever data is appropriate for the type of the argument.
  291:/usr/include/c++/9.2.0/ostream ****        *
@@ -1438,9 +1465,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  310:/usr/include/c++/9.2.0/ostream **** 
  311:/usr/include/c++/9.2.0/ostream ****       /**
  312:/usr/include/c++/9.2.0/ostream ****        *  @brief  Core write functionality, without sentry.
-GAS LISTING /tmp/ccBuC8w2.s 			page 25
-
-
  313:/usr/include/c++/9.2.0/ostream ****        *  @param  __s  The array to insert.
  314:/usr/include/c++/9.2.0/ostream ****        *  @param  __n  Maximum number of characters to insert.
  315:/usr/include/c++/9.2.0/ostream ****       */
@@ -1474,6 +1498,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  343:/usr/include/c++/9.2.0/ostream **** 
  344:/usr/include/c++/9.2.0/ostream ****       /**
  345:/usr/include/c++/9.2.0/ostream ****        *  @brief  Synchronizing the stream buffer.
+GAS LISTING /tmp/ccHWptXe.s 			page 26
+
+
  346:/usr/include/c++/9.2.0/ostream ****        *  @return  *this
  347:/usr/include/c++/9.2.0/ostream ****        *
  348:/usr/include/c++/9.2.0/ostream ****        *  If @c rdbuf() is a null pointer, changes nothing.
@@ -1498,9 +1525,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  367:/usr/include/c++/9.2.0/ostream ****        *  @brief  Changing the current write position.
  368:/usr/include/c++/9.2.0/ostream ****        *  @param  __pos  A file position object.
  369:/usr/include/c++/9.2.0/ostream ****        *  @return  *this
-GAS LISTING /tmp/ccBuC8w2.s 			page 26
-
-
  370:/usr/include/c++/9.2.0/ostream ****        *
  371:/usr/include/c++/9.2.0/ostream ****        *  If @c fail() is not true, calls @c rdbuf()->pubseekpos(pos).  If
  372:/usr/include/c++/9.2.0/ostream ****        *  that function fails, sets failbit.
@@ -1534,6 +1558,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  400:/usr/include/c++/9.2.0/ostream ****       : __ios_type()
  401:/usr/include/c++/9.2.0/ostream ****       { __ios_type::move(__rhs); }
  402:/usr/include/c++/9.2.0/ostream **** 
+GAS LISTING /tmp/ccHWptXe.s 			page 27
+
+
  403:/usr/include/c++/9.2.0/ostream ****       // 27.7.3.3 Assign/swap
  404:/usr/include/c++/9.2.0/ostream **** 
  405:/usr/include/c++/9.2.0/ostream ****       basic_ostream& operator=(const basic_ostream&) = delete;
@@ -1558,9 +1585,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  424:/usr/include/c++/9.2.0/ostream ****   /**
  425:/usr/include/c++/9.2.0/ostream ****    *  @brief  Performs setup work for output streams.
  426:/usr/include/c++/9.2.0/ostream ****    *
-GAS LISTING /tmp/ccBuC8w2.s 			page 27
-
-
  427:/usr/include/c++/9.2.0/ostream ****    *  Objects of this class are created before all of the standard
  428:/usr/include/c++/9.2.0/ostream ****    *  inserters are run.  It is responsible for <em>exception-safe prefix and
  429:/usr/include/c++/9.2.0/ostream ****    *  suffix operations</em>.
@@ -1594,6 +1618,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  457:/usr/include/c++/9.2.0/ostream ****        *
  458:/usr/include/c++/9.2.0/ostream ****        *  If @c ios_base::unitbuf is set in @c os.flags(), and
  459:/usr/include/c++/9.2.0/ostream ****        *  @c std::uncaught_exception() is true, the sentry destructor calls
+GAS LISTING /tmp/ccHWptXe.s 			page 28
+
+
  460:/usr/include/c++/9.2.0/ostream ****        *  @c flush() on the output stream.
  461:/usr/include/c++/9.2.0/ostream ****       */
  462:/usr/include/c++/9.2.0/ostream ****       ~sentry()
@@ -1618,9 +1645,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  481:/usr/include/c++/9.2.0/ostream **** #if __cplusplus >= 201103L
  482:/usr/include/c++/9.2.0/ostream ****       explicit
  483:/usr/include/c++/9.2.0/ostream **** #endif
-GAS LISTING /tmp/ccBuC8w2.s 			page 28
-
-
  484:/usr/include/c++/9.2.0/ostream ****       operator bool() const
  485:/usr/include/c++/9.2.0/ostream ****       { return _M_ok; }
  486:/usr/include/c++/9.2.0/ostream ****     };
@@ -1654,6 +1678,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  514:/usr/include/c++/9.2.0/ostream ****   // Specialization
  515:/usr/include/c++/9.2.0/ostream ****   template <class _Traits>
  516:/usr/include/c++/9.2.0/ostream ****     inline basic_ostream<char, _Traits>&
+GAS LISTING /tmp/ccHWptXe.s 			page 29
+
+
  517:/usr/include/c++/9.2.0/ostream ****     operator<<(basic_ostream<char, _Traits>& __out, char __c)
  518:/usr/include/c++/9.2.0/ostream ****     { return __ostream_insert(__out, &__c, 1); }
  519:/usr/include/c++/9.2.0/ostream **** 
@@ -1678,9 +1705,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  538:/usr/include/c++/9.2.0/ostream ****    *  @pre  @p __s must be a non-NULL pointer
  539:/usr/include/c++/9.2.0/ostream ****    *
  540:/usr/include/c++/9.2.0/ostream ****    *  Behaves like one of the formatted arithmetic inserters described in
-GAS LISTING /tmp/ccBuC8w2.s 			page 29
-
-
  541:/usr/include/c++/9.2.0/ostream ****    *  std::basic_ostream.  After constructing a sentry object with good
  542:/usr/include/c++/9.2.0/ostream ****    *  status, this function inserts @c traits::length(__s) characters starting
  543:/usr/include/c++/9.2.0/ostream ****    *  at @p __s, widened if necessary, followed by any required padding (as
@@ -1714,6 +1738,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
    2:/usr/include/c++/9.2.0/bits/char_traits.h **** 
    3:/usr/include/c++/9.2.0/bits/char_traits.h **** // Copyright (C) 1997-2019 Free Software Foundation, Inc.
    4:/usr/include/c++/9.2.0/bits/char_traits.h **** //
+GAS LISTING /tmp/ccHWptXe.s 			page 30
+
+
    5:/usr/include/c++/9.2.0/bits/char_traits.h **** // This file is part of the GNU ISO C++ Library.  This library is free
    6:/usr/include/c++/9.2.0/bits/char_traits.h **** // software; you can redistribute it and/or modify it under the
    7:/usr/include/c++/9.2.0/bits/char_traits.h **** // terms of the GNU General Public License as published by the
@@ -1738,9 +1765,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   26:/usr/include/c++/9.2.0/bits/char_traits.h ****  *  This is an internal header file, included by other library headers.
   27:/usr/include/c++/9.2.0/bits/char_traits.h ****  *  Do not attempt to use it directly. @headername{string}
   28:/usr/include/c++/9.2.0/bits/char_traits.h ****  */
-GAS LISTING /tmp/ccBuC8w2.s 			page 30
-
-
   29:/usr/include/c++/9.2.0/bits/char_traits.h **** 
   30:/usr/include/c++/9.2.0/bits/char_traits.h **** //
   31:/usr/include/c++/9.2.0/bits/char_traits.h **** // ISO C++ 14882: 21  Strings library
@@ -1774,6 +1798,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   59:/usr/include/c++/9.2.0/bits/char_traits.h ****    *  defined in char_traits, can specialize __gnu_cxx::_Char_types
   60:/usr/include/c++/9.2.0/bits/char_traits.h ****    *  while leaving __gnu_cxx::char_traits alone. */
   61:/usr/include/c++/9.2.0/bits/char_traits.h ****   template<typename _CharT>
+GAS LISTING /tmp/ccHWptXe.s 			page 31
+
+
   62:/usr/include/c++/9.2.0/bits/char_traits.h ****     struct _Char_types
   63:/usr/include/c++/9.2.0/bits/char_traits.h ****     {
   64:/usr/include/c++/9.2.0/bits/char_traits.h ****       typedef unsigned long   int_type;
@@ -1798,9 +1825,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
   83:/usr/include/c++/9.2.0/bits/char_traits.h ****    *  for advice on how to make use of this class for @a unusual character
   84:/usr/include/c++/9.2.0/bits/char_traits.h ****    *  types. Also, check out include/ext/pod_char_traits.h.  
   85:/usr/include/c++/9.2.0/bits/char_traits.h ****    */
-GAS LISTING /tmp/ccBuC8w2.s 			page 31
-
-
   86:/usr/include/c++/9.2.0/bits/char_traits.h ****   template<typename _CharT>
   87:/usr/include/c++/9.2.0/bits/char_traits.h ****     struct char_traits
   88:/usr/include/c++/9.2.0/bits/char_traits.h ****     {
@@ -1834,6 +1858,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  116:/usr/include/c++/9.2.0/bits/char_traits.h ****       static char_type*
  117:/usr/include/c++/9.2.0/bits/char_traits.h ****       move(char_type* __s1, const char_type* __s2, std::size_t __n);
  118:/usr/include/c++/9.2.0/bits/char_traits.h **** 
+GAS LISTING /tmp/ccHWptXe.s 			page 32
+
+
  119:/usr/include/c++/9.2.0/bits/char_traits.h ****       static char_type*
  120:/usr/include/c++/9.2.0/bits/char_traits.h ****       copy(char_type* __s1, const char_type* __s2, std::size_t __n);
  121:/usr/include/c++/9.2.0/bits/char_traits.h **** 
@@ -1858,9 +1885,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  140:/usr/include/c++/9.2.0/bits/char_traits.h **** 
  141:/usr/include/c++/9.2.0/bits/char_traits.h ****       static _GLIBCXX_CONSTEXPR int_type
  142:/usr/include/c++/9.2.0/bits/char_traits.h ****       not_eof(const int_type& __c)
-GAS LISTING /tmp/ccBuC8w2.s 			page 32
-
-
  143:/usr/include/c++/9.2.0/bits/char_traits.h ****       { return !eq_int_type(__c, eof()) ? __c : to_int_type(char_type()); }
  144:/usr/include/c++/9.2.0/bits/char_traits.h ****     };
  145:/usr/include/c++/9.2.0/bits/char_traits.h **** 
@@ -1894,6 +1918,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  173:/usr/include/c++/9.2.0/bits/char_traits.h ****     find(const char_type* __s, std::size_t __n, const char_type& __a)
  174:/usr/include/c++/9.2.0/bits/char_traits.h ****     {
  175:/usr/include/c++/9.2.0/bits/char_traits.h ****       for (std::size_t __i = 0; __i < __n; ++__i)
+GAS LISTING /tmp/ccHWptXe.s 			page 33
+
+
  176:/usr/include/c++/9.2.0/bits/char_traits.h ****         if (eq(__s[__i], __a))
  177:/usr/include/c++/9.2.0/bits/char_traits.h ****           return __s + __i;
  178:/usr/include/c++/9.2.0/bits/char_traits.h ****       return 0;
@@ -1918,9 +1945,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  197:/usr/include/c++/9.2.0/bits/char_traits.h ****       // NB: Inline std::copy so no recursive dependencies.
  198:/usr/include/c++/9.2.0/bits/char_traits.h ****       std::copy(__s2, __s2 + __n, __s1);
  199:/usr/include/c++/9.2.0/bits/char_traits.h ****       return __s1;
-GAS LISTING /tmp/ccBuC8w2.s 			page 33
-
-
  200:/usr/include/c++/9.2.0/bits/char_traits.h ****     }
  201:/usr/include/c++/9.2.0/bits/char_traits.h **** 
  202:/usr/include/c++/9.2.0/bits/char_traits.h ****   template<typename _CharT>
@@ -1954,6 +1978,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  230:/usr/include/c++/9.2.0/bits/char_traits.h ****     static _GLIBCXX_ALWAYS_INLINE constexpr bool
  231:/usr/include/c++/9.2.0/bits/char_traits.h ****     __constant_string_p(const _CharT* __s)
  232:/usr/include/c++/9.2.0/bits/char_traits.h ****     {
+GAS LISTING /tmp/ccHWptXe.s 			page 34
+
+
  233:/usr/include/c++/9.2.0/bits/char_traits.h **** #ifdef _GLIBCXX_HAVE_BUILTIN_IS_CONSTANT_EVALUATED
  234:/usr/include/c++/9.2.0/bits/char_traits.h ****       (void) __s;
  235:/usr/include/c++/9.2.0/bits/char_traits.h ****       // In constexpr contexts all strings should be constant.
@@ -1978,9 +2005,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  254:/usr/include/c++/9.2.0/bits/char_traits.h ****     __constant_char_array_p(const _CharT* __a, size_t __n)
  255:/usr/include/c++/9.2.0/bits/char_traits.h ****     {
  256:/usr/include/c++/9.2.0/bits/char_traits.h **** #ifdef _GLIBCXX_HAVE_BUILTIN_IS_CONSTANT_EVALUATED
-GAS LISTING /tmp/ccBuC8w2.s 			page 34
-
-
  257:/usr/include/c++/9.2.0/bits/char_traits.h ****       (void) __a;
  258:/usr/include/c++/9.2.0/bits/char_traits.h ****       (void) __n;
  259:/usr/include/c++/9.2.0/bits/char_traits.h ****       // In constexpr contexts all character arrays should be constant.
@@ -2014,6 +2038,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  287:/usr/include/c++/9.2.0/bits/char_traits.h **** 
  288:/usr/include/c++/9.2.0/bits/char_traits.h ****   /// 21.1.3.1  char_traits specializations
  289:/usr/include/c++/9.2.0/bits/char_traits.h ****   template<>
+GAS LISTING /tmp/ccHWptXe.s 			page 35
+
+
  290:/usr/include/c++/9.2.0/bits/char_traits.h ****     struct char_traits<char>
  291:/usr/include/c++/9.2.0/bits/char_traits.h ****     {
  292:/usr/include/c++/9.2.0/bits/char_traits.h ****       typedef char              char_type;
@@ -2038,9 +2065,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  311:/usr/include/c++/9.2.0/bits/char_traits.h **** 		< static_cast<unsigned char>(__c2));
  312:/usr/include/c++/9.2.0/bits/char_traits.h ****       }
  313:/usr/include/c++/9.2.0/bits/char_traits.h **** 
-GAS LISTING /tmp/ccBuC8w2.s 			page 35
-
-
  314:/usr/include/c++/9.2.0/bits/char_traits.h ****       static _GLIBCXX17_CONSTEXPR int
  315:/usr/include/c++/9.2.0/bits/char_traits.h ****       compare(const char_type* __s1, const char_type* __s2, size_t __n)
  316:/usr/include/c++/9.2.0/bits/char_traits.h ****       {
@@ -2074,6 +2098,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  523              		.loc 3 570 18 is_stmt 0 view .LVU147
  524 01e2 BA110000 		movl	$17, %edx
  524      00
+GAS LISTING /tmp/ccHWptXe.s 			page 36
+
+
  525 01e7 488D3500 		leaq	.LC0(%rip), %rsi
  525      000000
  526 01ee 488D3D00 		leaq	_ZSt4cerr(%rip), %rdi
@@ -2098,9 +2125,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  539              	.L35:
  104:Src/translator.cpp **** 
  540              		.loc 1 104 5 view .LVU151
-GAS LISTING /tmp/ccBuC8w2.s 			page 36
-
-
  541 0201 89E8     		movl	%ebp, %eax
  542 0203 4883C408 		addq	$8, %rsp
  543              		.cfi_remember_state
@@ -2134,6 +2158,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  566              		.cfi_endproc
  567              	.LFE1506:
  569              		.globl	_ZN10translator8parseCmdEPh
+GAS LISTING /tmp/ccHWptXe.s 			page 37
+
+
  571              	_ZN10translator8parseCmdEPh:
  572              	.LVL62:
  573              	.LFB1507:
@@ -2158,9 +2185,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  587              	.LVL63:
  109:Src/translator.cpp ****             return ~0;
  588              		.loc 1 109 9 is_stmt 1 view .LVU160
-GAS LISTING /tmp/ccBuC8w2.s 			page 37
-
-
  589 021f 3C01     		cmpb	$1, %al
  590 0221 7532     		jne	.L45
  112:Src/translator.cpp ****         if(var != 1)
@@ -2194,6 +2218,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  609      00
  610              	.LVL67:
  116:Src/translator.cpp ****         if(check != getCheckSum(package))
+GAS LISTING /tmp/ccHWptXe.s 			page 38
+
+
  611              		.loc 1 116 39 view .LVU168
  612 0240 89C5     		movl	%eax, %ebp
  613              	.LVL68:
@@ -2218,9 +2245,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  626              	.LVL70:
  627              	.L45:
  110:Src/translator.cpp **** 
-GAS LISTING /tmp/ccBuC8w2.s 			page 38
-
-
  628              		.loc 1 110 21 view .LVU174
  629 0255 48C7C0FF 		movq	$-1, %rax
  629      FFFFFF
@@ -2254,6 +2278,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  157:Src/translator.cpp ****         tgt[0] = getZeroByte(TYPE_CMD, 1);
  655              		.loc 1 157 5 is_stmt 1 view -0
  656              		.cfi_startproc
+GAS LISTING /tmp/ccHWptXe.s 			page 39
+
+
  157:Src/translator.cpp ****         tgt[0] = getZeroByte(TYPE_CMD, 1);
  657              		.loc 1 157 5 is_stmt 0 view .LVU179
  658 0268 55       		pushq	%rbp
@@ -2278,9 +2305,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  672              	.LVL76:
  158:Src/translator.cpp ****         #ifdef USE_MULTIDEVICE
  673              		.loc 1 158 29 view .LVU183
-GAS LISTING /tmp/ccBuC8w2.s 			page 39
-
-
  674 0279 E8000000 		call	_ZN10translator11getZeroByteEhh
  674      00
  675              	.LVL77:
@@ -2314,6 +2338,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  692              		.loc 1 165 16 is_stmt 0 view .LVU193
  693 0292 884302   		movb	%al, 2(%rbx)
  166:Src/translator.cpp **** 
+GAS LISTING /tmp/ccHWptXe.s 			page 40
+
+
  694              		.loc 1 166 5 view .LVU194
  695 0295 5B       		popq	%rbx
  696              		.cfi_def_cfa_offset 16
@@ -2338,9 +2365,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  714              		.cfi_def_cfa_offset 16
  715              		.cfi_offset 6, -16
  716 0299 53       		pushq	%rbx
-GAS LISTING /tmp/ccBuC8w2.s 			page 40
-
-
  717              		.cfi_def_cfa_offset 24
  718              		.cfi_offset 3, -24
  719 029a 4889FB   		movq	%rdi, %rbx
@@ -2374,6 +2398,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  184:Src/translator.cpp ****                     return false;
  738              		.loc 1 184 26 is_stmt 0 view .LVU206
  739 02b1 4889DF   		movq	%rbx, %rdi
+GAS LISTING /tmp/ccHWptXe.s 			page 41
+
+
  740 02b4 E8000000 		call	_ZN10translator6getLenEPKh
  740      00
  741              	.LVL83:
@@ -2398,9 +2425,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  754      00
  755              	.LVL85:
  191:Src/translator.cpp ****     }
-GAS LISTING /tmp/ccBuC8w2.s 			page 41
-
-
  756              		.loc 1 191 61 view .LVU211
  757 02cf 6639C5   		cmpw	%ax, %bp
  758 02d2 0F94C0   		sete	%al
@@ -2434,6 +2458,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  177:Src/translator.cpp ****                     return false;
  779              		.loc 1 177 17 view .LVU218
  780 02e0 3C01     		cmpb	$1, %al
+GAS LISTING /tmp/ccHWptXe.s 			page 42
+
+
  781 02e2 74D9     		je	.L56
  178:Src/translator.cpp ****                 break;
  782              		.loc 1 178 28 view .LVU219
@@ -2458,9 +2485,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  185:Src/translator.cpp ****                 break;
  796              		.loc 1 185 28 view .LVU222
  797 02f9 B8000000 		movl	$0, %eax
-GAS LISTING /tmp/ccBuC8w2.s 			page 42
-
-
  797      00
  798 02fe EBD5     		jmp	.L52
  799              		.cfi_endproc
@@ -2494,6 +2518,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  826              		.loc 1 197 9 is_stmt 1 view .LVU225
  197:Src/translator.cpp ****         tgt[SYS_LEN] = id;
  827              		.loc 1 197 47 is_stmt 0 view .LVU226
+GAS LISTING /tmp/ccHWptXe.s 			page 43
+
+
  828 0311 83C601   		addl	$1, %esi
  829              	.LVL92:
  197:Src/translator.cpp ****         tgt[SYS_LEN] = id;
@@ -2518,9 +2545,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  199:Src/translator.cpp ****         {
  842              		.loc 1 199 9 is_stmt 1 view .LVU232
  843              	.LVL95:
-GAS LISTING /tmp/ccBuC8w2.s 			page 43
-
-
  844              	.LBB32:
  199:Src/translator.cpp ****         {
  845              		.loc 1 199 21 is_stmt 0 view .LVU233
@@ -2554,6 +2578,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  864      04FF
  201:Src/translator.cpp ****             // std::cout << "from " << (int)(i) << " to " << (int)(i + 4) << " set 0x" << std::hex 
  865              		.loc 1 201 34 discriminator 2 view .LVU241
+GAS LISTING /tmp/ccHWptXe.s 			page 44
+
+
  866 0348 88441500 		movb	%al, 0(%rbp,%rdx)
  199:Src/translator.cpp ****         {
  867              		.loc 1 199 9 is_stmt 1 discriminator 2 view .LVU242
@@ -2578,9 +2605,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  880              		.loc 1 210 9 is_stmt 1 view .LVU247
  210:Src/translator.cpp ****         tgt[2] = check & 0xFF;
  881              		.loc 1 210 24 is_stmt 0 view .LVU248
-GAS LISTING /tmp/ccBuC8w2.s 			page 44
-
-
  882 0359 0FB6D4   		movzbl	%ah, %edx
  210:Src/translator.cpp ****         tgt[2] = check & 0xFF;
  883              		.loc 1 210 16 view .LVU249
@@ -2614,6 +2638,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  905              	.LFE1514:
  907              		.globl	_ZN10translator8parseVarEPhS0_h
  909              	_ZN10translator8parseVarEPhS0_h:
+GAS LISTING /tmp/ccHWptXe.s 			page 45
+
+
  910              	.LVL102:
  911              	.LFB1515:
  218:Src/translator.cpp ****         uint8_t type = getType(package);
@@ -2638,9 +2665,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  929              		.cfi_offset 6, -48
  930 0372 53       		pushq	%rbx
  931              		.cfi_def_cfa_offset 56
-GAS LISTING /tmp/ccBuC8w2.s 			page 45
-
-
  932              		.cfi_offset 3, -56
  933 0373 4889FB   		movq	%rdi, %rbx
  934 0376 4989F4   		movq	%rsi, %r12
@@ -2674,6 +2698,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  953 0392 3C01     		cmpb	$1, %al
  954 0394 7665     		jbe	.L72
  225:Src/translator.cpp ****                     thischeck = getCheckSum(package);
+GAS LISTING /tmp/ccHWptXe.s 			page 46
+
+
  955              		.loc 1 225 9 view .LVU265
  225:Src/translator.cpp ****                     thischeck = getCheckSum(package);
  956              		.loc 1 225 40 is_stmt 0 view .LVU266
@@ -2698,9 +2725,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  230:Src/translator.cpp ****         for(uint8_t i = 0; i < len - 1; i++)
  970              		.loc 1 230 9 view .LVU270
  230:Src/translator.cpp ****         for(uint8_t i = 0; i < len - 1; i++)
-GAS LISTING /tmp/ccBuC8w2.s 			page 46
-
-
  971              		.loc 1 230 17 is_stmt 0 view .LVU271
  972 03af 0FB67303 		movzbl	3(%rbx), %esi
  973              	.LVL109:
@@ -2734,6 +2758,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  991              		.loc 1 233 50 is_stmt 0 discriminator 2 view .LVU280
  992 03c6 8D5003   		leal	3(%rax), %edx
  993 03c9 4863D2   		movslq	%edx, %rdx
+GAS LISTING /tmp/ccHWptXe.s 			page 47
+
+
  233:Src/translator.cpp ****         }
  994              		.loc 1 233 20 discriminator 2 view .LVU281
  995 03cc 400FB6FE 		movzbl	%sil, %edi
@@ -2758,9 +2785,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1007              		.loc 1 231 9 is_stmt 1 discriminator 2 view .LVU287
  1008 03e4 83C101   		addl	$1, %ecx
  1009              	.LVL111:
-GAS LISTING /tmp/ccBuC8w2.s 			page 47
-
-
  231:Src/translator.cpp ****         {
  1010              		.loc 1 231 9 is_stmt 0 discriminator 2 view .LVU288
  1011 03e7 EBCF     		jmp	.L70
@@ -2794,6 +2818,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1033 03f4 415D     		popq	%r13
  1034              		.cfi_def_cfa_offset 24
  1035              	.LVL116:
+GAS LISTING /tmp/ccHWptXe.s 			page 48
+
+
  236:Src/translator.cpp ****     
  1036              		.loc 1 236 5 view .LVU294
  1037 03f6 415E     		popq	%r14
@@ -2818,9 +2845,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1052              		.loc 1 228 20 view .LVU297
  1053 0402 BD660000 		movl	$102, %ebp
  1053      00
-GAS LISTING /tmp/ccBuC8w2.s 			page 48
-
-
  1054              	.LVL120:
  228:Src/translator.cpp **** 
  1055              		.loc 1 228 20 view .LVU298
@@ -2854,6 +2878,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1083 0411 4189FE   		movl	%edi, %r14d
  1084 0414 89D0     		movl	%edx, %eax
  1085 0416 4989CC   		movq	%rcx, %r12
+GAS LISTING /tmp/ccHWptXe.s 			page 49
+
+
  1086 0419 4C89C5   		movq	%r8, %rbp
  1087 041c 4189F5   		movl	%esi, %r13d
  1088 041f 89D3     		movl	%edx, %ebx
@@ -2878,9 +2905,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1100      00
  1101              	.LVL124:
  242:Src/translator.cpp ****         tgt[SYS_LEN] = id;
-GAS LISTING /tmp/ccBuC8w2.s 			page 49
-
-
  1102              		.loc 1 242 16 view .LVU306
  1103 0435 884500   		movb	%al, 0(%rbp)
  243:Src/translator.cpp ****         for(uint8_t i = 0; i < arrlen; i++)
@@ -2914,6 +2938,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1124 044b B9000000 		movl	$0, %ecx
  1124      00
  1125              	.L78:
+GAS LISTING /tmp/ccHWptXe.s 			page 50
+
+
  1126              	.LVL128:
  246:Src/translator.cpp ****             {
  1127              		.loc 1 246 34 is_stmt 1 discriminator 3 view .LVU314
@@ -2938,9 +2965,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1140 0461 29FA     		subl	%edi, %edx
  248:Src/translator.cpp ****             }
  1141              		.loc 1 248 72 discriminator 2 view .LVU321
-GAS LISTING /tmp/ccBuC8w2.s 			page 50
-
-
  1142 0463 8D5410FF 		leal	-1(%rax,%rdx), %edx
  1143 0467 4863D2   		movslq	%edx, %rdx
  248:Src/translator.cpp ****             }
@@ -2974,6 +2998,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1163 047e 4889EF   		movq	%rbp, %rdi
  1164 0481 E8000000 		call	_ZN10translator11genCheckSumEPKh
  1164      00
+GAS LISTING /tmp/ccHWptXe.s 			page 51
+
+
  1165              	.LVL131:
  257:Src/translator.cpp ****         tgt[2] = check & 0xFF;
  1166              		.loc 1 257 9 is_stmt 1 view .LVU330
@@ -2998,9 +3025,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1179 0490 5D       		popq	%rbp
  1180              		.cfi_def_cfa_offset 32
  1181              	.LVL133:
-GAS LISTING /tmp/ccBuC8w2.s 			page 51
-
-
  259:Src/translator.cpp ****     
  1182              		.loc 1 259 5 view .LVU337
  1183 0491 415C     		popq	%r12
@@ -3034,6 +3058,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1209              		.cfi_def_cfa_offset 24
  1210              		.cfi_offset 13, -24
  1211 049c 4154     		pushq	%r12
+GAS LISTING /tmp/ccHWptXe.s 			page 52
+
+
  1212              		.cfi_def_cfa_offset 32
  1213              		.cfi_offset 12, -32
  1214 049e 55       		pushq	%rbp
@@ -3058,9 +3085,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1229 04af 89C5     		movl	%eax, %ebp
  268:Src/translator.cpp ****         if(len < 2)
  1230              		.loc 1 268 9 view .LVU345
-GAS LISTING /tmp/ccBuC8w2.s 			page 52
-
-
  268:Src/translator.cpp ****         if(len < 2)
  1231              		.loc 1 268 29 is_stmt 0 view .LVU346
  1232 04b1 4889DF   		movq	%rbx, %rdi
@@ -3094,6 +3118,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1251      00
  1252              	.LVL142:
  273:Src/translator.cpp ****             return TYPE_BAD_CHECKSUM;
+GAS LISTING /tmp/ccHWptXe.s 			page 53
+
+
  1253              		.loc 1 273 9 is_stmt 1 view .LVU353
  1254 04d3 664139C6 		cmpw	%ax, %r14w
  1255 04d7 7549     		jne	.L86
@@ -3118,9 +3145,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1267              		.loc 1 277 28 is_stmt 0 discriminator 3 view .LVU359
  1268 04e2 0FB6C1   		movzbl	%cl, %eax
  277:Src/translator.cpp ****         {
-GAS LISTING /tmp/ccBuC8w2.s 			page 53
-
-
  1269              		.loc 1 277 32 discriminator 3 view .LVU360
  1270 04e5 410FB6D5 		movzbl	%r13b, %edx
  277:Src/translator.cpp ****         {
@@ -3154,6 +3178,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  277:Src/translator.cpp ****         {
  1290              		.loc 1 277 9 is_stmt 1 discriminator 2 view .LVU370
  1291 0506 83C101   		addl	$1, %ecx
+GAS LISTING /tmp/ccHWptXe.s 			page 54
+
+
  1292              	.LVL145:
  277:Src/translator.cpp ****         {
  1293              		.loc 1 277 9 is_stmt 0 discriminator 2 view .LVU371
@@ -3178,9 +3205,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1308              	.LVL148:
  282:Src/translator.cpp ****     
  1309              		.loc 1 282 5 view .LVU375
-GAS LISTING /tmp/ccBuC8w2.s 			page 54
-
-
  1310 0513 5D       		popq	%rbp
  1311              		.cfi_def_cfa_offset 32
  1312 0514 415C     		popq	%r12
@@ -3214,6 +3238,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  274:Src/translator.cpp **** 
  1334              		.loc 1 274 20 view .LVU380
  1335 0527 EBE7     		jmp	.L81
+GAS LISTING /tmp/ccHWptXe.s 			page 55
+
+
  1336              		.cfi_endproc
  1337              	.LFE1517:
  1339              		.globl	_ZN10translator6isFullEPhh
@@ -3238,9 +3265,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1356 0532 53       		pushq	%rbx
  1357              		.cfi_def_cfa_offset 32
  1358              		.cfi_offset 3, -32
-GAS LISTING /tmp/ccBuC8w2.s 			page 55
-
-
  1359 0533 4889FD   		movq	%rdi, %rbp
  1360 0536 89F3     		movl	%esi, %ebx
  291:Src/translator.cpp ****             return false;
@@ -3274,6 +3298,9 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1379              	.LVL156:
  293:Src/translator.cpp ****         {
  1380              		.loc 1 293 9 view .LVU392
+GAS LISTING /tmp/ccHWptXe.s 			page 56
+
+
  1381 0555 3C01     		cmpb	$1, %al
  1382 0557 7418     		je	.L90
  1383 0559 84C0     		testb	%al, %al
@@ -3298,9 +3325,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1396 056f EB18     		jmp	.L88
  1397              	.L90:
  295:Src/translator.cpp ****             {
-GAS LISTING /tmp/ccBuC8w2.s 			page 56
-
-
  1398              		.loc 1 295 13 is_stmt 1 view .LVU398
  296:Src/translator.cpp ****                 if(getLen(package) != 1)
  1399              		.loc 1 296 13 view .LVU399
@@ -3323,7 +3347,7 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1412              		.loc 1 290 20 view .LVU402
  1413 057e B8000000 		movl	$0, %eax
  1413      00
- 312:Src/translator.cpp **** }
+ 312:Src/translator.cpp **** 
  1414              		.loc 1 312 5 view .LVU403
  1415 0583 C3       		ret
  1416              	.LVL158:
@@ -3334,10 +3358,13 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1421              		.cfi_offset 12, -16
  292:Src/translator.cpp ****         switch (getType(package))
  1422              		.loc 1 292 20 view .LVU404
+GAS LISTING /tmp/ccHWptXe.s 			page 57
+
+
  1423 0584 B8000000 		movl	$0, %eax
  1423      00
  1424              	.L88:
- 312:Src/translator.cpp **** }
+ 312:Src/translator.cpp **** 
  1425              		.loc 1 312 5 view .LVU405
  1426 0589 5B       		popq	%rbx
  1427              		.cfi_remember_state
@@ -3345,7 +3372,7 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1429 058a 5D       		popq	%rbp
  1430              		.cfi_def_cfa_offset 16
  1431              	.LVL159:
- 312:Src/translator.cpp **** }
+ 312:Src/translator.cpp **** 
  1432              		.loc 1 312 5 view .LVU406
  1433 058b 415C     		popq	%r12
  1434              		.cfi_def_cfa_offset 8
@@ -3358,9 +3385,6 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1440 058e B8000000 		movl	$0, %eax
  1440      00
  1441 0593 EBF4     		jmp	.L88
-GAS LISTING /tmp/ccBuC8w2.s 			page 57
-
-
  1442              	.L103:
  1443 0595 B8000000 		movl	$0, %eax
  1443      00
@@ -3379,114 +3403,227 @@ GAS LISTING /tmp/ccBuC8w2.s 			page 1
  1452 05a8 EBDF     		jmp	.L88
  1453              		.cfi_endproc
  1454              	.LFE1518:
- 1457              	_GLOBAL__sub_I__ZN10translator7SYS_LENE:
- 1458              	.LFB1839:
- 1459              		.loc 1 313 1 is_stmt 1 view -0
- 1460              		.cfi_startproc
- 1461 05aa 4883EC08 		subq	$8, %rsp
- 1462              		.cfi_def_cfa_offset 16
- 1463              		.loc 1 313 1 is_stmt 0 view .LVU411
- 1464 05ae BEFFFF00 		movl	$65535, %esi
- 1464      00
- 1465 05b3 BF010000 		movl	$1, %edi
- 1465      00
- 1466 05b8 E843FAFF 		call	_Z41__static_initialization_and_destruction_0ii
- 1466      FF
- 1467              	.LVL161:
- 1468 05bd 4883C408 		addq	$8, %rsp
- 1469              		.cfi_def_cfa_offset 8
- 1470 05c1 C3       		ret
- 1471              		.cfi_endproc
- 1472              	.LFE1839:
- 1474              		.section	.init_array,"aw"
- 1475              		.align 8
- 1476 0000 00000000 		.quad	_GLOBAL__sub_I__ZN10translator7SYS_LENE
- 1476      00000000 
- 1477              		.globl	_ZN10translator7SYS_LENE
- 1478              		.section	.rodata
- 1481              	_ZN10translator7SYS_LENE:
- 1482 0000 03       		.byte	3
- 1483              		.local	_ZStL8__ioinit
- 1484              		.comm	_ZStL8__ioinit,1,1
- 1485              		.text
- 1486              	.Letext0:
- 1487              		.file 5 "/usr/include/c++/9.2.0/cwchar"
- 1488              		.file 6 "/usr/include/c++/9.2.0/new"
- 1489              		.file 7 "/usr/include/c++/9.2.0/bits/exception_ptr.h"
- 1490              		.file 8 "/usr/include/c++/9.2.0/type_traits"
- 1491              		.file 9 "/usr/include/c++/9.2.0/x86_64-pc-linux-gnu/bits/c++config.h"
- 1492              		.file 10 "/usr/include/c++/9.2.0/bits/stl_pair.h"
- 1493              		.file 11 "/usr/include/c++/9.2.0/debug/debug.h"
- 1494              		.file 12 "/usr/include/c++/9.2.0/cstdint"
-GAS LISTING /tmp/ccBuC8w2.s 			page 58
+ 1456              		.globl	_ZN10translator13isHeaderValidEh
+ 1458              	_ZN10translator13isHeaderValidEh:
+ 1459              	.LVL161:
+ 1460              	.LFB1519:
+ 316:Src/translator.cpp ****         switch (getType(&head))
+ 1461              		.loc 1 316 5 is_stmt 1 view -0
+ 1462              		.cfi_startproc
+ 316:Src/translator.cpp ****         switch (getType(&head))
+ 1463              		.loc 1 316 5 is_stmt 0 view .LVU411
+ 1464 05aa 4883EC08 		subq	$8, %rsp
+ 1465              		.cfi_def_cfa_offset 16
+ 1466 05ae 40887C24 		movb	%dil, 4(%rsp)
+ 1466      04
+ 317:Src/translator.cpp ****         {
+ 1467              		.loc 1 317 9 is_stmt 1 view .LVU412
+GAS LISTING /tmp/ccHWptXe.s 			page 58
 
 
- 1495              		.file 13 "/usr/include/c++/9.2.0/clocale"
- 1496              		.file 14 "/usr/include/c++/9.2.0/cstdlib"
- 1497              		.file 15 "/usr/include/c++/9.2.0/cstdio"
- 1498              		.file 16 "/usr/include/c++/9.2.0/system_error"
- 1499              		.file 17 "/usr/include/c++/9.2.0/bits/ios_base.h"
- 1500              		.file 18 "/usr/include/c++/9.2.0/cwctype"
- 1501              		.file 19 "/usr/include/c++/9.2.0/iosfwd"
- 1502              		.file 20 "/usr/include/c++/9.2.0/bits/basic_ios.h"
- 1503              		.file 21 "/usr/include/c++/9.2.0/bits/predefined_ops.h"
- 1504              		.file 22 "/usr/include/c++/9.2.0/ext/new_allocator.h"
- 1505              		.file 23 "/usr/include/c++/9.2.0/ext/numeric_traits.h"
- 1506              		.file 24 "/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/stddef.h"
- 1507              		.file 25 "<built-in>"
- 1508              		.file 26 "/usr/include/bits/types/wint_t.h"
- 1509              		.file 27 "/usr/include/bits/types/__mbstate_t.h"
- 1510              		.file 28 "/usr/include/bits/types/mbstate_t.h"
- 1511              		.file 29 "/usr/include/bits/types/__FILE.h"
- 1512              		.file 30 "/usr/include/bits/types/struct_FILE.h"
- 1513              		.file 31 "/usr/include/bits/types/FILE.h"
- 1514              		.file 32 "/usr/include/wchar.h"
- 1515              		.file 33 "/usr/include/bits/types/struct_tm.h"
- 1516              		.file 34 "/usr/include/bits/types.h"
- 1517              		.file 35 "/usr/include/bits/stdint-intn.h"
- 1518              		.file 36 "/usr/include/bits/stdint-uintn.h"
- 1519              		.file 37 "/usr/include/stdint.h"
- 1520              		.file 38 "/usr/include/locale.h"
- 1521              		.file 39 "/usr/include/time.h"
- 1522              		.file 40 "/usr/include/c++/9.2.0/x86_64-pc-linux-gnu/bits/atomic_word.h"
- 1523              		.file 41 "/usr/include/stdlib.h"
- 1524              		.file 42 "/usr/include/bits/stdlib-float.h"
- 1525              		.file 43 "/usr/include/bits/stdlib-bsearch.h"
- 1526              		.file 44 "/usr/include/bits/types/__fpos_t.h"
- 1527              		.file 45 "/usr/include/stdio.h"
- 1528              		.file 46 "/usr/include/bits/sys_errlist.h"
- 1529              		.file 47 "/usr/include/bits/stdio.h"
- 1530              		.file 48 "/usr/include/errno.h"
- 1531              		.file 49 "/usr/include/bits/wctype-wchar.h"
- 1532              		.file 50 "/usr/include/wctype.h"
- 1533              		.file 51 "Inc/translator.hpp"
- 1534              		.file 52 "/usr/include/c++/9.2.0/bits/ostream_insert.h"
-GAS LISTING /tmp/ccBuC8w2.s 			page 59
+ 317:Src/translator.cpp ****         {
+ 1468              		.loc 1 317 24 is_stmt 0 view .LVU413
+ 1469 05b3 488D7C24 		leaq	4(%rsp), %rdi
+ 1469      04
+ 1470              	.LVL162:
+ 317:Src/translator.cpp ****         {
+ 1471              		.loc 1 317 24 view .LVU414
+ 1472 05b8 E8000000 		call	_ZN10translator7getTypeEPKh
+ 1472      00
+ 1473              	.LVL163:
+ 317:Src/translator.cpp ****         {
+ 1474              		.loc 1 317 9 view .LVU415
+ 1475 05bd 3C01     		cmpb	$1, %al
+ 1476 05bf 7420     		je	.L105
+ 1477 05c1 84C0     		testb	%al, %al
+ 1478 05c3 7431     		je	.L108
+ 1479 05c5 83E802   		subl	$2, %eax
+ 1480 05c8 3C01     		cmpb	$1, %al
+ 1481 05ca 7731     		ja	.L114
+ 325:Src/translator.cpp ****             case TYPE_ARR:
+ 1482              		.loc 1 325 13 is_stmt 1 view .LVU416
+ 326:Src/translator.cpp ****             {
+ 1483              		.loc 1 326 13 view .LVU417
+ 327:Src/translator.cpp ****                 if(getLen(&head) <= 1)
+ 1484              		.loc 1 327 13 view .LVU418
+ 328:Src/translator.cpp ****                     return false;
+ 1485              		.loc 1 328 17 view .LVU419
+ 328:Src/translator.cpp ****                     return false;
+ 1486              		.loc 1 328 26 is_stmt 0 view .LVU420
+ 1487 05cc 488D7C24 		leaq	4(%rsp), %rdi
+ 1487      04
+ 1488 05d1 E8000000 		call	_ZN10translator6getLenEPKh
+ 1488      00
+ 1489              	.LVL164:
+ 328:Src/translator.cpp ****                     return false;
+ 1490              		.loc 1 328 17 view .LVU421
+ 1491 05d6 3C01     		cmpb	$1, %al
+ 1492 05d8 762D     		jbe	.L111
+ 335:Src/translator.cpp ****     }
+ 1493              		.loc 1 335 16 view .LVU422
+ 1494 05da B8010000 		movl	$1, %eax
+ 1494      00
+ 1495 05df EB21     		jmp	.L104
+ 1496              	.L105:
+ 319:Src/translator.cpp ****             {
+ 1497              		.loc 1 319 13 is_stmt 1 view .LVU423
+ 320:Src/translator.cpp ****                 if(getLen(&head) != 1)
+ 1498              		.loc 1 320 13 view .LVU424
+ 321:Src/translator.cpp ****                     return false;
+ 1499              		.loc 1 321 17 view .LVU425
+ 321:Src/translator.cpp ****                     return false;
+ 1500              		.loc 1 321 26 is_stmt 0 view .LVU426
+ 1501 05e1 488D7C24 		leaq	4(%rsp), %rdi
+ 1501      04
+ 1502 05e6 E8000000 		call	_ZN10translator6getLenEPKh
+ 1502      00
+ 1503              	.LVL165:
+GAS LISTING /tmp/ccHWptXe.s 			page 59
+
+
+ 321:Src/translator.cpp ****                     return false;
+ 1504              		.loc 1 321 17 view .LVU427
+ 1505 05eb 3C01     		cmpb	$1, %al
+ 1506 05ed 7413     		je	.L104
+ 322:Src/translator.cpp ****                 break;
+ 1507              		.loc 1 322 28 view .LVU428
+ 1508 05ef B8000000 		movl	$0, %eax
+ 1508      00
+ 1509 05f4 EB0C     		jmp	.L104
+ 1510              	.L108:
+ 317:Src/translator.cpp ****         {
+ 1511              		.loc 1 317 9 view .LVU429
+ 1512 05f6 B8000000 		movl	$0, %eax
+ 1512      00
+ 1513 05fb EB05     		jmp	.L104
+ 1514              	.L114:
+ 1515 05fd B8000000 		movl	$0, %eax
+ 1515      00
+ 1516              	.L104:
+ 336:Src/translator.cpp **** }
+ 1517              		.loc 1 336 5 view .LVU430
+ 1518 0602 4883C408 		addq	$8, %rsp
+ 1519              		.cfi_remember_state
+ 1520              		.cfi_def_cfa_offset 8
+ 1521 0606 C3       		ret
+ 1522              	.L111:
+ 1523              		.cfi_restore_state
+ 329:Src/translator.cpp ****                 break;
+ 1524              		.loc 1 329 28 view .LVU431
+ 1525 0607 B8000000 		movl	$0, %eax
+ 1525      00
+ 1526 060c EBF4     		jmp	.L104
+ 1527              		.cfi_endproc
+ 1528              	.LFE1519:
+ 1531              	_GLOBAL__sub_I__ZN10translator7SYS_LENE:
+ 1532              	.LFB1840:
+ 1533              		.loc 1 337 1 is_stmt 1 view -0
+ 1534              		.cfi_startproc
+ 1535 060e 4883EC08 		subq	$8, %rsp
+ 1536              		.cfi_def_cfa_offset 16
+ 1537              		.loc 1 337 1 is_stmt 0 view .LVU433
+ 1538 0612 BEFFFF00 		movl	$65535, %esi
+ 1538      00
+ 1539 0617 BF010000 		movl	$1, %edi
+ 1539      00
+ 1540 061c E8DFF9FF 		call	_Z41__static_initialization_and_destruction_0ii
+ 1540      FF
+ 1541              	.LVL166:
+ 1542 0621 4883C408 		addq	$8, %rsp
+ 1543              		.cfi_def_cfa_offset 8
+ 1544 0625 C3       		ret
+ 1545              		.cfi_endproc
+ 1546              	.LFE1840:
+ 1548              		.section	.init_array,"aw"
+ 1549              		.align 8
+ 1550 0000 00000000 		.quad	_GLOBAL__sub_I__ZN10translator7SYS_LENE
+ 1550      00000000 
+GAS LISTING /tmp/ccHWptXe.s 			page 60
+
+
+ 1551              		.globl	_ZN10translator7SYS_LENE
+ 1552              		.section	.rodata
+ 1555              	_ZN10translator7SYS_LENE:
+ 1556 0000 03       		.byte	3
+ 1557              		.local	_ZStL8__ioinit
+ 1558              		.comm	_ZStL8__ioinit,1,1
+ 1559              		.text
+ 1560              	.Letext0:
+ 1561              		.file 5 "/usr/include/c++/9.2.0/cwchar"
+ 1562              		.file 6 "/usr/include/c++/9.2.0/new"
+ 1563              		.file 7 "/usr/include/c++/9.2.0/bits/exception_ptr.h"
+ 1564              		.file 8 "/usr/include/c++/9.2.0/type_traits"
+ 1565              		.file 9 "/usr/include/c++/9.2.0/x86_64-pc-linux-gnu/bits/c++config.h"
+ 1566              		.file 10 "/usr/include/c++/9.2.0/bits/stl_pair.h"
+ 1567              		.file 11 "/usr/include/c++/9.2.0/debug/debug.h"
+ 1568              		.file 12 "/usr/include/c++/9.2.0/cstdint"
+ 1569              		.file 13 "/usr/include/c++/9.2.0/clocale"
+ 1570              		.file 14 "/usr/include/c++/9.2.0/cstdlib"
+ 1571              		.file 15 "/usr/include/c++/9.2.0/cstdio"
+ 1572              		.file 16 "/usr/include/c++/9.2.0/system_error"
+ 1573              		.file 17 "/usr/include/c++/9.2.0/bits/ios_base.h"
+ 1574              		.file 18 "/usr/include/c++/9.2.0/cwctype"
+ 1575              		.file 19 "/usr/include/c++/9.2.0/iosfwd"
+ 1576              		.file 20 "/usr/include/c++/9.2.0/bits/basic_ios.h"
+ 1577              		.file 21 "/usr/include/c++/9.2.0/bits/predefined_ops.h"
+ 1578              		.file 22 "/usr/include/c++/9.2.0/ext/new_allocator.h"
+ 1579              		.file 23 "/usr/include/c++/9.2.0/ext/numeric_traits.h"
+ 1580              		.file 24 "/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/stddef.h"
+ 1581              		.file 25 "<built-in>"
+ 1582              		.file 26 "/usr/include/bits/types/wint_t.h"
+ 1583              		.file 27 "/usr/include/bits/types/__mbstate_t.h"
+ 1584              		.file 28 "/usr/include/bits/types/mbstate_t.h"
+ 1585              		.file 29 "/usr/include/bits/types/__FILE.h"
+ 1586              		.file 30 "/usr/include/bits/types/struct_FILE.h"
+ 1587              		.file 31 "/usr/include/bits/types/FILE.h"
+ 1588              		.file 32 "/usr/include/wchar.h"
+ 1589              		.file 33 "/usr/include/bits/types/struct_tm.h"
+ 1590              		.file 34 "/usr/include/bits/types.h"
+ 1591              		.file 35 "/usr/include/bits/stdint-intn.h"
+ 1592              		.file 36 "/usr/include/bits/stdint-uintn.h"
+ 1593              		.file 37 "/usr/include/stdint.h"
+ 1594              		.file 38 "/usr/include/locale.h"
+ 1595              		.file 39 "/usr/include/time.h"
+ 1596              		.file 40 "/usr/include/c++/9.2.0/x86_64-pc-linux-gnu/bits/atomic_word.h"
+ 1597              		.file 41 "/usr/include/stdlib.h"
+ 1598              		.file 42 "/usr/include/bits/stdlib-float.h"
+ 1599              		.file 43 "/usr/include/bits/stdlib-bsearch.h"
+ 1600              		.file 44 "/usr/include/bits/types/__fpos_t.h"
+ 1601              		.file 45 "/usr/include/stdio.h"
+ 1602              		.file 46 "/usr/include/bits/sys_errlist.h"
+ 1603              		.file 47 "/usr/include/bits/stdio.h"
+ 1604              		.file 48 "/usr/include/errno.h"
+ 1605              		.file 49 "/usr/include/bits/wctype-wchar.h"
+ 1606              		.file 50 "/usr/include/wctype.h"
+ 1607              		.file 51 "Inc/translator.hpp"
+ 1608              		.file 52 "/usr/include/c++/9.2.0/bits/ostream_insert.h"
+GAS LISTING /tmp/ccHWptXe.s 			page 61
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 translator.cpp
-     /tmp/ccBuC8w2.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/ccHWptXe.s:5      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
                              .bss:0000000000000000 _ZStL8__ioinit
-     /tmp/ccBuC8w2.s:45     .text:000000000000003d _ZN10translator7getTypeEPKh
-     /tmp/ccBuC8w2.s:62     .text:0000000000000044 _ZN10translator6getLenEPKh
-     /tmp/ccBuC8w2.s:79     .text:000000000000004b _ZN10translator11genCheckSumEPKh
-     /tmp/ccBuC8w2.s:159    .text:0000000000000092 _ZN10translator6equalsEPKhS1_
-     /tmp/ccBuC8w2.s:254    .text:00000000000000e2 _ZN10translator11getZeroByteEhh
-     /tmp/ccBuC8w2.s:276    .text:00000000000000ef _ZN10translator11getCheckSumEPKh
-     /tmp/ccBuC8w2.s:298    .text:00000000000000ff _ZN10translator11parsePacketEPhS0_
-     /tmp/ccBuC8w2.s:437    .text:000000000000018a _ZN10translator8parseCmdEPhPPFvvE
-     /tmp/ccBuC8w2.s:571    .text:0000000000000215 _ZN10translator8parseCmdEPh
-     /tmp/ccBuC8w2.s:652    .text:0000000000000268 _ZN10translator11generateCmdEhPh
-     /tmp/ccBuC8w2.s:707    .text:0000000000000298 _ZN10translator8validateEPKh
-     /tmp/ccBuC8w2.s:804    .text:0000000000000300 _ZN10translator11generateVarEhhPKhPh
-     /tmp/ccBuC8w2.s:909    .text:0000000000000369 _ZN10translator8parseVarEPhS0_h
-     /tmp/ccBuC8w2.s:1062   .text:0000000000000409 _ZN10translator11generateArrEhhhPKhPh
-     /tmp/ccBuC8w2.s:1199   .text:0000000000000498 _ZN10translator8parseArrEPhPS0_
-     /tmp/ccBuC8w2.s:1341   .text:0000000000000529 _ZN10translator6isFullEPhh
-     /tmp/ccBuC8w2.s:1457   .text:00000000000005aa _GLOBAL__sub_I__ZN10translator7SYS_LENE
-     /tmp/ccBuC8w2.s:1481   .rodata:0000000000000000 _ZN10translator7SYS_LENE
-     /tmp/ccBuC8w2.s:432    .rodata.str1.1:0000000000000000 .LC0
+     /tmp/ccHWptXe.s:45     .text:000000000000003d _ZN10translator7getTypeEPKh
+     /tmp/ccHWptXe.s:62     .text:0000000000000044 _ZN10translator6getLenEPKh
+     /tmp/ccHWptXe.s:79     .text:000000000000004b _ZN10translator11genCheckSumEPKh
+     /tmp/ccHWptXe.s:159    .text:0000000000000092 _ZN10translator6equalsEPKhS1_
+     /tmp/ccHWptXe.s:254    .text:00000000000000e2 _ZN10translator11getZeroByteEhh
+     /tmp/ccHWptXe.s:276    .text:00000000000000ef _ZN10translator11getCheckSumEPKh
+     /tmp/ccHWptXe.s:298    .text:00000000000000ff _ZN10translator11parsePacketEPhS0_
+     /tmp/ccHWptXe.s:437    .text:000000000000018a _ZN10translator8parseCmdEPhPPFvvE
+     /tmp/ccHWptXe.s:571    .text:0000000000000215 _ZN10translator8parseCmdEPh
+     /tmp/ccHWptXe.s:652    .text:0000000000000268 _ZN10translator11generateCmdEhPh
+     /tmp/ccHWptXe.s:707    .text:0000000000000298 _ZN10translator8validateEPKh
+     /tmp/ccHWptXe.s:804    .text:0000000000000300 _ZN10translator11generateVarEhhPKhPh
+     /tmp/ccHWptXe.s:909    .text:0000000000000369 _ZN10translator8parseVarEPhS0_h
+     /tmp/ccHWptXe.s:1062   .text:0000000000000409 _ZN10translator11generateArrEhhhPKhPh
+     /tmp/ccHWptXe.s:1199   .text:0000000000000498 _ZN10translator8parseArrEPhPS0_
+     /tmp/ccHWptXe.s:1341   .text:0000000000000529 _ZN10translator6isFullEPhh
+     /tmp/ccHWptXe.s:1458   .text:00000000000005aa _ZN10translator13isHeaderValidEh
+     /tmp/ccHWptXe.s:1531   .text:000000000000060e _GLOBAL__sub_I__ZN10translator7SYS_LENE
+     /tmp/ccHWptXe.s:1555   .rodata:0000000000000000 _ZN10translator7SYS_LENE
+     /tmp/ccHWptXe.s:432    .rodata.str1.1:0000000000000000 .LC0
 
 UNDEFINED SYMBOLS
 _GLOBAL_OFFSET_TABLE_
