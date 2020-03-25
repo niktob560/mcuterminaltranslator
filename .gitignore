@@ -1,8 +1,10 @@
 *.o
-./.*
+*.lst
 ./Build/*
+Build
+Build/
+./Build
+.vscode
 ./.vscode
 ./Test/test
 ./Test/test.cpp
-exec_always /usr/lib/kdeconnectd > /tmp/kdeconnectlog
-exec_always /usr/lib/kdeconnectd > /tmp/kdeconnectlog
