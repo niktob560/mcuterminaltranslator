@@ -4,6 +4,9 @@
 Build
 Build/
 ./Build
+Bin
+Bin/*
+./Bin
 .vscode
 ./.vscode
 ./Test/test
