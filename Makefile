@@ -34,15 +34,18 @@ CFLAGS=$(CPP_DEFS) $(CPP_INCLUDES) $(OPTIMIZE) -std=gnu++11 -Wno-pragmas -Wall -
 all: $(BIN_DIR)/$(TARGET)
 
 $(BIN_DIR)/$(TARGET): $(BIN_DIR)/lib$(TARGET).so $(BUILD_DIR)/main.o  Makefile
-	$(CPP) $(BUILD_DIR)/main.o $(BIN_DIR)/lib$(TARGET).so $(LIBS) -o $@
+	@$(CPP) $(BUILD_DIR)/main.o $(BIN_DIR)/lib$(TARGET).so $(LIBS) -o $@
+	@echo -e '\033[1;32m'"CC " $@ '\033[0m'
 
 
 $(BIN_DIR)/lib$(TARGET).so: $(TOBJECTS) 
-	$(CPP) -shared $^ -o $@
+	@$(CPP) -shared $^ -o $@
+	@echo -e '\033[1;32m'"CC " $@ '\033[0m'
 
 
 $(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
-	$(CPP) -c $(CFLAGS) -fPIC -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
+	@$(CPP) -c $(CFLAGS) -fPIC -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
+	@echo -e '\033[1;32m'"CC " $@ '\033[0m'
 
 
 test: directories all
@@ -72,10 +75,11 @@ $(TEST_DIR):
 
 
 clean:
-	rm -rf $(BUILD_DIR)/*
-	rm -rf $(TEST_DIR)/*.cpp
-	rm -rf $(TEST_DIR)/main
-	rm -rf $(BIN_DIR)/*
+	@rm -rf $(BUILD_DIR)/*
+	@rm -rf $(TEST_DIR)/*.cpp
+	@rm -rf $(TEST_DIR)/main
+	@rm -rf $(BIN_DIR)/*
+	@echo -e '\033[1;31m'"Cleaned"'\033[0m'
 
 
 run: main
