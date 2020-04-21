@@ -107,15 +107,15 @@ namespace translator
     {
         uint8_t var = getType(package);
         if(var != TYPE_CMD)
-            return static_cast<size_t>(~0);
+            return TYPE_BAD_TYPE;
 
         var = getLen(package);
         if(var != 1)
-            return static_cast<size_t>(~0);
+            return TYPE_BAD_LEN;
 
         checksum_t check = genCheckSum(package);
         if(check != getCheckSum(package))
-            return static_cast<size_t>(~0);
+            return TYPE_BAD_CHECKSUM;
         return package[SYS_LEN];
     }
 
