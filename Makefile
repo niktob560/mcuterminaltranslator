@@ -31,14 +31,14 @@ TOBJECTS = $(filter-out $(BUILD_DIR)/main.o,$(OBJECTS))
 CFLAGS=$(CPP_DEFS) $(CPP_INCLUDES) $(OPTIMIZE) -std=gnu++11 -Wno-pragmas -Wall -Wextra -Werror -Og -g -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wuninitialized -Wno-write-strings -Wcast-align -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wduplicated-branches -Wduplicated-cond -Wextra-semi -Wfloat-equal -Wlogical-op -Wnon-virtual-dtor -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wsign-conversion -Wsign-promo -Werror -IInclude -Wall -Wextra -Wpedantic -pedantic-errors -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -fno-devirtualize -fno-use-cxa-atexit
 
 
-all: $(BIN_DIR)/$(TARGET)
+all: $(BIN_DIR)/$(TARGET) directories
 
 $(BIN_DIR)/$(TARGET): $(BIN_DIR)/lib$(TARGET).so $(BUILD_DIR)/main.o  Makefile
 	@$(CPP) $(BUILD_DIR)/main.o $(BIN_DIR)/lib$(TARGET).so $(LIBS) -o $@
 	@echo -e '\033[1;32m'"CC " $@ '\033[0m'
 
 
-$(BIN_DIR)/lib$(TARGET).so: $(TOBJECTS) 
+$(BIN_DIR)/lib$(TARGET).so: $(TOBJECTS)
 	@$(CPP) -shared $^ -o $@
 	@echo -e '\033[1;32m'"CC " $@ '\033[0m'
 
