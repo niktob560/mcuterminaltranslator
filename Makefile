@@ -18,7 +18,7 @@ CPP_SOURCES = \
 Src/main.cpp \
 Src/translator.cpp
 
-CPP_DEFS =# -DDEVICE_ID=1 -DUSE_MULTIDEVICE
+CPP_DEFS = -DDEVICE_ID=1
 
 
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
@@ -49,10 +49,9 @@ $(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
 
 
 test: directories all
-	echo $(TOBJECTS)
-	cxxtest/bin/cxxtestgen --error-printer -o $(TEST_DIR)/test.cpp $(TEST_DIR)/test.h
-	g++ $(CPP_DEFS) -o $(TEST_DIR)/test $(TOBJECTS) $(TEST_DIR)/test.cpp -I cxxtest -I $(INCLUDE_DIR)
-	$(TEST_DIR)/test
+	@cxxtest/bin/cxxtestgen --error-printer -o $(TEST_DIR)/test.cpp $(TEST_DIR)/test.h
+	@g++ $(CPP_DEFS) -O6 -o $(TEST_DIR)/test $(TOBJECTS) $(TEST_DIR)/test.cpp -I cxxtest -I $(INCLUDE_DIR)
+	@$(TEST_DIR)/test
 
 
 directories: $(BUILD_DIR) $(BIN_DIR) $(SOURCE_DIR) $(INCLUDE_DIR) $(TEST_DIR)
