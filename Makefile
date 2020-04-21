@@ -17,9 +17,6 @@ CPP_INCLUDES = \
 CPP_SOURCES = \
 Src/main.cpp \
 Src/translator.cpp
-# CPP_SOURCES = \
-# /tmp/a.cpp \
-# Src/translator.cpp
 
 CPP_DEFS =# -DDEVICE_ID=1 -DUSE_MULTIDEVICE
 
@@ -31,17 +28,21 @@ TOBJECTS = $(filter-out $(BUILD_DIR)/main.o,$(OBJECTS))
 
 
 
-CFLAGS=$(CPP_DEFS) $(CPP_INCLUDES) $(OPTIMIZE) -Wall -Wextra -std=gnu++11 -g
+CFLAGS=$(CPP_DEFS) $(CPP_INCLUDES) $(OPTIMIZE) -Wall -Wextra -std=gnu++11 -g 
 
 
 all: $(BIN_DIR)/$(TARGET)
 
-$(BIN_DIR)/$(TARGET): $(OBJECTS) Makefile
-	$(CPP) $(OBJECTS) $(LDFLAGS) $(LIBS) -o $@
+$(BIN_DIR)/$(TARGET): $(BIN_DIR)/lib$(TARGET).so $(BUILD_DIR)/main.o  Makefile
+	$(CPP) $(BUILD_DIR)/main.o $(BIN_DIR)/lib$(TARGET).so $(LIBS) -o $@
+
+
+$(BIN_DIR)/lib$(TARGET).so: $(TOBJECTS) 
+	$(CPP) -shared $^ -o $@
 
 
 $(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
-	$(CPP) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
+	$(CPP) -c $(CFLAGS) -fPIC -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
 
 
 test: directories all
