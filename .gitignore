@@ -9,5 +9,5 @@ Bin/*
 ./Bin
 .vscode
 ./.vscode
-./Test/test
-./Test/test.cpp
+Test/test
+Test/test.cpp
