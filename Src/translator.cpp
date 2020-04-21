@@ -98,8 +98,7 @@ namespace translator
 
         if(funcArr[package[SYS_LEN]] != NULL)
             funcArr[package[SYS_LEN]]();
-        else
-            std::cerr << "tgt func is null\n";
+            
         return TYPE_CMD;
     }
 
