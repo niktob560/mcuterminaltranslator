@@ -40,11 +40,9 @@ void foo2()
 }
 
 
-int main(int argc, char **argv) 
+int main() 
 {
     // ifstream myfile ("a");
-    FILE *fp;
-    fp = fopen("a", "r");
 
     void (*funcArr [3])();
     funcArr[0] = foo0;
@@ -62,8 +60,8 @@ int main(int argc, char **argv)
     }
     cout << endl << translator::validate(tgt) << endl;
     size_t strsize = 64;
-    uint8_t* strbuf = (uint8_t*)malloc(strsize);
-    for(int a = 0; a < strsize; a++)
+    uint8_t* strbuf = static_cast<uint8_t*>(malloc(strsize));
+    for(size_t a = 0; a < strsize; a++)
         strbuf[a] = 0;
     size_t i = 0;
     // for(int i = 0; i < 64; i++)
@@ -73,12 +71,12 @@ int main(int argc, char **argv)
         if(i >= strsize)
         {
             strsize += 64;
-            strbuf = (uint8_t*)realloc(strbuf, strsize);
-            for(int a = i; a < strsize; a++)
+            strbuf = static_cast<uint8_t*>(realloc(strbuf, strsize));
+            for(size_t a = i; a < strsize; a++)
                 strbuf[a] = 0;
         }
-        strbuf[i] = getchar();
-        cout << "GOT " << (int)strbuf[i] << " ";
+        strbuf[i] = static_cast<uint8_t>(getchar());
+        cout << "GOT " << static_cast<int>(strbuf[i]) << " ";
         // strbuf[i] = fgetc(myfile);
         i++;
     }
@@ -86,9 +84,9 @@ int main(int argc, char **argv)
     cout << endl;
 
 
-    for(int i = 0; i < strsize; i++)
+    for(size_t i = 0; i < strsize; i++)
         // putchar(tgt[i]);
-        cout << (int)tgt[i] << ' ';
+        cout << static_cast<int>(tgt[i]) << ' ';
 
     cout << endl;
 

@@ -46,7 +46,7 @@ namespace translator
         for(uint8_t i = 0; i < len + SYS_LEN; i++)
         {
             if(i != 1 && i != 2)
-                ret += (c[i]) << (8 * ((i % 2) == 1));
+                ret = static_cast<checksum_t>(ret + ((c[i]) << (8 * ((i % 2) == 1))));
         }
         ret++;
         return ret;
@@ -55,7 +55,7 @@ namespace translator
     //get type of package
     uint8_t getType(const uint8_t* package)
     {
-        return ((package[0] & (~LEN_MASK)) >> 6);
+        return static_cast<uint8_t>((package[0] & (~LEN_MASK)) >> 6);
     }
 
 
@@ -107,15 +107,15 @@ namespace translator
     {
         uint8_t var = getType(package);
         if(var != TYPE_CMD)
-            return ~0;
+            return static_cast<size_t>(~0);
 
         var = getLen(package);
         if(var != 1)
-            return ~0;
+            return static_cast<size_t>(~0);
 
         checksum_t check = genCheckSum(package);
         if(check != getCheckSum(package))
-            return ~0;
+            return static_cast<size_t>(~0);
         return package[SYS_LEN];
     }
 
@@ -142,13 +142,13 @@ namespace translator
 
     uint8_t getZeroByte(const uint8_t type, const uint8_t len)
     {
-        return (uint8_t)(((type & 0b11) << 6) | (len & LEN_MASK));
+        return static_cast<uint8_t>(((type & 0x03) << 6) | (len & LEN_MASK));
     }
 
 
     checksum_t getCheckSum(const uint8_t* package)
     {
-        return (package[1] << 8) | package[2];
+        return static_cast<checksum_t>((package[1] << 8) | package[2]);
     }
 
 
@@ -161,8 +161,8 @@ namespace translator
         #endif 
         tgt[SYS_LEN] = cmd;
         checksum_t check = genCheckSum(tgt);
-        tgt[1] = check >> 8;
-        tgt[2] = check & 0xFF;
+        tgt[1] = static_cast<uint8_t>(check >> 8);
+        tgt[2] = static_cast<uint8_t>(check & 0xFF);
     }
 
 
@@ -194,12 +194,11 @@ namespace translator
     //create var package
     void generateVar(const uint8_t id, const uint8_t varlen, const uint8_t* var, uint8_t* tgt)
     {
-        tgt[0] = getZeroByte(TYPE_VAR, varlen + 1);
+        tgt[0] = getZeroByte(TYPE_VAR, static_cast<uint8_t>(varlen + 1));
         tgt[SYS_LEN] = id;
         for(uint8_t i = 0; i < varlen; i++)
         {
             tgt[SYS_LEN + 1 + i] = var[varlen - i - 1];
-            // std::cout << "from " << (int)(i) << " to " << (int)(i + 4) << " set 0x" << std::hex << (int)var[i] << std::endl;
         }
 
         #ifdef USE_MULTIDEVICE
@@ -207,8 +206,8 @@ namespace translator
         #endif 
 
         checksum_t check = genCheckSum(tgt);
-        tgt[1] = check >> 8;
-        tgt[2] = check & 0xFF;
+        tgt[1] = static_cast<uint8_t>(check >> 8);
+        tgt[2] = static_cast<uint8_t>(check & 0xFF);
 
     }
 
@@ -239,7 +238,7 @@ namespace translator
     //create array package
     void generateArr(const uint8_t id, const uint8_t arrlen, const uint8_t elsize, const uint8_t* arr, uint8_t* tgt)
     {
-        tgt[0] = getZeroByte(TYPE_ARR, (arrlen * elsize) + 1);
+        tgt[0] = getZeroByte(TYPE_ARR, static_cast<uint8_t>((arrlen * elsize) + 1));
         tgt[SYS_LEN] = id;
         for(uint8_t i = 0; i < arrlen; i++)
         {
@@ -254,8 +253,8 @@ namespace translator
         #endif 
 
         checksum_t check = genCheckSum(tgt);
-        tgt[1] = check >> 8;
-        tgt[2] = check & 0xFF;
+        tgt[1] = static_cast<uint8_t>(check >> 8);
+        tgt[2] = static_cast<uint8_t>(check & 0xFF);
     }
     
     

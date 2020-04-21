@@ -28,7 +28,7 @@ TOBJECTS = $(filter-out $(BUILD_DIR)/main.o,$(OBJECTS))
 
 
 
-CFLAGS=$(CPP_DEFS) $(CPP_INCLUDES) $(OPTIMIZE) -Wall -Wextra -std=gnu++11 -g 
+CFLAGS=$(CPP_DEFS) $(CPP_INCLUDES) $(OPTIMIZE) -std=gnu++11 -Wno-pragmas -Wall -Wextra -Werror -Og -g -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wuninitialized -Wno-write-strings -Wcast-align -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wduplicated-branches -Wduplicated-cond -Wextra-semi -Wfloat-equal -Wlogical-op -Wnon-virtual-dtor -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wsign-conversion -Wsign-promo -Werror -IInclude -Wall -Wextra -Wpedantic -pedantic-errors -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -fno-devirtualize -fno-use-cxa-atexit
 
 
 all: $(BIN_DIR)/$(TARGET)

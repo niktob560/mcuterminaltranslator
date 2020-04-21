@@ -22,13 +22,13 @@ namespace translator
     typedef uint16_t checksum_t;
 
     const STR_LEN_DTYPE str_NAN = 0xFFFFFFFF;
-    const uint8_t       TYPE_CMD = 0b01,
-                        TYPE_VAR = 0b10,
-                        TYPE_ARR = 0b11,
+    const uint8_t       TYPE_CMD = 0x01,
+                        TYPE_VAR = 0x02,
+                        TYPE_ARR = 0x03,
                         TYPE_BAD_LEN = 100,
                         TYPE_BAD_TYPE = 101,
                         TYPE_BAD_CHECKSUM = 102,
-                        LEN_MASK = 0b00111111;
+                        LEN_MASK = 0x3F;
 
     //generate checksum for char array
     checksum_t genCheckSum(const uint8_t* c);
