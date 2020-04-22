@@ -276,12 +276,6 @@ namespace translator
         }
         return TYPE_ARR;
     }
-
-    //parse array id from array package
-    uint8_t parseArrId(uint8_t* package)
-    {
-        return package[SYS_LEN];
-    }
     
     //parse array from array package and write into toArr[id], return type of package
     uint8_t parseArr(uint8_t* package, uint8_t** toArr)
