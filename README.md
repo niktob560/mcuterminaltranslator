@@ -22,9 +22,14 @@ Library for parsing commands for communication of MCUs
 ### max len: 63 bytes  
   
 ## Types:  
-command: ``0b1``;  
+command: ``0b01``;  
 var: ``0b10``;  
 array: ``0b11``;
+
+## Structure of array payload:
+```
+<id, 1 byte><array bytes>
+```
   
 ## Structure of zero byte:  
 ```
