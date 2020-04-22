@@ -59,10 +59,13 @@ namespace translator
     uint8_t parsePacket(uint8_t* package, uint8_t* payloadto);
 
 
+    //compare 2 packets
     bool equals(const uint8_t* p1, const uint8_t* p2);
 
+    //construct head byte
     uint8_t getZeroByte(const uint8_t type, const uint8_t len);
 
+    //extratc checksum from packet
     checksum_t getCheckSum(const uint8_t* package);
 
     //gets cmd num at 'cmd', returns final package into target pointer
@@ -80,5 +83,6 @@ namespace translator
     //check for package is full
     bool isFull(uint8_t* package, const uint8_t len);
 
+    //validate header
     bool isHeaderValid(uint8_t head);
 }
