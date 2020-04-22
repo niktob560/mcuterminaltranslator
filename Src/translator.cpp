@@ -142,12 +142,6 @@ namespace translator
 
 
 
-    checksum_t getCheckSum(const uint8_t* package)
-    {
-        return static_cast<checksum_t>((package[1] << 8) | package[2]);
-    }
-
-
     //gets cmd num at 'cmd', returns final package into target pointer
     void generateCmd(const uint8_t cmd, uint8_t* tgt)
     {
