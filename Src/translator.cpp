@@ -139,10 +139,7 @@ namespace translator
         return true;
     }
 
-    uint8_t getZeroByte(const uint8_t type, const uint8_t len)
-    {
-        return static_cast<uint8_t>(((type & 0x03) << 6) | (len & LEN_MASK));
-    }
+
 
 
     checksum_t getCheckSum(const uint8_t* package)

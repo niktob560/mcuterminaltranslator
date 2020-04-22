@@ -66,8 +66,10 @@ namespace translator
     bool equals(const uint8_t* p1, const uint8_t* p2);
 
     //construct head byte
-    uint8_t getZeroByte(const uint8_t type, const uint8_t len);
-
+    constexpr uint8_t getZeroByte(const uint8_t type, const uint8_t len)
+    {
+        return static_cast<uint8_t>(((type & 0x03) << 6) | (len & LEN_MASK));
+    }
     //extratc checksum from packet
     checksum_t getCheckSum(const uint8_t* package);
 
