@@ -26,11 +26,17 @@ command: ``0b01``;
 var: ``0b10``;  
 array: ``0b11``;
 
+
+## Structure of var payload:
+```
+<id, 1 byte><var bytes>
+```
+
 ## Structure of array payload:
 ```
 <id, 1 byte><array bytes>
 ```
-  
+
 ## Structure of zero byte:  
 ```
 ttllllll
