@@ -12,8 +12,16 @@ namespace translator
         #ifdef USE_DYNAMIC_ID
             extern uint8_t myId;
 
-            void setMyId(uint8_t id);
-            uint8_t getMyId(void);
+            
+            inline void setMyId(uint8_t id)
+            {
+                myId = id;
+            }
+
+            inline uint8_t getMyId(void)
+            {
+                return myId;
+            }
 
         #else
             extern const uint8_t myId;

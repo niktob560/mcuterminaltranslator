@@ -8,16 +8,6 @@ namespace translator
 
         #ifdef USE_DYNAMIC_ID
             uint8_t myId = 0;
-
-            void setMyId(uint8_t id)
-            {
-                myId = id;
-            }
-
-            uint8_t getMyId(void)
-            {
-                return myId;
-            }
         #else
             #ifndef DEVICE_ID
                 #error "Device id is not set"

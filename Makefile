@@ -18,7 +18,7 @@ CPP_SOURCES = \
 Src/main.cpp \
 Src/translator.cpp
 
-CPP_DEFS =-DUSE_MULTIDEVICE -DDEVICE_ID=1
+CPP_DEFS =-DUSE_MULTIDEVICE -DUSE_DYNAMIC_ID
 
 
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
