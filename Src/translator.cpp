@@ -52,12 +52,6 @@ namespace translator
         return ret;
     }
 
-    //get type of package
-    uint8_t getType(const uint8_t* package)
-    {
-        return static_cast<uint8_t>((package[0] & (~LEN_MASK)) >> 6);
-    }
-
 
     //parse input package, get payload, return type of package
     uint8_t parsePacket(uint8_t* package, uint8_t* payloadto)

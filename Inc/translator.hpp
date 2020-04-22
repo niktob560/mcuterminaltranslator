@@ -37,9 +37,12 @@ namespace translator
     {
         return package[0] & LEN_MASK;
     }
-    //get type of package
-    uint8_t getType(const uint8_t* package);
 
+    //get type of package
+    constexpr uint8_t getType(const uint8_t* package)
+    {
+        return static_cast<uint8_t>((package[0] & (~LEN_MASK)) >> 6);
+    }
     //parse var from var package and write into toArr[id], return type of package
     uint8_t parseVar(uint8_t* package, uint8_t* toArr, uint8_t elsize);
 
