@@ -256,9 +256,8 @@ namespace translator
         tgt[2] = static_cast<uint8_t>(check & 0xFF);
     }
     
-    
-    //parse array from array package and write into toArr[id], return type of package
-    uint8_t parseArr(uint8_t* package, uint8_t** toArr)
+    //parse array from array package and write into toArr(ignoring id), return type of package
+    uint8_t parseArrNoId(uint8_t* package, uint8_t* toArr)
     {
         uint8_t type = getType(package);
         if(type != TYPE_ARR)
@@ -271,12 +270,24 @@ namespace translator
         if(check != thischeck)
             return TYPE_BAD_CHECKSUM;
 
-        uint8_t id = package[SYS_LEN];
         for(uint8_t i = 0; i < len - 1; i++)
         {
-            toArr[id][i] = package[SYS_LEN + 1 + i];
+            toArr[i] = package[SYS_LEN + 1 + i];
         }
         return TYPE_ARR;
+    }
+
+    //parse array id from array package
+    uint8_t parseArrId(uint8_t* package)
+    {
+        return package[SYS_LEN];
+    }
+    
+    //parse array from array package and write into toArr[id], return type of package
+    uint8_t parseArr(uint8_t* package, uint8_t** toArr)
+    {
+        uint8_t id = parseArrId(package);
+        return parseArrNoId(package, toArr[id]);
     }
     
     

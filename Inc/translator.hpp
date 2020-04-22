@@ -44,6 +44,12 @@ namespace translator
     //parse array from array package and write into toArr[id], return type of package
     uint8_t parseArr(uint8_t* package, uint8_t** toArr);
 
+    //parse array from array package and write into toArr(ignoring id), return type of package
+    uint8_t parseArrNoId(uint8_t* package, uint8_t* toArr);
+
+    //parse array id from array package
+    uint8_t parseArrId(uint8_t* package);
+
     //parse cmd from package, call funcArr[cmd], return type of package, max num of funcs - 255, max len - 1
     uint8_t parseCmd(uint8_t* package, void (*funcArr [])());
 
