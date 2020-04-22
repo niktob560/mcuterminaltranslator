@@ -5,11 +5,6 @@ namespace translator
     #ifdef USE_MULTIDEVICE
         #pragma message "Using multidevice version"
         const uint8_t SYS_LEN = 4;
-        
-        uint8_t getSenderId(uint8_t* p)
-        {
-            return p[SYS_LEN];
-        }
 
         #ifdef USE_DYNAMIC_ID
             uint8_t myId = 0;

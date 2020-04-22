@@ -5,7 +5,10 @@ namespace translator
 {
     extern const uint8_t SYS_LEN;
     #ifdef USE_MULTIDEVICE
-        uint8_t getSenderId(uint8_t* p);
+        constexpr uint8_t getSenderId(uint8_t* p)
+        {
+            return p[SYS_LEN];
+        }
         #ifdef USE_DYNAMIC_ID
             extern uint8_t myId;
 
