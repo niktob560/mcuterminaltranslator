@@ -119,12 +119,6 @@ namespace translator
     }
 
 
-    //get len of payload
-    uint8_t getLen(const uint8_t* package)
-    {
-        return package[0] & LEN_MASK;
-    }
-
     bool equals(const uint8_t* p1, const uint8_t* p2)
     {
         if(p1[0] != p2[0])

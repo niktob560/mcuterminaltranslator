@@ -33,8 +33,10 @@ namespace translator
     checksum_t genCheckSum(const uint8_t* c);
 
     //get len of payload
-    uint8_t getLen(const uint8_t* package);
-
+    constexpr uint8_t getLen(const uint8_t* package)
+    {
+        return package[0] & LEN_MASK;
+    }
     //get type of package
     uint8_t getType(const uint8_t* package);
 
