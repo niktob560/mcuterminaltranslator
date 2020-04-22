@@ -55,6 +55,9 @@ namespace translator
 
     size_t parseCmd(uint8_t* package);
 
+    //parse input package, get payload, return type of package
+    uint8_t parsePacket(uint8_t* package, uint8_t* payloadto);
+
 
     bool equals(const uint8_t* p1, const uint8_t* p2);
 
