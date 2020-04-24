@@ -39,3 +39,6 @@ Min len of array/variable: 2 bytes
 ```
 sum of all bytes + 1
 ```
+
+## Building:
+run ``make Build/translator.o`` and add this object to your end binary because we have no shared objects
