@@ -1,9 +1,12 @@
 TARGET=translator
+MCU=atmega2560
+OPTIMIZE=-Os
+XTAL=16000000
 LIBS=
-OPTIMIZE=-Og
+OPTIMIZE=-Os
 LFLAGS=-Wall -Wextra -lm $(LIBS)
-CPP=g++
-LD=ld
+CPP=avr-g++
+LD=avr-ld
 BUILD_DIR=Build
 SOURCE_DIR=Src
 BIN_DIR=Bin
@@ -33,18 +36,13 @@ CFLAGS=$(CPP_DEFS) $(CPP_INCLUDES) $(OPTIMIZE) -std=gnu++11 -Wno-pragmas -Wall -
 
 all: $(BIN_DIR)/$(TARGET) directories
 
-$(BIN_DIR)/$(TARGET): $(BIN_DIR)/lib$(TARGET).so $(BUILD_DIR)/main.o  Makefile
+$(BIN_DIR)/$(TARGET): $(BUILD_DIR)/main.o  Makefile
 	@$(CPP) $(BUILD_DIR)/main.o $(BIN_DIR)/lib$(TARGET).so $(LIBS) -o $@
 	@echo -e '\033[1;32m'"CC " $@ '\033[0m'
 
 
-$(BIN_DIR)/lib$(TARGET).so: $(TOBJECTS)
-	@$(CPP) -shared $^ -o $@
-	@echo -e '\033[1;32m'"CC " $@ '\033[0m'
-
-
 $(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
-	@$(CPP) -c $(CFLAGS) -fPIC -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
+	@$(CPP) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst)) $< -o $@
 	@echo -e '\033[1;32m'"CC " $@ '\033[0m'
 
 

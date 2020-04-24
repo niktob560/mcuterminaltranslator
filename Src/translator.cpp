@@ -31,7 +31,7 @@ namespace translator
         for(uint8_t i = 0; i < len + SYS_LEN; i++)
         {
             if(i != 1 && i != 2)
-                ret = static_cast<checksum_t>(ret + ((c[i]) << (8 * ((i % 2) == 1))));
+                ret = static_cast<checksum_t>(ret + static_cast<checksum_t>((c[i]) << (8 * ((i % 2) == 1))));
         }
         ret++;
         return ret;
